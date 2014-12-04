@@ -1,0 +1,146 @@
+\name{DoOR.function.package}
+\Rdversion{1.1}
+\alias{DoOR.function-package}
+\alias{DoOR.function}
+\docType{package}
+\title{
+DoOR Function
+}
+\description{
+Functions package providing manipulation and application of the DoOR.
+}
+\details{
+\tabular{ll}{
+Package: \tab DoOR.function\cr
+Type: \tab Package\cr
+Version: \tab 0.1-2\cr
+Date: \tab 2012-04-16\cr
+License: \tab GPL-2\cr
+LazyLoad: \tab yes\cr
+}
+
+\bold{Type \code{help(package = DoOR.function)} to see a complete list of datasets and functions. 
+Below is what you need for a quick start.}
+
+First, load the DoOR packages, data and function package:
+\tabular{ll}{
+\code{library(DoOR.function)}: \tab \cr
+\code{library(DoOR.data)}: \tab \cr
+}
+
+then, load all datasets including the precomputed response matrix:
+\tabular{ll}{
+\code{\link{loadRD}}:  \tab Load all data into current active environment . \cr
+}
+or, load all odorant reseponse data into a list:
+\tabular{ll}{
+\code{\link{loadRDList}}:  \tab Load odorant response data only and compose them as a list.  \cr
+}
+
+Try some visualizations (e.g. producing the plots from the paper):
+\tabular{ll}{
+\code{\link{ALimage}}:  \tab response to a chemical mapped onto an image of the antennal lobe.\cr
+\code{\link{comparDiagram}}:  \tab compare the results of two studies.  \cr
+\code{\link{ORdotplot}}:  \tab Dot Plot of Odorant Responses Across Receptors. \cr
+\code{\link{PlotChemicals}}:  \tab bar plot:one receptor, all chemicals. \cr
+\code{\link{PlotReceptors}}:  \tab bar plot: all receptors, one or more chemicals.\cr
+\code{\link{tuningBreadth}}:  \tab pyramid diagram depicting a receptor's tuning breadth. \cr
+}
+Try some queries:
+\tabular{ll}{
+\code{\link{findResp}}:  \tab given a chemical, get original responses from all studies in the database.\cr
+\code{\link{findRespNorm}}:  \tab given a chemical, get normalised responses from all studies in the database.\cr
+\code{\link{showOdor}}:  \tab obtain information on a chemical from PubChem. \cr
+}
+
+In case you wish to create your own response model (e.g. because you want to include your own datasets):
+\tabular{ll}{
+\code{\link{CreateDatabase}}:  \tab compute the complete response model for all receptors in the database  (calls \code{\link{modelRP}} for all receptors). \cr
+\code{\link{modelRP}}: \tab run the DoOR algorithm, that merges all measurements for one receptor. \cr
+}
+
+
+Estimate odorant responses:
+\tabular{ll}{
+\code{\link{DoOREst}}:  \tab estimate NA entries in a consensus response data. \cr
+\code{\link{LLSIestKnn}}:  \tab Local Least Squares Imputation Estimation using k-nearest neighbor. \cr
+\code{\link{LLSIestPC}}:  \tab estimate odorant responses using local least imputation, odors will be selected by coherent odors that have large absolute values of Pearson correlation coefficients. \cr
+}
+Project the model response values back to tested values:
+\tabular{ll}{
+\code{\link{backProject}}:  \tab project the model response values back to tested values. \cr
+}
+
+Introduce new data into DoOR and update the supported data sets:
+\tabular{ll}{
+\code{\link{importNewData}}:  \tab import new data into DoOR, and update the weight, response range and receptor names. \cr
+\code{\link{updateDatabase}}:  \tab update response matrix by introducing new consensus response data of given receptor. \cr
+}
+or, introduce new data into a specific receptor:
+\tabular{ll}{
+\code{\link{combData}}:  \tab combine two dataset by column with CAS number. \cr
+}
+
+Model functions and inverse model functions:
+\tabular{ll}{
+\code{\link{modelfunction_asymp}}:  \tab Asymptotic Model \cr
+\code{\link{modelfunction_asympOff}}:  \tab Asymptotic Model with an Offset \cr
+\code{\link{modelfunction_exp}}:  \tab exponential Model \cr
+\code{\link{modelfunction_linear}}:  \tab Linear Model \cr
+\code{\link{modelfunction_sigmoid}}:  \tab Logistic Model \cr
+
+\code{\link{inverse_modelfunction_asymp}}:  \tab inverse Asymptotic Model \cr
+\code{\link{inverse_modelfunction_asympOff}}:  \tab inverse Asymptotic Model with an Offset \cr
+\code{\link{inverse_modelfunction_exp}}:  \tab inverse exponential Model \cr
+\code{\link{inverse_modelfunction_linear}}:  \tab inverse Linear Model \cr
+\code{\link{inverse_modelfunction_sigmoid}}:  \tab inverse Logistic Model \cr
+}
+Leibniz's notation for computing the curvic length:
+\tabular{ll}{
+\code{\link{dsdx_asymp}}:  \tab Leibniz's notation for asymptotic model \cr
+\code{\link{dsdx_asympOff}}:  \tab Leibniz's notation for asymptotic model with an Offset \cr
+\code{\link{dsdx_exp}}:  \tab Leibniz's notation for exponential model \cr
+\code{\link{dsdx_linear}}:  \tab Leibniz's notation for linear model \cr
+\code{\link{dsdx_sigmoid}}:  \tab Leibniz's notation for logistic model \cr
+
+\code{\link{dsdx_inverse_asymp}}:  \tab Leibniz's notation for inverse asymptotic model \cr
+\code{\link{dsdx_inverse_asympOff}}:  \tab Leibniz's notation for inverse asymptotic model with an Offset \cr
+\code{\link{dsdx_inverse_exp}}:  \tab Leibniz's notation for inverse exponential model \cr
+\code{\link{dsdx_inverse_linear}}:  \tab Leibniz's notation for inverse linear model \cr
+\code{\link{dsdx_inverse_sigmoid}}:  \tab Leibniz's notation for inverse logistic model \cr
+}
+Supported functions and maths:
+\tabular{ll}{
+\code{\link{calModel}}:  \tab return the best model function. \cr
+\code{\link{compute_MD}}:  \tab compute the mean distance. \cr
+\code{\link{DoORColmap}}:  \tab assign a color code for consensus response. \cr
+\code{\link{DoORnorm}}:  \tab normalize the data in values from 0 to 1. \cr
+\code{\link{intervalFun}}:  \tab intrval function with a specified middle function. \cr
+\code{\link{PseudoInverse}}:  \tab evaluate the pseudoinvese of a matrix. \cr
+\code{\link{projectPoints}}:  \tab projects data points onto the curve defined by the model function. \cr
+\code{\link{resetSFR}}:  \tab reset SFR to zero. \cr
+\code{\link{selectModel}}:  \tab compute the data pairwise and and selects a pair with the lowest "MD" value. \cr
+\code{\link{SSexpo}}:  \tab selfStart model estimate the parameters of expontenial model. \cr
+}
+Default values:
+\tabular{ll}{
+\code{\link{default.val}}:  \tab return default values for DoOR functions. \cr
+}
+}                     
+\author{
+C. Giovanni Galizia \cr
+Daniel Muench \cr
+Martin Strauch \cr
+Anja Nissler \cr
+Shouwen Ma \cr
+
+Maintainer: Daniel Muench <daniel.muench@uni-konstanz.de> Shouwen Ma <shouwen.ma@gmail.com>
+}
+\references{
+\url{http://neuro.uni-konstanz.de/DoOR/default.html}
+}
+\seealso{
+\code{\link[<pkg>:<pkg>-package]{<DoOR.data>}}
+}
+\keyword{ package }
+

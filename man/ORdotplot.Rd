@@ -1,0 +1,48 @@
+\name{ORdotplot}
+\Rdversion{1.1}
+\alias{ORdotplot}
+\title{
+show the odorant responses across receptors with dot plot
+}
+\description{
+show the odorant responses across receptors with dot plot.
+}
+\usage{
+ORdotplot(data, type, dot.col = "black", dot.size = default.val("dot.size"), col.extrem = default.val("col.extrem"), cex.labels = default.val("cex.labels"), ...)
+}
+\arguments{
+  \item{data}{
+data matrix of response values; a odors-by-receptors matrix.
+}
+  \item{type}{
+character string; indicating which dot type is used for the plot. Options are "BW" and "CR" indicating "black and white" dotplot and "color ramp",  respectively.
+}
+  \item{dot.col}{
+character; giving the color of displayed dot in plot. The default is black.
+}
+  \item{dot.size}{
+numeric; giving the size of displayed dot in plot is magnified relative to the default setting. The default is 3.
+}
+  \item{col.extrem}{
+character vector; coding the color of each end. The default is c("blue", "red").
+}
+  \item{cex.labels}{
+numeric; giving the size of labels is magnified relative to the default setting. The default is 1.
+}
+  \item{\dots}{
+further graphical parameters (see\code{\link{par}}).
+}
+}
+\details{
+This function is used to visualize odorant responses across receptors. The given data is odors-by-receptors consensus response matrix. There are two types of dot plot. In "black and white" ("BW") dotplot, a blank represents no available data; the size of dot represents the intensity of odorant response; filled circle and open circle response positive and negative values, respectively. In "color ramp" ("CR") dotplot, the size of dot is same, only difference is their colors. A blank represents no available data; red circle and blue circle response positive and negative values, respectively. The intensity of odorant response is indicated by color ramp. The darker the color is, the more intensitve a odorant response is.
+}
+\author{
+Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
+}
+\examples{
+library(DoOR.data)
+data(response.matrix)
+responseMatrix<-apply(response.matrix,2,function(x) resetSFR(x,sfr=x[1]))
+ORdotplot(responseMatrix[c(150:240),],cex.labels=0.7,type='BW',dot.size=1.5)
+}
+\keyword{ iplot }

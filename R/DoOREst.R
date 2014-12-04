@@ -1,0 +1,61 @@
+DoOREst <-
+function(da, nodor, method = "PC")
+
+# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
+# Neurobiology, University of Konstanz, Germany
+
+# DoOREst.R :
+####################
+
+# estimate NA entries in a consensus response data
+
+# input parameters:
+###################
+
+# da 		: data frame or a matrix; a consensus response data.
+# nodor 	: numeric; number of selected odors.
+# method 	: character string; specifying the method for estimation, default is "Knn" (k nearest neighbors). The alternative is "PC" (Pearson's coefficient).
+
+## output is a consensus response data that also constains the estimated values.
+
+{
+
+	# find where is missing in the data
+	inputdata <- as.matrix(da)
+	outputdata <- inputdata
+	whichmissing <- which(is.na(inputdata),arr.ind=TRUE)
+	dim_whichmissing <- dim(whichmissing)
+	precentageMissing <- round(dim_whichmissing[1]/length(inputdata),4)*100
+	message(paste("There are",dim_whichmissing[1],paste( "(",precentageMissing,"%)",sep=""), "missing values in the given data."))
+
+	for (i in 1:dim_whichmissing[1]) {
+
+	receptor <- colnames(inputdata)[whichmissing[i,2]]
+	cas 	 <- rownames(inputdata)[whichmissing[i,1]]
+	
+	if (method == "Knn") {
+		tryestmatine <- try(LLSIestKnn(CAS = cas, 
+					receptor = receptor, 
+					responseMatrix = inputdata, 
+					nodor=nodor),TRUE)
+	}
+
+	if (method == "PC") {
+		tryestmatine <- try(LLSIestPC(CAS = cas, 
+					receptor = receptor, 
+					responseMatrix = inputdata, 
+					nodor=nodor),TRUE)
+	}
+
+	if (inherits(tryestmatine, "try-error")) { print(paste("The odorant response of",receptor, "to", cas, "can not be estimated.")) }
+	else { outputdata[cas, receptor] <- tryestmatine$estimation }
+	if (inherits(tryestmatine, "Warning messages:")) { stop }
+	}
+	whichmissingOutput 	<- which(is.na(outputdata),arr.ind=TRUE)
+	dim_whichmissingOutput 	<- dim(whichmissingOutput)
+	precentageMissingOutput <- round(dim_whichmissingOutput[1]/length(outputdata),4)*100
+	N_estimate <- dim_whichmissing[1] - dim_whichmissingOutput[1]
+	message(paste("There are",dim_whichmissingOutput[1],paste( "(",precentageMissingOutput,"%)",sep=""), "missing values in the output data."))
+	message(paste(N_estimate,"values were estimated."))
+	return(outputdata)
+}

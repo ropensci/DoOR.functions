@@ -1,0 +1,45 @@
+\name{combData}
+\Rdversion{1.1}
+\alias{combData}
+\title{
+Combine Two Data
+}
+\description{
+  Combine two data into one by CAS number
+}
+\usage{
+combData(data1, data2, by.data2, assigned.name)
+}
+\arguments{
+  \item{data1}{
+data frame; the object to be added.
+}
+  \item{data2}{
+data frame; it will be merged to "data1".
+}
+  \item{by.data2}{
+character string; a column name in "data2", specify which column will be combined into data1.
+}
+  \item{assigned.name}{
+charater string; assigning a name to combined column.
+}
+}
+\details{
+  	Data frames are merged by CAS number specifically, because chemical could have multiple names, 
+	CAS number is standard registered name of chemical. Data2 will be merged into data1 specified 
+	by the column name \code{by.data2} into one. The name of added column could be assigned 
+	with \code{assigned.name}. If \code{data2} contains some odors that the \code{data1} do not 
+	have, then the new odors will be added into output.
+}
+\author{
+Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
+}
+\examples{
+library(DoOR.data)
+library(DoOR.function)
+newdata<-data.frame(CAS=c("111-1-1","222-2-2","71-23-8","333-3-3"), 
+	new.data=c(0.4, 0.5, 0.6, 0.7))
+data(Or22a)
+new.Or22a<-combData(data1=Or22a,data2=newdata,by.data2="new.data")
+}
+\keyword{ data }

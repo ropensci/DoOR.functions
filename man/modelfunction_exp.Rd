@@ -1,0 +1,35 @@
+\name{modelfunction_exp}
+\Rdversion{1.1}
+\alias{modelfunction_exp}
+\title{
+exponential Model
+}
+\description{
+exponential Model
+}
+\usage{
+modelfunction_exp(input, parms)
+}
+\arguments{
+  \item{input}{
+numeric vector of data values
+}
+  \item{parms}{
+numeric vector; parameters with given names: "a", "b", "c"
+}
+}
+\details{
+expression : a + b * exp (c * input)
+}
+\author{
+Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
+}
+\seealso{
+\code{\link{SSexpo}}
+}
+\examples{
+x <- rnorm(20)
+y <- modelfunction_exp(input = x, parms = c(a = 0.1, b = 0.2, c = 0.3) )
+plot(x,y)
+}
+\keyword{ math }

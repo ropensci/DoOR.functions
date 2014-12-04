@@ -1,0 +1,102 @@
+backProject <-
+function(cons.data,bp.data,tag.odor,tag.cons.data,tag.bp.data)
+
+# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
+# Neurobiology, University of Konstanz, Germany
+
+
+# backProject.R:
+################
+#
+# Projects model responses back onto a specific study
+# such as to answer questions like "If study A had measured this odor, what would be the response (in spikes)?"
+
+
+
+#input parameters:
+##################
+
+#  two dataframes:
+#
+#  - cons.data 	   : data frame; model response values
+#  - bp.data 	   : data frame; dataset (study) onto which we want to backproject
+#
+#
+#   and some information on how to access the dataframes:
+# 
+#  - tag.odor 	   : character string; indicates which row will be used for matching the two dataframes.
+#  - tag.cons.data : character string; specifies which column contains the model responses in "con.data". 
+#  - tag.bp.data   : character string; specifies which column in "bp.data" contains the data onto which to backproject
+
+
+
+#output:
+#########
+
+
+#  "backProject": a list containing a numeric vector ($rescale) and a data frame ($output).
+#
+#  - "rescale" :  can be used to rescale the normalized data to the original scale.
+#  -  "output" :  contains the whole "bp.data", and consensus values from "cons.data", 
+#  "projected.Y" (normalized backprojected data) and rescaled backprojected data "bp.data".
+{
+
+	con.data <- as.data.frame(cons.data)
+	bp.data  <- as.data.frame(bp.data)
+
+
+	# match rows of the study and the model response
+
+	match_two_data <- match(con.data[,tag.odor], bp.data[,tag.odor])
+
+
+        # normalize the two dataframes to the range [0, 1] and bind them together
+	# study             : y-axis 
+	# model response    : x-axis.
+
+	xy <- cbind(DoORnorm(cons.data[,tag.cons.data]), DoORnorm(bp.data[match_two_data,tag.bp.data]))
+	
+
+        # plot the two dataframes against each other, find the best fitting function and project
+        # the points onto the functional line.
+
+	calM		   <- calModel(x=xy[,1],y=xy[,2])
+	projected 	   <- projectPoints(x=xy[,1],y=xy[,2],best.model=calM, plot=TRUE,title=TRUE, xlab=tag.cons.data, ylab=tag.bp.data)
+
+	projected_back     <- rbind(projected$Double.Observations[,c('ID','Y')],projected$Single.Observation[,c('ID','Y')])
+        #projected_back normalised:
+        projected_back_NDR <- rbind(projected$Double.Observations[,c('ID','NDR')],projected$Single.Observation[,c('ID','NDR')])
+
+
+	match_Double.Observations_ID <- projected$Double.Observations[, c('ID')] 		# find overlapping odors
+	normalized_bp_DO 	     <- projected$Double.Observations[, c('y')]			# Y-coordinates of normalized data (Double.Observations)
+	unnormalized_bp_DO 	     <- bp.data[match_Double.Observations_ID, tag.bp.data]	# Y-coordinates of unnormalized data (Double.Observations)
+	
+
+
+        # set unnormalized data (unnormalized_bp_DO) as response (dependent) variable, 
+        # normalized data (normalized_bp_DO) as predictor (independent variable), 
+        # estimate the Intercept and Slope
+	
+        g 	<- lm(unnormalized_bp_DO~normalized_bp_DO)
+	parms 	<- c(g$coef[1], g$coef[2])
+
+
+
+        # rescale data "projected_back" back to the original scale. 
+
+	match_odor  		<- match(seq(1:dim(bp.data)[1]),projected_back[,'ID'])
+	rescaled_projected_back <- parms[1] + parms[2] * projected_back[match_odor,'Y']	
+	
+
+
+
+
+	# pack into output list
+	backProject <- list(rescale = c("Intercept"=as.vector(g$coef[1]),"Slope"=as.vector(g$coef[2])),
+			    output  = data.frame(bp.data,
+						consensus.value = projected_back_NDR[match_odor,"NDR"],
+						projected.Y 	= projected_back[match_odor,"Y"],
+						bp.data 	= rescaled_projected_back))
+return(backProject)
+}

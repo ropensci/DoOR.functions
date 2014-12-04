@@ -1,0 +1,35 @@
+\name{dsdx_inverse_asymp}
+\Rdversion{1.1}
+\alias{dsdx_inverse_asymp}
+\title{
+Leibniz's notation for computing the curvic length on inverse Asymptotic Model
+}
+\description{
+Leibniz's notation for computing the curvic length on inverse Asymptotic Model
+}
+\usage{
+dsdx_inverse_asymp(input, parms)
+}
+\arguments{
+  \item{input}{
+numeric vector of data values
+}
+  \item{parms}{
+numeric vector; parameters with given names: "Asym", "lrc", "R0"
+}
+}
+\details{
+expression : sqrt(1+(-(1/(R0 - Asym)/(input - Asym)/(R0 - Asym)/exp(lrc)))^2)
+}
+\references{
+Jose Pinheiro and Douglas Bates
+}
+\seealso{
+\code{\link{SSasymp}}
+}
+\examples{
+x <-  seq(0.1,1,length=20)
+parms <- c(Asym = 2, R0 = 0.2, lrc = 0.3)
+integrate(function(x) { dsdx_inverse_asymp(input = x, parms = parms ) }, lower = 0, upper = 0.5)
+}
+\keyword{ math }
