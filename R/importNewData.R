@@ -126,11 +126,16 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
     odor.data[(dim_odor[1]+(1:length(whichNA))),"InChIKey"]       <-   as.character(imported_data[whichNA,"InChIKey"])
     }
     
+    if ('SMILES' %in% colnames(imported_data)){
+    levels(odor.data$SMILES) <- union(levels(odor.data$SMILES),levels(imported_data$SMILES))
+    odor.data[(dim_odor[1]+(1:length(whichNA))),"SMILES"]       <-   as.character(imported_data[whichNA,"SMILES"])
+    }
     
     
     
     
-    message( "Only 'CAS', 'NAME' and 'CID' columns were updated." )
+    
+    message( "If data was provided, 'CAS', 'NAME', 'CID', 'Class', 'InChI' and 'SMILES' columns were updated." )
     
     # update response data for each receptor, if new odor is available.
   }
