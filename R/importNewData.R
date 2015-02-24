@@ -23,7 +23,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
 # odor.data 	 : data frame, containing the odorant information
 # weightGlobNorm : data matrix, indicates whether given receptor has been measured by given study.
 # responseRange  : data frame, contains the information about response range of each study and how many odors have been measured in each study.
-# receptors 	 : data frame, contains the receptor and ORN names and their expression.
+# receptors 	 : data frame, contains the receptor and ORN names and their AL projection pattern.
 
 
 #output: the updated weights, etc. are written to the workspace
@@ -140,7 +140,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
     # update response data for each receptor, if new odor is available.
   }
   
-  # if there is new receptor or ORN update data frame "ORs"; NOTE: the expression should be added manually
+  # if there is new receptor or ORN update data frame "ORs"; NOTE: the AL projection pattern (OGN) should be added manually
   
   match_receptor <- match(receptor_file, receptors[,"OR"])
   what_is_new <-  receptor_file[which(is.na(match_receptor))]
@@ -148,7 +148,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   { 
     ORs_new 	<- data.frame(OR = what_is_new, expression = NA) 
     receptors 	<- rbind(receptors, ORs_new)
-    message( "New receptor or ORN has been added in 'ORs', please input the expression manually." )
+    message( "New receptor or ORN has been added in 'ORs', please input the AL projection pattern manually." )
   }  
     
     # add new response data
