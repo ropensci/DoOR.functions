@@ -59,7 +59,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
     seqlastRows 		<- ((dim_weightGlobNorm[1]+1):lastRow)
     weightGlobNorm[seqlastRows,dim_weightGlobNorm[2]] <- NA
     rownames(weightGlobNorm)[seqlastRows] <- newReceptor
-    print( paste(newReceptor, "has been added into 'weight.globNorm'.") )	
+    message( paste(newReceptor, "has been added into 'weight.globNorm'.") )	
   }
   
   # update data frame "response range"
@@ -82,13 +82,13 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   }
   if (is.na(whichNA[1]))
   {
-    print("There were no new odors imported.")
+    message("There were no new odors imported.")
   }
   else 
   {
     newOdor 	<- as.character(imported_data[whichNA,"CAS"])
     
-    print( paste(newOdor, "is a new odor. Data frames 'odor' and 'data.format' will be updated.") )
+    message( paste(newOdor, "is a new odor. Data frames 'odor' and 'data.format' will be updated.") )
     
     dim_odor 	<- dim(odor.data)
     dim_data.format <- dim(dataFormat)
@@ -162,7 +162,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
       if (inherits(target, "try-error"))				# if it can be done, there must be a new receptor
       {
         target 		<- dataFormat
-        print( paste(j, "is a new receptor or ORN. A new response data.frame was created.") )
+        message( paste(j, "is a new receptor or ORN. A new response data.frame was created.") )
       }
       matchOdor 	<- match(imported_data[,"CAS"],target$CAS)
       whichNA 	<- which(is.na(matchOdor))
@@ -197,7 +197,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
            combData(data1 = target, data2 = imported_data, 
                     by.data2 = column.name, 
                     assigned.name = paste( file.name, sep="" )),envir = .GlobalEnv)
-    print(paste(column.name,"has been imported."))
+    message(paste(column.name,"has been imported."))
     
     # update weight.globNorm
     dim_weightGlobNorm 	<- dim(weightGlobNorm)
