@@ -88,7 +88,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   {
     newOdor 	<- as.character(imported_data[whichNA,"CAS"])
     
-    print( paste(newOdor, "is a new odor. Data frames 'odor' and 'data.format' have been updated.") )
+    print( paste(newOdor, "is a new odor. Data frames 'odor' and 'data.format' will be updated.") )
     
     dim_odor 	<- dim(odor.data)
     dim_data.format <- dim(dataFormat)
@@ -106,15 +106,19 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
     odor.data[(dim_odor[1]+(1:length(whichNA))),"Name"]    	      <-   as.character(imported_data[whichNA,"Name"])
     dataFormat[(dim_data.format[1]+(1:length(whichNA))),"Name"]  	<-   as.character(imported_data[whichNA,"Name"])  
     
+    if ('CID' %in% colnames(imported_data)){
     levels(odor.data$CID) <- union(levels(odor.data$CID),levels(imported_data$CID))
     levels(dataFormat$CID) <- union(levels(dataFormat$CID),levels(imported_data$CID))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"CID"]    	      <-   as.character(imported_data[whichNA,"CID"])
     dataFormat[(dim_data.format[1]+(1:length(whichNA))),"CID"]  	<-   as.character(imported_data[whichNA,"CID"])
+    }
     
+    if ('Class' %in% colnames(imported_data)){
     levels(odor.data$Class) <- union(levels(odor.data$Class),levels(imported_data$Class))
     levels(dataFormat$Class) <- union(levels(dataFormat$Class),levels(imported_data$Class))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"Class"]    	    <-   as.character(imported_data[whichNA,"Class"])
     dataFormat[(dim_data.format[1]+(1:length(whichNA))),"Class"]  <-   as.character(imported_data[whichNA,"Class"]) 
+    }
     
     if ('InChI' %in% colnames(imported_data)){
     levels(odor.data$InChI) <- union(levels(odor.data$InChI),levels(imported_data$InChI))
@@ -175,8 +179,10 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
         levels(target$Name) <- union(levels(target$Name),levels(imported_data$Name))
         target[(dim_odor[1]+(1:length(whichNA))),"Name"] <- as.character(imported_data[whichNA,"Name"])
         
+        if ('CID' %in% colnames(imported_data)){
         levels(target$CID) <- union(levels(target$CID),levels(imported_data$CID))
         target[(dim_odor[1]+(1:length(whichNA))),"CID"] <- as.character(imported_data[whichNA,"CID"])
+        }
         
         assign(j, target, envir = .GlobalEnv) 				# assign the target back to his real name
       }
@@ -187,11 +193,11 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   {
     column.name 	<- receptor_file[i] 			# receptor name
     target 		<- try(get(column.name),silent=TRUE) 	# try to find a match receptor and load data from old database
-    print(paste(column.name,"has been imported."))		
     assign(column.name, 
            combData(data1 = target, data2 = imported_data, 
                     by.data2 = column.name, 
                     assigned.name = paste( file.name, sep="" )),envir = .GlobalEnv)
+    print(paste(column.name,"has been imported."))
     
     # update weight.globNorm
     dim_weightGlobNorm 	<- dim(weightGlobNorm)
