@@ -3,7 +3,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
 			odor.data = default.val("odor.data"), 
 			weightGlobNorm = default.val("weight.globNorm"), 
 			responseRange = default.val("response.range"), 
-			receptors = default.val("ORs") )
+			receptors = default.val("ORs"))
 
 # part of the DoOR package: (c) 2015 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
 # Neurobiology, University of Konstanz, Germany  
@@ -32,8 +32,8 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
 # importNewData(file.name="Daniel.2011.nmr", file.format=".txt", dataFormat  = data.format, weightGlobNorm  = weight.globNorm, responseRange = response.range, receptors = ORs,odor.data = odor)
 
 {
-  if (file.format == ".txt") { imported_data <- read.table( paste(file.name,file.format,sep="") ) }
-  if (file.format == ".csv") { imported_data <- read.csv( paste(file.name,file.format,sep="") ) }
+  if (file.format == ".txt") { imported_data <- read.table(paste(file.name,file.format,sep="")) }
+  if (file.format == ".csv") { imported_data <- read.csv(paste(file.name,file.format,sep="")) }
   
   whichCIDCol <- grep("CID",names(imported_data))
   if (!is.na(whichCIDCol[1]))
@@ -59,15 +59,15 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
     seqlastRows 		<- ((dim_weightGlobNorm[1]+1):lastRow)
     weightGlobNorm[seqlastRows,dim_weightGlobNorm[2]] <- NA
     rownames(weightGlobNorm)[seqlastRows] <- newReceptor
-    message( paste(newReceptor, "has been added into 'weight.globNorm'.") )	
+    message(paste(newReceptor, "has been added into 'weight.globNorm'.", collapse = '\n'))	
   }
   
   # update data frame "response range"
   responseRange_new.file 	<- range(imported_data[,nv],na.rm=TRUE)
-  responseRange_new 	<- data.frame( study   = file.name,
+  responseRange_new 	<- data.frame(study   = file.name,
                                     min 	  = responseRange_new.file[1],
                                     max  	  = responseRange_new.file[2],
-                                    n_odors = sum(apply(!is.na(imported_data[nv]),1,sum) > 0) )# dim(imported_data)[1]) # changed as the old way also returned NAs
+                                    n_odors = sum(apply(!is.na(imported_data[nv]),1,sum) > 0))# dim(imported_data)[1]) # changed as the old way also returned NAs
   
   responseRange 		<- rbind(responseRange, responseRange_new)
   
@@ -88,7 +88,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   {
     newOdor 	<- as.character(imported_data[whichNA,"CAS"])
     
-    message( paste(newOdor, "is a new odor. Data frames 'odor' and 'data.format' will be updated.") )
+    message(paste(newOdor, "is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
     
     dim_odor 	<- dim(odor.data)
     dim_data.format <- dim(dataFormat)
@@ -139,7 +139,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
     
     
     
-    message( "If data was provided, 'CAS', 'NAME', 'CID', 'Class', 'InChI' and 'SMILES' columns were updated." )
+    message("If data was provided, 'CAS', 'NAME', 'CID', 'Class', 'InChI' and 'SMILES' columns were updated.")
     
     # update response data for each receptor, if new odor is available.
   }
@@ -152,7 +152,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   { 
     ORs_new 	<- data.frame(OR = what_is_new, expression = NA) 
     receptors 	<- rbind(receptors, ORs_new)
-    message( "New receptor or ORN has been added in 'ORs', please input the AL projection pattern manually." )
+    message("New receptor or ORN has been added in 'ORs', please input the AL projection pattern manually.")
   }  
     
     # add new response data
@@ -162,7 +162,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
       if (inherits(target, "try-error"))				# if it can be done, there must be a new receptor
       {
         target 		<- dataFormat
-        message( paste(j, "is a new receptor or ORN. A new response data.frame was created.") )
+        message(paste(j, "is a new receptor or ORN. A new response data.frame was created."))
       }
       matchOdor 	<- match(imported_data[,"CAS"],target$CAS)
       whichNA 	<- which(is.na(matchOdor))
@@ -196,7 +196,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
     assign(column.name, 
            combData(data1 = target, data2 = imported_data, 
                     by.data2 = column.name, 
-                    assigned.name = paste( file.name, sep="" )),envir = .GlobalEnv)
+                    assigned.name = paste(file.name, sep="")),envir = .GlobalEnv)
     message(paste(column.name,"has been imported."))
     
     # update weight.globNorm
