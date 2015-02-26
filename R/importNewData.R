@@ -162,12 +162,12 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
       if (inherits(target, "try-error"))				# if it can be done, there must be a new receptor
       {
         target 		<- dataFormat
+        print( paste(j, "is a new receptor or ORN. A new response data.frame was created.") )
       }
       matchOdor 	<- match(imported_data[,"CAS"],target$CAS)
       whichNA 	<- which(is.na(matchOdor))
       if (is.na(whichNA[1])) {
         assign(j, target, envir = .GlobalEnv) 
-        print( paste(j, "is a new receptor or ORN. A new response data.frame was created.") )
       }
       else {
         dim_RD 	<- dim(target)
