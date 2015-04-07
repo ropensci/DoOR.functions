@@ -3,7 +3,8 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
 			odor.data = default.val("odor.data"), 
 			weightGlobNorm = default.val("weight.globNorm"), 
 			responseRange = default.val("response.range"), 
-			receptors = default.val("ORs"))
+			receptors = default.val("ORs"),
+      round = 3)
 
 # part of the DoOR package: (c) 2015 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
 # Neurobiology, University of Konstanz, Germany  
@@ -44,6 +45,11 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   n 	<- length(nv)
   receptor_file <- colnames(imported_data)[nv]
   
+  if (round != F) 
+  {
+    imported_data[nv] <- round(imported_data[nv],round)
+  }
+  
   # update data matrix "weight.globNorm"
   dim_weightGlobNorm <- dim(weightGlobNorm)
   weightGlobNorm[,dim_weightGlobNorm[2]+1] <- NA
@@ -76,7 +82,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   matchtoDF 	<- match(imported_data[,"CAS"],dataFormat$CAS)
   whichNA 	<- which(is.na(matchtoOdor))
   
-  if (any(is.na(match(matchtoOdor,matchtoDF)))) 
+  if (!identical(matchtoOdor,matchtoDF))
   { 
     stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
   }
