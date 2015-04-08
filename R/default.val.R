@@ -37,6 +37,7 @@ function(DoOR_default)
 	if (DoOR_default == "zero") 		{ return("SFR") } # findRespNorm.R
 	if (DoOR_default == "tag.ALimage") 	{ return("Glomerulus") } # ALimage.R
 	if (DoOR_default == "tag") 		{ return("CAS") } # PlotChemicals.R; PlotReceptors.R; CreateDatabase.R; CreateDatabase.R
+  if (DoOR_default == "ident") { return("InChIKey") } # importNewData.R
 
 	## character vector
 	if (DoOR_default == "col.extrem") 	{ return(c("blue", "red")) } # ALimage.R; ORdotplot.R; PlotChemicals.R; PlotReceptors.R
