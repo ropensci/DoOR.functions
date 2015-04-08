@@ -81,13 +81,9 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   
   # update data frame "odor" and data.format if new odor is available.
   matchtoOdor <- match(imported_data[,ident],odor.data[,ident])
-  matchtoDF   <- match(imported_data[,ident],dataFormat[,ident])
   whichNA     <- which(is.na(matchtoOdor))
   
-  if (!identical(matchtoOdor,matchtoDF))
-  { 
-    stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
-  }
+  if (!identical(odor.data[1:5],dataFormat)) stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
   if (is.na(whichNA[1]))
   {
     message("There were no new odors imported.")
