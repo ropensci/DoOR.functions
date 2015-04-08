@@ -158,7 +158,7 @@ function(file.name, file.format, dataFormat = default.val("data.format"),
   { 
     ORs_new 	<- data.frame(OR = what_is_new, expression = NA) 
     receptors 	<- rbind(receptors, ORs_new)
-    message("New receptor or ORN has been added in 'ORs', please input the AL projection pattern manually.")
+    message("New receptor or ORN has been added in 'ORs', please input the AL mapping manually.")
   }  
     
     # add new response data
