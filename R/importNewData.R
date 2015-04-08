@@ -101,40 +101,28 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     message(paste(newOdor, '\n', "is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
     
     dim_odor 	<- dim(odor.data)
-    dim_data.format <- dim(dataFormat)
     
     odor.data[(dim_odor[1]+length(whichNA)),] 		<- NA
-    dataFormat[(dim_data.format[1]+length(whichNA)),] 	<- NA
     
     levels(odor.data$InChIKey) <- union(levels(odor.data$InChIKey),levels(imported_data$InChIKey))
-    levels(dataFormat$InChIKey) <- union(levels(dataFormat$InChIKey),levels(imported_data$InChIKey))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"InChIKey"]       <-   as.character(imported_data[whichNA,"InChIKey"])
-    dataFormat[(dim_data.format[1]+(1:length(whichNA))),"InChIKey"]       <-   as.character(imported_data[whichNA,"InChIKey"])
     
     levels(odor.data$Name) <- union(levels(odor.data$Name),levels(imported_data$Name))
-    levels(dataFormat$Name) <- union(levels(dataFormat$Name),levels(imported_data$Name))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"Name"]    	      <-   as.character(imported_data[whichNA,"Name"])
-    dataFormat[(dim_data.format[1]+(1:length(whichNA))),"Name"]  	<-   as.character(imported_data[whichNA,"Name"])  
     
     if ('CAS' %in% colnames(imported_data)){
     levels(odor.data$CAS) <- union(levels(odor.data$CAS),levels(imported_data$CAS))
-    levels(dataFormat$CAS) <- union(levels(dataFormat$CAS),levels(imported_data$CAS))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"CAS"]    	<- as.character(imported_data[whichNA,"CAS"])
-    dataFormat[(dim_data.format[1]+(1:length(whichNA))),"CAS"]  	<- as.character(imported_data[whichNA,"CAS"])
     }
     
     if ('CID' %in% colnames(imported_data)){
     levels(odor.data$CID) <- union(levels(odor.data$CID),levels(imported_data$CID))
-    levels(dataFormat$CID) <- union(levels(dataFormat$CID),levels(imported_data$CID))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"CID"]    	      <-   as.character(imported_data[whichNA,"CID"])
-    dataFormat[(dim_data.format[1]+(1:length(whichNA))),"CID"]  	<-   as.character(imported_data[whichNA,"CID"])
     }
     
     if ('Class' %in% colnames(imported_data)){
     levels(odor.data$Class) <- union(levels(odor.data$Class),levels(imported_data$Class))
-    levels(dataFormat$Class) <- union(levels(dataFormat$Class),levels(imported_data$Class))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"Class"]    	    <-   as.character(imported_data[whichNA,"Class"])
-    dataFormat[(dim_data.format[1]+(1:length(whichNA))),"Class"]  <-   as.character(imported_data[whichNA,"Class"]) 
     }
     
     if ('InChI' %in% colnames(imported_data)){
@@ -146,7 +134,9 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     levels(odor.data$SMILES) <- union(levels(odor.data$SMILES),levels(imported_data$SMILES))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"SMILES"]       <-   as.character(imported_data[whichNA,"SMILES"])
     }
-    
+
+    dataFormat <- odor.data[1:5]
+
     message("If data was provided, 'CAS', 'NAME', 'CID', 'Class', 'InChI' and 'SMILES' columns were updated.")
   }
   
