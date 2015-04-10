@@ -73,6 +73,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   colnames(weightGlobNorm)[dim_weightGlobNorm[2]+1] <- file.name
   
   matchreceptor <- match(receptor_file,rownames(weightGlobNorm))
+  stats <- list('updatedReceptors' = length(na.omit(matchreceptor)), 'newReceptors' = 0, 'updatedOdors' = 0, 'newOdors' = 0)
   if (any(is.na(matchreceptor)))
   {
     whichNotmatch 		<- which(is.na(matchreceptor))
@@ -82,7 +83,8 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     seqlastRows 		<- ((dim_weightGlobNorm[1]+1):lastRow)
     weightGlobNorm[seqlastRows,dim_weightGlobNorm[2]] <- NA
     rownames(weightGlobNorm)[seqlastRows] <- newReceptor
-    message(paste(newReceptor, "has been added into 'weight.globNorm'.", collapse = '\n'))	
+    message(paste(newReceptor, "has been added into 'weight.globNorm'.", collapse = '\n'))
+    stats$newReceptors <- length(newReceptor)
   }
   
   # update data frame "response range"
@@ -97,6 +99,9 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   # update data frame "odor" and data.format if new odor is available.
   matchtoOdor <- match(imported_data[,ident],odor.data[,ident])
   whichNA     <- which(is.na(matchtoOdor))
+  
+  stats$updatedOdors <- length(na.omit(matchtoOdor))
+  stats$newOdors     <- length(whichNA) 
   
   if (!identical(odor.data[1:5],dataFormat)) stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
   if (is.na(whichNA[1]))
@@ -233,5 +238,11 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   assign("response.range", responseRange, envir = .GlobalEnv)
   assign("ORs", receptors, envir = .GlobalEnv)
   assign("odor", odor.data, envir = .GlobalEnv)
+
+  message()
+  message(paste('###################\n',
+                'Import statistics:\n',
+                stats$updatedReceptors,'response profiles were updated,',stats$newReceptors,'new profiles were added to DoOR.\n',
+                stats$updatedOdors,'odorants were updated,',stats$newOdors,'new odorants were added to DoOR.'))
   
 } # END program "importNewData"
