@@ -1,3 +1,23 @@
+#' Compare the results of two studies
+#' 
+#' Orderdered bar plots for two studies, allowing for an easy comparison of the
+#' two studies' results.
+#' 
+#' 
+#' @param x,y data frames; data x and y could be two different data frame or a
+#' same data frame.
+#' @param by.x character string; specifying a column in x.
+#' @param by.y character string; specifying a column in y.
+#' @param lim.y numeric vector; x-axis limit of data y.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords iplot
+#' @examples
+#' 
+#' library(DoOR.data)
+#' data(Or22a)
+#' data(response.range)
+#' comparDiagram(x=Or22a, y=Or22a, by.x="Hallem.2006.EN", by.y="Pelz.2006.AntEC50", lim.y=c(-0.5,7))
+#' 
 comparDiagram <-
 function(x, y, by.x, by.y, lim.y) 
 

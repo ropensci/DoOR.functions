@@ -1,3 +1,9 @@
+#' information of function version
+#' 
+#' information of function version
+#' 
+#' 
+#' @keywords data
 version.function <-
 function()
 {

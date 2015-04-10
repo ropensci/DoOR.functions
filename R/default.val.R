@@ -1,3 +1,18 @@
+#' default values for DoOR functions
+#' 
+#' \code{default.val} is used to return default values for DoOR functions.
+#' 
+#' There are six categories for default value. real number, integer, logical,
+#' NULL, character string and character vector.
+#' 
+#' @param DoOR_default a character string; indicating which argument is to be
+#' returned for DoOR functions.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords data
+#' @examples
+#' 
+#' default.val(DoOR_default = "select.MD")
+#' 
 default.val <-
 function(DoOR_default)
 

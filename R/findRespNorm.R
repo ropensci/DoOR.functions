@@ -1,3 +1,24 @@
+#' Find normalised receptor responses
+#' 
+#' given a chemical, get normalised receptor responses from all studies in the
+#' database.
+#' 
+#' 
+#' @param CAS character vector; one or more odors.
+#' @param zero character string; The default is "SFR", i.e. the spontaneous
+#' firing rate.
+#' @param responseMatrix a data frame; as e.g. "response.matrix" that is loaded
+#' by \code{\link{modelRP}}. It is also possible to create this frame manually
+#' using \code{\link{modelRP}}.
+#' @seealso \code{\link{modelRP}},\code{\link{CreateDatabase}}
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' cas <- c("71-36-3","123-92-2","79-09-4")
+#' data(response.matrix)
+#' result <- findRespNorm(cas, responseMatrix = response.matrix)
+#' 
 findRespNorm <-
 function(CAS, zero= default.val("zero"), responseMatrix = default.val("response.matrix"))
 

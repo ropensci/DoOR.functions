@@ -21,6 +21,35 @@
 
 ## output is a data frame containing all columns from data1 plus a column containing the merged odor set (CAS-numbers) from data1 and data2
 
+
+
+#' Combine Two Data
+#' 
+#' Combine two data into one by CAS number
+#' 
+#' Data frames are merged by CAS number specifically, because chemical could
+#' have multiple names, CAS number is standard registered name of chemical.
+#' Data2 will be merged into data1 specified by the column name \code{by.data2}
+#' into one. The name of added column could be assigned with
+#' \code{assigned.name}. If \code{data2} contains some odors that the
+#' \code{data1} do not have, then the new odors will be added into output.
+#' 
+#' @param data1 data frame; the object to be added.
+#' @param data2 data frame; it will be merged to "data1".
+#' @param by.data2 character string; a column name in "data2", specify which
+#' column will be combined into data1.
+#' @param assigned.name charater string; assigning a name to combined column.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' library(DoOR.function)
+#' newdata<-data.frame(CAS=c("111-1-1","222-2-2","71-23-8","333-3-3"), 
+#' 	new.data=c(0.4, 0.5, 0.6, 0.7))
+#' data(Or22a)
+#' new.Or22a<-combData(data1=Or22a,data2=newdata,by.data2="new.data")
+#' 
 combData <- function(data1, data2, by.data2, assigned.name, ident = default.val("ident")) 
 {
 	if(any(duplicated(data2[,ident]))) stop('There are duplicated identifiers in the new dataset, please solve this first.')
