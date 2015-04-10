@@ -36,7 +36,16 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   if (file.format == ".txt") { imported_data <- read.table(paste(file.name,file.format,sep="")) }
   if (file.format == ".csv") { imported_data <- read.csv(paste(file.name,file.format,sep="")) }
  
-  if(any(duplicated(imported_data[,ident]))) stop('There are duplicated identifiers in the new dataset, please solve this first.')
+  if(any(duplicated(tolower(imported_data[,ident])))) stop('There are duplicated identifiers in the new dataset, please solve this first.')
+  
+  if(any(is.na(imported_data[,ident]))) 
+  {
+    nas <- which(is.na(imported_data[,ident]))
+    imported_data <- droplevels(imported_data[-nas,])
+    warning('We found ', length(nas), ' misisng identifier(s), this data was removed!')
+  }
+  
+  
   
   whichCIDCol <- grep("CID",names(imported_data))
   if (!is.na(whichCIDCol[1]))
