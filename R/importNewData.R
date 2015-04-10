@@ -1,32 +1,3 @@
-# part of the DoOR package: (c) 2015 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany  
-
-# importnewdata.r:
-###################
-
-## import new data and update the weights (weight.globNorm), response range (response.range) and receptor names (ors)
-
-
-# input parameters:
-#####################
-
-# file.name      : character, the name of given file that contains response values of one or more odorant receptors
-# file.format 	 : character; either ".txt" or ".csv"
-# dataFormat 	   : data frame, a data frame does not contain any response value but odorant information.
-# odor.data 	   : data frame, containing the odorant information
-# weightGlobNorm : data matrix, indicates whether given receptor has been measured by given study.
-# responseRange  : data frame, contains the information about response range of each study and how many odors have been measured in each study.
-# receptors 	   : data frame, contains the receptor and ORN names and their AL projection pattern.
-# ident          : identifier used for merging, usually InChIKey
-# round          : # of digits to roiund values to
-
-
-# output: the updated weights, etc. are written to the workspace
-
-# example: 
-# importNewData(file.name="Daniel.2011.nmr", file.format=".txt", dataFormat  = data.format, weightGlobNorm  = weight.globNorm, responseRange = response.range, receptors = ORs,odor.data = odor)
-
-
 #' import new data into DoOR
 #' 
 #' import new data and update the weight, response range and receptor names
