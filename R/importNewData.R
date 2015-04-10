@@ -44,15 +44,15 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   if (file.format == ".txt") { imported_data <- read.table(paste(file.name,file.format,sep="")) }
   if (file.format == ".csv") { imported_data <- read.csv(paste(file.name,file.format,sep="")) }
   
-  if(any(duplicated(tolower(imported_data[,ident])))) stop('There are duplicated identifiers in the new dataset, please solve this first.')
-  
   if(any(is.na(imported_data[,ident]))) 
   {
     nas <- which(is.na(imported_data[,ident]))
     imported_data <- droplevels(imported_data[-nas,])
-    warning('We found ', length(nas), ' misisng identifier(s), this data was removed!')
+    warning('We found ', length(nas), ' misisng identifier(s), this data was removed!', call. = F)
   }
- 
+  
+  if(any(duplicated(tolower(imported_data[,ident])))) stop('There are duplicated identifiers in the new dataset, please solve this first.')
+   
   whichCIDCol <- grep("CID",names(imported_data))
   if (!is.na(whichCIDCol[1]))
   {
@@ -84,7 +84,6 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     weightGlobNorm[seqlastRows,dim_weightGlobNorm[2]] <- NA
     rownames(weightGlobNorm)[seqlastRows] <- newReceptor
     message(paste(newReceptor, "has been added into 'weight.globNorm'.", collapse = '\n'))
-    stats$newReceptors <- length(newReceptor)
   }
   
   # update data frame "response range"
@@ -114,7 +113,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     # add new odor identifiers to 'odor' and 'data.format' -------------------- 
     ##########
     newOdor 	<- as.character(imported_data[whichNA,"Name"])
-    message(paste(newOdor, '\n', "is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
+    message(paste(newOdor, " - is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
     
     dim_odor 	<- dim(odor.data)
     
@@ -221,6 +220,10 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   {
     column.name <- receptor_file[i] 			        # receptor name
     target <- try(get(column.name),silent=TRUE) 	# try to find a match receptor and load data from old database
+    
+    # check if receptor is new
+    if(dim(target)[2] == 5) stats$newReceptors <- stats$newReceptors + 1
+    
     assign(column.name, 
            combData(data1 = target, data2 = imported_data, by.data2 = column.name, assigned.name = paste(file.name, sep="")),
            envir = .GlobalEnv)
