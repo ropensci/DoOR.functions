@@ -3,7 +3,7 @@
 #' @author Daniel Münch, \email{daniel@muench.bio}
 #'
 #'
-UpdateOdorInfo <- function() 
+updateOdorInfo <- function() 
 {
   for(i in ORs$OR)
   {
