@@ -29,9 +29,9 @@
 #' @keywords data
 #' @examples
 #' 
-#' # import new data named "odorantResponses_Orx.txt" into database and update the support data.
-#' # library(DoOR.data)
-#' # importNewData(file.name="odorantResponses_Orx", file.format=".txt")
+#' import new data named "odorantResponses_Orx.txt" into database and update the support data.
+#' library(DoOR.data)
+#' importNewData(file.name="odorantResponses_Orx", file.format=".txt")
 #' 
 importNewData <- function(file.name, file.format, dataFormat = default.val("data.format"),
                           odor.data = default.val("odor.data"), 
