@@ -45,9 +45,9 @@ receptors and odors were measured from given study) will be integrated into
 data "response.range", "ORs" and "weight.globNorm".
 }
 \examples{
-# import new data named "odorantResponses_Orx.txt" into database and update the support data.
-# library(DoOR.data)
-# importNewData(file.name="odorantResponses_Orx", file.format=".txt")
+import new data named "odorantResponses_Orx.txt" into database and update the support data.
+library(DoOR.data)
+importNewData(file.name="odorantResponses_Orx", file.format=".txt")
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

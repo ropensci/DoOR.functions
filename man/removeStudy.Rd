@@ -5,18 +5,26 @@
 \title{Remove a study from DoOR}
 \usage{
 removeStudy(study, receptors = default.val("ORs"),
-  responseRange = default.val("response.range"))
+  responseRange = default.val("response.range"),
+  weightGlobNorm = default.val("weight.globNorm"))
 }
 \arguments{
-\item{study}{a string containing the name of the study you want to remove (e.g. 'Bruyne.2001.WT')}
+\item{study}{a string containing the name of the study you want to remove
+(e.g. 'Bruyne.2001.WT')}
 
-\item{receptors}{a vector of all the receptors to be checked. Defaults to all receptors exidting in DoOR.}
+\item{receptors}{a vector of all the receptors to be checked. Defaults to all
+receptors exidting in DoOR.}
 
-\item{responseRange}{the dataframe containing the info about the response ranges of all studies (\code{response.range})}
+\item{responseRange}{the dataframe containing the info about the response
+ranges of all studies (\code{response.range})}
+
+\item{weightGlobNorm}{the dataframe containing the info about the relative
+  weights between receptors (\code{weight.globNorm})}
 }
 \description{
-Use this function to remove a study from the DoOR database. \code{importNewData.R} uses this function
-when it detects an existing study during the import process (e.g. because you imported updated data).
+Use this function to remove a study from the DoOR database.
+\code{importNewData.R} uses this function when it detects an existing study
+during the import process (e.g. because you imported updated data).
 }
 \examples{
 removeStudy('Bruyne.2001.WT')
