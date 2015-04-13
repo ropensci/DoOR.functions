@@ -1,6 +1,6 @@
-#' import new data into DoOR
+#' Import new data into DoOR
 #' 
-#' import new data and update the weight, response range and receptor names
+#' Import or update new data and update \code{weight.globNorm}, \code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
 #' 
 #' \code{\link{importNewData}} is used to import new data into database. If the
 #' data contains a new receptor or ORN, then build a new data frame for this
@@ -8,7 +8,8 @@
 #' database, then merge the imported data into old data frame with function
 #' \code{\link{combData}}. The information (e.g. response range, how many
 #' receptors and odors were measured from given study) will be integrated into
-#' data "response.range", "ORs" and "weight.globNorm".
+#' data \code{response.range}, \code{odor}, \code{ORs} and \code{weight.globNorm}.
+#' If an existing study is imported, \code{\link{removeStudy}} will be run first in order to perform an update.
 #' 
 #' @param file.name character string; the name of given file that contains
 #' response values of one or more odorant receptors.
@@ -24,6 +25,8 @@
 #' range of each study and how many odors have been measured in each study.
 #' @param receptors data frame, contains the receptor and ORN names and their
 #' expression.
+#' @param ident the identifier used for matching, usually the InChIKey is used.
+#' @param round the number of digits the imported values are rounded to.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @keywords data

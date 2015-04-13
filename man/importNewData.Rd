@@ -2,7 +2,7 @@
 % Please edit documentation in R/importNewData.R
 \name{importNewData}
 \alias{importNewData}
-\title{import new data into DoOR}
+\title{Import new data into DoOR}
 \usage{
 importNewData(file.name, file.format, dataFormat = default.val("data.format"),
   odor.data = default.val("odor.data"),
@@ -31,9 +31,13 @@ range of each study and how many odors have been measured in each study.}
 
 \item{receptors}{data frame, contains the receptor and ORN names and their
 expression.}
+
+\item{ident}{the identifier used for matching, usually the InChIKey is used.}
+
+\item{round}{the number of digits the imported values are rounded to.}
 }
 \description{
-import new data and update the weight, response range and receptor names
+Import or update new data and update \code{weight.globNorm}, \code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
 }
 \details{
 \code{\link{importNewData}} is used to import new data into database. If the
@@ -42,7 +46,8 @@ receptor or ORN. If the data contains a receptor that is already present in
 database, then merge the imported data into old data frame with function
 \code{\link{combData}}. The information (e.g. response range, how many
 receptors and odors were measured from given study) will be integrated into
-data "response.range", "ORs" and "weight.globNorm".
+data \code{response.range}, \code{odor}, \code{ORs} and \code{weight.globNorm}.
+If an existing study is imported, \code{\link{removeStudy}} will be run first in order to perform an update.
 }
 \examples{
 import new data named "odorantResponses_Orx.txt" into database and update the support data.
