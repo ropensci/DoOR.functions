@@ -51,19 +51,20 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     warning('We found ', length(nas), ' misisng identifier(s), this data was removed!', call. = F)
   }
   
-  if(any(duplicated(tolower(imported_data[,ident])))) stop('There are duplicated identifiers in the new dataset, please solve this first.')
+  
+  
+  if(any(duplicated(tolower(imported_data[,ident])))) 
+    stop('There are duplicated identifiers in the new dataset, please solve this first.')
    
   whichCIDCol <- grep("CID",names(imported_data))
-  if (!is.na(whichCIDCol[1]))
-  {
+  if (!is.na(whichCIDCol[1])) {
     imported_data[,whichCIDCol] <- factor(imported_data[,whichCIDCol])
   }
   nv 	<- as.numeric(which(sapply(imported_data, is.numeric)))
   n 	<- length(nv)
   receptor_file <- colnames(imported_data)[nv]
   
-  if (round != F) 
-  {
+  if (round != F) {
     imported_data[nv] <- round(imported_data[nv],round)
   }
   
@@ -74,8 +75,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   
   matchreceptor <- match(receptor_file,rownames(weightGlobNorm))
   stats <- list('updatedReceptors' = length(na.omit(matchreceptor)), 'newReceptors' = 0, 'updatedOdors' = 0, 'newOdors' = 0)
-  if (any(is.na(matchreceptor)))
-  {
+  if (any(is.na(matchreceptor))) {
     whichNotmatch 		<- which(is.na(matchreceptor))
     newReceptor 		<- receptor_file[whichNotmatch]
     dim_weightGlobNorm 	<- dim(weightGlobNorm)
@@ -102,13 +102,11 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   stats$updatedOdors <- length(na.omit(matchtoOdor))
   stats$newOdors     <- length(whichNA) 
   
-  if (!identical(odor.data[1:5],dataFormat)) stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
-  if (is.na(whichNA[1]))
-  {
+  if (!identical(odor.data[1:5],dataFormat)) 
+    stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
+  if (is.na(whichNA[1])) {
     message("There were no new odors imported.")
-  }
-  else 
-  {
+  } else {
     ##########
     # add new odor identifiers to 'odor' and 'data.format' -------------------- 
     ##########
@@ -125,27 +123,27 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     levels(odor.data$Name) <- union(levels(odor.data$Name),levels(imported_data$Name))
     odor.data[(dim_odor[1]+(1:length(whichNA))),"Name"]    	      <-   as.character(imported_data[whichNA,"Name"])
     
-    if ('CAS' %in% colnames(imported_data)){
+    if ('CAS' %in% colnames(imported_data)) {
       levels(odor.data$CAS) <- union(levels(odor.data$CAS),levels(imported_data$CAS))
       odor.data[(dim_odor[1]+(1:length(whichNA))),"CAS"]    	<- as.character(imported_data[whichNA,"CAS"])
     }
     
-    if ('CID' %in% colnames(imported_data)){
+    if ('CID' %in% colnames(imported_data)) {
       levels(odor.data$CID) <- union(levels(odor.data$CID),levels(imported_data$CID))
       odor.data[(dim_odor[1]+(1:length(whichNA))),"CID"]    	      <-   as.character(imported_data[whichNA,"CID"])
     }
     
-    if ('Class' %in% colnames(imported_data)){
+    if ('Class' %in% colnames(imported_data)) {
       levels(odor.data$Class) <- union(levels(odor.data$Class),levels(imported_data$Class))
       odor.data[(dim_odor[1]+(1:length(whichNA))),"Class"]    	    <-   as.character(imported_data[whichNA,"Class"])
     }
     
-    if ('InChI' %in% colnames(imported_data)){
+    if ('InChI' %in% colnames(imported_data)) {
       levels(odor.data$InChI) <- union(levels(odor.data$InChI),levels(imported_data$InChI))
       odor.data[(dim_odor[1]+(1:length(whichNA))),"InChI"]          <-   as.character(imported_data[whichNA,"InChI"])
     }
     
-    if ('SMILES' %in% colnames(imported_data)){
+    if ('SMILES' %in% colnames(imported_data)) {
       levels(odor.data$SMILES) <- union(levels(odor.data$SMILES),levels(imported_data$SMILES))
       odor.data[(dim_odor[1]+(1:length(whichNA))),"SMILES"]       <-   as.character(imported_data[whichNA,"SMILES"])
     }
@@ -161,8 +159,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   
   match_receptor <- match(receptor_file, receptors[,"OR"])
   what_is_new <-  receptor_file[which(is.na(match_receptor))]
-  if (!is.na(what_is_new[1])) 
-  { 
+  if (!is.na(what_is_new[1])) { 
     ORs_new 	<- data.frame(OR = what_is_new, expression = NA) 
     receptors 	<- rbind(receptors, ORs_new)
     message("New receptor or ORN has been added to 'ORs', please input the AL mapping manually.")
@@ -172,11 +169,9 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   # add new response data
   ##########
   
-  for (j in receptors[,"OR"])
-  {
-    target <- try(get(j),silent=TRUE)			# try to get the data and assign it a names "target"
-    if (inherits(target, "try-error"))				# if it can be done, there must be a new receptor
-    {
+  for (j in receptors[,"OR"]) {
+    target <- try(get(j),silent=TRUE)			    # try to get the data and assign it a names "target"
+    if (inherits(target, "try-error")) {			# if it can be done, there must be a new receptor
       target <- dataFormat
       message(paste(j, "is a new receptor or ORN. A new response data.frame was created."))
     }
@@ -185,8 +180,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
     whichNA 	<- which(is.na(matchOdor))
     if (is.na(whichNA[1])) {
       assign(j, target, envir = .GlobalEnv) 
-    }
-    else {
+    } else {
       dim_RD 	<- dim(target)
       target[(dim_RD[1]+length(whichNA)),] 	<- NA
       
@@ -196,17 +190,17 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
       levels(target$Name) <- union(levels(target$Name),levels(imported_data$Name))
       target[(dim_odor[1]+(1:length(whichNA))),"Name"] <- as.character(imported_data[whichNA,"Name"])
       
-      if ('Class' %in% colnames(imported_data)){
+      if ('Class' %in% colnames(imported_data)) {
         levels(target$Class) <- union(levels(target$Class),levels(imported_data$Class))
         target[(dim_RD[1]+(1:length(whichNA))),"Class"] <- as.character(imported_data[whichNA,"Class"])
       }
       
-      if ('CAS' %in% colnames(imported_data)){
+      if ('CAS' %in% colnames(imported_data)) {
         levels(target$CAS) <- union(levels(target$CAS),levels(imported_data$CAS))
         target[(dim_RD[1]+(1:length(whichNA))),"CAS"] <- as.character(imported_data[whichNA,"CAS"])
       }
       
-      if ('CID' %in% colnames(imported_data)){
+      if ('CID' %in% colnames(imported_data)) {
         levels(target$CID) <- union(levels(target$CID),levels(imported_data$CID))
         target[(dim_odor[1]+(1:length(whichNA))),"CID"] <- as.character(imported_data[whichNA,"CID"])
       }
@@ -216,22 +210,25 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   }
   
   # import data
-  for (i in 1:n)
-  {
+  for (i in 1:n) {
     column.name <- receptor_file[i] 			        # receptor name
     target <- try(get(column.name),silent=TRUE) 	# try to find a match receptor and load data from old database
     
     # check if receptor is new
-    if(dim(target)[2] == 5) stats$newReceptors <- stats$newReceptors + 1
+    if(dim(target)[2] == 5) 
+      stats$newReceptors <- stats$newReceptors + 1
     
     assign(column.name, 
-           combData(data1 = target, data2 = imported_data, by.data2 = column.name, assigned.name = paste(file.name, sep="")),
+           combData(data1 = target, 
+                    data2 = imported_data, 
+                    by.data2 = column.name, 
+                    assigned.name = paste(file.name, sep="")),
            envir = .GlobalEnv)
     message(paste(column.name,"has been imported."))
     
     # update weight.globNorm
     dim_weightGlobNorm 	<- dim(weightGlobNorm)
-    match_receptor 		<- match(column.name, rownames(weightGlobNorm))
+    match_receptor 		  <- match(column.name, rownames(weightGlobNorm))
     weightGlobNorm[match_receptor,dim_weightGlobNorm[2]] <- 1
   } # END for (i in 1:n)
   
