@@ -32,5 +32,5 @@ removeStudy <- function(study,
   }
   responseRange <- responseRange[- which(responseRange$study == study),] 
   assign("response.range", responseRange, envir = .GlobalEnv)
-  message(paste('removed',study,'from DoOR. Remember to requild the response matrices.'))
+  message(paste('removed',study,'from \'response.range\'. Remember to requild the response matrices.'))
 }
