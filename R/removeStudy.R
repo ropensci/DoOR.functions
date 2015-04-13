@@ -23,6 +23,9 @@ removeStudy <- function(study,
                         receptors = default.val('ORs'),
                         responseRange = default.val('response.range'),
                         weightGlobNorm = default.val('weight.globNorm')) {
+  if (length(study) > 1)
+    stop('Please enter only 1 study at a time.')
+  
   for(x in receptors[,'OR']) {
     data <- try(get(x), silent = TRUE)
     if (any(colnames(data) == study)) {
