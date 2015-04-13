@@ -29,7 +29,6 @@
 #' @seealso \code{\link{DoORnorm}},\code{\link{projectPoints}},
 #' \code{\link{calModel}}, \code{\link{modelfunction}}
 #' @keywords data
-#' @examples
 #' 
 #' 
 #' 

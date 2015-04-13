@@ -1,6 +1,6 @@
-#' Update the DoOR odor data withinfo from 'odor'
+#' Update the DoOR odor data with info from \code{odor}
 #'
-#' @author Daniel Münch, \email{daniel@muench.bio}
+#' @author Daniel Münch, \email{daniel@@muench.bio}
 #'
 #'
 updateOdorInfo <- function() 

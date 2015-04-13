@@ -16,7 +16,7 @@
 #' @param parms numeric vector; parameters of middle function
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords math
-#' @examples
+#'
 #' 
 #' 
 #' 
