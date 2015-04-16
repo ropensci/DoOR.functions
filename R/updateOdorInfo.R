@@ -17,5 +17,5 @@ updateOdorInfo <- function()
     }
     assign(i, tmp, envir = .GlobalEnv)
   }
-  data.format <- odor[1:5]
+  assign('data.format', odor[1:5], envir = .GlobalEnv)
 }
