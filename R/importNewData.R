@@ -64,7 +64,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   if(any(is.na(imported.data[,ident]))) {
     nas <- which(is.na(imported.data[,ident]))
     imported.data <- droplevels(imported.data[-nas,])
-    warning('We found ', length(nas), ' misisng identifier(s), this data was removed!', call. = F)
+    warning('We found ', length(nas), ' missing identifier(s), this data was removed!', call. = F)
   }
   
   # check for duplicated identifiers
@@ -92,7 +92,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   colnames(weightGlobNorm)[dim_weightGlobNorm[2]+1] <- file.name
   
   matchreceptor <- match(receptor_file,rownames(weightGlobNorm))
-  stats <- list('updatedReceptors' = length(na.omit(matchreceptor)), 'newReceptors' = 0, 'updatedOdors' = 0, 'newOdors' = 0)
+  stats <- list('importedReceptors' = length(receptor_file), 'newReceptors' = 0, 'updatedOdors' = 0, 'newOdors' = 0)
   if (any(is.na(matchreceptor))) {
     whichNotmatch 		<- which(is.na(matchreceptor))
     newReceptor 		<- receptor_file[whichNotmatch]
@@ -260,7 +260,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   message()
   message(paste('###################\n',
                 'Import statistics:\n',
-                stats$updatedReceptors,'response profiles were updated,',stats$newReceptors,'new profiles were added to DoOR.\n',
+                stats$importedReceptors - stats$newReceptors,'response profiles were updated,',stats$newReceptors,'new profiles were added to DoOR.\n',
                 stats$updatedOdors,'odorants were updated,',stats$newOdors,'new odorants were added to DoOR.'))
   
 } # END program "importNewData"
