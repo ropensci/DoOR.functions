@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #' Compose a Response Matrix of All Odor Receptors
 #' 
 #' computes the complete response model for all receptors in the database
@@ -23,7 +21,6 @@
 #' loadRD()
 #' # mydatabase <- CreateDatabase()
 #' 
->>>>>>> 0bb2577... added ... to be able to pass more parameters to modelRP()
 CreateDatabase <-
 function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues"), ...) 
 {
