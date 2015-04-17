@@ -10,8 +10,11 @@
 #' studies that do not align sufficiently well to the response model
 #' @param overlapValues numeric; a criterion using to refuse a data set that
 #' has not enough overlap value.
+#' @param ... pass more parameters to \code{\link{modelRP}} (e.g. \code{glob.normalization == T} to build a non-normalized response matrix)
 #' @seealso \code{\link{modelRP}}
 #' @keywords data
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @author Shouwen Ma <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
 #' 
 #' library(DoOR.data)
@@ -19,28 +22,7 @@
 #' # mydatabase <- CreateDatabase()
 #' 
 CreateDatabase <-
-function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues") ) 
-
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-
-# CreateDatabase.R :
-####################
-
-# Create the whole database; i.e. call the merging function modelRP() for all receptors
-
-
-# input parameters:
-###################
-
-# tag 		 : character string; format for rownames; possibilities: tag="CAS", tag="CID", tag="Name"
-# select.MDValue : numeric; threshold on the MAD, this is used to reject studies that do not align sufficiently well to the response model
-#  overlapValues : numeric; a criterion using to refuse a data set that has not enough overlap value.
-
-
-## output is an odors-by-receptors numeric matrix, i.e. the DoOR database
-
+function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues"), ...) 
 {
 
 	Or.list  	<- loadRDList() 	# contains data for all receptors
@@ -70,7 +52,7 @@ function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), o
 			frame_data[, i] <- NA }
 		else
 		{
-			merged 		   <- modelRP(da,select.MDValue, overlapValues)
+			merged 		   <- modelRP(da,select.MDValue, overlapValues, ...)
 			merged.responses   <- merged$model.response[,"merged_data"]
 			merged.odors 	   <- as.vector(merged$model.response[,tag])
 			match_odorsTOframe <- match(merged.odors, rownames(frame_data))
