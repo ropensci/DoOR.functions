@@ -34,7 +34,7 @@ function(DoOR_default)
 
 	## integer
 	if (DoOR_default == "overlapValues") 	{ return(5) } # selectModel.R
-	if (DoOR_default == "num.charColumns") 	{ return(4) } # CreateDatabase.R, modelRP.R, importNewData.R, modelRPSEQ.R
+	if (DoOR_default == "num.charColumns") 	{ return(5) } # CreateDatabase.R, modelRP.R, importNewData.R, modelRPSEQ.R
 
 	## logical
 	if (DoOR_default == "glob.normalization") { return(TRUE) } # modelRP.R
