@@ -21,40 +21,35 @@
 #' loadRD()
 #' # mydatabase <- CreateDatabase()
 #' 
-CreateDatabase <-
-function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues"), ...) 
-{
+CreateDatabase <- function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues"), ...) {
 
 	Or.list  	<- loadRDList() 	# contains data for all receptors
 	Or.Names 	<- names(Or.list)
 	num_receptors 	<- length(Or.Names)	# how many receptors
 
 	odors <- character()
-
-	for (i in Or.Names) {
+  for (i in Or.Names) {
 		pre.odors <- as.vector(Or.list[[i]][,tag])
 		new_odors <- which(is.na(match(pre.odors,odors)))
 		odors 	  <- c(odors,pre.odors[new_odors])
 	}
 
 	num_odors 	     <- length(odors)					# how many odors
-	frame_data 	     <- matrix(NA,nrow=num_odors,ncol=num_receptors)	# empty matrix
+	frame_data 	     <- matrix(NA, nrow = num_odors, ncol = num_receptors)	# empty matrix
 	colnames(frame_data) <- Or.Names
 	rownames(frame_data) <- odors
 
-	for (i in Or.Names)
-	{
+	for (i in Or.Names) {
 		da <- Or.list[[i]]
 	
-        	# if no response data, fill in "NA" and skip
+    # if no response data, fill in "NA" and skip
 		if (dim(da)[2] <= default.val("num.charColumns")) { 
 			print(paste(i, "is a empty data frame."))
-			frame_data[, i] <- NA }
-		else
-		{
-			merged 		   <- modelRP(da,select.MDValue, overlapValues, ...)
+			frame_data[, i] <- NA 
+		} else {
+			merged 		         <- modelRP(da, select.MDValue, overlapValues, ...)
 			merged.responses   <- merged$model.response[,"merged_data"]
-			merged.odors 	   <- as.vector(merged$model.response[,tag])
+			merged.odors 	     <- as.vector(merged$model.response[,tag])
 			match_odorsTOframe <- match(merged.odors, rownames(frame_data))
 			frame_data[match_odorsTOframe, i] <- merged.responses
 			print(paste(i, "has been merged."))

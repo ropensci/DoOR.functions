@@ -6,7 +6,7 @@
 #' output is a data frame containing response values of given odor across
 #' receptors from all available studies.
 #' 
-#' @param CAS character string; CAS number
+#' @param odorant a single odor provided as InChIKey
 #' @param responseRange data frame; response ranges of studies
 #' @param Or.list a list contains reponse data of all available receptors. It
 #' can be loaded using \code{\link{loadRDList}}.
@@ -15,54 +15,25 @@
 #' 
 #' library(DoOR.data)
 #' loadRD()
-#' Or.list <- loadRDList()
-#' cas="105-87-3"
-#' OriginalResponses <- findResp(CAS = cas, responseRange = response.range, Or.list = Or.list)
+#' responses <- findResp(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #' 
-findResp <-
-function(CAS, responseRange = default.val("response.range"), Or.list)
+findResp <- function(odorant, responseRange = default.val("response.range"), Or.list = loadRDList()) {
 
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-
-# findResp.R:
-#############
-
-# given a chemical, get original receptor responses from all studies in the database.
-
-
-#input parameters:
-##################
-
-#  CAS 		  : CAS number of query odor
-#  responseRange  : response ranges of studies
-#  Or.list 	  : a list containing reponse data for all available receptors
-
-## output is a data frame containing response values for the given odor across receptors from all available studies. 
-
-{
-
-	studies  <- responseRange[,"study"]
-    	Or.Names <- names(Or.list)
-    	res 	 <- numeric()
-
-    	for (i in 1:length(Or.Names)) 
-	{
-        	match_odor <- match(CAS, as.character(Or.list[[i]]$CAS))
-	        pres1 	   <- Or.list[[i]][match_odor, ]
-		valueCol   <- as.numeric(which(sapply(pres1, is.numeric)))
-
-		if (is.na(valueCol[1]))
-		{
-			pres<-data.frame(ORs = Or.Names[i], studies = NA, Odor = CAS, Response = NA )
-		}
-		else 
-		{
-			pres<-data.frame(ORs = Or.Names[i], studies = colnames(pres1)[valueCol], Odor = CAS, Response = c(as.matrix(pres1[, valueCol])))
-		}
-		res<-rbind(res,pres)
-	}
-
+  studies  <- responseRange[,"study"]
+	Or.Names <- names(Or.list)
+	res 	   <- numeric()
+  
+	for (i in 1:length(Or.Names)) {
+  	match_odor <- match(odorant, Or.list[[i]][,'InChIKey'])
+    pres1 	   <- Or.list[[i]][match_odor, ]
+  	valueCol   <- as.numeric(which(sapply(pres1, is.numeric)))
+  
+  	if (is.na(valueCol[1])) {
+  		pres <- data.frame(ORs = Or.Names[i], studies = NA, Odor = odorant, Response = NA )
+  	} else {
+  		pres <- data.frame(ORs = Or.Names[i], studies = colnames(pres1)[valueCol], Odor = odorant, Response = c(as.matrix(pres1[, valueCol])))
+  	}
+  	res<-rbind(res,pres)
+  }
 return(res)
 }

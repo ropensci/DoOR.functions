@@ -4,8 +4,8 @@
 #' database.
 #' 
 #' 
-#' @param CAS character vector; one or more odors.
-#' @param zero character string; The default is "SFR", i.e. the spontaneous
+#' @param odors character vector; one or more odors provided as InChIKey.
+#' @param zero InChIKey of background that should be set to zero. The default is "SFR", i.e. the spontaneous
 #' firing rate.
 #' @param responseMatrix a data frame; as e.g. "response.matrix" that is loaded
 #' by \code{\link{modelRP}}. It is also possible to create this frame manually
@@ -15,54 +15,32 @@
 #' @examples
 #' 
 #' library(DoOR.data)
-#' cas <- c("71-36-3","123-92-2","79-09-4")
+#' odors <- c("MLFHJEHSLIIPHL-UHFFFAOYSA-N","OBNCKNCVKJNDBV-UHFFFAOYSA-N","IKHGUXGNUITLKF-UHFFFAOYSA-N")
 #' data(response.matrix)
 #' result <- findRespNorm(cas, responseMatrix = response.matrix)
 #' 
-findRespNorm <-
-function(CAS, zero= default.val("zero"), responseMatrix = default.val("response.matrix"))
+findRespNorm <- function(odors, zero = default.val("zero"), responseMatrix = default.val("response.matrix")) {
 
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-
-# findRespNorm.R:
-##################
-
-## given a chemical, get normalized receptor responses from all studies in the database
-
-
-# input parameters:
-####################
-
-#  CAS 		: character vector; one or more odors.
-#  zero 	: character string; The default is "SFR", i.e. the spontaneous firing rate.
-#  responseMatrix 	: a data frame; as e.g. "mast" that is loaded by modelRP. It is also possible to create this frame manually using modelRP
-
-
-## output is a data frame containing normalized responses for the given odors.
-
-{
-
-	Or.Names <- names(responseMatrix)
+	Or.Names <- colnames(responseMatrix)
 	n	 <- dim(responseMatrix)[2]
-	pr.mast  <- responseMatrix
-
-	for (j in 1:n)
-	{
-		if (is.na(which(!is.na(pr.mast[,j]))[1])) { next }
-		else 
-		{
-			# reset the response data by scaling the "zero" to 0, the default "zero" is spontanous firing rate 
-			if (is.na(pr.mast[1,j])) { mzero <- 0 }
-			else 			   { mzero <- pr.mast[1,j] }
-			pr.mast[,j] <- resetSFR(pr.mast[,j], mzero)	
+	
+	for (j in 1:n) {
+		if (is.na(which(!is.na(responseMatrix[,j]))[1])) { 
+      next 
+		} else {
+			# reset the response data by setting "zero" to 0, the default "zero" is spontanous firing rate (SFR)
+			if (is.na(responseMatrix[zero,j])) { 
+        mzero <- 0 
+			} else { 
+        mzero <- responseMatrix[zero,j] 
+			}
+			responseMatrix[,j] <- resetSFR(responseMatrix[,j], mzero)	
 		}
 	}
 	
-	mp  <- match(CAS,rownames(pr.mast))
-	res <- data.frame(ORs 	   = rep(colnames(pr.mast),each=length(CAS)),
-			  Odor 	   = rep(CAS,length(Or.Names)),
-			  Response = c(as.matrix(pr.mast[mp,])))
+	mp  <- match(odors,rownames(responseMatrix))
+	res <- data.frame(ORs = rep(colnames(responseMatrix),each=length(odors)),
+			              Odor = rep(odors,length(Or.Names)),
+			              Response = c(as.matrix(responseMatrix[mp,])))
 return(res)
 }

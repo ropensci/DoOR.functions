@@ -49,11 +49,11 @@ modelRP <- function(da,
   }
 
   # positions of columns that contain odor response vectors
-  # should be columns 5...end (1..4 contain odor class, odor name, CID and CAS)
+  # should be columns 6...end (1..5 contain odor class, odor name, InChIKey, CID and CAS)
   # 
-  nv 	 		<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
-  number_of_studies   <- length(nv)
-  excluded 		<- character()
+  nv 	 		          <- as.numeric(c((default.val("num.charColumns")+1):dim(da)[2]))
+  number_of_studies <- length(nv)
+  excluded 		      <- character()
 
   # if there is no study --> stop
   if (number_of_studies == 0) {
@@ -90,8 +90,8 @@ modelRP <- function(da,
   	# pda contains the columns (receptors) of the data matrix 
   	# the function DoORnorm has normalized each to [0,1]
 
-  ###
-	# --> start the merging process: find the first pair 
+    ###
+  	# --> start the merging process: find the first pair 
 
   	candidate.studies <- colnames(pda)
   	# candidate.studies contains a list of all studies in this receptor
@@ -109,7 +109,7 @@ modelRP <- function(da,
   	# done by projecting response values onto the chosen function (and, if plot==TRUE, also plot this)
   	# use the function (best.model) found with selectModel above
 
-   projected <- projectPoints(x = pda[,selected$selected.x], y = pda[,selected$selected.y], best.model = selected$best.model, xlab = selected$selected.x,    ylab = selected$selected.y,    plot = plot, title = plot)
+   projected <- projectPoints(x = pda[,selected$selected.x], y = pda[,selected$selected.y], best.model = selected$best.model, xlab = selected$selected.x,    ylab = selected$selected.y, plot = plot, title = plot)
 
   	# the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
   	# to integrate it into pda, change data type: list to vector
@@ -168,7 +168,7 @@ modelRP <- function(da,
 		name.Stud = name.Stud, weightGlobNorm = weightGlobNorm, responseRange = responseRange )
   }
 
-  resd <- cbind(da[, c("Class", "Name", "CID", "CAS")], merged_data)
+  resd <- cbind(da[, c("Class", "Name", "InChIKey", "CID", "CAS")], merged_data)
   source.data = colnames(da)[nv][-match(excluded,colnames(da)[nv])]
  
 return(list(Source.data = source.data, model.response = resd, Excluded.Data = excluded))
