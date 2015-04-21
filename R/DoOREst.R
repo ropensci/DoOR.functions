@@ -1,3 +1,26 @@
+#' Estimate the missing entries in a response data
+#' 
+#' Estimate the missing entries in a response data
+#' 
+#' A warp programe using \code{\link{LLSIestPC}} or \code{\link{LLSIestKnn}}
+#' estimate the missing entries in a response data.
+#' 
+#' @param da a data frame or matrix; contaning the consensus response values.
+#' @param nodor a numeric value; specifying the number of the selected odors.
+#' @param method character string; specifying the method ("PC" (Pearson's
+#' coefficient) and "Knn" (k nearest neighbors)) for estimation, the default is
+#' "PC".
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @references Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
+#' DNA microarray gene expression data: local least squares imputation., 2005,
+#' Bioinformatics, 21, 187-198
+#' @keywords math
+#' @examples
+#' 
+#' library(DoOR.data)
+#' data(response.matrix)
+#' # est_data <- DoOREst(da=response.matrix, nodor = 3)
+#' 
 DoOREst <-
 function(da, nodor, method = "PC")
 

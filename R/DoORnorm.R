@@ -1,3 +1,16 @@
+#' normalize the data in values from 0 to 1
+#' 
+#' \code{DoORnorm} is used to normalize the data in values from 0 to 1.
+#' 
+#' 
+#' @param x a numeric vector
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords math
+#' @examples
+#' 
+#' x <- rnorm(10)
+#' DoORnorm(x)
+#' 
 DoORnorm <-
 function(x) 
 

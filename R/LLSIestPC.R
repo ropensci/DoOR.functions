@@ -1,3 +1,36 @@
+#' Local Least Squares Imputation Estimation Using Pearson Correlation
+#' 
+#' Using local least squares imputation to estimate the missing values in
+#' target odorant receptors, odors will be selected by coherent odors that have
+#' large absolute values of Pearson correlation coefficients.
+#' 
+#' The response matrix in common scale \code{respose.matrix} allows using local
+#' least squares imputation (LLS) to estimate the missing values in target
+#' odorant receptors. Odorant responses of most structural similar odors will
+#' be constructed as a linear combination for LLS. The odors will be selected
+#' by using k-nearest neighbor that have large absolute values of Pearson
+#' correlation coefficients. \code{nodor} indicates the number of selected
+#' odors.
+#' 
+#' @param CAS a character string; the CAS number of odorant compound.
+#' @param receptor a character string; the name of odorant receptor.
+#' @param responseMatrix a numeric matrix; containing the normalized odorant
+#' responses.
+#' @param nodor a numeric value; specifying the number of the selected odors.
+#' @return A list with components \code{estimation}, \code{selected.receptors}
+#' and \code{selected.odors} which give the value of estimation, the selected
+#' receptors and odors with absolute values of Pearson correlation coefficients
+#' for linear combinations, respectively.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @references Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
+#' DNA microarray gene expression data: local least squares imputation., 2005,
+#' Bioinformatics, 21, 187-198
+#' @keywords math
+#' @examples
+#' 
+#' library(DoOR.data)
+#' LLSIestPC(CAS = "589-91-3", receptor = "Or22a" )
+#' 
 LLSIestPC <-
 function(CAS, 
 		receptor, 

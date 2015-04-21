@@ -1,3 +1,31 @@
+#' export data
+#' 
+#' export odor response data and supported data
+#' 
+#' Please load ORs from data package DoOR.data by typing (\code{data(ORs)})
+#' before use.
+#' 
+#' @param file.format character string; the format of given file, either ".txt"
+#' or ".csv"
+#' @param directory character string; naming a directory for writing. If
+#' missing, the exported data are saved in current working directory.
+#' @param odorantReceptors data frame; receptor names and expressions
+#' @param responseMatrix data matrix; an global unnormalized responses matrix
+#' @param responseRange data frame; response ranges for each study
+#' @param unglobalNorm_RM data matrix; an unnormalized responses matrix
+#' @param weightGlobNorm data frame; weight matrix for global normalizazion
+#' @param all.data logical; if TRUE, export odorant response data and supported
+#' data "response.matrix", "response.range", "unglobalNorm_response.matrix",
+#' "response.matrix", "weight.globNorm" and "ORs".
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' library(DoOR.function)
+#' loadRD()
+#' exportData(".txt", all.data = FALSE) 	# export odorant responses data only
+#' 
 exportData <-
 function(file.format, directory, 
 	odorantReceptors = default.val("ORs"),  

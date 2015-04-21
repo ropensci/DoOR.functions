@@ -1,3 +1,23 @@
+#' Link to PubChem
+#' 
+#' obtain information on a chemical from PubChem
+#' 
+#' Send a query to PubChem. The result is displayed using the default
+#' WWW-browser.
+#' 
+#' @param CID a character string; the compound identity (CID) in pubchem.
+#' @param CAS a character string; the CAS number.
+#' @param odor.data data frame; chemical data of odors.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @seealso \code{\link{browseURL}}
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' data(odor)
+#' showOdor(CID=222,odor.data=odor)
+#' showOdor(CAS="64-19-7",odor.data=odor)
+#' 
 showOdor <-
 function(CID, CAS, odor.data = default.val("odor.data")) 
 

@@ -1,3 +1,34 @@
+#' compute the data pairwise and and selects a pair with the lowest "MD" value.
+#' 
+#' compute the data pairwise using function \code{\link{calModel}} and selects
+#' a pair with the lowest "MD" value.
+#' 
+#' This function is used in \code{\link{modelRP}} to select the first pair or
+#' next data set for merging. The output is a list containing "selected.x" and
+#' "selected.y" that specify which data plots against another, and "best.model"
+#' that is used in function \code{\link{projectPoints}}.
+#' 
+#' @param candidate a character vector; contains the names of studies.
+#' @param data_candidate a data frame; odorant response data that only contains
+#' value columns.
+#' @param merged_data numeric vector; merged data
+#' @param overlapValues numeric; a criterion using to refuse a data set that
+#' has not enough overlap value.
+#' @param merged logical; if merged is \code{TRUE}, calculate models between
+#' merged_data and candidate data. If \code{FALSE}, calculate models between
+#' candidates.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @seealso \code{\link{projectPoints}},\code{\link{modelRP}}
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' data(Or35a)
+#' studies<-names(Or35a)[c(5:9)]
+#' data_candidate<-Or35a[,c(5:9)]
+#' Norm_data_candidate<-apply(data_candidate,2,DoORnorm)
+#' selectModel(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
+#' 
 selectModel <-
 function(candidate, 
 			data_candidate, 

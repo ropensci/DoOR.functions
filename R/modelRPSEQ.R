@@ -1,3 +1,21 @@
+#' Generates a model response and merge data in given sequence
+#' 
+#' Generates a model response and merge data in given sequence.
+#' 
+#' 
+#' @param data data frame; odorant response data, e.g. Or22a.
+#' @param SEQ character vector; containing the names of studies indicating
+#' given sequence for merging data.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' data(Or35a)
+#' data(response.range)
+#' SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Yao.2005.WT")
+#' selected.merg <- modelRPSEQ(Or35a, SEQ = SEQ)
+#' 
 modelRPSEQ <-
 function(data,SEQ) 
 

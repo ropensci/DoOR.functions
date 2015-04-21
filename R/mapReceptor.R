@@ -1,3 +1,20 @@
+#' Mapping the given receptor into response matrix
+#' 
+#' Mapping the given receptor into response matrix by comparing their linear
+#' relationship (Pearson Correlation Coefficient).
+#' 
+#' 
+#' @param da data frame; odorant response data for a given receptor, e.g.
+#' Or22a.
+#' @param by.column character string; specifying the column in "da" that
+#' contains the response values.
+#' @param Receptors character vector; containing the names of receptor that
+#' specify the consensus values in response matrix
+#' @param ResponseMatrix output is a numeric vector that contains the Pearson
+#' Correlation Coefficient between given data and selected consensus data in
+#' response matrix
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords data
 mapReceptor <-
 function(da, by.column, Receptors, ResponseMatrix) 
 

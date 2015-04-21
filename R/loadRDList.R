@@ -1,3 +1,22 @@
+#' load data into a list
+#' 
+#' load all available data into a list
+#' 
+#' Please load ORs from data package DoOR.data by typing (\code{data(ORs)})
+#' before use.
+#' 
+#' @param odorantReceptors data frame; containing receptor or ORN names and
+#' their expression.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' library(DoOR.function)
+#' loadRD()
+#' orlist <- loadRDList()
+#' orlist$Or22a
+#' 
 loadRDList <-
 function(odorantReceptors = default.val("ORs"))
 

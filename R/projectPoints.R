@@ -1,3 +1,49 @@
+#' projects data points onto the curve defined by the model function
+#' 
+#' For internal use in the merging process (see also \code{\link{modelRP}}).
+#' The model function is choosen by \code{\link{calModel}}.
+#' \code{\link{projectPoints}} then projects the data points from the datasets
+#' to be merged onto the curve defined by the model function. It computes the
+#' closest distance from a data point to a point on the curve by numerical
+#' optimisation.
+#' 
+#' A list with two data frames "Double.Observations" and "Single.Observation"
+#' is returned, which give the coordinates of double observations (defined as
+#' (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)).
+#' Both data frames contain seven columns: "ID" indicating the original
+#' position of data x and y; "x", "y" indicating the coordinate of observation;
+#' "X", "Y" indicating the coordinate of projected point on the functional
+#' line; "distance" indicating the distances between \code{(xmin, f(xmin))} and
+#' all points on the functional line; "NDR" indicating the normalized distances
+#' across all the distance values.
+#' 
+#' @param x,y numeric vectors of data values; coordinate vectors of points to
+#' plot, the coordinates can contain \code{NA} values.
+#' @param xylim numeric vectors; x, y limits of the plot.
+#' @param best.model a list; containing the parameters, function, inverse
+#' function, Leibniz's notation for distance calculation and MD value. if
+#' missing, the best model will be generated automatically.
+#' @param plot logical; If \code{FALSE}, plotting is suppressed. Default is
+#' \code{FALSE}.
+#' @param points.cex a numerical value; giving the magnification level of
+#' symbols relative to the default size.
+#' @param title logical; If \code{TRUE}, title is shown. Default is
+#' \code{FALSE}.
+#' @param cex.title numeric; The magnification to be used for main titles
+#' relative to the current setting of cex.
+#' @param \dots further graphical parameters
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @seealso \code{\link{calModel}}, \code{\link{modelfunction}},
+#' \code{\link{optimize}}, \code{\link{integrate}}
+#' @keywords math
+#' @examples
+#' 
+#' library(DoOR.data)
+#' data(Or23a)
+#' x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
+#' y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
+#' projectPoints(x = x, y = y, plot = TRUE)
+#' 
 projectPoints <-
 function(x, y, xylim, best.model, 
 			plot = default.val("plot"), 

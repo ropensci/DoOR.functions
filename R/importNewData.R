@@ -1,162 +1,266 @@
-importNewData <-
-function(file.name, file.format, dataFormat = default.val("data.format"),
-			odor.data = default.val("odor.data"), 
-			weightGlobNorm = default.val("weight.globNorm"), 
-			responseRange = default.val("response.range"), 
-			receptors = default.val("ORs") )
-
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-
-
-# importnewdata.r:
-###################
-
-## import new data and update the weights (weight.globNorm), response range (response.range) and receptor names (ors)
-
-
-# input parameters:
-#####################
-
-# file.name 	 : character, the name of given file that contains response values of one or more odorant receptors
-# file.format 	 : character; either ".txt" or ".csv"
-# dataFormat 	 : data frame, a data frame does not contain any response value but odorant information.
-# odor.data 	 : data frame, containing the odorant information
-# weightGlobNorm : data matrix, indicates whether given receptor has been measured by given study.
-# responseRange  : data frame, contains the information about response range of each study and how many odors have been measured in each study.
-# receptors 	 : data frame, contains the receptor and ORN names and their expression.
-
-
-#output: the updated weights, etc. are written to the workspace
-
+#' Import new data into DoOR
+#' 
+#' Import or update new data and update \code{weight.globNorm}, \code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
+#' 
+#' \code{\link{importNewData}} is used to import new data into database. If the
+#' data contains a new receptor or ORN, then build a new data frame for this
+#' receptor or ORN. If the data contains a receptor that is already present in
+#' database, then merge the imported data into old data frame with function
+#' \code{\link{combData}}. The information (e.g. response range, how many
+#' receptors and odors were measured from given study) will be integrated into
+#' data \code{response.range}, \code{odor}, \code{ORs} and \code{weight.globNorm}.
+#' If an existing study is imported, \code{\link{removeStudy}} will be run first in order to perform an update.
+#' 
+#' @param file.name character string; the name of given file that contains
+#' response values of one or more odorant receptors.
+#' @param file.format character string; the format of given file, either ".txt"
+#' or ".csv"
+#' @param dataFormat data frame; a data frame does not contain any response
+#' value but odorant information.
+#' @param odor.data data frame; a data frame that contains the odorant
+#' information.
+#' @param weightGlobNorm data matrix; indicates whether given receptor has been
+#' measured by given study.
+#' @param responseRange data frame; contains the information about response
+#' range of each study and how many odors have been measured in each study.
+#' @param receptors data frame, contains the receptor and ORN names and their
+#' expression.
+#' @param ident the identifier used for matching, usually the InChIKey is used.
+#' @param round the number of digits the imported values are rounded to.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @keywords data
+#' @examples
+#' 
+#' import new data named "odorantResponses_Orx.txt" into database and update the support data.
+#' library(DoOR.data)
+#' importNewData(file.name="odorantResponses_Orx", file.format=".txt")
+#' 
+importNewData <- function(file.name, file.format, dataFormat = default.val("data.format"),
+                          odor.data = default.val("odor.data"), 
+                          weightGlobNorm = default.val("weight.globNorm"), 
+                          responseRange = default.val("response.range"), 
+                          receptors = default.val("ORs"),
+                          ident = default.val("ident"),
+                          round = 3)
 {
-	loadRD()	# load all available response data
+  if (file.format == ".txt") { imported.data <- read.table(paste(file.name,file.format,sep="")) }
+  if (file.format == ".csv") { imported.data <- read.csv(paste(file.name,file.format,sep="")) }
 
-	if (file.format == ".txt") { imported_data <- read.table( paste(file.name,file.format,sep="") ) }
-	if (file.format == ".csv") { imported_data <- read.csv( paste(file.name,file.format,sep="") ) }
-	
-	whichCIDCol <- grep("CID",names(imported_data))
-	if (!is.na(whichCIDCol[1]))
-	{
-		imported_data[,whichCIDCol] <- as.character(imported_data[,whichCIDCol])
-	}
-	nv 	<- as.numeric(which(sapply(imported_data, is.numeric)))
-	n 	<- length(nv)
-	receptor_file <- colnames(imported_data)[nv]
-
-	# update data matrix "weight.globNorm"
-	dim_weightGlobNorm <- dim(weightGlobNorm)
-	weightGlobNorm[,dim_weightGlobNorm[2]+1] <- NA
-	colnames(weightGlobNorm)[dim_weightGlobNorm[2]+1] <- file.name
-
-	matchreceptor <- match(receptor_file,rownames(weightGlobNorm))
-	if (any(is.na(matchreceptor)))
-	{
-		whichNotmatch 		<- which(is.na(matchreceptor))
-		newReceptor 		<- receptor_file[whichNotmatch]
-		dim_weightGlobNorm 	<- dim(weightGlobNorm)
-		lastRow 		<- (dim_weightGlobNorm[1]+length(whichNotmatch))
-		seqlastRows 		<- ((dim_weightGlobNorm[1]+1):lastRow)
-		weightGlobNorm[seqlastRows,dim_weightGlobNorm[2]] <- NA
-		rownames(weightGlobNorm)[seqlastRows] <- newReceptor
-		print( paste(newReceptor, "has been added into 'weight.globNorm'.") )	
-	}
+  # check for already existing studies
+  if (any(file.name %in% responseRange$study)) {
+    existing <- which(file.name %in% responseRange$study)
+    existing <- file.name[existing]
+    for(i in existing)
+      removeStudy(i)
+    
+    # get updated versions from .globalEnv
+    responseRange <- response.range
+    weightGlobNorm <- weight.globNorm
+    warning(paste('The following studies were already existing and were removed prior to integrating the new data:\n', paste(existing, collapse = ', ')))
+  }
+  
+  # check for missing identifiers
+  if(any(is.na(imported.data[,ident]))) {
+    nas <- which(is.na(imported.data[,ident]))
+    imported.data <- droplevels(imported.data[-nas,])
+    warning('We found ', length(nas), ' missing identifier(s), this data was removed!', call. = F)
+  }
+  
+  # check for duplicated identifiers
+  if(any(duplicated(tolower(imported.data[,ident])))) 
+    stop('There are duplicated identifiers in the new dataset, please solve this first.')
  
-	# update data frame "response range"
-	responseRange_new.file 	<- range(imported_data[,nv],na.rm=TRUE)
-	responseRange_new 	<- data.frame( study   = file.name,
-					  min 	  = responseRange_new.file[1],
-					  max  	  = responseRange_new.file[2],
-					  n_odors = dim(imported_data)[1])
+  # convert CID to character    
+  whichCIDCol <- grep("CID",names(imported.data))
+  if (!is.na(whichCIDCol[1])) {
+    imported.data[,whichCIDCol] <- factor(imported.data[,whichCIDCol])
+  }
+  
+  # look for columns containing numerical values (response data)
+  nv 	<- as.numeric(which(sapply(imported.data, is.numeric)))
+  n 	<- length(nv)
+  receptor_file <- colnames(imported.data)[nv]
 
-	responseRange 		<- rbind(responseRange, responseRange_new)
+  if (round != F) {
+    imported.data[nv] <- round(imported.data[nv],round)
+  }
+  
+  # update data matrix "weight.globNorm"
+  dim_weightGlobNorm <- dim(weightGlobNorm)
+  weightGlobNorm[,dim_weightGlobNorm[2]+1] <- NA
+  colnames(weightGlobNorm)[dim_weightGlobNorm[2]+1] <- file.name
+  
+  matchreceptor <- match(receptor_file,rownames(weightGlobNorm))
+  stats <- list('importedReceptors' = length(receptor_file), 'newReceptors' = 0, 'updatedOdors' = 0, 'newOdors' = 0)
+  if (any(is.na(matchreceptor))) {
+    whichNotmatch 		<- which(is.na(matchreceptor))
+    newReceptor 		<- receptor_file[whichNotmatch]
+    dim_weightGlobNorm 	<- dim(weightGlobNorm)
+    lastRow 		<- (dim_weightGlobNorm[1]+length(whichNotmatch))
+    seqlastRows 		<- ((dim_weightGlobNorm[1]+1):lastRow)
+    weightGlobNorm[seqlastRows,dim_weightGlobNorm[2]] <- NA
+    rownames(weightGlobNorm)[seqlastRows] <- newReceptor
+    message(paste(newReceptor, "has been added into 'weight.globNorm'.", collapse = '\n'))
+  }
+  
+  # update data frame "response range"
+  responseRange_new.file 	<- range(imported.data[,nv],na.rm=TRUE)
+  responseRange_new     	<- data.frame(study   = file.name,
+                                       min 	  = responseRange_new.file[1],
+                                       max  	  = responseRange_new.file[2],
+                                       n_odors = sum(apply(!is.na(imported.data[nv]),1,sum) > 0))# dim(imported.data)[1]) # changed as the old way also returned NAs
+  
+  responseRange <- rbind(responseRange, responseRange_new)
+  
+  # update data frame "odor" and data.format if new odor is available.
+  matchtoOdor <- match(imported.data[,ident],odor.data[,ident])
+  whichNA     <- which(is.na(matchtoOdor))
+  
+  stats$updatedOdors <- length(na.omit(matchtoOdor))
+  stats$newOdors     <- length(whichNA) 
+  
+  if (!identical(odor.data[1:5],dataFormat)) 
+    stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
+  if (is.na(whichNA[1])) {
+    message("There were no new odors imported.")
+  } else {
+    ##########
+    # add new odor identifiers to 'odor' and 'data.format' -------------------- 
+    ##########
+    newOdor 	<- as.character(imported.data[whichNA,"Name"])
+    message(paste(newOdor, " - is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
+    
+    dim_odor 	<- dim(odor.data)
+    
+    odor.data[(dim_odor[1]+length(whichNA)),] 		<- NA
+    
+    levels(odor.data$InChIKey) <- union(levels(odor.data$InChIKey),levels(imported.data$InChIKey))
+    odor.data[(dim_odor[1]+(1:length(whichNA))),"InChIKey"]       <-   as.character(imported.data[whichNA,"InChIKey"])
+    
+    levels(odor.data$Name) <- union(levels(odor.data$Name),levels(imported.data$Name))
+    odor.data[(dim_odor[1]+(1:length(whichNA))),"Name"]    	      <-   as.character(imported.data[whichNA,"Name"])
+    
+    if ('CAS' %in% colnames(imported.data)) {
+      levels(odor.data$CAS) <- union(levels(odor.data$CAS),levels(imported.data$CAS))
+      odor.data[(dim_odor[1]+(1:length(whichNA))),"CAS"]    	<- as.character(imported.data[whichNA,"CAS"])
+    }
+    
+    if ('CID' %in% colnames(imported.data)) {
+      levels(odor.data$CID) <- union(levels(odor.data$CID),levels(imported.data$CID))
+      odor.data[(dim_odor[1]+(1:length(whichNA))),"CID"]    	      <-   as.character(imported.data[whichNA,"CID"])
+    }
+    
+    if ('Class' %in% colnames(imported.data)) {
+      levels(odor.data$Class) <- union(levels(odor.data$Class),levels(imported.data$Class))
+      odor.data[(dim_odor[1]+(1:length(whichNA))),"Class"]    	    <-   as.character(imported.data[whichNA,"Class"])
+    }
+    
+    if ('InChI' %in% colnames(imported.data)) {
+      levels(odor.data$InChI) <- union(levels(odor.data$InChI),levels(imported.data$InChI))
+      odor.data[(dim_odor[1]+(1:length(whichNA))),"InChI"]          <-   as.character(imported.data[whichNA,"InChI"])
+    }
+    
+    if ('SMILES' %in% colnames(imported.data)) {
+      levels(odor.data$SMILES) <- union(levels(odor.data$SMILES),levels(imported.data$SMILES))
+      odor.data[(dim_odor[1]+(1:length(whichNA))),"SMILES"]       <-   as.character(imported.data[whichNA,"SMILES"])
+    }
+    
+    dataFormat <- odor.data[1:5]
+    
+    message("If data was provided, 'CAS', 'NAME', 'CID', 'Class', 'InChI' and 'SMILES' columns were updated.")
+  }
+  
+  ##########
+  # if there is a new receptor or ORN update data frame "ORs"; NOTE: the AL projection pattern (OGN) should be added manually
+  ##########
+  
+  match_receptor <- match(receptor_file, receptors[,"OR"])
+  what_is_new <-  receptor_file[which(is.na(match_receptor))]
+  if (!is.na(what_is_new[1])) { 
+    ORs_new 	<- data.frame(OR = what_is_new, expression = NA) 
+    receptors 	<- rbind(receptors, ORs_new)
+    message("New receptor or ORN has been added to 'ORs', please input the AL mapping manually.")
+  }  
+  
+  ##########
+  # add new response data
+  ##########
+  
+  for (j in receptors[,"OR"]) {
+    target <- try(get(j),silent=TRUE)			    # try to get the data and assign it a names "target"
+    if (inherits(target, "try-error")) {			# if it can be done, there must be a new receptor
+      target <- dataFormat
+      message(paste(j, "is a new receptor or ORN. A new response data.frame was created."))
+    }
+    
+    matchOdor <- match(imported.data[,ident],target[,ident])
+    whichNA 	<- which(is.na(matchOdor))
+    if (is.na(whichNA[1])) {
+      assign(j, target, envir = .GlobalEnv) 
+    } else {
+      dim_RD 	<- dim(target)
+      target[(dim_RD[1]+length(whichNA)),] 	<- NA
+      
+      levels(target$InChIKey) <- union(levels(target$InChIKey),levels(imported.data$InChIKey))
+      target[(dim_RD[1]+(1:length(whichNA))),"InChIKey"] <- as.character(imported.data[whichNA,"InChIKey"])
+      
+      levels(target$Name) <- union(levels(target$Name),levels(imported.data$Name))
+      target[(dim_odor[1]+(1:length(whichNA))),"Name"] <- as.character(imported.data[whichNA,"Name"])
+      
+      if ('Class' %in% colnames(imported.data)) {
+        levels(target$Class) <- union(levels(target$Class),levels(imported.data$Class))
+        target[(dim_RD[1]+(1:length(whichNA))),"Class"] <- as.character(imported.data[whichNA,"Class"])
+      }
+      
+      if ('CAS' %in% colnames(imported.data)) {
+        levels(target$CAS) <- union(levels(target$CAS),levels(imported.data$CAS))
+        target[(dim_RD[1]+(1:length(whichNA))),"CAS"] <- as.character(imported.data[whichNA,"CAS"])
+      }
+      
+      if ('CID' %in% colnames(imported.data)) {
+        levels(target$CID) <- union(levels(target$CID),levels(imported.data$CID))
+        target[(dim_odor[1]+(1:length(whichNA))),"CID"] <- as.character(imported.data[whichNA,"CID"])
+      }
+      
+      assign(j, target, envir = .GlobalEnv) 				# assign the target back to his real name
+    }
+  }
+  
+  # import data
+  for (i in 1:n) {
+    column.name <- receptor_file[i] 			        # receptor name
+    target <- try(get(column.name),silent=TRUE) 	# try to find a match receptor and load data from old database
+    
+    # check if receptor is new
+    if(dim(target)[2] == 5) 
+      stats$newReceptors <- stats$newReceptors + 1
+    
+    assign(column.name, 
+           combData(data1 = target, 
+                    data2 = imported.data, 
+                    by.data2 = column.name, 
+                    assigned.name = paste(file.name, sep="")),
+           envir = .GlobalEnv)
+    message(paste(column.name,"has been imported."))
+    
+    # update weight.globNorm
+    dim_weightGlobNorm 	<- dim(weightGlobNorm)
+    match_receptor 		  <- match(column.name, rownames(weightGlobNorm))
+    weightGlobNorm[match_receptor,dim_weightGlobNorm[2]] <- 1
+  } # END for (i in 1:n)
+  
+  # return the updates back to working enviroment
+  assign("data.format", dataFormat, envir = .GlobalEnv)
+  assign("weight.globNorm", weightGlobNorm, envir = .GlobalEnv)
+  assign("response.range", responseRange, envir = .GlobalEnv)
+  assign("ORs", receptors, envir = .GlobalEnv)
+  assign("odor", odor.data, envir = .GlobalEnv)
 
-	# update data frame "odor" and data.format if new odor is available.
-	matchtoOdor 	<- match(imported_data[,"CAS"],odor.data$CAS)
-	matchtoDF 	<- match(imported_data[,"CAS"],dataFormat$CAS)
-
-	if (any(is.na(match(matchtoOdor,matchtoDF)))) 
-	{ 
-		stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
-	}
-	else 
-	{
-		whichNA 	<- which(is.na(matchtoOdor))
-		newOdor 	<- as.character(imported_data[whichNA,"CAS"])
-
-		print( paste(newOdor, "is a new odor. Data frames 'odor' and 'data.format' will be updated.") )
-
-		dim_odor 	<- dim(odor.data)
-		dim_data.format <- dim(dataFormat)
-
-		odor.data[(dim_odor[1]+length(whichNA)),] 		<- NA
-		dataFormat[(dim_data.format[1]+length(whichNA)),] 	<- NA
-		levels(odor.data$CAS) <- c(levels(odor.data$CAS),newOdor)
-		levels(dataFormat$CAS) <- c(levels(dataFormat$CAS),newOdor)
-		odor.data[(dim_odor[1]+(1:length(whichNA))),"CAS"]  		<- newOdor
-		dataFormat[(dim_data.format[1]+(1:length(whichNA))),"CAS"]  	<- newOdor
-		message( "Only 'CAS' column of data has been updated." )
-
-		# update response data for each receptor, if new odor is available.
-	}
-
-	# if there is new receptor or ORN updata data frame "ORs"; NOTE: the expression should be added manually
-
-	match_receptor <- match(receptor_file, receptors[,"OR"])
-	what_is_new <-  receptor_file[which(is.na(match_receptor))]
-	if (!is.na(what_is_new[1])) 
-	{ 
-		ORs_new 	<- data.frame(OR = what_is_new, expression = NA) 
-		receptors 	<- rbind(receptors, ORs_new)
-
-		message( "New receptor or ORN has been added in 'ORs', please input the expression manually." )
-	}
-	
-	for (j in receptors[,"OR"])
-	{
-		target 		<- try(get(j),silent=TRUE)			# try to get the data and assign it a names "target"
-		if (inherits(target, "try-error"))				# if it can be done, there must be a new receptor
-		{
-		target 		<- dataFormat
-		}
-		matchOdor 	<- match(imported_data[,"CAS"],target$CAS)
-		whichNA 	<- which(is.na(matchOdor))
-		if (is.na(whichNA[1])) {
-			assign(j, target, envir = .GlobalEnv) 
-			print( paste(j, "is a new receptor or ORN. A new response data is builded.") )
-		}
-		else {
-			dim_RD 	<- dim(target)
-			target[(dim_RD[1]+length(whichNA)),] 	<- NA
-			levels(target$CAS) <- c(levels(target$CAS),newOdor)
-			target[(dim_RD[1]+(1:length(whichNA))),"CAS"]  	<- newOdor
-			assign(j, target, envir = .GlobalEnv) 				# assign the target back to his real name
-		}
-	}
-	
-	# import data
-	for (i in 1:n)
-	{
-		column.name 	<- receptor_file[i] 			# receptor name
-		target 		<- try(get(column.name),silent=TRUE) 	# try to find a match receptor and load data from old database
-		
-		assign(column.name, 
-			combData(data1 = target, data2 = imported_data, 
-				by.data2 = column.name, 
-				assigned.name = paste( file.name, sep="" )),envir = .GlobalEnv)
-
-		# update weight.globNorm
-		dim_weightGlobNorm 	<- dim(weightGlobNorm)
-		match_receptor 		<- match(column.name, rownames(weightGlobNorm))
-		weightGlobNorm[match_receptor,dim_weightGlobNorm[2]] <- 1
-	} # END for (i in 1:n)
-
-	# return the updates back to working enviroment
-	assign("data.format", dataFormat, envir = .GlobalEnv)
-	assign("weight.globNorm", weightGlobNorm, envir = .GlobalEnv)
-	assign("response.range", responseRange, envir = .GlobalEnv)
-	assign("ORs", receptors, envir = .GlobalEnv)
-	assign("odor", odor.data, envir = .GlobalEnv)
-
-}
+  message()
+  message(paste('###################\n',
+                'Import statistics:\n',
+                stats$importedReceptors - stats$newReceptors,'response profiles were updated,',stats$newReceptors,'new profiles were added to DoOR.\n',
+                stats$updatedOdors,'odorants were updated,',stats$newOdors,'new odorants were added to DoOR.'))
+  
+} # END program "importNewData"

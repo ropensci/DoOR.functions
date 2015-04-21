@@ -1,3 +1,24 @@
+#' Find receptor responses
+#' 
+#' given a chemical, get original receptor responses from all studies in the
+#' database.
+#' 
+#' output is a data frame containing response values of given odor across
+#' receptors from all available studies.
+#' 
+#' @param CAS character string; CAS number
+#' @param responseRange data frame; response ranges of studies
+#' @param Or.list a list contains reponse data of all available receptors. It
+#' can be loaded using \code{\link{loadRDList}}.
+#' @keywords data
+#' @examples
+#' 
+#' library(DoOR.data)
+#' loadRD()
+#' Or.list <- loadRDList()
+#' cas="105-87-3"
+#' OriginalResponses <- findResp(CAS = cas, responseRange = response.range, Or.list = Or.list)
+#' 
 findResp <-
 function(CAS, responseRange = default.val("response.range"), Or.list)
 
