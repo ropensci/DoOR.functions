@@ -25,7 +25,7 @@ findRespNorm <- function(odors, zero = default.val("zero"), responseMatrix = def
 	
 	mp  <- match(odors,rownames(responseMatrix))
 	res <- data.frame(ORs = rep(colnames(responseMatrix),each=length(odors)),
-			              Odor = rep(odors,length(Or.Names)),
+			              Odor = rep(odors,dim(responseMatrix)[2]),
 			              Response = c(as.matrix(responseMatrix[mp,])))
 return(res)
 }
