@@ -16,6 +16,7 @@
 #' 
 resetSFR <- function(x, sfr) {
 	if (is.na(sfr)) sfr <- 0
+  if (all(is.na(x))) return(x)
   rS <- (x - sfr)
 	return(rS)
 }
