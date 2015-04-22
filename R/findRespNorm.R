@@ -17,26 +17,11 @@
 #' library(DoOR.data)
 #' odors <- c("MLFHJEHSLIIPHL-UHFFFAOYSA-N","OBNCKNCVKJNDBV-UHFFFAOYSA-N","IKHGUXGNUITLKF-UHFFFAOYSA-N")
 #' data(response.matrix)
-#' result <- findRespNorm(cas, responseMatrix = response.matrix)
+#' result <- findRespNorm(odors, responseMatrix = response.matrix)
 #' 
 findRespNorm <- function(odors, zero = default.val("zero"), responseMatrix = default.val("response.matrix")) {
 
-	Or.Names <- colnames(responseMatrix)
-	n	 <- dim(responseMatrix)[2]
-	
-	for (j in 1:n) {
-		if (is.na(which(!is.na(responseMatrix[,j]))[1])) { 
-      next 
-		} else {
-			# reset the response data by setting "zero" to 0, the default "zero" is spontanous firing rate (SFR)
-			if (is.na(responseMatrix[zero,j])) { 
-        mzero <- 0 
-			} else { 
-        mzero <- responseMatrix[zero,j] 
-			}
-			responseMatrix[,j] <- resetSFR(responseMatrix[,j], mzero)	
-		}
-	}
+	responseMatrix <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
 	
 	mp  <- match(odors,rownames(responseMatrix))
 	res <- data.frame(ORs = rep(colnames(responseMatrix),each=length(odors)),
