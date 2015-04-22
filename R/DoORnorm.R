@@ -1,4 +1,4 @@
-#' normalize the data in values from 0 to 1
+#' rescale the data values from 0 to 1
 #' 
 #' \code{DoORnorm} is used to normalize the data in values from 0 to 1.
 #' 
@@ -11,22 +11,13 @@
 #' x <- rnorm(10)
 #' DoORnorm(x)
 #' 
-DoORnorm <-
-function(x) 
-
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-## normalize the data in values from 0 to 1
-
-# x: numeric vector
-
-{
-        if ((max(x, na.rm = TRUE) - min(x, na.rm = TRUE)) == 0) {
-        	eval <- x - x
+DoORnorm <- function(x) {
+  x.max <- max(x, na.rm = TRUE)
+  x.min <- min(x, na.rm = TRUE)
+  if (xmax - xmin) == 0) {
+    eval <- x - x
+	} else { 
+		  eval <- (x - x.min) / (x.max - x.min) 
 	}
-        else { 
-		eval <- (x - min(x, na.rm = TRUE))/(max(x, na.rm = TRUE) - min(x, na.rm = TRUE)) 
-	}
-        return(eval)
+return(eval)
 }
