@@ -14,7 +14,7 @@
 DoORnorm <- function(x) {
   x.max <- max(x, na.rm = TRUE)
   x.min <- min(x, na.rm = TRUE)
-  if (xmax - xmin) == 0) {
+  if ((x.max - x.min) == 0) {
     eval <- x - x
 	} else { 
 		  eval <- (x - x.min) / (x.max - x.min) 
