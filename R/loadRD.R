@@ -19,8 +19,8 @@ loadRD <- function(odorantReceptors = default.val("ORs"), supportData = TRUE) {
 	data.name 	 <- c(receptor.name,supportData.name)
 
 	# version information of data and function
-	version.data()
-	version.function()
+	DoOR.data.version()
+	DoOR.functions.version()
 
 	return(list(data(list=(data.name))))
 
