@@ -84,11 +84,11 @@ default.val <- function(DoOR_default) {
 	  return(weight.globNorm)
 	} # exportData.R; importNewData.R; updateDatabase.R; modelRP.R
 
-	if (DoOR_default == "OGN") {
-	  if (!exists("OGN")) {
-	    data(OGN)
+	if (DoOR_default == "DoOR.mappings") {
+	  if (!exists("DoOR.mappings")) {
+	    data(DoOR.mappings)
 	  }
-	  return(OGN)
+	  return(DoOR.mappings)
 	} # ALimage.R
   
 	if (DoOR_default == "ORs") {

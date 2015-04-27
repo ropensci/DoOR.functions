@@ -172,7 +172,7 @@ importNewData <- function(file.name, file.format, dataFormat = default.val("data
   }
   
   ##########
-  # if there is a new receptor or ORN update data frame "ORs"; NOTE: the AL projection pattern (OGN) should be added manually
+  # if there is a new receptor or ORN update data frame "ORs"; NOTE: the AL projection pattern (DoOR.mappings) should be added manually
   ##########
   
   match_receptor <- match(receptor_file, receptors[,"OR"])

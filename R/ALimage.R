@@ -25,7 +25,7 @@
 #' the color scale ranges from blue to red
 #' @param ind.panels logical; if \code{TRUE}, the indicated panels are shown on
 #' the right side.
-#' @param OGN a data frame; maps receptor to sensillum, receptor neuron and
+#' @param DoOR.mappings a data frame; maps receptor to sensillum, receptor neuron and
 #' glomerulus.
 #' @param AL256 a data frame; which contains pixel values to code the graphic
 #' antennal lobe.
@@ -38,18 +38,18 @@
 #' library(DoOR.function)
 #' loadRD()
 #' data(response.range)
-#' data(OGN)
+#' data(DoOR.mappings)
 #' data(AL256)
 #' cas<-c("628-63-7")
 #' RP.PAcE<-findRespNorm(cas,responseMatrix= response.matrix)
-#' ALimage(RP.PAcE, main = "PAcE", OGN = OGN, AL256 = AL256)
+#' ALimage(RP.PAcE, main = "PAcE", DoOR.mappings = DoOR.mappings, AL256 = AL256)
 #' 
 ALimage <- function (response.data, 
                   	 tag.ALimage =  default.val("tag.ALimage"), 
                   	 main = default.val("main"),
                   	 col.extrem = default.val("col.extrem"),
                   	 ind.panels = default.val("ind.panels"),
-                  	 OGN = default.val("OGN"), 
+                  	 DoOR.mappings = default.val("DoOR.mappings"), 
                   	 AL256 = default.val("AL256") ) {
 
   # rotate the AL256 pix matrix
@@ -58,18 +58,18 @@ ALimage <- function (response.data,
   # find the attribute variables in the AL256 matrix; the variables define the positions of glomeruli.
   levg <- levels(factor(transg))
 
-  # extract a subset that contains a complete "Code" column from "OGN"
-  subsetOGN 		         <- subset(OGN, !is.na(Code))
-  match_receptor 	       <- na.omit(match(response.data[, "ORs"], subsetOGN[, "Receptor"]))
-  rcode 	    	         <- subsetOGN[match_receptor, "Code"]
-  available_receptor 	   <- na.omit(match(subsetOGN[, "Code"], rcode))
-  not_available_receptor <- subsetOGN[attr(available_receptor, "na.action"), "Code"]
+  # extract a subset that contains a complete "Code" column from "DoOR.mappings"
+  mappings.subset         <- subset(DoOR.mappings, !is.na(Code))
+  match_receptor          <- na.omit(match(response.data[, "ORs"], mappings.subset[, "receptor"]))
+  rcode                   <- mappings.subset[match_receptor, "code"]
+  available_receptor      <- na.omit(match(mappings.subset[, "code"], rcode))
+  not_available_receptor  <- mappings.subset[attr(available_receptor, "na.action"), "Code"]
 
   # set background to NA
   transg[which(transg == 255)] <- NA
   
-  OR.val 	<- response.data[-attr(match_receptor, "na.action"), "Response"]
-  range.RD 	<- range(OR.val, na.rm = TRUE)
+  OR.val    <- response.data[-attr(match_receptor, "na.action"), "Response"]
+  range.RD  <- range(OR.val, na.rm = TRUE)
 
   # if the range of response data exceeds the boundaries [-1, 1], then normalize the data to the range [-1, 1]
   if (range.RD[1] < (-1))
@@ -111,8 +111,8 @@ ALimage <- function (response.data,
     image(transg, col = mycol, axes = FALSE)
     frame.transg <- dim(transg)
     # show the names of glomeruli on the AL
-    for (i in 1:dim(subsetOGN)[1]) {
-      text(x = subsetOGN[i, "x"]/frame.transg[1], y = (frame.transg[2] - subsetOGN[i, "y"])/frame.transg[2], subsetOGN[i, tag.ALimage])
+    for (i in 1:dim(mappings.subset)[1]) {
+      text(x = mappings.subset[i, "x"]/frame.transg[1], y = (frame.transg[2] - mappings.subset[i, "y"])/frame.transg[2], mappings.subset[i, tag.ALimage])
     }
     if (!is.null(main))
       title(main, cex.main = 2)
@@ -133,9 +133,9 @@ ALimage <- function (response.data,
       par(mar = c(2, 2, 2, 0.5))
       image(transg, col = mycol, axes = FALSE)
       frame.transg <- dim(transg)
-      for (i in 1:dim(subsetOGN)[1]){
-        text(x = subsetOGN[i, "x"]/frame.transg[1], y = (frame.transg[2] - 
-        subsetOGN[i, "y"])/frame.transg[2], subsetOGN[i, tag.ALimage])
+      for (i in 1:dim(mappings.subset)[1]){
+        text(x = mappings.subset[i, "x"]/frame.transg[1], y = (frame.transg[2] - 
+        mappings.subset[i, "y"])/frame.transg[2], mappings.subset[i, tag.ALimage])
       }
       if (!is.null(main)) 
           title(main, cex.main = 2)
