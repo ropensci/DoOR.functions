@@ -93,11 +93,11 @@ function(receptor, permutation = TRUE, unglobalNorm_responseMatrix = default.val
 
   perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
 
-	# find and show the sequence with the highest correlation
-
-  sort_perm_MC <- perm_MC[order(perm_MC[,"meanCorrel"],decreasing=FALSE),]
-  SEQ <- c(as.matrix(perm_MC[1,c(1:(dim(perm_MC)[2]-1))]))
-  print(paste("The optimized sequence with the lowest mean MD", round(sort_perm_MC[1,"meanCorrel"], 4), "is:"))
+	# find and show the sequence with the lowest MD
+  min.MD  <- which.min(meanCorrel)
+  SEQ     <- perm[min.MD,]
+  
+  print(paste("The optimized sequence with the lowest mean MD", round(meanCorrel[min.MD], 4), "is:"))
   print(SEQ)
 
 	# merge response data with the optimized sequence.
