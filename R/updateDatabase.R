@@ -72,58 +72,46 @@ function(receptor, permutation = TRUE, unglobalNorm_responseMatrix = default.val
 	if (permutation == TRUE)
 	{
 		message("requires: library(gtools)")
-		perm 	<- permutations(length(recordColumn), length(recordColumn),v=names(da)[recordColumn])
-		
+		perm 	<- permutations(length(recordColumn), length(recordColumn),v=names(da)[recordColumn]) # implement faster version from http://stackoverflow.com/questions/11095992/generating-all-distinct-permutations-of-a-list-in-r
+		message(paste("All possible permutations (", dim(perm)[1], ") have been calculated, now merging.", sep = ""))
 		# compute the mean correlation between merged responses and original response.
 		meanCorrel <- matrix(NA,nrow=dim(perm)[1])
 
-		for (i in 1:dim(perm)[1]) 
-                {
-			tryMerg <- try(modelRPSEQ(data=da,SEQ=perm[i,]),silent = TRUE)
-			
-                        if (inherits(tryMerg, "try-error")) { meanCorrel_tryMerg <- NA }
-			else 
-                        { 
-				meanCorrel_tryMerg <- mean(apply(da[,recordColumn],2,function(x) calModel(tryMerg,x)[[1]]$MD),na.rm=TRUE) 
-			}
-
-			meanCorrel[i,] <- meanCorrel_tryMerg
-
-			print("The permutated sequence:",justify="left")
-			cat(perm[i,])
-			cat("Mean distance:")
-			print(round(meanCorrel_tryMerg, 4))
-			
-		}
+  for (i in 1:dim(perm)[1]) {
+    tryMerg <- try(modelRPSEQ(data=da,SEQ=perm[i,]),silent = TRUE)
+    if (inherits(tryMerg, "try-error")) { 
+      meanCorrel_tryMerg <- NA 
+      } else {
+        meanCorrel_tryMerg <- mean(sapply(da[,recordColumn],function(x) calModel(tryMerg,x)[[1]]$MD),na.rm=TRUE) 
+        }
+    meanCorrel[i,] <- meanCorrel_tryMerg
+    
+    message(paste("[",i,"/",dim(perm)[1],"] ",paste(perm[i,], collapse = ", "), " ------ Mean distance: ", round(meanCorrel_tryMerg, 4), sep = ""))
+  }
 		
-		cat("--------------------------------------------------------")
+		message("--------------------------------------------------------")
 
-        	perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
+  perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
 
-		# find and show the sequence with the highest correlation
-	
-           	sort_perm_MC <- perm_MC[order(perm_MC[,"meanCorrel"],decreasing=FALSE),]
-		SEQ <- c(as.matrix(perm_MC[1,c(1:(dim(perm_MC)[2]-1))]))
-		print(paste("The optimized sequence with the lowest mean MD", round(sort_perm_MC[1,"meanCorrel"], 4), "is:"))
-		print(SEQ)
+	# find and show the sequence with the highest correlation
 
-		# merge response data with the optimized sequence.
-		merg <- modelRPSEQ(data = da, SEQ = SEQ)
+  sort_perm_MC <- perm_MC[order(perm_MC[,"meanCorrel"],decreasing=FALSE),]
+  SEQ <- c(as.matrix(perm_MC[1,c(1:(dim(perm_MC)[2]-1))]))
+  print(paste("The optimized sequence with the lowest mean MD", round(sort_perm_MC[1,"meanCorrel"], 4), "is:"))
+  print(SEQ)
 
-	} # END if (permutation == TRUE)
-	else
-	{
+	# merge response data with the optimized sequence.
+	merg <- modelRPSEQ(data = da, SEQ = SEQ)
+
+	} else { # END if (permutation == TRUE)
 		merg <- modelRP(da, glob.normalization = FALSE)$model.response[,"merged_data"]
 	}
-
-
 	# update  unglobalNorm_response.matrix
 
 	merged_data_withCAS <- data.frame(CAS = da$CAS, merged_data = merg)
 	matchCAS <- match(merged_data_withCAS$CAS,rownames(unglobalNorm_responseMatrix))
 	findNA_CAS <- which(is.na(matchCAS))
-	if (!is.na(findNA_CAS[1]))
-	{
+	if (!is.na(findNA_CAS[1])){
 		addRow <- matrix(NA, nrow=length(findNA_CAS), ncol= dim(unglobalNorm_responseMatrix)[2])
 		colnames(addRow) <- colnames(unglobalNorm_responseMatrix)
 		rownames(addRow) <- merged_data_withCAS[findNA_CAS,"CAS"]
@@ -137,15 +125,15 @@ function(receptor, permutation = TRUE, unglobalNorm_responseMatrix = default.val
 
 	# update response.matrix
 
-	name.Stud    <- colnames(da)[recordColumn]
-	mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
-        Rmax         <- apply(as.matrix(da[,recordColumn]),2,function(x) max(range(x,na.rm=TRUE)))
-	Smax         <- responseRange[mp_orx,"max"]
-	merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merg, name.Stud = name.Stud, 
-				responseRange = responseRange, weightGlobNorm = weightGlobNorm)
-	merged_data_withCAS <- data.frame(CAS = da$CAS, merged_data = merged_data)
-	matchCAS <- match(merged_data_withCAS$CAS,rownames(responseMatrix))
-	responseMatrix[matchCAS, receptor] <- merged_data
+  name.Stud    <- colnames(da)[recordColumn]
+  mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
+  Rmax         <- apply(as.matrix(da[,recordColumn]),2,function(x) max(range(x,na.rm=TRUE)))
+  Smax         <- responseRange[mp_orx,"max"]
+  merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merg, name.Stud = name.Stud, 
+  responseRange = responseRange, weightGlobNorm = weightGlobNorm)
+  merged_data_withCAS <- data.frame(CAS = da$CAS, merged_data = merged_data)
+  matchCAS <- match(merged_data_withCAS$CAS,rownames(responseMatrix))
+  responseMatrix[matchCAS, receptor] <- merged_data
 
 	assign("response.matrix", responseMatrix, envir = .GlobalEnv)
 }
