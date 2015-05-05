@@ -108,18 +108,18 @@ function(receptor, permutation = TRUE, unglobalNorm_responseMatrix = default.val
 	}
 	# update  unglobalNorm_response.matrix
 
-	merged_data_withCAS <- data.frame(CAS = da$CAS, merged_data = merg)
-	matchCAS <- match(merged_data_withCAS$CAS,rownames(unglobalNorm_responseMatrix))
-	findNA_CAS <- which(is.na(matchCAS))
-	if (!is.na(findNA_CAS[1])){
-		addRow <- matrix(NA, nrow=length(findNA_CAS), ncol= dim(unglobalNorm_responseMatrix)[2])
+	merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merg)
+	matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
+	findNA_InChIKey <- which(is.na(matchInChIKey))
+	if (!is.na(findNA_InChIKey[1])){
+		addRow <- matrix(NA, nrow=length(findNA_InChIKey), ncol= dim(unglobalNorm_responseMatrix)[2])
 		colnames(addRow) <- colnames(unglobalNorm_responseMatrix)
-		rownames(addRow) <- merged_data_withCAS[findNA_CAS,"CAS"]
+		rownames(addRow) <- merged_data_withInChIKey[findNA_InChIKey,"InChIKey"]
 		unglobalNorm_responseMatrix <- rbind(unglobalNorm_responseMatrix,addRow)
 		responseMatrix <- rbind(responseMatrix,addRow)
-		matchCAS <- match(merged_data_withCAS$CAS,rownames(unglobalNorm_responseMatrix))
+		matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
 	}
-	unglobalNorm_responseMatrix[matchCAS, receptor] <- merg
+	unglobalNorm_responseMatrix[matchInChIKey, receptor] <- merg
 	assign("unglobalNorm_response.matrix", unglobalNorm_responseMatrix, envir = .GlobalEnv)
 
 
@@ -129,11 +129,10 @@ function(receptor, permutation = TRUE, unglobalNorm_responseMatrix = default.val
   mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
   Rmax         <- apply(as.matrix(da[,recordColumn]),2,function(x) max(range(x,na.rm=TRUE)))
   Smax         <- responseRange[mp_orx,"max"]
-  merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merg, name.Stud = name.Stud, 
-  responseRange = responseRange, weightGlobNorm = weightGlobNorm)
-  merged_data_withCAS <- data.frame(CAS = da$CAS, merged_data = merged_data)
-  matchCAS <- match(merged_data_withCAS$CAS,rownames(responseMatrix))
-  responseMatrix[matchCAS, receptor] <- merged_data
+  merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merg, name.Stud = name.Stud, responseRange = responseRange, weightGlobNorm = weightGlobNorm)
+  merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merged_data)
+  matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(responseMatrix))
+  responseMatrix[matchInChIKey, receptor] <- merged_data
 
 	assign("response.matrix", responseMatrix, envir = .GlobalEnv)
 }
