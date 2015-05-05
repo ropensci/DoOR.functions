@@ -41,8 +41,8 @@ function(data,SEQ)
 {
 	nv  	    <- as.numeric( c( (default.val("num.charColumns")+1):dim(data)[2] ) ) # positions of columns that contain odor response vectors
 	name.stud   <- names(data)[nv]
-	pda 	    <- apply(as.data.frame(data[, nv]), 2, DoORnorm) # processing data
-	mseq 	    <- match(SEQ, name.stud) # match given sequence to the column names of response data
+	pda 	      <- apply(as.data.frame(data[, nv]), 2, DoORnorm) # processing data
+	mseq 	      <- match(SEQ, name.stud) # match given sequence to the column names of response data
 	first.study <- SEQ[1] 
 	rest.study  <- SEQ[-match(first.study,SEQ)]
 
