@@ -57,23 +57,15 @@ function (x, y, select.MD = default.val("select.MD") )
 
     # compute the parameters of 5 optional models with and without inverse function (see modelfunction.R).
     models 	<- modelfunction(x,y)
-    len.models  <- length(models)
-
-    collect.MD <- numeric()
-    for (i in 1:len.models)
-    {
-	collect.MD <- c(collect.MD, models[[c(i)]]$MD)
-    }
 
     # select the best model from the ones tried above:
 
-    if (select.MD == FALSE) 
-    { 
-	return(models) 
+    if (select.MD == FALSE) { 
+	    return(models) 
     }
 
-    if (select.MD == TRUE) 
-    {
-	return(models[match(min(collect.MD,na.rm=TRUE),collect.MD)])
+    if (select.MD == TRUE) {
+      collect.MD <- sapply(models, "[[", "MD")
+      return(models["inv.linear"])
     }
 }
