@@ -52,8 +52,7 @@ function(data,SEQ)
 	for (i in rest.study) 
 	{
 		x 	  <- pda[,i]
-		ind 	  <- calModel(x,y)
-		projected <- projectPoints(x,y)
+    projected <- projectPoints(x,y)
 		res 	  <- rep(NA, length = dim(pda)[1])
 
 		# the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
