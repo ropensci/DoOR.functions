@@ -10,7 +10,7 @@
 #' studies that do not align sufficiently well to the response model
 #' @param overlapValues numeric; a criterion using to refuse a data set that
 #' has not enough overlap value.
-#' @param ... pass more parameters to \code{\link{modelRP}} (e.g. \code{glob.normalization == T} to build a non-normalized response matrix)
+#' @param ... pass more parameters to \code{\link{modelRP}} (e.g. \code{glob.normalization == F} to build a non-normalized response matrix)
 #' @seealso \code{\link{modelRP}}
 #' @keywords data
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
@@ -21,7 +21,7 @@
 #' loadRD()
 #' # mydatabase <- CreateDatabase()
 #' 
-CreateDatabase <- function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues"), ...) {
+CreateDatabase <- function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues"), glob.normalization = T, ...) {
 
 	Or.list  	<- loadRDList() 	# contains data for all receptors
 	Or.Names 	<- names(Or.list)
@@ -47,7 +47,7 @@ CreateDatabase <- function(tag=default.val("tag"), select.MDValue=default.val("s
 			print(paste(i, "is a empty data frame."))
 			frame_data[, i] <- NA 
 		} else {
-			merged 		         <- modelRP(da, select.MDValue, overlapValues, ...)
+			merged 		         <- modelRP(da, select.MDValue, overlapValues, glob.normalization = glob.normalization, ...)
 			merged.responses   <- merged$model.response[,"merged_data"]
 			merged.odors 	     <- as.vector(merged$model.response[,tag])
 			match_odorsTOframe <- match(merged.odors, rownames(frame_data))
