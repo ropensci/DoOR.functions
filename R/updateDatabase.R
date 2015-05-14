@@ -66,14 +66,14 @@ updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_resp
     
     message(paste("The optimized sequence with the lowest mean MD", round(meanCorrel[min.MD], 4), "is:"))
     message(SEQ)
-    
+
     # merge response data with the optimized sequence.
     merg <- modelRPSEQ(data = da, SEQ = SEQ)
     
   } else { # END if (permutation == TRUE)
     merg <- modelRP(da, glob.normalization = FALSE)$model.response[,"merged_data"]
   }
-  
+
   # update  unglobalNorm_response.matrix
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merg)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
@@ -89,7 +89,7 @@ updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_resp
   unglobalNorm_responseMatrix[matchInChIKey, receptor] <- merg
   assign("unglobalNorm_response.matrix", unglobalNorm_responseMatrix, envir = .GlobalEnv)
   message(paste("unglobalNorm_response.matrix has been updated for",receptor))
-  
+
   # update response.matrix
   name.Stud    <- colnames(da)[recordColumn]
   mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
