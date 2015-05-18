@@ -99,10 +99,10 @@ modelRP <- function(da,
   	# selected contains the pair of studies with the best match
   	# including all parameters for the best match
 
-  	if (names(selected$best.model) == "no.fitted.model")
+  	if (names(selected$best.model) == "no.fitted.model" | names(selected$best.model) == "initial")
 	    stop("Can not find any fitted model to merge given data. Stopped in modelRP.R")
 
-  	if (selected[[1]][[1]]$MD > select.MDValue)
+  	if (selected[[1]][[1]]$MD >= select.MDValue)
   	  stop("Can not find any fitted model with MD value under given threshold criterion. Stopped in modelRP.R")
 
     # merge these two datasets to one model response.
