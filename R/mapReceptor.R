@@ -38,33 +38,28 @@ function(da, by.column, Receptors, ResponseMatrix)
 
 # output is a numeric vector that contains the Pearson Correlation Coefficient between given data and selected consensus data in response matrix.
 {
-	res 		<- numeric()
-	matchOdor 	<- match(da[,"CAS"], rownames(ResponseMatrix))
-	for (i in Receptors)
-	{
-		dataVector 	<- da[,by.column]
-		ResponseMatrixi <- ResponseMatrix[matchOdor,i]
-		xy 		<- na.omit(cbind(dataVector,ResponseMatrixi))
-		if(is.na(which(!is.na(ResponseMatrix[matchOdor,i]))[1]) | dim(xy)[1]==0)
-		# if no data available for selected receptor or no overlapped values with the selected receptor, then return NA and run next loop
-		{
-			meanDist <- NA
-			next
-		}
-		if (lm(ResponseMatrixi~dataVector)$coef[2]==0 | 
-			is.na(lm(ResponseMatrixi~dataVector)$coef[2]))
-		# if the two data are fitted horizontally or vertically, then return NA and run next loop
-		{
-			meanDist <- NA
-			next
-		}
-		else 
-		{
-			corCoeff <- cor.test(x= dataVector,y=ResponseMatrixi)$estimate
-		}
-		Rss 		<- corCoeff
-		names(Rss) 	<- i		# assign the receptor name to "corCoeff"
-		res 		<- c(res,Rss)
-	}
-	return(res)
+  res 		<- data.frame()
+  matchOdor 	<- match(da[,"InChIKey"], rownames(ResponseMatrix))
+  for (i in Receptors) {
+    dataVector 	    <- da[,by.column]
+    ResponseMatrixi <- ResponseMatrix[matchOdor,i]
+    xy 		          <- na.omit(cbind(dataVector,ResponseMatrixi))
+    # if no data available for selected receptor or no overlapped values with the selected receptor, then return NA and run next loop
+    if (is.na(which(!is.na(ResponseMatrix[matchOdor,i]))[1]) | dim(xy)[1] < 3) {
+      cor.coeff <- NA
+      cor.pval  <- NA
+    } else if (lm(ResponseMatrixi ~ dataVector)$coef[2] == 0 | is.na(lm(ResponseMatrixi ~ dataVector)$coef[2])) {
+      # if the two data are fitted horizontally or vertically, then return NA and run next loop
+      cor.coeff <- NA
+      cor.pval  <- NA
+    } else {
+      correl <- cor.test(x = dataVector,y = ResponseMatrixi)
+      cor.coeff <- correl$estimate
+      cor.pval  <- correl$p.value
+    }
+    res.x <- data.frame(receptor = i, cor.coeff = cor.coeff, p.value = cor.pval, n = dim(xy)[1])
+    res 	<- rbind(res,res.x)
+    res   <- res[order(res$cor.coeff, decreasing = T, na.last = T),]
+  }
+  return(res)
 }
