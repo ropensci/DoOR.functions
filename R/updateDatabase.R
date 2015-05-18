@@ -35,6 +35,12 @@ updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_resp
   recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
   
+  study.sd <- apply(apply(da[,studies], 2, range, na.rm = T), 2, sd)
+  if(any(study.sd == 0))
+    stop(studies[which(study.sd == 0)]," has a SD of 0, please remove first.")
+
+  
+    
   if (permutation == TRUE) {
     if (missing(perm)) {
       perm 	<- matrix(studies[permutations(length(studies))], ncol=length(studies)) 
