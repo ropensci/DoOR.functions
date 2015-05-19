@@ -72,7 +72,7 @@ updateDatabase <- function(receptor,
       if (inherits(tryMerg, "try-error")) { 
         meanCorrel_tryMerg <- NA 
       } else {
-        meanCorrel_tryMerg <- mean(sapply(da[,recordColumn],function(x) calModel(tryMerg,x)[[1]]$MD),na.rm=TRUE) 
+        meanCorrel_tryMerg <- mean(unlist(sapply(da[,recordColumn],function(x) calModel(tryMerg,x)[[1]]["MD"])))
       }
       meanCorrel[i,] <- meanCorrel_tryMerg
 
