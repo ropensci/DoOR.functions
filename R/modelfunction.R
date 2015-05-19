@@ -60,12 +60,17 @@ function(x, y)
 	bottom.x 	<- as.vector(inverse_modelfunction_linear(range_y[1],linear_parameters) )
 	top.x    	<- as.vector(inverse_modelfunction_linear(range_y[2],linear_parameters) )
 	range.X <- c(max(c(0, bottom.x, range_x[1])), min(c(1, top.x, range_x[2])))
-	c.linear <- list(parameters  = linear_parameters,
-			 range 	     = range.X,
-			 fun 	     = modelfunction_linear, 
-			 inverse.fun = inverse_modelfunction_linear,
-			 dsdx	     = dsdx_linear,
-			 MD          = compute_MD(x=x, y=y, range.X = range.X, parms = linear_parameters,fun = modelfunction_linear)$MD )
+	if (linear_parameters["Slope"] < 0) {
+	  c.linear <- list(parameters = NA, range = NA, fun = NA, inverse.fun = NA, dsdx = NA, MD = NA)
+	} else {
+	  c.linear <- list(
+	    parameters  = linear_parameters,
+	    range 	     = range.X,
+	    fun         = modelfunction_linear, 
+	    inverse.fun = inverse_modelfunction_linear,
+	    dsdx	       = dsdx_linear,
+	    MD          = compute_MD(x=x, y=y, range.X = range.X, parms = linear_parameters,fun = modelfunction_linear)$MD )
+	}
 	linear_parameters <- NA
 	range.X		  <- NA	
 
@@ -76,12 +81,18 @@ function(x, y)
 	bottom.x 	<- as.vector(modelfunction_linear(range_y[1],linear_parameters) )
 	top.x    	<- as.vector(modelfunction_linear(range_y[2],linear_parameters) )
 	range.X <- c(max(c(0, bottom.x, range_x[1])), min(c(1, top.x, range_x[2])))
-	c.linear.inv <- list(parameters  = linear_parameters,
-			     range 	 = range.X,
-			     fun 	 = inverse_modelfunction_linear, 
-			     inverse.fun = modelfunction_linear,
-			     dsdx	 = dsdx_inverse_linear,
-			     MD          = compute_MD(x=x, y=y, range.X = range.X, parms = linear_parameters,fun = inverse_modelfunction_linear)$MD )
+	if (linear_parameters["Slope"] < 0) {
+	  c.linear.inv <- list(parameters = NA, range = NA, fun = NA, inverse.fun = NA, dsdx = NA, MD = NA)
+	} else {
+	  c.linear.inv <- list(
+	    parameters  = linear_parameters,
+	    range       = range.X,
+	    fun         = inverse_modelfunction_linear,
+	    inverse.fun = modelfunction_linear,
+	    dsdx        = dsdx_inverse_linear,
+	    MD          = compute_MD(x = x, y = y, range.X = range.X, parms = linear_parameters,fun = inverse_modelfunction_linear)$MD
+	  )
+	}
 	linear_parameters <- NA
 	range.X		  <- NA
 	### END linear ###
