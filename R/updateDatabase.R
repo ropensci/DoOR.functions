@@ -30,7 +30,7 @@
 #' # update the entry "Or67b" of data "response.matrix" and "unglobalNorm_response.matrix" with permutations.
 #' # updateDatabase(receptor="Or67b", permutation = TRUE)
 #' 
-updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_responseMatrix = default.val("unglobalNorm_response.matrix"), responseMatrix = default.val("response.matrix"), responseRange = default.val("response.range"), weightGlobNorm = default.val("weight.globNorm")) {	
+updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_responseMatrix = default.val("unglobalNorm_response.matrix"), responseMatrix = default.val("response.matrix"), responseRange = default.val("response.range"), weightGlobNorm = default.val("weight.globNorm"), ...) {	
   da 		        <- get(receptor)
   recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
@@ -51,7 +51,7 @@ updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_resp
     meanCorrel <- matrix(NA,nrow=dim(perm)[1])
     
     for (i in 1:dim(perm)[1]) {
-      tryMerg <- try(modelRPSEQ(data=da,SEQ=perm[i,]),silent = TRUE)
+      tryMerg <- try(modelRPSEQ(data=da,SEQ=perm[i,],...),silent = TRUE)
       if (inherits(tryMerg, "try-error")) { 
         meanCorrel_tryMerg <- NA 
       } else {

@@ -17,7 +17,7 @@
 #' selected.merg <- modelRPSEQ(Or35a, SEQ = SEQ)
 #' 
 modelRPSEQ <-
-function(data,SEQ) 
+function(data,SEQ,...) 
 
 # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
 # Neurobiology, University of Konstanz, Germany
@@ -52,7 +52,7 @@ function(data,SEQ)
 	for (i in rest.study) 
 	{
 		x 	  <- pda[,i]
-    projected <- projectPoints(x,y)
+    projected <- projectPoints(x,y,...)
 		res 	  <- rep(NA, length = dim(pda)[1])
 
 		# the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
