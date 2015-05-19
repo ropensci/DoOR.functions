@@ -75,20 +75,23 @@ updateDatabase <- function(receptor,
         meanCorrel_tryMerg <- mean(sapply(da[,recordColumn],function(x) calModel(tryMerg,x)[[1]]$MD),na.rm=TRUE) 
       }
       meanCorrel[i,] <- meanCorrel_tryMerg
-      
+
       message(paste("[",i,"/",dim(perm)[1],"] ",paste(perm[i,], collapse = ", "), " ------ Mean distance: ", round(meanCorrel_tryMerg, 4), sep = ""))
     }
     
+    if (all(is.na(meanCorrel))) 
+      stop("No good sequence found")
+        
     message("--------------------------------------------------------")
     
     perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
     
     # find and show the sequence with the lowest MD
     min.MD  <- which.min(meanCorrel)
-    SEQ     <- perm[min.MD,]
+    SEQ     <- perm[min.MD[1],]
     
     message(paste("The optimized sequence with the lowest mean MD", round(meanCorrel[min.MD], 4), "is:"))
-    message(SEQ)
+    message(paste(SEQ, collapse = " -> "))
 
     # merge response data with the optimized sequence.
     merg <- modelRPSEQ(data = da, SEQ = SEQ)
