@@ -66,6 +66,6 @@ function (x, y, select.MD = default.val("select.MD") )
 
     if (select.MD == TRUE) {
       collect.MD <- sapply(models, "[[", "MD")
-      return(models["inv.linear"])
+      return(models[match(min(collect.MD,na.rm=TRUE),collect.MD)])
     }
 }
