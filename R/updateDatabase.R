@@ -19,6 +19,8 @@
 #' @param responseMatrix data frame; globally normalized response data.
 #' @param responseRange data frame; response range of studies.
 #' @param weightGlobNorm data frame; weight matrix for global normalization.
+#' @param overlapValues minimum overlap between studies to perfom a merge
+#' @param select.MDValue the minimum mean distance between studies to perfom a merge (only valid for permutation == F)
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Shouwen Ma <\email{daniel.muench@@uni-konstanz.de}>
 #' @seealso \code{\link{modelRP}},\code{\link{modelRPSEQ}}
@@ -30,7 +32,16 @@
 #' # update the entry "Or67b" of data "response.matrix" and "unglobalNorm_response.matrix" with permutations.
 #' # updateDatabase(receptor="Or67b", permutation = TRUE)
 #' 
-updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_responseMatrix = default.val("unglobalNorm_response.matrix"), responseMatrix = default.val("response.matrix"), responseRange = default.val("response.range"), weightGlobNorm = default.val("weight.globNorm"), ...) {	
+updateDatabase <- function(receptor, 
+                           permutation = TRUE, 
+                           perm, 
+                           unglobalNorm_responseMatrix = default.val("unglobalNorm_response.matrix"), 
+                           responseMatrix = default.val("response.matrix"), 
+                           responseRange = default.val("response.range"), 
+                           weightGlobNorm = default.val("weight.globNorm"),
+                           select.MDValue=default.val("select.MDValue"), 
+                           overlapValues = default.val("overlapValues"),
+                           ...) {	
   da 		        <- get(receptor)
   recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
@@ -51,7 +62,7 @@ updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_resp
     meanCorrel <- matrix(NA,nrow=dim(perm)[1])
     
     for (i in 1:dim(perm)[1]) {
-      tryMerg <- try(modelRPSEQ(data=da,SEQ=perm[i,],...),silent = TRUE)
+      tryMerg <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, ...),silent = TRUE)
       if (inherits(tryMerg, "try-error")) { 
         meanCorrel_tryMerg <- NA 
       } else {
@@ -77,7 +88,7 @@ updateDatabase <- function(receptor, permutation = TRUE, perm, unglobalNorm_resp
     merg <- modelRPSEQ(data = da, SEQ = SEQ)
     
   } else { # END if (permutation == TRUE)
-    merg <- modelRP(da, glob.normalization = FALSE)$model.response[,"merged_data"]
+    merg <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues)$model.response[,"merged_data"]
   }
 
   # update  unglobalNorm_response.matrix
