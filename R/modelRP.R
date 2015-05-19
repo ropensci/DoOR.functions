@@ -100,10 +100,10 @@ modelRP <- function(da,
   	# including all parameters for the best match
 
   	if (names(selected$best.model) == "no.fitted.model" | names(selected$best.model) == "initial") {
-	    warning("Can not find any fitted model to merge given data. Stopped in modelRP.R")
+	    warning("Can not find any fitted model to merge given data.")
   	  pda[1:length(pda)] <- NA
   	} else if (selected[[1]][[1]]$MD >= select.MDValue) {
-  	  warning("Can not find any fitted model with MD value under given threshold criterion. Stopped in modelRP.R")
+  	  warning("Can not find any fitted model with MD value under given threshold criterion.")
   	  pda[1:length(pda)] <- NA
   	}
   	
