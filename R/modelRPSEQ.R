@@ -42,14 +42,22 @@ function(data, SEQ, overlapValues = default.val("overlapValues"), plot=F) {
   first.study <- SEQ[1] 
   rest.study  <- SEQ[-match(first.study,SEQ)]
   
+  if (plot == TRUE)  {
+    lenNV_1  <- length(nv) - 1
+    nframe.X <- ceiling(lenNV_1^0.5)
+    nframe.Y <- ceiling(lenNV_1/nframe.X)
+    op       <- par(mfrow = c((nframe.Y), (nframe.X)))
+  }
+  
   # start merging following the given sequence
   y <- pda[,first.study]
-  
+  ylab <- first.study
   for (i in rest.study) {
     x 	  <- pda[,i]
     if (dim(na.omit(cbind(x,y)))[1] < overlapValues)
       stop(paste("less than", overlapValues, "observations between two datasets"))
-    projected <- projectPoints(x,y,plot=plot)
+    
+    projected <- projectPoints(x, y, plot = plot, xlab = i, ylab = ylab, title = plot)
     res 	  <- rep(NA, length = dim(pda)[1])
     
     # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
@@ -59,6 +67,7 @@ function(data, SEQ, overlapValues = default.val("overlapValues"), plot=F) {
     }
     
     y <- res
+    ylab <- "merged_data"
     
   } # END merging
   
