@@ -87,12 +87,12 @@ function(x, y, xylim, best.model,
 { 
     
 
-        # subfunctions:
+  # subfunctions:
     	
-        # returns -> 	0: no data
-	# 		1: available on x
-	#		2: available on y
-	# 		3: available in both datasets
+  # returns -> 	0: no data
+	#             1: available on x
+	#             2: available on y
+	#             3: available in both datasets
         available <- function(x) { return(sum(which(sapply(x,is.na) == FALSE))) }
 
 
@@ -133,15 +133,16 @@ function(x, y, xylim, best.model,
 	# dsdx 		: expression; Leibniz's notation for distance calculation on the functional line 
 	# MD.value 	: numeric; median distance
 
-	function.name 	<- names(best.model)
-	parms 		<- best.model[[1]]$parameters
-	ff 		<- best.model[[1]]$fun
-	range.X 	<- best.model[[1]]$range
-	ff_inverse  	<- best.model[[1]]$inverse.fun
-	dsdx 		<- best.model[[1]]$dsdx
-	MD.value 	<- best.model[[1]]$MD
+	function.name   <- names(best.model)
+	parms           <- best.model[[1]]$parameters
+	ff              <- best.model[[1]]$fun
+	range.X         <- best.model[[1]]$range
+	ff_inverse      <- best.model[[1]]$inverse.fun
+	dsdx            <- best.model[[1]]$dsdx
+	MD.value        <- best.model[[1]]$MD
 
-        if (function.name == "no.fitted.model")	{ return(message('Data sets can not been fitted by any of optional models.')) }
+        if (function.name == "no.fitted.model")	
+          return(message('Data sets can not been fitted by any of optional models.')) 
 	
 	#  define the range of frame for middle function. (e.g. range.X, range.Y)
 	range.Y <- sapply(range.X, function(x) intervalFun(x, range.X, middleFun = ff, parms))
