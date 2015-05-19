@@ -34,7 +34,7 @@
 #' selected.merg <- modelRPSEQ(Or35a, SEQ = SEQ)
 #' 
 modelRPSEQ <-
-function(data, SEQ, overlapValues = default.val("overlapValues"), ...) {
+function(data, SEQ, overlapValues = default.val("overlapValues"), plot=F) {
   nv          <- as.numeric( c( (default.val("num.charColumns")+1):dim(data)[2] ) ) # positions of columns that contain odor response vectors
   name.stud   <- names(data)[nv]
   pda         <- apply(as.data.frame(data[, nv]), 2, DoORnorm) # processing data
@@ -49,7 +49,7 @@ function(data, SEQ, overlapValues = default.val("overlapValues"), ...) {
     x 	  <- pda[,i]
     if (dim(na.omit(cbind(x,y)))[1] < overlapValues)
       stop(paste("less than", overlapValues, "observations between two datasets"))
-    projected <- projectPoints(x,y,...)
+    projected <- projectPoints(x,y,plot=plot)
     res 	  <- rep(NA, length = dim(pda)[1])
     
     # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.

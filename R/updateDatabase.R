@@ -41,7 +41,7 @@ updateDatabase <- function(receptor,
                            weightGlobNorm = default.val("weight.globNorm"),
                            select.MDValue=default.val("select.MDValue"), 
                            overlapValues = default.val("overlapValues"),
-                           ...) {	
+                           plot = F) {	
   da 		        <- get(receptor)
   recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
@@ -68,7 +68,7 @@ updateDatabase <- function(receptor,
     meanCorrel <- matrix(NA,nrow=dim(perm)[1])
     
     for (i in 1:dim(perm)[1]) {
-      tryMerg <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, ...),silent = TRUE)
+      tryMerg <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, plot=plot),silent = TRUE)
       if (inherits(tryMerg, "try-error")) { 
         meanCorrel_tryMerg <- NA 
       } else {
