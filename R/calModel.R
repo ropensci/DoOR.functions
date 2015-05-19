@@ -66,6 +66,11 @@ function (x, y, select.MD = default.val("select.MD") )
 
     if (select.MD == TRUE) {
       collect.MD <- sapply(models, "[[", "MD")
-      return(models[match(min(collect.MD,na.rm=TRUE),collect.MD)])
+      if (all(is.na(collect.MD))) {
+        return(NA)
+        message("No model could be fitted")
+      } else {
+        return(models[match(min(collect.MD,na.rm=TRUE),collect.MD)])
+      }
     }
 }

@@ -111,6 +111,10 @@ function(candidate,
           x = x, y = y, select.MD = TRUE
         ))
       
+      # skip if no fit could be performed
+      if(is.na(curr.model))
+        next
+      
       # update best.model if a better fitting was found
       if (curr.model[[1]]$MD < best.model[[1]]$MD) {
         best.model <- curr.model
