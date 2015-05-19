@@ -46,9 +46,9 @@ function(data, SEQ, overlapValues = default.val("overlapValues"), ...) {
   y <- pda[,first.study]
   
   for (i in rest.study) {
+    x 	  <- pda[,i]
     if (dim(na.omit(cbind(x,y)))[1] < overlapValues)
       stop(paste("less than", overlapValues, "observations between two datasets"))
-    x 	  <- pda[,i]
     projected <- projectPoints(x,y,...)
     res 	  <- rep(NA, length = dim(pda)[1])
     
