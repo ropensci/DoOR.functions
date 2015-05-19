@@ -46,9 +46,15 @@ updateDatabase <- function(receptor,
   recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
   
+  # remove studies with sd = 0 e.g. containing only 0
   study.sd <- apply(apply(da[,studies], 2, range, na.rm = T), 2, sd)
-  if(any(study.sd == 0))
-    stop(studies[which(study.sd == 0)]," has a SD of 0, please remove first.")
+  if(any(study.sd == 0)) {
+    warning(studies[which(study.sd == 0)]," has a SD of 0 and was removed from merge.")
+    da <- da[,- which(names(da) == studies[which(study.sd == 0)])]
+    recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
+    studies       <- names(da)[recordColumn]
+  }
+    
 
   
     
