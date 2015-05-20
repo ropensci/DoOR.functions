@@ -13,7 +13,7 @@
 #' @param receptor character string; name of given odorant receptor.
 #' @param permutation logical; if TRUE, the sequence is chosen from
 #' permutation, if FALSE, sequence is chosen by the routine process.
-#' @perm a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.
+#' @param perm a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.
 #' @param unglobalNorm_responseMatrix data frame; response data that has not
 #' been globally normalized.
 #' @param responseMatrix data frame; globally normalized response data.

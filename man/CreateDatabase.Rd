@@ -6,7 +6,7 @@
 \usage{
 CreateDatabase(tag = default.val("tag"),
   select.MDValue = default.val("select.MDValue"),
-  overlapValues = default.val("overlapValues"), ...)
+  overlapValues = default.val("overlapValues"), glob.normalization = T, ...)
 }
 \arguments{
 \item{tag}{character string; format for rownames; possibilities: tag="CAS",
@@ -18,7 +18,7 @@ studies that do not align sufficiently well to the response model}
 \item{overlapValues}{numeric; a criterion using to refuse a data set that
 has not enough overlap value.}
 
-\item{...}{pass more parameters to \code{\link{modelRP}} (e.g. \code{glob.normalization == T} to build a non-normalized response matrix)}
+\item{...}{pass more parameters to \code{\link{modelRP}} (e.g. \code{glob.normalization == F} to build a non-normalized response matrix)}
 }
 \description{
 computes the complete response model for all receptors in the database

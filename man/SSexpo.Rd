@@ -5,7 +5,11 @@
 \alias{SSexpo}
 \title{SelfStart estimation of exponential function}
 \format{\preformatted{function (x, a, b, c)  
+ - attr(*, "srcref")=Class 'srcref'  atomic [1:8] 21 11 36 1 11 1 21 36
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x49f4088> 
  - attr(*, "initial")=function (mCall, data, LHS)  
+  ..- attr(*, "srcref")=Class 'srcref'  atomic [1:8] 36 14 65 3 14 3 36 65
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x49f4088> 
  - attr(*, "pnames")= chr [1:3] "a" "b" "c"
  - attr(*, "class")= chr "selfStart"
 }}

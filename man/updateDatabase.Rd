@@ -4,17 +4,21 @@
 \alias{updateDatabase}
 \title{update response matrix}
 \usage{
-updateDatabase(receptor, permutation = TRUE,
+updateDatabase(receptor, permutation = TRUE, perm,
   unglobalNorm_responseMatrix = default.val("unglobalNorm_response.matrix"),
   responseMatrix = default.val("response.matrix"),
   responseRange = default.val("response.range"),
-  weightGlobNorm = default.val("weight.globNorm"))
+  weightGlobNorm = default.val("weight.globNorm"),
+  select.MDValue = default.val("select.MDValue"),
+  overlapValues = default.val("overlapValues"), plot = F)
 }
 \arguments{
 \item{receptor}{character string; name of given odorant receptor.}
 
 \item{permutation}{logical; if TRUE, the sequence is chosen from
 permutation, if FALSE, sequence is chosen by the routine process.}
+
+\item{perm}{a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.}
 
 \item{unglobalNorm_responseMatrix}{data frame; response data that has not
 been globally normalized.}
@@ -24,6 +28,10 @@ been globally normalized.}
 \item{responseRange}{data frame; response range of studies.}
 
 \item{weightGlobNorm}{data frame; weight matrix for global normalization.}
+
+\item{select.MDValue}{the minimum mean distance between studies to perfom a merge (only valid for permutation == F)}
+
+\item{overlapValues}{minimum overlap between studies to perfom a merge}
 }
 \description{
 update the globally \code{response matrix} and the unglobally normalized
@@ -45,10 +53,11 @@ loadRD()
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
+
+Shouwen Ma <\email{daniel.muench@uni-konstanz.de}>
 }
 \seealso{
-\code{\link{modelRP}},\code{\link{modelRPSEQ}},
-\code{\link[gregmisc]{permutations}}
+\code{\link{modelRP}},\code{\link{modelRPSEQ}}
 }
 \keyword{data}
 
