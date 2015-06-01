@@ -40,7 +40,7 @@ default.val <- function(DoOR_default) {
 
 	## character
   if (DoOR_default == "zero") 		    { return("SFR") } # findRespNorm.R
-  if (DoOR_default == "tag.ALimage") 	{ return("Glomerulus") } # ALimage.R
+  if (DoOR_default == "tag.ALimage") 	{ return("glomerulus") } # ALimage.R
   if (DoOR_default == "tag") 		      { return("InChIKey") } # PlotChemicals.R; PlotReceptors.R; CreateDatabase.R
   if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
 

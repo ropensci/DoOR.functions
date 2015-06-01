@@ -59,7 +59,7 @@ ALimage <- function (response.data,
   levg <- levels(factor(transg))
 
   # extract a subset that contains a complete "Code" column from "DoOR.mappings"
-  mappings.subset         <- subset(DoOR.mappings, !is.na(Code))
+  mappings.subset         <- subset(DoOR.mappings, !is.na(code))
   match_receptor          <- na.omit(match(response.data[, "ORs"], mappings.subset[, "receptor"]))
   rcode                   <- mappings.subset[match_receptor, "code"]
   available_receptor      <- na.omit(match(mappings.subset[, "code"], rcode))
