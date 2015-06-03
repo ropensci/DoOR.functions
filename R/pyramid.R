@@ -17,6 +17,7 @@ pyramid <- function(n) {
 #' returns the "pyramidal" order for a vector with numeric values
 #'
 #' @param x vector that should be ordered
+#' @param na.rm whether ornot to remove missing values
 #'
 #' @return integer, the "pyramidal" order of x
 #'
@@ -25,9 +26,11 @@ pyramid <- function(n) {
 #' order.pyramid <- orderPyramid(data)
 #' plot(data)
 #' plot(data[order.pyramid])
-orderPyramid <- function(x) {
+orderPyramid <- function(x, na.rm = F) {
   order.x   <- order(x)
-  length.x  <- length(x)
+  if(na.rm == T)
+    order.x <- order.x[- which(order.x %in% which(is.na(x)))]
+  length.x  <- length(order.x)
   pyramid.x <- order.x[pyramid(length.x)]
-  
+  return(pyramid.x)
 }
