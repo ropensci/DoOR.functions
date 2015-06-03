@@ -13,7 +13,7 @@
 #'
 
 
-sparse <- function(x, type = 'lts') {
+sparse <- function(x, method = 'ltk') {
   x <- na.omit(x)
   n <- length(x)
   
