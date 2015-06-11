@@ -46,6 +46,7 @@ updateDatabase <- function(receptor,
   recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
   
+
   # remove studies with sd = 0 e.g. containing only 0
   study.sd <- apply(apply(da[,studies], 2, range, na.rm = T), 2, sd)
   if(any(study.sd == 0)) {
@@ -54,8 +55,33 @@ updateDatabase <- function(receptor,
     recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
     studies       <- names(da)[recordColumn]
   }
-    
 
+  # check overlap
+  checkOverlap <- TRUE
+  while(checkOverlap == TRUE)
+  {
+    tmp <- da[,recordColumn]
+    tmp <- !is.na(tmp)
+    
+    ol <- c()
+    for(i in 1:dim(tmp)[2]) {
+      a <- tmp[,i]
+      b <- apply(tmp[,-i],1,function(x) any(x == TRUE))
+      overlap <- length(which(a == T &  b == T))
+      ol <- c(ol,overlap)
+    } 
+    
+    if(any(ol < overlapValues)) {
+      remove <- which(ol < overlapValues)
+      remove <- studies[remove]
+      da <- da[,- which(names(da) %in% remove)]
+      recordColumn 	<- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
+      studies       <- names(da)[recordColumn]
+      message(paste("REMOVED", remove, "as overlap with all other studies was smaller than", overlapValues, "!"))
+    } else {
+     checkOverlap <- FALSE
+   }
+}
   
     
   if (permutation == TRUE) {
