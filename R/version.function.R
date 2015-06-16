@@ -4,7 +4,7 @@
 #' 
 #' 
 #' @keywords DoOR
-DoOR.functions.version <- function() {
+version.function <- function() {
 	message("Function Version 1.9")
 	message("Date: Apr 21 2015")
 }
