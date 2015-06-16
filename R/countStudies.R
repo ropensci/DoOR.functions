@@ -22,7 +22,11 @@ countStudies <-
       or <- or[-c(1:char.columns)]
       or <- !is.na(or)
       or <- apply(or, 1, sum)
-      counts <- cbind(counts,  or)
+      if(i == 1) {
+        counts[,1] <- or
+      } else {
+        counts <- cbind(counts,  or)
+      }
       colnames(counts)[i] <- or.name
     }
     return(counts)
