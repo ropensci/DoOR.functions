@@ -37,130 +37,130 @@
 #' 
 modelRP <- function(da, 
                     select.MDValue = default.val("select.MDValue"), 
-                		overlapValues = default.val("overlapValues"),
-                		responseRange = default.val("response.range"),
-                		weightGlobNorm = default.val("weight.globNorm"), 
-                		glob.normalization = default.val("glob.normalization"), 
-                		plot = default.val("plot") ) {
-
+                    overlapValues = default.val("overlapValues"),
+                    responseRange = default.val("response.range"),
+                    weightGlobNorm = default.val("weight.globNorm"), 
+                    glob.normalization = default.val("glob.normalization"), 
+                    plot = default.val("plot") ) {
+  
   #safety check for input data format
   if (!is.data.frame(da)) {
     stop("Not a data frame. Stopped in modelRP.R")
   }
-
+  
   # positions of columns that contain odor response vectors
   # should be columns 6...end (1..5 contain odor class, odor name, InChIKey, CID and CAS)
   # 
-  nv 	 		          <- as.numeric(c((default.val("num.charColumns")+1):dim(da)[2]))
-  number_of_studies <- length(nv)
-  excluded 		      <- character()
-
+  nv                 <- as.numeric(c((default.val("num.charColumns")+1):dim(da)[2]))
+  number_of_studies  <- length(nv)
+  excluded           <- character()
+  
   # if there is no study --> stop
   if (number_of_studies == 0) {
-      stop("No study to treat. Stopped in modelRP.R")
+    stop("No study to treat. Stopped in modelRP.R")
   }
-
-
+  
+  
   # if there is only one study --> just normalise data and return
   if (number_of_studies == 1) {
-      pda 	    <- apply(as.data.frame(da[, nv]), 2, DoORnorm)	# pda : processing data
-      merged_data <- as.vector(pda)
-      message("No merging performed as there is only one study in the dataset.")
-      # merged_data thus corresponds to the only measured data set
-# merged_data <- pda
+    pda 	    <- apply(as.data.frame(da[, nv]), 2, DoORnorm)	# pda : processing data
+    merged_data <- as.vector(pda)
+    message("No merging performed as there is only one study in the dataset.")
+    # merged_data thus corresponds to the only measured data set
+    # merged_data <- pda
   }
-
-
+  
+  
   # merge data sets only if there are two or more datasets
   # start by merging the data pair that matches best (criterion: minimal MD value)
   # 
   if (number_of_studies > 1) {
-  # setup the page parameters to fit all graphs onto one page
-  # based on the number of studies present
+    # setup the page parameters to fit all graphs onto one page
+    # based on the number of studies present
     if (plot == TRUE)  {
- 	    lenNV_1  <- number_of_studies - 1
+      lenNV_1  <- number_of_studies - 1
       nframe.X <- ceiling(lenNV_1^0.5)
-     	nframe.Y <- ceiling(lenNV_1/nframe.X)
+      nframe.Y <- ceiling(lenNV_1/nframe.X)
       op       <- par(mfrow = c((nframe.Y), (nframe.X)))
-  	}
-  	# end plot
-
-  	# extract response data without information columns into pda
+    }
+    # end plot
+    
+    # extract response data without information columns into pda
     pda <- apply(as.data.frame(da[, nv]), 2, DoORnorm) # processing data
-  	# pda contains the columns (receptors) of the data matrix 
-  	# the function DoORnorm has normalized each to [0,1]
-
+    # pda contains the columns (receptors) of the data matrix 
+    # the function DoORnorm has normalized each to [0,1]
+    
     ###
-  	# --> start the merging process: find the first pair 
-
-  	candidate.studies <- colnames(pda)
-  	# candidate.studies contains a list of all studies in this receptor
-  	selected 	  <- selectModel(candidate = candidate.studies, merged_data = NULL, overlapValues, data_candidate = pda, merged = FALSE )
-  	# selected contains the pair of studies with the best match
-  	# including all parameters for the best match
-
-  	if (names(selected$best.model) == "no.fitted.model" | names(selected$best.model) == "initial") {
-	    warning("Can not find any fitted model to merge given data.")
-  	  pda[1:length(pda)] <- NA
-  	} else if (selected[[1]][[1]]$MD >= select.MDValue) {
-  	  warning("Can not find any fitted model with MD value under given threshold criterion.")
-  	  pda[1:length(pda)] <- NA
-  	}
-  	
-
+    # --> start the merging process: find the first pair 
+    
+    candidate.studies <- colnames(pda)
+    # candidate.studies contains a list of all studies in this receptor
+    selected <- selectModel(candidate = candidate.studies, merged_data = NULL, overlapValues, data_candidate = pda, merged = FALSE )
+    # selected contains the pair of studies with the best match
+    # including all parameters for the best match
+    
+    if (names(selected$best.model) == "no.fitted.model" | names(selected$best.model) == "initial") {
+      warning("Can not find any fitted model to merge given data.")
+      pda[1:length(pda)] <- NA
+    } else if (selected[[1]][[1]]$MD >= select.MDValue) {
+      warning("Can not find any fitted model with MD value under given threshold criterion.")
+      pda[1:length(pda)] <- NA
+    }
+    
+    
     # merge these two datasets to one model response.
-  	# done by projecting response values onto the chosen function (and, if plot==TRUE, also plot this)
-  	# use the function (best.model) found with selectModel above
-
-   projected <- projectPoints(x = pda[,selected$selected.x], y = pda[,selected$selected.y], best.model = selected$best.model, xlab = selected$selected.x,    ylab = selected$selected.y, plot = plot, title = plot)
-
-  	# the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
-  	# to integrate it into pda, change data type: list to vector
-  	merged_data                                   <- rep(NA, length = dim(pda)[1])
- 	  merged_data[projected$Double.Observations$ID] <- projected$Double.Observations$NDR
-  	merged_data[projected$Single.Observation$ID]  <- projected$Single.Observation$NDR
-
-  	#remove the merged studies from the data matrix pda
-  	rest_data <- colnames(pda)[-match(c(selected$selected.y,selected$selected.x),colnames(pda))]
-
-  	# merge the remaining studies 
-  	# always merge into the model response
-  	# while there are still studies to process: find the study to be merged next 
-  	# (again, use calModel() to try all studies and fitting functions --> MD values)
-
-  	ind <- length(rest_data) # how many studies are left to merge
-
-  	while (ind > 0) {
-  	  # find the best match
-  		selected.next <- selectModel(candidate = rest_data, data_candidate = pda, overlapValues, merged_data = merged_data, merged = TRUE )
-    	# if a threshold for the MD is given, stop when no study reaches this threshold criterion any more
+    # done by projecting response values onto the chosen function (and, if plot==TRUE, also plot this)
+    # use the function (best.model) found with selectModel above
+    
+    projected <- projectPoints(x = pda[,selected$selected.x], y = pda[,selected$selected.y], best.model = selected$best.model, xlab = selected$selected.x,    ylab = selected$selected.y, plot = plot, title = plot)
+    
+    # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
+    # to integrate it into pda, change data type: list to vector
+    merged_data                                   <- rep(NA, length = dim(pda)[1])
+    merged_data[projected$Double.Observations$ID] <- projected$Double.Observations$NDR
+    merged_data[projected$Single.Observation$ID]  <- projected$Single.Observation$NDR
+    
+    #remove the merged studies from the data matrix pda
+    rest_data <- colnames(pda)[-match(c(selected$selected.y,selected$selected.x),colnames(pda))]
+    
+    # merge the remaining studies 
+    # always merge into the model response
+    # while there are still studies to process: find the study to be merged next 
+    # (again, use calModel() to try all studies and fitting functions --> MD values)
+    
+    ind <- length(rest_data) # how many studies are left to merge
+    
+    while (ind > 0) {
+      # find the best match
+      selected.next <- selectModel(candidate = rest_data, data_candidate = pda, overlapValues, merged_data = merged_data, merged = TRUE )
+      # if a threshold for the MD is given, stop when no study reaches this threshold criterion any more
       if ( (names(selected.next$best.model) == "initial") | (names(selected.next$best.model) == "no.fitted.model") | (selected.next$best.model[[1]]$MD > select.MDValue) )	{
         excluded  <- rest_data
-    	  message("Not all datasets could be merged because they did not reach the criterion.")
-	       ind <- 0
-    	   next
+        message("Not all datasets could be merged because they did not reach the criterion.")
+        ind <- 0
+        next
       }
-	
+      
       # best match has been found, now merge it into the model response "merged_data"
       # done by projecting response values onto the chosen function (and, if plot==TRUE, also plot this)
       # use the function (best.model) found with selectModel above
-
-  		projected <- projectPoints(x = pda[,selected.next$selected.x], y = merged_data, best.model = selected.next$best.model, xlab = selected.next$selected.x,    ylab = selected.next$selected.y,    plot = plot, title = plot)
-
-     	# overwrite merged_data with new values 
-  		merged_data                                     <- rep(NA, length = dim(pda)[1])
-    	merged_data[projected$Double.Observations$ID]   <- projected$Double.Observations$NDR
-	    merged_data[projected$Single.Observation$ID]    <- projected$Single.Observation$NDR
+      
+      projected <- projectPoints(x = pda[,selected.next$selected.x], y = merged_data, best.model = selected.next$best.model, xlab = selected.next$selected.x,    ylab = selected.next$selected.y,    plot = plot, title = plot)
+      
+      # overwrite merged_data with new values 
+      merged_data                                     <- rep(NA, length = dim(pda)[1])
+      merged_data[projected$Double.Observations$ID]   <- projected$Double.Observations$NDR
+      merged_data[projected$Single.Observation$ID]    <- projected$Single.Observation$NDR
       #remove the merged study from the data matrix pda
- 		  rest_data <- rest_data[-match(selected.next$selected.x,rest_data)]
-	    ind <- ind - 1
-  	} # while (ind > 0) 
-  
-  	# now all studies have been merged into model response (merged_data)
+      rest_data <- rest_data[-match(selected.next$selected.x,rest_data)]
+      ind <- ind - 1
+    } # while (ind > 0) 
+    
+    # now all studies have been merged into model response (merged_data)
   } # end if (number_of_studies > 1) 
-
-
-
+  
+  
+  
   # global normalization 
   if (glob.normalization == TRUE) {
     name.Stud    <- colnames(da)[nv]
@@ -168,11 +168,11 @@ modelRP <- function(da,
     Rmax         <- apply(as.matrix(da[,nv]),2,function(x) max(range(x,na.rm=TRUE)))
     Smax         <- responseRange[mp_orx,"max"]
     merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merged_data,
-		name.Stud = name.Stud, weightGlobNorm = weightGlobNorm, responseRange = responseRange )
+                               name.Stud = name.Stud, weightGlobNorm = weightGlobNorm, responseRange = responseRange )
   }
-
+  
   resd <- cbind(da[, c("Class", "Name", "InChIKey", "CID", "CAS")], merged_data)
   source.data = colnames(da)[nv][-match(excluded,colnames(da)[nv])]
- 
-return(list(Source.data = source.data, model.response = resd, Excluded.Data = excluded))
+  
+  return(list(Source.data = source.data, model.response = resd, Excluded.Data = excluded))
 }
