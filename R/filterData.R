@@ -15,13 +15,14 @@ filterData <- function(data, overlapValues = default.val("overlapValues"), charC
   
   recordColumn  <- as.numeric(c((charColumns + 1):dim(data)[2]) )
   studies       <- names(data)[recordColumn]
+  receptor <- deparse(substitute(data))
   
   removed <- data.frame()
   
   # remove studies with sd = 0 e.g. containing only 0
-  study.sd <- apply(apply(data[,studies], 2, range, na.rm = T), 2, sd)
+  study.sd <- apply(apply(as.data.frame(data[,studies]), 2, range, na.rm = T), 2, sd)
   if(any(study.sd == 0)) {
-    warning(studies[which(study.sd == 0)]," has a SD of 0 and was removed from merge.")
+    message(paste(receptor,": REMOVED ", studies[which(study.sd == 0)], " as it had a SD of 0.\n", sep = ""))
     removed <- data.frame(study = studies[which(study.sd == 0)], reason = "SD = 0")
     data <- data[,- which(names(data) == studies[which(study.sd == 0)])]
     recordColumn  <- as.numeric( c((charColumns + 1):dim(data)[2]) )
@@ -30,14 +31,14 @@ filterData <- function(data, overlapValues = default.val("overlapValues"), charC
   
   # check overlap
   checkOverlap <- TRUE
-  while(checkOverlap == TRUE) {
+  while(checkOverlap == TRUE & length(studies) > 1) {
     tmp <- data[,recordColumn]
     tmp <- !is.na(tmp)
     
     ol <- c()
     for(i in 1:dim(tmp)[2]) {
       a <- tmp[,i]
-      b <- apply(tmp[,-i],1,function(x) any(x == TRUE))
+      b <- apply(as.data.frame(tmp[,-i]),1,function(x) any(x == TRUE))
       overlap <- length(which(a == T &  b == T))
       ol <- c(ol,overlap)
     } 
@@ -46,14 +47,18 @@ filterData <- function(data, overlapValues = default.val("overlapValues"), charC
       remove <- which(ol < overlapValues)
       remove <- studies[remove]
       data <- data[,- which(names(data) %in% remove)]
-      recordColumn  <- as.numeric(c((charColumns + 1):dim(data)[2]))
+      if(length(data) > overlapValues) {
+        recordColumn  <- as.numeric(c((charColumns + 1):dim(data)[2]))
+      } else {
+        recordColumn <- NULL
+      }
       studies       <- names(data)[recordColumn]
-      message(paste("REMOVED", remove, "as overlap with all other studies was smaller than", overlapValues, "!"))
+      message(paste(receptor, ": REMOVED ", remove, " as overlap with all other studies was smaller than ", overlapValues, "!\n", sep = ""))
       removed <- rbind(removed, data.frame(study = remove, reason = paste("overlap <", overlapValues)))
     } else {
       checkOverlap <- FALSE
     }
-    data <- list(data = data, removed = removed)
-    return(data)
   }
+  data <- list(data = data, removed = removed)
+  return(data)
 }
