@@ -1,13 +1,47 @@
+#' ALimage
+#'
+#' Plot an antennal lobe map with color coded odorant responses.
+#'
+#' @param InChIKey InChIKey specifying the odorant to plot
+#' @param responseMatrix the input data (e.g. response.matrix or unglobalNorm_response.matrix)
+#' @param zero the odorant to set to zero (defaults to "SFR")
+#' @param tag the labels to plot on top of the glomeruli (one of the following \code{DoOR.mappings} columns: "receptor", "sensillum", "ORN", "glomerulus" or "co.receptor") 
+#' @param main the title, one column of \code{odor}, defaults to "Name"
+#' @param scalebar whether or not to add a scalebar
+#' @param DoOR.mappings the darta frame containing the mapping information
+#' @param colors a vector containing 6 color values (2 for values below 0, 1 0 value and 3 steps between 0 and 1)
+#' @param limits the limits for the color scale, if empty the range of the response matrix is taken (after setting ``zero`` to 0)
+#' @details Normalized, color coded odor responses across receptors are mapped onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map was a kind gift from Veit Grabe. 
+#' @seealso \link{findRespNorm}, \pkg{\link{ggplot2}, \link{grid}}
+#' @references Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
+#' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
+#' @return a ggplot2 object
+#'
+#' @examples
+#' ALimage("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = F)
+#' ALimage("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
+#' 
+#' ALimage(getKey("123-92-2"), scalebar = F) + 
+#' theme(legend.position  = "bottom", 
+#'       panel.background = element_rect(fill = "grey90", color = NA)) + 
+#' ggtitle("responses elicited by isopentyl acetate")
+#' 
+#' \dontrun{
+#' p <- ALimage(getKey("123-92-2"))
+#' ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
+#' }
 ALimage <- function(InChIKey,
                     responseMatrix = default.val("response.matrix"),
                     zero = default.val("zero"),
                     tag =  default.val("tag.ALimage"), 
                     main = "Name",
-                    ind.panels = default.val("ind.panels"),
+                    scalebar = default.val("scalebar"),
                     DoOR.mappings = default.val("DoOR.mappings"),
                     colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"), 
                     limits) {
-  require(ggplot2)
+
+  if (!require(ggplot2))
+    stop("Please install lattice: install.packages('ggplot2')")
   require(grid)
   
   if(missing(limits)) {
@@ -51,5 +85,9 @@ ALimage <- function(InChIKey,
           #legend.key.size = unit(.8, "line"),
           #legend.key.width = unit(.3, "line")
     )
+  
+  if(scalebar == F)
+    p <- p + theme(legend.position = "none")
+  
   return(p)
 }

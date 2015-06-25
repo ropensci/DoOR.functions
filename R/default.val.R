@@ -31,7 +31,7 @@ default.val <- function(DoOR_default) {
 	if (DoOR_default == "merged") 	       	  { return(TRUE) } # selectModel.R
 	if (DoOR_default == "select.MD") 	        { return(TRUE) } # calModel.R; projectPoints.R
 	if (DoOR_default == "closest") 		        { return(TRUE) } # LLSIest.R
-	if (DoOR_default == "ind.panels") 	      { return(TRUE) } # ALimage.R
+	if (DoOR_default == "scalebar")   	      { return(TRUE) } # ALimage.R
 	if (DoOR_default == "title") 		          { return(FALSE) } # projectPoints.R
 	if (DoOR_default == "plot") 		          { return(FALSE) } # modelRP.R; projectPoints.R
 
