@@ -4,7 +4,7 @@
 \alias{sparse}
 \title{Calculate the sparseness of a vector.}
 \usage{
-sparse(x, type = "lts")
+sparse(x, method = "ltk")
 }
 \arguments{
 \item{x}{numerical input vector}
