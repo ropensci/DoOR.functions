@@ -1,6 +1,6 @@
 #' filterData
 #' 
-#' filter DoOR datasets before merging (remove studies with few overlapping points or SD = 0)
+#' Filter DoOR datasets before merging (remove studies with few overlapping points or SD = 0). This function is used by updateDatabase to pre filter before performing all possible merges.
 #'
 #' @param data a DoOR data frame (e.g. Or22a)
 #' @param overlapValues number of minimum overlap needed between data sets
