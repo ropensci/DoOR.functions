@@ -20,12 +20,16 @@
 #' result <- findRespNorm(odors, responseMatrix = response.matrix)
 #' 
 findRespNorm <- function(odors, zero = default.val("zero"), responseMatrix = default.val("response.matrix")) {
-
-	responseMatrix <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
-	
-	mp  <- match(odors,rownames(responseMatrix))
-	res <- data.frame(ORs = rep(colnames(responseMatrix),each=length(odors)),
-			              Odor = rep(odors,dim(responseMatrix)[2]),
-			              Response = c(as.matrix(responseMatrix[mp,])))
-return(res)
+  
+  responseMatrix <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
+  
+  mp  <- match(odors,rownames(responseMatrix))
+  if(any(is.na(mp))) {
+    stop(paste("The following odorants are not in the database: "), paste(odors[which(is.na(mp))], collapse = ", "))
+  }
+    
+  res <- data.frame(ORs = rep(colnames(responseMatrix),each=length(odors)),
+                    Odor = rep(odors,dim(responseMatrix)[2]),
+                    Response = c(as.matrix(responseMatrix[mp,])))
+  return(res)
 }
