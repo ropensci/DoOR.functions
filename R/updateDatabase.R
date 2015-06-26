@@ -58,7 +58,7 @@ updateDatabase <- function(receptor,
     meanCorrel <- matrix(NA,nrow=dim(perm)[1])
     
     for (i in 1:dim(perm)[1]) {
-      tryMerg <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, plot=plot),silent = TRUE)
+      tryMerg <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, plot = plot),silent = TRUE)
       if (inherits(tryMerg, "try-error")) { 
         meanCorrel_tryMerg <- NA 
       } else {
@@ -84,10 +84,10 @@ updateDatabase <- function(receptor,
     message(paste(SEQ, collapse = " -> "))
 
     # merge response data with the optimized sequence.
-    merg <- modelRPSEQ(data = da, SEQ = SEQ)
+    merg <- modelRPSEQ(data = da, SEQ = SEQ, overlapValues = overlapValues, plot = plot)
     
   } else { # END if (permutation == TRUE)
-    merg <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues)$model.response[,"merged_data"]
+    merg <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)$model.response[,"merged_data"]
   }
 
   # update  unglobalNorm_response.matrix
