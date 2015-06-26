@@ -43,7 +43,8 @@ updateDatabase <- function(receptor,
                            overlapValues = default.val("overlapValues"),
                            plot = F) {	
   da            <- get(receptor)
-  da            <- filterData(da, overlapValues = overlapValues)$data
+  if (missing(perm))
+    da <- filterData(da, overlapValues = overlapValues)$data
   recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
   

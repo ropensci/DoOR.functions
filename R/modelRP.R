@@ -48,6 +48,8 @@ modelRP <- function(da,
     stop("Not a data frame. Stopped in modelRP.R")
   }
   
+  da <- filterData(da, overlapValues = overlapValues)$data
+  
   # positions of columns that contain odor response vectors
   # should be columns 6...end (1..5 contain odor class, odor name, InChIKey, CID and CAS)
   # 
