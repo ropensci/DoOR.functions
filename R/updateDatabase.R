@@ -43,8 +43,7 @@ updateDatabase <- function(receptor,
                            overlapValues = default.val("overlapValues"),
                            plot = F) {	
   da            <- get(receptor)
-  if (missing(perm))
-    da <- filterData(da, overlapValues = overlapValues)$data
+  da            <- filterData(da, overlapValues = overlapValues)$data
   recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
   
@@ -54,6 +53,7 @@ updateDatabase <- function(receptor,
       message(paste("All possible permutations (", dim(perm)[1], ") have been calculated, now merging.", sep = ""))
     }
     
+    
     # compute the mean correlation between merged responses and original response.
     meanCorrel <- matrix(NA,nrow=dim(perm)[1])
     
@@ -62,7 +62,7 @@ updateDatabase <- function(receptor,
       if (inherits(tryMerg, "try-error")) { 
         meanCorrel_tryMerg <- NA 
       } else {
-        meanCorrel_tryMerg <- mean(unlist(sapply(da[,recordColumn],function(x) calModel(tryMerg,x)[[1]]["MD"])))
+        meanCorrel_tryMerg <- mean(unlist(sapply(da[,recordColumn],function(x) calModel(tryMerg, x, overlapValues = overlapValues)[[1]]["MD"])))
       }
       meanCorrel[i,] <- meanCorrel_tryMerg
 
@@ -78,13 +78,13 @@ updateDatabase <- function(receptor,
     
     # find and show the sequence with the lowest MD
     min.MD  <- which.min(meanCorrel)
-    SEQ     <- perm[min.MD[1],]
+    perm     <- perm[min.MD[1],]
     
     message(paste("The optimized sequence with the lowest mean MD", round(meanCorrel[min.MD], 4), "is:"))
-    message(paste(SEQ, collapse = " -> "))
-
+    message(paste(perm, collapse = " -> "))
+    
     # merge response data with the optimized sequence.
-    merg <- modelRPSEQ(data = da, SEQ = SEQ, overlapValues = overlapValues, plot = plot)
+    merg <- modelRPSEQ(data = da, SEQ = perm, overlapValues = overlapValues, plot = plot)
     
   } else { # END if (permutation == TRUE)
     merg <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)$model.response[,"merged_data"]
