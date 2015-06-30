@@ -66,8 +66,8 @@ ALimage <- function(InChIKey,
   
   p <- ggplot(data = plotdata) + 
     geom_polygon(data = AL.map$background, aes(x = x, y = y, group = group), fill = "grey65", color = "grey65") +
-    geom_polygon(data = AL.map$unmapped_not.olf, aes(x = x, y = y, group = glomerulus), fill = "grey50", color = "grey75") +
     geom_polygon(data = AL.map$bg.cutout,  aes(x = x, y = y, group = group), fill = "white", color = "white") +
+    geom_polygon(data = AL.map$unmapped_not.olf, aes(x = x, y = y, group = glomerulus), fill = "grey50", color = "grey75") +
     geom_polygon(aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") + 
     scale_fill_gradientn(na.value="grey80", colours=colors,space="rgb", values=DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
     annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = 3, alpha = .4) +#, hjust=0) +
