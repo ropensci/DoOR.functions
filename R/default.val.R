@@ -49,11 +49,11 @@ default.val <- function(DoOR_default) {
 	if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R; modelfunction.R; projectPoints.R
 
 	## data frame
-	if (DoOR_default == "AL256") {
-    if (!exists("AL256")) {
-      data(AL256)
+	if (DoOR_default == "AL.map") {
+    if (!exists("AL.map")) {
+      data(AL.map)
     }
-    return(AL256)
+    return(AL.map)
   } # ALimage.R
   
 	if (DoOR_default == "data.format") {

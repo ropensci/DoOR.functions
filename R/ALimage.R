@@ -37,6 +37,7 @@ ALimage <- function(InChIKey,
                     main = "Name",
                     scalebar = default.val("scalebar"),
                     DoOR.mappings = default.val("DoOR.mappings"),
+                    AL.map = default.val("AL.map"),
                     colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"), 
                     limits) {
 
