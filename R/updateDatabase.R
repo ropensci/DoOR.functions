@@ -26,12 +26,12 @@
 #' @seealso \code{\link{modelRP}},\code{\link{modelRPSEQ}}
 #' @keywords data
 #' @examples
-#' 
+#' \dontrun{
 #' library(DoOR.data)
 #' loadRD()
 #' # update the entry "Or67b" of data "response.matrix" and "unglobalNorm_response.matrix" with permutations.
 #' # updateDatabase(receptor="Or67b", permutation = TRUE)
-#' 
+#' }
 updateDatabase <- function(receptor, 
                            permutation = TRUE, 
                            perm, 
