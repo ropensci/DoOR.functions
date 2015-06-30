@@ -16,9 +16,17 @@
 #' ALimage(getKey("123-92-2"))
 getKey <- function(x, type = "CAS", odor.data = default.val("odor.data")) {
   result <- odor.data$InChIKey[which(odor.data[,type] == x)]
-  if(length(result) > 1)
-    stop("More than one result, please specify.")
-  if(length(result) == 0)
-    stop("No match, please retry.")
+  if(is.na(x)) {
+    warning("Entered NA, returning NA.")
+    return(NA)
+  }
+  if(length(result) > 1) {
+    warning("More than one result, returning first hit.")
+    return(as.character(result[1]))
+  }
+  if(length(result) == 0) {
+    warning("No match, returning NA.")
+    return(NA)
+  }
   return(as.character(result))
 }
