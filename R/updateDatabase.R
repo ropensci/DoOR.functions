@@ -65,13 +65,13 @@ updateDatabase <- function(receptor,
         meanCorrel_tryMerg <- mean(unlist(sapply(da[,recordColumn],function(x) calModel(tryMerg, x, overlapValues = overlapValues)[[1]]["MD"])))
       }
       meanCorrel[i,] <- meanCorrel_tryMerg
-
+      
       message(paste("[",i,"/",dim(perm)[1],"] ",paste(perm[i,], collapse = ", "), " ------ Mean distance: ", round(meanCorrel_tryMerg, 4), sep = ""))
     }
     
     if (all(is.na(meanCorrel))) 
       stop("No good sequence found")
-        
+    
     message("--------------------------------------------------------")
     
     perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
@@ -89,7 +89,7 @@ updateDatabase <- function(receptor,
   } else { # END if (permutation == TRUE)
     merg <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)$model.response[,"merged_data"]
   }
-
+  
   # update  unglobalNorm_response.matrix
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merg)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
@@ -105,7 +105,7 @@ updateDatabase <- function(receptor,
   unglobalNorm_responseMatrix[matchInChIKey, receptor] <- merg
   assign("unglobalNorm_response.matrix", unglobalNorm_responseMatrix, envir = .GlobalEnv)
   message(paste("unglobalNorm_response.matrix has been updated for",receptor))
-
+  
   # update response.matrix
   name.Stud    <- colnames(da)[recordColumn]
   mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
