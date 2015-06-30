@@ -38,7 +38,8 @@ ALimage <- function(InChIKey,
                     scalebar = default.val("scalebar"),
                     DoOR.mappings = default.val("DoOR.mappings"),
                     AL.map = default.val("AL.map"),
-                    colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"), 
+                    colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"),
+                    legend = T,
                     limits) {
 
   if (!require(ggplot2))
@@ -65,12 +66,12 @@ ALimage <- function(InChIKey,
   
   
   p <- ggplot(data = plotdata) + 
-    geom_polygon(data = AL.map$background, aes(x = x, y = y, group = group), fill = "grey65", color = "grey65") +
+    geom_polygon(data = AL.map$background, aes(x = x, y = y, group = group), fill = "grey80", color = "grey80") +
     geom_polygon(data = AL.map$bg.cutout,  aes(x = x, y = y, group = group), fill = "white", color = "white") +
-    geom_polygon(data = AL.map$unmapped_not.olf, aes(x = x, y = y, group = glomerulus), fill = "grey50", color = "grey75") +
+    geom_polygon(data = AL.map$unmapped_not.olf, aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
     geom_polygon(aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") + 
-    scale_fill_gradientn(na.value="grey80", colours=colors,space="rgb", values=DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
-    annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = 3, alpha = .4) +#, hjust=0) +
+    scale_fill_gradientn(na.value="grey65", colours=colors,space="rgb", values=DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
+    annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = 3, alpha = .5) +#, hjust=0) +
     coord_fixed() + 
     theme_minimal() +
     ggtitle(main) +
@@ -87,8 +88,22 @@ ALimage <- function(InChIKey,
           #legend.key.width = unit(.3, "line")
     )
   
-  if(scalebar == F)
+  if(scalebar == F) 
     p <- p + theme(legend.position = "none")
+
+  if(legend == T) {
+  x1 <- 118; x2 <- x1 + 34; x3 <- x2 + 19.5; y <- -20; lsize <- 10
+  p <- p + 
+    annotate("rect", 
+             xmin = c(x1, x2, x3) , 
+             xmax = c(x1+lsize, x2+lsize, x3+lsize), 
+             ymin = y, ymax = y+lsize, 
+             fill = c("grey45", "grey65", "grey80")) + 
+    annotate("text", 
+             x = c(x1+lsize+1.5, x2+lsize+1.5, x3+lsize+1.5) , 
+             y = y + lsize / 2 , 
+             label = c("unmapped", "NA", "background"), hjust = 0, size = 3.5)
+  }
   
   return(p)
 }
