@@ -84,6 +84,14 @@ default.val <- function(DoOR_default) {
 	  return(weight.globNorm)
 	} # exportData.R; importNewData.R; updateDatabase.R; modelRP.R
 
+  if (DoOR_default == "excluded.data") {
+    if (!exists("excluded.data")) {
+      data(excluded.data)
+    }
+    return(excluded.data)
+  } # updateDatabase.R; modelRP.R; CreateDatabase.R
+  
+  
 	if (DoOR_default == "DoOR.mappings") {
 	  if (!exists("DoOR.mappings")) {
 	    data(DoOR.mappings)

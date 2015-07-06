@@ -41,57 +41,71 @@ updateDatabase <- function(receptor,
                            weightGlobNorm = default.val("weight.globNorm"),
                            select.MDValue=default.val("select.MDValue"), 
                            overlapValues = default.val("overlapValues"),
+                           excluded.data = default.val("excluded.data"),
                            plot = F) {	
   da            <- get(receptor)
-  da            <- filterData(da, overlapValues = overlapValues)$data
   recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
   
   if (permutation == TRUE) {
-    if (missing(perm)) {
-      perm 	<- matrix(studies[permutations(length(studies))], ncol=length(studies)) 
-      message(paste("All possible permutations (", dim(perm)[1], ") have been calculated, now merging.", sep = ""))
-    }
+    da            <- filterData(da, overlapValues = overlapValues)
+    excluded      <- as.character(da$excluded$study)
+    da            <- da$data
+    recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
+    studies       <- names(da)[recordColumn]
     
-    
-    # compute the mean correlation between merged responses and original response.
-    meanCorrel <- matrix(NA,nrow=dim(perm)[1])
-    
-    for (i in 1:dim(perm)[1]) {
-      tryMerg <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, plot = plot),silent = TRUE)
-      if (inherits(tryMerg, "try-error")) { 
-        meanCorrel_tryMerg <- NA 
-      } else {
-        meanCorrel_tryMerg <- mean(unlist(sapply(da[,recordColumn],function(x) calModel(tryMerg, x)[[1]]["MD"])))
+    if(length(da) > default.val("num.charColumns")) {
+
+      if (missing(perm)) {
+        perm 	<- matrix(studies[permutations(length(studies))], ncol=length(studies)) 
+        message(paste("All possible permutations (", dim(perm)[1], ") have been calculated, now merging.", sep = ""))
       }
-      meanCorrel[i,] <- meanCorrel_tryMerg
       
-      message(paste("[",i,"/",dim(perm)[1],"] ",paste(perm[i,], collapse = ", "), " ------ Mean distance: ", round(meanCorrel_tryMerg, 4), sep = ""))
+      
+      # compute the mean correlation between merged responses and original response.
+      meanCorrel <- matrix(NA,nrow=dim(perm)[1])
+      
+      for (i in 1:dim(perm)[1]) {
+        merge.try <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, plot = plot),silent = TRUE)
+        if (inherits(merge.try, "try-error")) { 
+          meanCorrel_merge.try <- NA 
+        } else {
+          meanCorrel_merge.try <- mean(unlist(sapply(da[,recordColumn],function(x) calModel(merge.try, x)[[1]]["MD"])))
+        }
+        meanCorrel[i,] <- meanCorrel_merge.try
+        
+        message(paste("[",i,"/",dim(perm)[1],"] ",paste(perm[i,], collapse = ", "), " ------ Mean distance: ", round(meanCorrel_merge.try, 4), sep = ""))
+      }
+      
+      if (all(is.na(meanCorrel))) 
+        stop("No good sequence found")
+      
+      message("--------------------------------------------------------")
+      
+      perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
+      
+      # find and show the sequence with the lowest MD
+      min.MD  <- which.min(meanCorrel)
+      perm     <- perm[min.MD[1],]
+      
+      message(paste("The optimized sequence with the lowest mean MD", round(meanCorrel[min.MD], 4), "is:"))
+      message(paste(perm, collapse = " -> "))
+      
+      # merge response data with the optimized sequence.
+      merge <- modelRPSEQ(data = da, SEQ = perm, overlapValues = overlapValues, plot = plot)
+    } else {
+      merge <- rep(NA, dim(da)[1])
+      message("No data left to merge, returning NAs")
     }
-    
-    if (all(is.na(meanCorrel))) 
-      stop("No good sequence found")
-    
-    message("--------------------------------------------------------")
-    
-    perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
-    
-    # find and show the sequence with the lowest MD
-    min.MD  <- which.min(meanCorrel)
-    perm     <- perm[min.MD[1],]
-    
-    message(paste("The optimized sequence with the lowest mean MD", round(meanCorrel[min.MD], 4), "is:"))
-    message(paste(perm, collapse = " -> "))
-    
-    # merge response data with the optimized sequence.
-    merg <- modelRPSEQ(data = da, SEQ = perm, overlapValues = overlapValues, plot = plot)
     
   } else { # END if (permutation == TRUE)
-    merg <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)$model.response[,"merged_data"]
+    merge <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)
+    excluded <- merge$excluded.data
+    merge <- merge$model.response[,"merged_data"]
   }
   
   # update  unglobalNorm_response.matrix
-  merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merg)
+  merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merge)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
   findNA_InChIKey <- which(is.na(matchInChIKey))
   if (!is.na(findNA_InChIKey[1])) {
@@ -102,7 +116,7 @@ updateDatabase <- function(receptor,
     responseMatrix <- rbind(responseMatrix,addRow)
     matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
   }
-  unglobalNorm_responseMatrix[matchInChIKey, receptor] <- merg
+  unglobalNorm_responseMatrix[matchInChIKey, receptor] <- merge
   assign("unglobalNorm_response.matrix", unglobalNorm_responseMatrix, envir = .GlobalEnv)
   message(paste("unglobalNorm_response.matrix has been updated for",receptor))
   
@@ -111,11 +125,19 @@ updateDatabase <- function(receptor,
   mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
   Rmax         <- apply(as.matrix(da[,recordColumn]),2,function(x) max(range(x,na.rm=TRUE)))
   Smax         <- responseRange[mp_orx,"max"]
-  merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merg, name.Stud = name.Stud, responseRange = responseRange, weightGlobNorm = weightGlobNorm)
+  merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merge, name.Stud = name.Stud, responseRange = responseRange, weightGlobNorm = weightGlobNorm)
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merged_data)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(responseMatrix))
   responseMatrix[matchInChIKey, receptor] <- merged_data
   
   assign("response.matrix", responseMatrix, envir = .GlobalEnv)
   message(paste("response.matrix has been updated for",receptor))
+  
+  # update response.matrix.excluded
+  if (length(excluded) > 0) {
+    excluded.data[excluded.data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
+    assign("excluded.data", excluded.data, envir = .GlobalEnv)
+    message(paste("excluded.data has been updated for",receptor))
+  }
+  
 }

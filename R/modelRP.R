@@ -48,18 +48,27 @@ modelRP <- function(da,
     stop("Not a data frame. Stopped in modelRP.R")
   }
   
-  da <- filterData(da, overlapValues = overlapValues)$data
+  da <- filterData(da, overlapValues = overlapValues)
+  excluded <- as.character(da$excluded$study)
+  da <- da$data
+  
   
   # positions of columns that contain odor response vectors
   # should be columns 6...end (1..5 contain odor class, odor name, InChIKey, CID and CAS)
   # 
-  nv                 <- as.numeric(c((default.val("num.charColumns")+1):dim(da)[2]))
-  number_of_studies  <- length(nv)
-  excluded           <- character()
+  if(length(da) > default.val("num.charColumns")) {
+    nv                 <- as.numeric(c((default.val("num.charColumns")+1):dim(da)[2]))
+    number_of_studies  <- length(nv)
+  } else {
+    number_of_studies  <- 0
+  }
+  
   
   # if there is no study --> stop
   if (number_of_studies == 0) {
-    stop("No study to treat. Stopped in modelRP.R")
+    merged_data <- rep(NA, dim(da)[1])
+    glob.normalization <- FALSE
+    message("No study to treat, returning NAs")
   }
   
   
@@ -104,9 +113,11 @@ modelRP <- function(da,
     if (names(selected$best.model) == "no.fitted.model" | names(selected$best.model) == "initial") {
       warning("Can not find any fitted model to merge given data.")
       pda[1:length(pda)] <- NA
+      excluded <- candidate.studies
     } else if (selected[[1]][[1]]$MD >= select.MDValue) {
       warning("Can not find any fitted model with MD value under given threshold criterion.")
       pda[1:length(pda)] <- NA
+      excluded <- candidate.studies
     }
     
     
@@ -137,7 +148,7 @@ modelRP <- function(da,
       selected.next <- selectModel(candidate = rest_data, data_candidate = pda, overlapValues, merged_data = merged_data, merged = TRUE )
       # if a threshold for the MD is given, stop when no study reaches this threshold criterion any more
       if ( (names(selected.next$best.model) == "initial") | (names(selected.next$best.model) == "no.fitted.model") | (selected.next$best.model[[1]]$MD > select.MDValue) )	{
-        excluded  <- rest_data
+        excluded  <- c(excluded, rest_data)
         message("Not all datasets could be merged because they did not reach the criterion.")
         ind <- 0
         next
@@ -174,7 +185,7 @@ modelRP <- function(da,
   }
   
   resd <- cbind(da[, c("Class", "Name", "InChIKey", "CID", "CAS")], merged_data)
-  source.data = colnames(da)[nv][-match(excluded,colnames(da)[nv])]
+  source.data = colnames(da)[nv][-na.omit(match(excluded,colnames(da)[nv]))]
   
-  return(list(Source.data = source.data, model.response = resd, Excluded.Data = excluded))
+  return(list(source.data = source.data, model.response = resd, excluded.data = excluded))
 }

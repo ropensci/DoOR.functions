@@ -21,10 +21,16 @@
 #' loadRD()
 #' mydatabase <- CreateDatabase()
 #' }
-CreateDatabase <- function(tag=default.val("tag"), select.MDValue=default.val("select.MDValue"), overlapValues = default.val("overlapValues"), glob.normalization = T, ...) {
+CreateDatabase <- function(tag                = default.val("tag"), 
+                           select.MDValue     = default.val("select.MDValue"), 
+                           overlapValues      = default.val("overlapValues"), 
+                           glob.normalization = T, 
+                           ...) {
   
-  Or.list  	<- loadRDList() 	# contains data for all receptors
-  Or.Names 	<- names(Or.list)
+  excluded.data   <- data.frame(OR = ORs$OR, excluded = NA) # reset/create excluded.data
+  
+  Or.list  	      <- loadRDList() 	# contains data for all receptors
+  Or.Names 	      <- names(Or.list)
   num_receptors 	<- length(Or.Names)	# how many receptors
   
   odors <- character()
@@ -42,8 +48,6 @@ CreateDatabase <- function(tag=default.val("tag"), select.MDValue=default.val("s
   for (i in Or.Names) {
     da <- Or.list[[i]]
     
-    da <- filterData(da, overlapValues = overlapValues)$data
-    
     # if no response data, fill in "NA" and skip
     if (dim(da)[2] <= default.val("num.charColumns")) { 
       print(paste(i, "is a empty data frame."))
@@ -51,11 +55,18 @@ CreateDatabase <- function(tag=default.val("tag"), select.MDValue=default.val("s
     } else {
       merged <- modelRP(da, select.MDValue, overlapValues, glob.normalization = glob.normalization, ...)
       merged.responses   <- merged$model.response[,"merged_data"]
+      excluded           <- merged$excluded.data
       merged.odors       <- as.vector(merged$model.response[,tag])
       match_odorsTOframe <- match(merged.odors, rownames(frame_data))
       frame_data[match_odorsTOframe, i] <- merged.responses
+      # update response.matrix.excluded
+      if (length(excluded > 0))
+        excluded.data[excluded.data$OR == i, "excluded"] <- paste(excluded, collapse = ", ")
+        
       print(paste(i, "has been merged."))
     }
   }
+  assign("excluded.data", excluded.data, envir = .GlobalEnv)
+  message("response.matrix.excluded has been updated")
   return(frame_data)
 }
