@@ -10,7 +10,7 @@
 #'   studies that do not align sufficiently well to the response model
 #' @param overlapValues numeric; a criterion using to refuse a data set that
 #' has not enough overlap value.
-#' @param ... pass more parameters to \code{\link{modelRP}} (e.g. \code{glob.normalization == F} to build a non-normalized response matrix)
+#' @param ... pass more parameters to \code{\link{modelRP}}
 #' @seealso \code{\link{modelRP}}
 #' @keywords data
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
@@ -24,7 +24,6 @@
 CreateDatabase <- function(tag                = default.val("tag"), 
                            select.MDValue     = default.val("select.MDValue"), 
                            overlapValues      = default.val("overlapValues"), 
-                           glob.normalization = T, 
                            ...) {
   
   excluded.data   <- data.frame(OR = ORs$OR, excluded = NA) # reset/create excluded.data
@@ -53,7 +52,7 @@ CreateDatabase <- function(tag                = default.val("tag"),
       print(paste(i, "is a empty data frame."))
       frame_data[, i] <- NA 
     } else {
-      merged <- modelRP(da, select.MDValue, overlapValues, glob.normalization = glob.normalization, ...)
+      merged <- modelRP(da, select.MDValue, overlapValues, glob.normalization = T, ...)
       merged.responses   <- merged$model.response[,"merged_data"]
       excluded           <- merged$excluded.data
       merged.odors       <- as.vector(merged$model.response[,tag])
@@ -66,7 +65,14 @@ CreateDatabase <- function(tag                = default.val("tag"),
       print(paste(i, "has been merged."))
     }
   }
+  frame_data_nn <- apply(response.matrix, 2, DoORnorm)
+  
+  assign("response.matrix", frame_data, envir = .GlobalEnv)
+  message("response.matrix has been created")
+  
+  assign("response.matrix_non.normalized", frame_data_nn, envir = .GlobalEnv)
+  message("response.matrix_non.normalized has been created")
+  
   assign("excluded.data", excluded.data, envir = .GlobalEnv)
-  message("response.matrix.excluded has been updated")
-  return(frame_data)
+  message("excluded.data has been created")
 }
