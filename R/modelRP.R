@@ -68,6 +68,7 @@ modelRP <- function(da,
   if (number_of_studies == 0) {
     merged_data <- rep(NA, dim(da)[1])
     glob.normalization <- FALSE
+    nv <- 0
     message("No study to treat, returning NAs")
   }
   
