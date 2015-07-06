@@ -15,7 +15,7 @@
 #' @param unglobalNorm_RM data matrix; an unnormalized responses matrix
 #' @param weightGlobNorm data frame; weight matrix for global normalizazion
 #' @param all.data logical; if TRUE, export odorant response data and supported
-#' data "response.matrix", "response.range", "unglobalNorm_response.matrix",
+#' data "response.matrix", "response.range", "response.matrix_non.normalized",
 #' "response.matrix", "weight.globNorm" and "ORs".
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
@@ -31,7 +31,7 @@ function(file.format, directory,
 	odorantReceptors = default.val("ORs"),  
 	responseMatrix = default.val("response.matrix"), 
 	responseRange = default.val("response.range"), 
-	unglobalNorm_RM = default.val("unglobalNorm_response.matrix"), 
+	unglobalNorm_RM = default.val("response.matrix_non.normalized"), 
 	weightGlobNorm = default.val("weight.globNorm"), 
 	all.data = TRUE )
 
@@ -56,7 +56,7 @@ function(file.format, directory,
 # responseRange 		: data frame; response ranges for each study 
 # unglobalNorm_RM 	        : data matrix; an unnormalized response matrix 
 # weightGlobNorm 		: data frame; weight matrix for global normalisation 
-# all.data  			: logical; if TRUE, export odorant response data plus all other information: "response.matrix", "response.range", "unglobalNorm_response.matrix", 
+# all.data  			: logical; if TRUE, export odorant response data plus all other information: "response.matrix", "response.range", "response.matrix_non.normalized", 
 #                                 "response.matrix", "weight.globNorm" and "ORs".
 
 
@@ -82,7 +82,7 @@ function(file.format, directory,
 		{ 
 			write.table(responseMatrix, paste("response.matrix",file.format,sep="") )
 			write.table(responseRange, paste("response.range",file.format,sep="") )
-			write.table(unglobalNorm_RM, paste("unglobalNorm_response.matrix",file.format,sep="") )
+			write.table(unglobalNorm_RM, paste("response.matrix_non.normalized",file.format,sep="") )
 			write.table(weightGlobNorm, paste("weight.globNorm",file.format,sep="") )
 			write.table(odorantReceptors, paste("ORs",file.format,sep="") )
 		}
@@ -90,7 +90,7 @@ function(file.format, directory,
 		{
 			write.csv(responseMatrix, paste("response.matrix",file.format,sep="") )
 			write.csv(responseRange, paste("response.range",file.format,sep="") )
-			write.csv(unglobalNorm_RM, paste("unglobalNorm_response.matrix",file.format,sep="") )
+			write.csv(unglobalNorm_RM, paste("response.matrix_non.normalized",file.format,sep="") )
 			write.csv(responseMatrix, paste("response.matrix",file.format,sep="") )
 			write.csv(weightGlobNorm, paste("weight.globNorm",file.format,sep="") )
 			write.csv(odorantReceptors, paste("ORs",file.format,sep="") )

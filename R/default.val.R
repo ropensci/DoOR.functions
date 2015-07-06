@@ -120,11 +120,11 @@ default.val <- function(DoOR_default) {
 	  return(response.range)
 	} # exportData.R; findResp.R; importNewData.R; updateDatabase.R; modelRP.R
   
-	if (DoOR_default == "unglobalNorm_response.matrix") {
-	  if (!exists("unglobalNorm_response.matrix")) {
-	    data(unglobalNorm_response.matrix)
+	if (DoOR_default == "response.matrix_non.normalized") {
+	  if (!exists("response.matrix_non.normalized")) {
+	    data(response.matrix_non.normalized)
 	  }
-	  return(unglobalNorm_response.matrix)
+	  return(response.matrix_non.normalized)
 	} # exportData.R
 
 }

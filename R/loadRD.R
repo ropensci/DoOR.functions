@@ -15,7 +15,7 @@
 #' 
 loadRD <- function(odorantReceptors = default.val("ORs"), supportData = TRUE) {
 	receptor.name 	 <- as.character(odorantReceptors[,"OR"])
-	supportData.name <- c("AL.map", "data.format", "glo.dist", "odor", "DoOR.mappings", "ORs", "reference","response.matrix", "response.range","unglobalNorm_response.matrix","weight.globNorm","dataset.info")
+	supportData.name <- c("AL.map", "data.format", "glo.dist", "odor", "DoOR.mappings", "ORs", "reference","response.matrix", "response.range","response.matrix_non.normalized","weight.globNorm","dataset.info")
 	data.name 	 <- c(receptor.name,supportData.name)
 
 	# version information of data and function

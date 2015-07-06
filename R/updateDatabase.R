@@ -1,7 +1,7 @@
 #' update response matrix
 #' 
 #' update the globally \code{response matrix} and the unglobally normalized
-#' response matrix \code{unglobalNorm_response.matrix} by introducing new
+#' response matrix \code{response.matrix_non.normalized} by introducing new
 #' consensus response data of given receptor.
 #' 
 #' The merging sequence could be arranged by the routine process (using
@@ -14,7 +14,7 @@
 #' @param permutation logical; if TRUE, the sequence is chosen from
 #' permutation, if FALSE, sequence is chosen by the routine process.
 #' @param perm a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.
-#' @param unglobalNorm_responseMatrix data frame; response data that has not
+#' @param responseMatrix_nn data frame; response data that has not
 #' been globally normalized.
 #' @param responseMatrix data frame; globally normalized response data.
 #' @param responseRange data frame; response range of studies.
@@ -29,13 +29,13 @@
 #' \dontrun{
 #' library(DoOR.data)
 #' loadRD()
-#' # update the entry "Or67b" of data "response.matrix" and "unglobalNorm_response.matrix" with permutations.
+#' # update the entry "Or67b" of data "response.matrix" and "response.matrix_non.normalized" with permutations.
 #' # updateDatabase(receptor="Or67b", permutation = TRUE)
 #' }
 updateDatabase <- function(receptor, 
                            permutation = TRUE, 
                            perm, 
-                           unglobalNorm_responseMatrix = default.val("unglobalNorm_response.matrix"), 
+                           responseMatrix_nn = default.val("response.matrix_non.normalized"), 
                            responseMatrix = default.val("response.matrix"), 
                            responseRange = default.val("response.range"), 
                            weightGlobNorm = default.val("weight.globNorm"),
@@ -104,21 +104,21 @@ updateDatabase <- function(receptor,
     merge <- merge$model.response[,"merged_data"]
   }
   
-  # update  unglobalNorm_response.matrix
+  # update  response.matrix_non.normalized
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merge)
-  matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
+  matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(responseMatrix_nn))
   findNA_InChIKey <- which(is.na(matchInChIKey))
   if (!is.na(findNA_InChIKey[1])) {
-    addRow <- matrix(NA, nrow=length(findNA_InChIKey), ncol= dim(unglobalNorm_responseMatrix)[2])
-    colnames(addRow) <- colnames(unglobalNorm_responseMatrix)
+    addRow <- matrix(NA, nrow=length(findNA_InChIKey), ncol= dim(responseMatrix_nn)[2])
+    colnames(addRow) <- colnames(responseMatrix_nn)
     rownames(addRow) <- merged_data_withInChIKey[findNA_InChIKey,"InChIKey"]
-    unglobalNorm_responseMatrix <- rbind(unglobalNorm_responseMatrix,addRow)
+    responseMatrix_nn <- rbind(responseMatrix_nn,addRow)
     responseMatrix <- rbind(responseMatrix,addRow)
-    matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(unglobalNorm_responseMatrix))
+    matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(responseMatrix_nn))
   }
-  unglobalNorm_responseMatrix[matchInChIKey, receptor] <- merge
-  assign("unglobalNorm_response.matrix", unglobalNorm_responseMatrix, envir = .GlobalEnv)
-  message(paste("unglobalNorm_response.matrix has been updated for",receptor))
+  responseMatrix_nn[matchInChIKey, receptor] <- merge
+  assign("response.matrix_non.normalized", responseMatrix_nn, envir = .GlobalEnv)
+  message(paste("response.matrix_non.normalized has been updated for",receptor))
   
   # update response.matrix
   name.Stud    <- colnames(da)[recordColumn]

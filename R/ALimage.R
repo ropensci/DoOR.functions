@@ -3,7 +3,7 @@
 #' Plot an antennal lobe map with color coded odorant responses.
 #'
 #' @param InChIKey InChIKey specifying the odorant to plot
-#' @param responseMatrix the input data (e.g. response.matrix or unglobalNorm_response.matrix)
+#' @param responseMatrix the input data (e.g. response.matrix or response.matrix_non.normalized)
 #' @param zero the odorant to set to zero (defaults to "SFR")
 #' @param tag the labels to plot on top of the glomeruli (one of the following \code{DoOR.mappings} columns: "receptor", "sensillum", "ORN", "glomerulus" or "co.receptor") 
 #' @param main the title, one column of \code{odor}, defaults to "Name"
