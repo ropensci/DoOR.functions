@@ -65,7 +65,7 @@ CreateDatabase <- function(tag                = default.val("tag"),
       print(paste(i, "has been merged."))
     }
   }
-  frame_data_nn <- apply(response.matrix, 2, DoORnorm)
+  frame_data_nn <- apply(frame_data, 2, DoORnorm)
   
   assign("response.matrix", frame_data, envir = .GlobalEnv)
   message("response.matrix has been created")
