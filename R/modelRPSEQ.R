@@ -7,6 +7,8 @@
 #' @param SEQ character vector; containing the names of studies indicating
 #' given sequence for merging data.
 #' @param overlapValues minimum overlap between studies to perfom a merge
+#' @param select.MDValue the minimum mean distance between studies to perfom a merge
+#' @param strict logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
 #' @details 
@@ -36,8 +38,10 @@
 modelRPSEQ <-
   function(data, 
            SEQ, 
-           overlapValues = default.val("overlapValues"), 
-           plot=F) {
+           overlapValues  = default.val("overlapValues"), 
+           select.MDValue = default.val("select.MDValue"),
+           strict         = TRUE,
+           plot           = F) {
     nv          <- as.numeric( c( (default.val("num.charColumns")+1):dim(data)[2] ) ) # positions of columns that contain odor response vectors
     name.stud   <- names(data)[nv]
     pda         <- apply(as.data.frame(data[, nv]), 2, DoORnorm) # processing data
@@ -61,6 +65,10 @@ modelRPSEQ <-
         stop(paste("less than", overlapValues, "observations between two datasets"))
       
       projected <- projectPoints(x, y, plot = plot, xlab = i, ylab = ylab, title = plot)
+      
+      if(strict == T & projected$MD > select.MDValue)
+        stop(paste("Mean distance between two studies above", select.MDValue))
+      
       res 	  <- rep(NA, length = dim(pda)[1])
       
       # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.

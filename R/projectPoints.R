@@ -329,13 +329,13 @@ projectPoints <-
       legend("topleft", c(paste("n=",dim(x_y)[1]), paste("MD=",round(best.model[[1]]$MD,6))),bty='n')
     }
     
-    return(list(Double.Observations=res3,Single.Observation=res4))
+    return(list(Double.Observations = res3, Single.Observation = res4, MD = MD.value))
     
   } # END if (plot == TRUE)
   
   else 
   {
-    return(list(Double.Observations=res3,Single.Observation=res4))
+    return(list(Double.Observations=res3,Single.Observation=res4, MD = MD.value))
   }
   
 }
