@@ -35,7 +35,7 @@ the results of two studies.  \cr \code{\link{DoORplot_pointMatrix}}: \tab Dot Pl
 Odorant Responses Across Receptors. \cr \code{\link{DoORplot_responseProfile}}: \tab
 bar plot:one receptor, all chemicals. \cr \code{\link{DoORplot_compareReceptors}}: \tab
 bar plot: all receptors, one or more chemicals.\cr
-\code{\link{tuningBreadth}}: \tab pyramid diagram depicting a receptor's
+\code{\link{DoORplot_tuningCurve}}: \tab pyramid diagram depicting a receptor's
 tuning breadth. \cr } Try some queries: \tabular{ll}{
 \code{\link{findResp}}: \tab given a chemical, get original responses from
 all studies in the database.\cr \code{\link{findRespNorm}}: \tab given a

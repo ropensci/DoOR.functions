@@ -20,9 +20,9 @@
 #' data(Or22a)
 #' x=Or22a[,"Hallem.2006.EN"]
 #' x<-na.omit(x)
-#' tuningBreadth(x,las=2,main="Tuning Curve:Hallem.2006.EN")
+#' DoORplot_tuningCurve(x,las=2,main="Tuning Curve:Hallem.2006.EN")
 #' 
-tuningBreadth <-
+DoORplot_tuningCurve <-
 function(x, ...) 
 
 # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
@@ -30,7 +30,7 @@ function(x, ...)
 
 
 
-# tuningBreadth.R :
+# DoORplot_tuningCurve.R :
 ####################
 
 # pyramidal plot showing the tuning breadth of a receptor 
