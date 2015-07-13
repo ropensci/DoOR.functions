@@ -12,7 +12,7 @@
 #' correlation coefficients. \code{nodor} indicates the number of selected
 #' odors.
 #' 
-#' @param CAS a character string; the CAS number of odorant compound.
+#' @param InChIKey a character string; the InChIKey number of odorant compound.
 #' @param receptor a character string; the name of odorant receptor.
 #' @param responseMatrix a numeric matrix; containing the normalized odorant
 #' responses.
@@ -29,10 +29,10 @@
 #' @examples
 #' 
 #' library(DoOR.data)
-#' LLSIestPC(CAS = "589-91-3", receptor = "Or22a" )
+#' LLSIestPC(InChIKey = "MQWCXKGKQLNYQG-UHFFFAOYSA-N", receptor = "Or22a" )
 #' 
 LLSIestPC <-
-function(CAS, 
+function(InChIKey, 
 		receptor, 
 		responseMatrix = default.val("response.matrix"),
 		nodor = 2)
@@ -45,7 +45,7 @@ function(CAS,
 
 ## Using local least squares imputation to estimate the missing values in target odorant receptors.
 
-#  CAS 		   	: a character string; the CAS number of odorant compound.
+#  InChIKey 		   	: a character string; the InChIKey number of odorant compound.
 #  receptor 	   	: a character string; the name of odorant receptor.
 #  responseMatrix 	: a numeric matrix; containing the normalized odorant responses.
 #  nodor 		: a numeric; specifying how many odors will be selected. If missing, all candicate odors will be selected after sorting.
@@ -93,7 +93,7 @@ function(CAS,
 	responseMatrix 		<- as.data.frame(responseMatrix)
 	# localize the target receptor and odor in sorted response matrix
 	whereTargetReceptor 	<- match(receptor,colnames(responseMatrix))
-	whereTargetodor 	<- match(CAS,rownames(responseMatrix))
+	whereTargetodor 	<- match(InChIKey,rownames(responseMatrix))
 
 	# non-NA vectors (b ("candicateOdors") and w ("candicateReceptors") ) as candicates
 	candicateReceptors 	<- which(!is.na(responseMatrix[whereTargetodor,]))
@@ -111,8 +111,8 @@ function(CAS,
 	matchReceptor <- match( colnames(candi_A), colnames(responseMatrix) )
 
 	# vector "w"
-	w <- c( as.matrix( responseMatrix[CAS, matchReceptor] ) )
-	selectReceptor <- names(responseMatrix[CAS, matchReceptor])
+	w <- c( as.matrix( responseMatrix[InChIKey, matchReceptor] ) )
+	selectReceptor <- names(responseMatrix[InChIKey, matchReceptor])
 
 	# find neighbors
 	kNeighbors <- nearest(target = w, candicate = candi_A, k = nodor)
