@@ -16,7 +16,7 @@
 #' rescaling to 0 ... 255), see \code{\link{rgb}}.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @seealso \code{\link{rgb}}, \code{\link{colorRamp}}, \code{\link{DoORplot_ALmap}},
-#' \code{\link{DoORplot_pointMatrix}}, \code{\link{DoORplot_responseProfile}},
+#' \code{\link{DoORplot_responseMatrix}}, \code{\link{DoORplot_responseProfile}},
 #' \code{\link{DoORplot_compareReceptors}}
 #' @keywords color
 #' @examples
