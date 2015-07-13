@@ -12,7 +12,7 @@ DoORplot_responseProfile(data, tag = default.val("tag"), zero, name.title,
 \arguments{
 \item{data}{data frame; odorant response data e.g. Or22a}
 
-\item{tag}{character string; CAS number is the default descriptor}
+\item{tag}{character string; InChIKey is the default descriptor}
 
 \item{zero}{character string; where should zero be placed? e.g. zero="SFR"
 sets zero to the spontaneous firing rate.}
@@ -57,7 +57,7 @@ A bar plot of all DoOR responses of a given receptor.
 \details{
 This function is used to visualize the response profile of an odorant
 receptor. The data frame should contain the columns "odor class", "odor
-name", "odor code", "CAS number" and "data". The default color range is blue
+name", "odor code", "InChIKeyr" and "data". The default color range is blue
 to red (from inhibitory to excitatory). If the data stems not from a merged
 dataset (by using \code{\link{modelRP}}) or the recording values are not
 normalized, only binary colors are used: blue indicates that the value is

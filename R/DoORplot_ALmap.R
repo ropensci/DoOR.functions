@@ -12,7 +12,7 @@
 #' @param colors a vector containing 6 color values (2 for values below 0, 1 0 value and 3 steps between 0 and 1)
 #' @param limits the limits for the color scale, if empty the range of the response matrix is taken (after setting ``zero`` to 0)
 #' @details Normalized, color coded odor responses across receptors are mapped onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map was a kind gift from Veit Grabe. 
-#' @seealso \link{findRespNorm}, \pkg{\link{ggplot2}, \link{grid}}
+#' @seealso \link{getNormalizedResponses}, \pkg{\link{ggplot2}, \link{grid}}
 #' @references Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
 #' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
 #' @export
@@ -52,7 +52,7 @@ DoORplot_ALmap <- function(InChIKey,
     limits <- range(response.matrix.SFRreset, na.rm=T)
   }
   
-  response.data <- findRespNorm(InChIKey, zero = zero, responseMatrix = responseMatrix) 
+  response.data <- getNormalizedResponses(InChIKey, zero = zero, responseMatrix = responseMatrix) 
   
   plotdata <- AL.map[["glomeruli"]]
   plotdata$receptor <- DoOR.mappings$receptor[match(plotdata$glomerulus, DoOR.mappings$code)] # match mapped glomeruli and extract receptor names

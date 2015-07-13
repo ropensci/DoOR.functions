@@ -18,9 +18,9 @@
 #' library(DoOR.data)
 #' odors <- c("MLFHJEHSLIIPHL-UHFFFAOYSA-N","OBNCKNCVKJNDBV-UHFFFAOYSA-N","IKHGUXGNUITLKF-UHFFFAOYSA-N")
 #' data(response.matrix)
-#' result <- findRespNorm(odors, responseMatrix = response.matrix)
+#' result <- getNormalizedResponses(odors, responseMatrix = response.matrix)
 #' 
-findRespNorm <- function(odors, zero = default.val("zero"), responseMatrix = default.val("response.matrix")) {
+getNormalizedResponses <- function(odors, zero = default.val("zero"), responseMatrix = default.val("response.matrix")) {
   
   responseMatrix <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
   

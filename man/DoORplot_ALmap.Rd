@@ -60,6 +60,6 @@ Daniel Münch \email{daniel.muench@uni-konstanz.de}
 Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
 }
 \seealso{
-\link{findRespNorm}, \pkg{\link{ggplot2}, \link{grid}}
+\link{getNormalizedResponses}, \pkg{\link{ggplot2}, \link{grid}}
 }
 

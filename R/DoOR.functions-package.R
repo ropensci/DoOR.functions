@@ -29,7 +29,7 @@
 #' \code{\link{DoORplot_tuningCurve}}: \tab pyramid diagram depicting a receptor's
 #' tuning breadth. \cr } Try some queries: \tabular{ll}{
 #' \code{\link{findResp}}: \tab given a chemical, get original responses from
-#' all studies in the database.\cr \code{\link{findRespNorm}}: \tab given a
+#' all studies in the database.\cr \code{\link{getNormalizedResponses}}: \tab given a
 #' chemical, get normalised responses from all studies in the database.\cr}
 #' 
 #' In case you wish to create your own response model (e.g. because you want to
@@ -54,7 +54,7 @@
 #' \code{\link{updateDatabase}}: \tab update response matrix by introducing new
 #' consensus response data of given receptor. \cr } or, introduce new data into
 #' a specific receptor: \tabular{ll}{ \code{\link{combData}}: \tab combine two
-#' dataset by column with CAS number. \cr }
+#' datasets via InChIKeys. \cr }
 #' 
 #' Model functions and inverse model functions: \tabular{ll}{
 #' \code{\link{modelfunction_asymp}}: \tab Asymptotic Model \cr

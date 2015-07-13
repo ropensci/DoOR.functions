@@ -40,7 +40,7 @@ default.val <- function(DoOR_default) {
 	if (DoOR_default == "main") { return(NULL) } # DoORplot_ALmap.R
 
 	## character
-  if (DoOR_default == "zero") 		    { return("SFR") } # findRespNorm.R
+  if (DoOR_default == "zero") 		    { return("SFR") } # getNormalizedResponses.R
   if (DoOR_default == "tag.ALmap") 	{ return("glomerulus") } # DoORplot_ALmap.R
   if (DoOR_default == "tag") 		      { return("InChIKey") } # DoORplot_responseProfile.R; DoORplot_compareReceptors.R; CreateDatabase.R
   if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
@@ -112,7 +112,7 @@ default.val <- function(DoOR_default) {
 	    data(response.matrix)
 	  }
 	  return(response.matrix)
-	} # exportData.R; findRespNorm.R
+	} # exportData.R; getNormalizedResponses.R
   
 	if (DoOR_default == "response.range") {
 	  if (!exists("response.range")) {
