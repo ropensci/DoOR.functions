@@ -12,7 +12,7 @@
 #' correlation coefficients. \code{nodor} indicates the number of selected
 #' odors.
 #' 
-#' @param CAS a character string; the CAS number of odorant compound.
+#' @param InChIKey a character string; the InChIKey of an odorant.
 #' @param receptor a character string; the name of odorant receptor.
 #' @param responseMatrix a numeric matrix; containing the normalized odorant
 #' responses.
@@ -29,10 +29,10 @@
 #' @examples
 #' 
 #' library(DoOR.data)
-#' LLSIestKnn(CAS = "589-91-3", receptor = "Or22a" )
+#' LLSIestKnn(InChIKey = "MQWCXKGKQLNYQG-UHFFFAOYSA-N", receptor = "Or22a" )
 #' 
 LLSIestKnn <-
-function(CAS, 
+function(InChIKey, 
 		receptor, 
  		responseMatrix = default.val("response.matrix"), 
 		nodor = 3)
@@ -79,7 +79,7 @@ function(CAS,
 
 	# localize the target receptor and odor in sorted response matrix
 	whereTargetReceptor 	<- match(receptor,colnames(responseMatrix))
-	whereTargetodor 	<- match(CAS,rownames(responseMatrix))
+	whereTargetodor 	<- match(InChIKey,rownames(responseMatrix))
 
 	# non-NA vectors (b ("candicateOdors") and w ("candicateReceptors") ) as candicates
 	candicateReceptors 	<- which(!is.na(responseMatrix[whereTargetodor,]))
@@ -97,8 +97,8 @@ function(CAS,
 	matchReceptor <- match( colnames(candi_A), colnames(responseMatrix) )
 
 	# vector "w"
-	w <- c( as.matrix( responseMatrix[CAS, matchReceptor] ) )
-	selectReceptor <- names(responseMatrix[CAS, matchReceptor])
+	w <- c( as.matrix( responseMatrix[InChIKey, matchReceptor] ) )
+	selectReceptor <- names(responseMatrix[InChIKey, matchReceptor])
 
 	# the odors are not yet sorted.
 	unsorted_b <- c( as.matrix( responseMatrix[matchOdor, receptor] ) )
