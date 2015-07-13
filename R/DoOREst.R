@@ -55,24 +55,24 @@ function(da, nodor, method = "PC")
 	for (i in 1:dim_whichmissing[1]) {
 
 	receptor <- colnames(inputdata)[whichmissing[i,2]]
-	cas 	 <- rownames(inputdata)[whichmissing[i,1]]
+	inchikey 	 <- rownames(inputdata)[whichmissing[i,1]]
 	
 	if (method == "Knn") {
-		tryestmatine <- try(LLSIestKnn(CAS = cas, 
+		tryestmatine <- try(LLSIestKnn(InChIKey = inchikey, 
 					receptor = receptor, 
 					responseMatrix = inputdata, 
 					nodor=nodor),TRUE)
 	}
 
 	if (method == "PC") {
-		tryestmatine <- try(LLSIestPC(CAS = cas, 
+		tryestmatine <- try(LLSIestPC(InChIKey = inchikey, 
 					receptor = receptor, 
 					responseMatrix = inputdata, 
 					nodor=nodor),TRUE)
 	}
 
-	if (inherits(tryestmatine, "try-error")) { print(paste("The odorant response of",receptor, "to", cas, "can not be estimated.")) }
-	else { outputdata[cas, receptor] <- tryestmatine$estimation }
+	if (inherits(tryestmatine, "try-error")) { print(paste("The odorant response of",receptor, "to", inchikey, "can not be estimated.")) }
+	else { outputdata[inchikey, receptor] <- tryestmatine$estimation }
 	if (inherits(tryestmatine, "Warning messages:")) { stop }
 	}
 	whichmissingOutput 	<- which(is.na(outputdata),arr.ind=TRUE)
