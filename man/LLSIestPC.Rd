@@ -4,11 +4,11 @@
 \alias{LLSIestPC}
 \title{Local Least Squares Imputation Estimation Using Pearson Correlation}
 \usage{
-LLSIestPC(CAS, receptor, responseMatrix = default.val("response.matrix"),
+LLSIestPC(InChIKey, receptor, responseMatrix = default.val("response.matrix"),
   nodor = 2)
 }
 \arguments{
-\item{CAS}{a character string; the CAS number of odorant compound.}
+\item{InChIKey}{a character string; the InChIKey number of odorant compound.}
 
 \item{receptor}{a character string; the name of odorant receptor.}
 
@@ -39,7 +39,7 @@ odors.
 }
 \examples{
 library(DoOR.data)
-LLSIestPC(CAS = "589-91-3", receptor = "Or22a" )
+LLSIestPC(InChIKey = "MQWCXKGKQLNYQG-UHFFFAOYSA-N", receptor = "Or22a" )
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

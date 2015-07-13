@@ -4,11 +4,11 @@
 \alias{LLSIestKnn}
 \title{Local Least Squares Imputation Estimation using k-nearest neighbor}
 \usage{
-LLSIestKnn(CAS, receptor, responseMatrix = default.val("response.matrix"),
-  nodor = 3)
+LLSIestKnn(InChIKey, receptor,
+  responseMatrix = default.val("response.matrix"), nodor = 3)
 }
 \arguments{
-\item{CAS}{a character string; the CAS number of odorant compound.}
+\item{InChIKey}{a character string; the InChIKey of an odorant.}
 
 \item{receptor}{a character string; the name of odorant receptor.}
 
@@ -39,7 +39,7 @@ odors.
 }
 \examples{
 library(DoOR.data)
-LLSIestKnn(CAS = "589-91-3", receptor = "Or22a" )
+LLSIestKnn(InChIKey = "MQWCXKGKQLNYQG-UHFFFAOYSA-N", receptor = "Or22a" )
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
