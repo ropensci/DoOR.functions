@@ -5,8 +5,7 @@
 \title{DoORplot_responseMatrix}
 \usage{
 DoORplot_responseMatrix(data, tag = default.val("tag"),
-  colors = c("#0570b0", "#74a9cf", "#ffffff", "#fdcc8a", "#fc8d59",
-  "#d7301f"), limits)
+  colors = default.val("colors"), limits)
 }
 \arguments{
 \item{data}{a subset of e.g. response.matrix}
