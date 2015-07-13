@@ -16,9 +16,9 @@
 #' 
 #' library(DoOR.data)
 #' loadRD()
-#' responses <- findResp(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
+#' responses <- getResponses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #' 
-findResp <- function(odorant, responseRange = default.val("response.range"), Or.list = loadRDList()) {
+getResponses <- function(odorant, responseRange = default.val("response.range"), Or.list = loadRDList()) {
 
   studies  <- responseRange[,"study"]
 	Or.Names <- names(Or.list)

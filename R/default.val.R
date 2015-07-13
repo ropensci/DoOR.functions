@@ -119,7 +119,7 @@ default.val <- function(DoOR_default) {
 	    data(response.range)
 	  }
 	  return(response.range)
-	} # exportData.R; findResp.R; importNewData.R; updateDatabase.R; modelRP.R
+	} # exportData.R; getResponses.R; importNewData.R; updateDatabase.R; modelRP.R
   
 	if (DoOR_default == "response.matrix_non.normalized") {
 	  if (!exists("response.matrix_non.normalized")) {
