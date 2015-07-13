@@ -20,11 +20,11 @@ linear (\code{\link{modelfunction_linear}}), exponential
 (\code{\link{modelfunction_exp}}), sigmoid (\code{\link{SSlogis}}),
 asymptotic model with x intercept (\code{\link{SSasympOff}}), asympototic
 model with y intercept (\code{\link{SSasymp}}) and their inverse function,
-\code{\link{inverse_modelfunction_linear}},
-\code{\link{inverse_modelfunction_exp}},
-\code{\link{inverse_modelfunction_sigmoid}},
-\code{\link{inverse_modelfunction_asympOff}},
-\code{\link{inverse_modelfunction_asymp}}. The output is a list containing
+\code{\link{modelfunction_linear_inverse}},
+\code{\link{modelfunction_exp_inverse}},
+\code{\link{modelfunction_sigmoid_inverse}},
+\code{\link{modelfunction_asympOff_inverse}},
+\code{\link{modelfunction_asymp_inverse}}. The output is a list containing
 estimated parameter, function and inverse function expression, applied range
 for middle function, Leibniz's notation for computing curvic length and mean
 distance value "MD" of all optional model function.

@@ -17,9 +17,9 @@
 #' 
 #' x <-  seq(0.1,1,length=20)
 #' parms <- c(Asym = 2, R0 = 0.2, lrc = 0.3)
-#' integrate(function(x) { dsdx_inverse_asymp(input = x, parms = parms ) }, lower = 0, upper = 0.5)
+#' integrate(function(x) { dsdx_asymp_inverse(input = x, parms = parms ) }, lower = 0, upper = 0.5)
 #' 
-dsdx_inverse_asymp <-
+dsdx_asymp_inverse <-
 function(input, parms)
 
 # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma

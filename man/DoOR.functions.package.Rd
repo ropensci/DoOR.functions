@@ -72,11 +72,11 @@ Model functions and inverse model functions: \tabular{ll}{
 \code{\link{modelfunction_linear}}: \tab Linear Model \cr
 \code{\link{modelfunction_sigmoid}}: \tab Logistic Model \cr
 
-\code{\link{inverse_modelfunction_asymp}}: \tab inverse Asymptotic Model \cr
-\code{\link{inverse_modelfunction_asympOff}}: \tab inverse Asymptotic Model
-with an Offset \cr \code{\link{inverse_modelfunction_exp}}: \tab inverse
-exponential Model \cr \code{\link{inverse_modelfunction_linear}}: \tab
-inverse Linear Model \cr \code{\link{inverse_modelfunction_sigmoid}}: \tab
+\code{\link{modelfunction_asymp_inverse}}: \tab inverse Asymptotic Model \cr
+\code{\link{modelfunction_asympOff_inverse}}: \tab inverse Asymptotic Model
+with an Offset \cr \code{\link{modelfunction_exp_inverse}}: \tab inverse
+exponential Model \cr \code{\link{modelfunction_linear_inverse}}: \tab
+inverse Linear Model \cr \code{\link{modelfunction_sigmoid_inverse}}: \tab
 inverse Logistic Model \cr } Leibniz's notation for computing the curvic
 length: \tabular{ll}{ \code{\link{dsdx_asymp}}: \tab Leibniz's notation for
 asymptotic model \cr \code{\link{dsdx_asympOff}}: \tab Leibniz's notation
@@ -85,12 +85,12 @@ Leibniz's notation for exponential model \cr \code{\link{dsdx_linear}}: \tab
 Leibniz's notation for linear model \cr \code{\link{dsdx_sigmoid}}: \tab
 Leibniz's notation for logistic model \cr
 
-\code{\link{dsdx_inverse_asymp}}: \tab Leibniz's notation for inverse
-asymptotic model \cr \code{\link{dsdx_inverse_asympOff}}: \tab Leibniz's
+\code{\link{dsdx_asymp_inverse}}: \tab Leibniz's notation for inverse
+asymptotic model \cr \code{\link{dsdx_asympOff_inverse}}: \tab Leibniz's
 notation for inverse asymptotic model with an Offset \cr
-\code{\link{dsdx_inverse_exp}}: \tab Leibniz's notation for inverse
-exponential model \cr \code{\link{dsdx_inverse_linear}}: \tab Leibniz's
-notation for inverse linear model \cr \code{\link{dsdx_inverse_sigmoid}}:
+\code{\link{dsdx_exp_inverse}}: \tab Leibniz's notation for inverse
+exponential model \cr \code{\link{dsdx_linear_inverse}}: \tab Leibniz's
+notation for inverse linear model \cr \code{\link{dsdx_sigmoid_inverse}}:
 \tab Leibniz's notation for inverse logistic model \cr } Supported functions
 and maths: \tabular{ll}{ \code{\link{calModel}}: \tab return the best model
 function. \cr \code{\link{compute_MD}}: \tab compute the mean distance. \cr

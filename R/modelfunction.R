@@ -8,11 +8,11 @@
 #' (\code{\link{modelfunction_exp}}), sigmoid (\code{\link{SSlogis}}),
 #' asymptotic model with x intercept (\code{\link{SSasympOff}}), asympototic
 #' model with y intercept (\code{\link{SSasymp}}) and their inverse function,
-#' \code{\link{inverse_modelfunction_linear}},
-#' \code{\link{inverse_modelfunction_exp}},
-#' \code{\link{inverse_modelfunction_sigmoid}},
-#' \code{\link{inverse_modelfunction_asympOff}},
-#' \code{\link{inverse_modelfunction_asymp}}. The output is a list containing
+#' \code{\link{modelfunction_linear_inverse}},
+#' \code{\link{modelfunction_exp_inverse}},
+#' \code{\link{modelfunction_sigmoid_inverse}},
+#' \code{\link{modelfunction_asympOff_inverse}},
+#' \code{\link{modelfunction_asymp_inverse}}. The output is a list containing
 #' estimated parameter, function and inverse function expression, applied range
 #' for middle function, Leibniz's notation for computing curvic length and mean
 #' distance value "MD" of all optional model function.
@@ -57,8 +57,8 @@ function(x, y)
 	model_parameters  <- lm(y ~ x)
 	linear_parameters <- model_parameters$coef
 	names(linear_parameters) <- c("Intercept", "Slope")
-	bottom.x 	<- as.vector(inverse_modelfunction_linear(range_y[1],linear_parameters) )
-	top.x    	<- as.vector(inverse_modelfunction_linear(range_y[2],linear_parameters) )
+	bottom.x 	<- as.vector(modelfunction_linear_inverse(range_y[1],linear_parameters) )
+	top.x    	<- as.vector(modelfunction_linear_inverse(range_y[2],linear_parameters) )
 	range.X <- c(max(c(0, bottom.x, range_x[1])), min(c(1, top.x, range_x[2])))
 	if (linear_parameters["Slope"] < 0) {
 	  c.linear <- list(parameters = NA, range = NA, fun = NA, inverse.fun = NA, dsdx = NA, MD = NA)
@@ -67,7 +67,7 @@ function(x, y)
 	    parameters  = linear_parameters,
 	    range 	     = range.X,
 	    fun         = modelfunction_linear, 
-	    inverse.fun = inverse_modelfunction_linear,
+	    inverse.fun = modelfunction_linear_inverse,
 	    dsdx	       = dsdx_linear,
 	    MD          = compute_MD(x=x, y=y, range.X = range.X, parms = linear_parameters,fun = modelfunction_linear)$MD )
 	}
@@ -87,10 +87,10 @@ function(x, y)
 	  c.linear.inv <- list(
 	    parameters  = linear_parameters,
 	    range       = range.X,
-	    fun         = inverse_modelfunction_linear,
+	    fun         = modelfunction_linear_inverse,
 	    inverse.fun = modelfunction_linear,
-	    dsdx        = dsdx_inverse_linear,
-	    MD          = compute_MD(x = x, y = y, range.X = range.X, parms = linear_parameters,fun = inverse_modelfunction_linear)$MD
+	    dsdx        = dsdx_linear_inverse,
+	    MD          = compute_MD(x = x, y = y, range.X = range.X, parms = linear_parameters,fun = modelfunction_linear_inverse)$MD
 	  )
 	}
 	linear_parameters <- NA
@@ -108,13 +108,13 @@ function(x, y)
 	else 
 	{
 		parms 	<- model_parameters$m$getAllPars()
-		bottom.x 	<- as.vector(inverse_modelfunction_exp(range_y[1],parms) )
-		top.x    	<- as.vector(inverse_modelfunction_exp(range_y[2],parms) )
+		bottom.x 	<- as.vector(modelfunction_exp_inverse(range_y[1],parms) )
+		top.x    	<- as.vector(modelfunction_exp_inverse(range_y[2],parms) )
 		range.X <- c(max(c(0,bottom.x, range_x[1]),na.rm=TRUE), min(c(top.x, range_x[2],1),na.rm=TRUE))
 		c.expo <- list(parameters  = parms,
 			       range 	   = range.X,
 			       fun 	   = modelfunction_exp,
-			       inverse.fun = inverse_modelfunction_exp,
+			       inverse.fun = modelfunction_exp_inverse,
 			       dsdx	   = dsdx_exp,
 			       MD          = compute_MD(x=x, y=y, range.X = range.X, parms = parms,fun = modelfunction_exp)$MD )
 	}
@@ -139,10 +139,10 @@ function(x, y)
 
 		c.expo.inv   <- list(parameters  = parms,
 			       	    range 	 = range.X.inv,
-			       	    fun 	 = inverse_modelfunction_exp,
+			       	    fun 	 = modelfunction_exp_inverse,
 			       	    inverse.fun  = modelfunction_exp,
-			       	    dsdx	 = dsdx_inverse_exp,
-			       	    MD           = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = inverse_modelfunction_exp)$MD )
+			       	    dsdx	 = dsdx_exp_inverse,
+			       	    MD           = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = modelfunction_exp_inverse)$MD )
 		range.X.inv <- NA
 	}
 	parms 	    <- NA
@@ -160,13 +160,13 @@ function(x, y)
 	else 
 	{
 		parms 	<- model_parameters$m$getAllPars()
-		bottom.x 	<- as.vector(inverse_modelfunction_sigmoid(range_y[1],parms) )
-		top.x    	<- as.vector(inverse_modelfunction_sigmoid(range_y[2],parms) )
+		bottom.x 	<- as.vector(modelfunction_sigmoid_inverse(range_y[1],parms) )
+		top.x    	<- as.vector(modelfunction_sigmoid_inverse(range_y[2],parms) )
 		range.X <- c(max(c(0,bottom.x, range_x[1]),na.rm=TRUE), min(c(1,top.x, range_x[2]),na.rm=TRUE))
 		c.sigmoid <- list(parameters  = parms,
 			       	  range       = range.X,
 				  fun  	      = modelfunction_sigmoid, 
-				  inverse.fun = inverse_modelfunction_sigmoid,
+				  inverse.fun = modelfunction_sigmoid_inverse,
 				  dsdx 	      = dsdx_sigmoid,
 				  MD          = compute_MD(x=x, y=y, range.X = range.X, parms = parms,fun = modelfunction_sigmoid)$MD )
 	}
@@ -190,10 +190,10 @@ function(x, y)
 		
 		c.sigmoid.inv <- list(parameters  = parms,
 				      range 	  = range.X.inv,
-				      fun    	  = inverse_modelfunction_sigmoid, 
+				      fun    	  = modelfunction_sigmoid_inverse, 
 				      inverse.fun = modelfunction_sigmoid,
-				      dsdx 	  = dsdx_inverse_sigmoid,
-				      MD          = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = inverse_modelfunction_sigmoid)$MD )
+				      dsdx 	  = dsdx_sigmoid_inverse,
+				      MD          = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = modelfunction_sigmoid_inverse)$MD )
 		
 	}
 	parms 	    <- NA
@@ -211,13 +211,13 @@ function(x, y)
 	else 
 	{
 		parms 	<- model_parameters$m$getAllPars()
-		bottom.x 	<- as.vector(inverse_modelfunction_asympOff(range_y[1],parms) )
-		top.x    	<- as.vector(inverse_modelfunction_asympOff(range_y[2],parms) )
+		bottom.x 	<- as.vector(modelfunction_asympOff_inverse(range_y[1],parms) )
+		top.x    	<- as.vector(modelfunction_asympOff_inverse(range_y[2],parms) )
 		range.X <- c(max(c(0,bottom.x, range_x[1]),na.rm=TRUE), min(c(1,top.x, range_x[2]),na.rm=TRUE))
 		c.asympOff <- list(parameters  	= parms,
 			       	   range 	= range.X,
 				   fun    	= modelfunction_asympOff, 
-				   inverse.fun 	= inverse_modelfunction_asympOff,
+				   inverse.fun 	= modelfunction_asympOff_inverse,
 				   dsdx 	= dsdx_asympOff,
 				   MD         	= compute_MD(x=x, y=y, range.X = range.X, parms = parms,fun = modelfunction_asympOff)$MD )
 
@@ -242,10 +242,10 @@ function(x, y)
 
 		c.asympOff.inv <- list(parameters  = parms,
 				       range 	   = range.X.inv,
-				       fun    	   = inverse_modelfunction_asympOff, 
+				       fun    	   = modelfunction_asympOff_inverse, 
 				       inverse.fun = modelfunction_asympOff,
-				       dsdx 	   = dsdx_inverse_asympOff,
-				       MD          = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = inverse_modelfunction_asympOff)$MD )
+				       dsdx 	   = dsdx_asympOff_inverse,
+				       MD          = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = modelfunction_asympOff_inverse)$MD )
 
 	}
 	parms 	    <- NA
@@ -263,13 +263,13 @@ function(x, y)
 	else 
 	{
 		parms 	<- model_parameters$m$getAllPars()
-		bottom.x 	<- as.vector(inverse_modelfunction_asymp(range_y[1],parms) )
-		top.x    	<- as.vector(inverse_modelfunction_asymp(range_y[2],parms) )
+		bottom.x 	<- as.vector(modelfunction_asymp_inverse(range_y[1],parms) )
+		top.x    	<- as.vector(modelfunction_asymp_inverse(range_y[2],parms) )
 		range.X <- c(max(c(0,bottom.x, range_x[1]),na.rm=TRUE), min(c(1,top.x, range_x[2]),na.rm=TRUE))
 		c.asymp <- list(parameters  = parms,
 			       	range 	    = range.X,
 				fun 	    = modelfunction_asymp, 
-				inverse.fun = inverse_modelfunction_asymp,
+				inverse.fun = modelfunction_asymp_inverse,
 				dsdx	    = dsdx_asymp,
 				MD          = compute_MD(x=x, y=y, range.X = range.X, parms = parms,fun = modelfunction_asymp)$MD )
 	}
@@ -292,10 +292,10 @@ function(x, y)
 
 		c.asymp.inv <- list(parameters  = parms,
 				    range 	= range.X.inv,
-				    fun 	= inverse_modelfunction_asymp, 
+				    fun 	= modelfunction_asymp_inverse, 
 				    inverse.fun = modelfunction_asymp,
-				    dsdx	= dsdx_inverse_asymp,
-				    MD          = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = inverse_modelfunction_asymp)$MD )
+				    dsdx	= dsdx_asymp_inverse,
+				    MD          = compute_MD(x=x, y=y, range.X = range.X.inv, parms = parms,fun = modelfunction_asymp_inverse)$MD )
 
 	}
 	parms 	    <- NA

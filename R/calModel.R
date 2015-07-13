@@ -9,11 +9,11 @@
 #' (\code{\link{modelfunction_sigmoid}}), asymptotic model with x intercept
 #' (\code{\link{modelfunction_asympOff}}), asympototic model with y intercept
 #' (\code{\link{modelfunction_asymp}}) and their inverse model
-#' functions:(\code{\link{inverse_modelfunction_linear}}),
-#' (\code{\link{inverse_modelfunction_exp}}),
-#' (\code{\link{inverse_modelfunction_sigmoid}}),
-#' (\code{\link{inverse_modelfunction_asympOff}}) and
-#' (\code{\link{inverse_modelfunction_asymp}}).
+#' functions:(\code{\link{modelfunction_linear_inverse}}),
+#' (\code{\link{modelfunction_exp_inverse}}),
+#' (\code{\link{modelfunction_sigmoid_inverse}}),
+#' (\code{\link{modelfunction_asympOff_inverse}}) and
+#' (\code{\link{modelfunction_asymp_inverse}}).
 #' 
 #' @param x,y data vectors from study x and y (can contain NA)
 #' @param select.MD logical; if TRUE, only the best model function (in terms of

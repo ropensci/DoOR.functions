@@ -13,10 +13,10 @@
 #' @examples
 #' 
 #' x <- seq(0.1,1,length=20)
-#' y <- inverse_modelfunction_asympOff(input = x, parms = c(Asym = 2, c0 = 0.2, lrc = 0.3) )
+#' y <- modelfunction_asympOff_inverse(input = x, parms = c(Asym = 2, c0 = 0.2, lrc = 0.3) )
 #' plot(x,y)
 #' 
-inverse_modelfunction_asympOff <-
+modelfunction_asympOff_inverse <-
 function(input, parms)
 
 # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma

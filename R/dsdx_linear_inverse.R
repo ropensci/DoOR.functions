@@ -12,9 +12,9 @@
 #' 
 #' x <-  seq(0.1,1,length=20)
 #' parms <- c(Intercept = 0.2, Slope = 0.3) 
-#' integrate(function(x) { dsdx_inverse_linear(input = x, parms = parms ) }, lower = 0.1, upper = 0.5)
+#' integrate(function(x) { dsdx_linear_inverse(input = x, parms = parms ) }, lower = 0.1, upper = 0.5)
 #' 
-dsdx_inverse_linear <-
+dsdx_linear_inverse <-
 function(input, parms) 
 
 # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
