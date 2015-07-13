@@ -36,18 +36,18 @@ DoORplot_responseMatrix <- function(data,
   
   
   
-  plot <- ggplot(data, aes(y = odorant, x = dataset)) + 
-    theme_minimal() + 
-    theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = .5))
+  plot <- ggplot2::ggplot(data, ggplot2::aes(y = odorant, x = dataset)) + 
+    ggplot2::theme_minimal() + 
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0, vjust = .5))
   
   if(limits[1] < 0) {
     plot <- plot + 
-      geom_tile(aes(fill = value)) +
-      scale_fill_gradientn(colours  = colors,space="rgb", 
-                           values   = DoOR.functions:::DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),
-                           limits   = limits)
+      ggplot2::geom_tile(ggplot2::aes(fill = value)) +
+      ggplot2::scale_fill_gradientn(colours  = colors, space="rgb", 
+                                    values   = DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),
+                                    limits   = limits)
   } else {
-    plot <- plot + geom_point(aes(size = value), alpha = .6) 
+    plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value), alpha = .6) 
   }
   
   return(plot)
