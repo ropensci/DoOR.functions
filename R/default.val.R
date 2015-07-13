@@ -9,6 +9,7 @@
 #' returned for DoOR functions.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
+#' @export
 #' @examples
 #' 
 #' default.val(DoOR_default = "select.MD")
@@ -68,7 +69,7 @@ default.val <- function(DoOR_default) {
 	    data(odor)
 	  }
 	  return(odor)
-	} # showOdor.R
+	}
   
 	if (DoOR_default == "odor.dist") {
 	  if (!exists("odor.dist")) {

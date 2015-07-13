@@ -30,9 +30,7 @@
 #' tuning breadth. \cr } Try some queries: \tabular{ll}{
 #' \code{\link{findResp}}: \tab given a chemical, get original responses from
 #' all studies in the database.\cr \code{\link{findRespNorm}}: \tab given a
-#' chemical, get normalised responses from all studies in the database.\cr
-#' \code{\link{showOdor}}: \tab obtain information on a chemical from PubChem.
-#' \cr }
+#' chemical, get normalised responses from all studies in the database.\cr}
 #' 
 #' In case you wish to create your own response model (e.g. because you want to
 #' include your own datasets): \tabular{ll}{ \code{\link{CreateDatabase}}: \tab
