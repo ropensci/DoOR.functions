@@ -24,7 +24,7 @@
 #' an image of the antennal lobe.\cr \code{\link{DoORplot_compareProfiles}}: \tab compare
 #' the results of two studies.  \cr \code{\link{DoORplot_pointMatrix}}: \tab Dot Plot of
 #' Odorant Responses Across Receptors. \cr \code{\link{DoORplot_responseProfile}}: \tab
-#' bar plot:one receptor, all chemicals. \cr \code{\link{PlotReceptors}}: \tab
+#' bar plot:one receptor, all chemicals. \cr \code{\link{DoORplot_compareReceptors}}: \tab
 #' bar plot: all receptors, one or more chemicals.\cr
 #' \code{\link{tuningBreadth}}: \tab pyramid diagram depicting a receptor's
 #' tuning breadth. \cr } Try some queries: \tabular{ll}{
