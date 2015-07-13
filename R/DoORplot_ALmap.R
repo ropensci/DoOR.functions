@@ -39,7 +39,7 @@ DoORplot_ALmap <- function(InChIKey,
                     scalebar = default.val("scalebar"),
                     DoOR.mappings = default.val("DoOR.mappings"),
                     AL.map = default.val("AL.map"),
-                    colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"),
+                    colors = default.val("colors"),
                     legend = T,
                     limits) {
   if (!requireNamespace("ggplot2", quietly = TRUE))
