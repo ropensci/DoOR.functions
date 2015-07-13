@@ -34,7 +34,7 @@
 DoORplot_ALmap <- function(InChIKey,
                     responseMatrix = default.val("response.matrix"),
                     zero = default.val("zero"),
-                    tag =  default.val("tag.DoORplot_ALmap"), 
+                    tag =  default.val("tag.ALmap"), 
                     main = "Name",
                     scalebar = default.val("scalebar"),
                     DoOR.mappings = default.val("DoOR.mappings"),
@@ -71,7 +71,7 @@ DoORplot_ALmap <- function(InChIKey,
     ggplot2::geom_polygon(data = AL.map$bg.cutout,  ggplot2::aes(x = x, y = y, group = group), fill = "white", color = "white") +
     ggplot2::geom_polygon(data = AL.map$unmapped_not.olf, ggplot2::aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
     ggplot2::geom_polygon(ggplot2::aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") + 
-    ggplot2::scale_fill_gradientn(na.value="grey65", colours=colors,space="rgb", values=DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
+    ggplot2::scale_fill_gradientn(na.value="grey65", colours = colors, space = "rgb", values = DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
     ggplot2::annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = 3, alpha = .5) +#, hjust=0) +
     ggplot2::coord_fixed() + 
     ggplot2::theme_minimal() +

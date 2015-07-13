@@ -5,7 +5,7 @@
 \title{DoORplot_ALmap}
 \usage{
 DoORplot_ALmap(InChIKey, responseMatrix = default.val("response.matrix"),
-  zero = default.val("zero"), tag = default.val("tag.DoORplot_ALmap"),
+  zero = default.val("zero"), tag = default.val("tag.ALmap"),
   main = "Name", scalebar = default.val("scalebar"),
   DoOR.mappings = default.val("DoOR.mappings"),
   AL.map = default.val("AL.map"), colors = c("#0570b0", "#74a9cf",
