@@ -4,11 +4,11 @@
 #' two studies / response profiles'.
 #' 
 #' 
-#' @param x,y data frames; only one is necessary.
-#' @param by.x character string; specifying a column in x.
-#' @param by.y character string; specifying a column in y.
-#' @param tag name of the column that holds the chemical identifiers for merging the data
-#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @param x,y data frames; if only x is given, both data sets are taken from x
+#' @param by.x character string; specifying a column in x
+#' @param by.y character string; specifying a column in y
+#' @param tag name of the column that holds the chemical identifiers for merging the data (will also be used as label)
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
 #' @examples
 #' 

@@ -4,31 +4,30 @@
 \alias{DoORplot_compareProfiles}
 \title{Compare two response profiles}
 \usage{
-DoORplot_compareProfiles(x, y, by.x, by.y, lim.y,
-  tag = default.val(DoOR_default = "tag"))
+DoORplot_compareProfiles(x, y, by.x, by.y, tag = default.val(DoOR_default =
+  "tag"))
 }
 \arguments{
-\item{x,y}{data frames; data x and y could be two different data frame or a
-same data frame.}
+\item{x,y}{data frames; if only x is given, both data sets are taken from x}
 
-\item{by.x}{character string; specifying a column in x.}
+\item{by.x}{character string; specifying a column in x}
 
-\item{by.y}{character string; specifying a column in y.}
+\item{by.y}{character string; specifying a column in y}
 
-\item{lim.y}{numeric vector; x-axis limit of data y.}
+\item{tag}{name of the column that holds the chemical identifiers for merging the data (will also be used as label)}
 }
 \description{
 Orderdered bar plots for two studies, allowing for an easy comparison of the
-two studies' results.
+two studies / response profiles'.
 }
 \examples{
 library(DoOR.data)
 data(Or22a)
 data(response.range)
-DoORplot_compareProfiles(x=Or22a, y=Or22a, by.x="Hallem.2006.EN", by.y="Pelz.2006.AntEC50", lim.y=c(-0.5,7))
+DoORplot_compareProfiles(x=Or22a, y=Or22a, by.x="Hallem.2006.EN", by.y="Pelz.2006.AntEC50")
+DoORplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)), y = cbind(response.matrix, InChIKey = rownames(response.matrix)), by.x = "Or22a", by.y = "Or10a", lim.y=c(0,1))
 }
 \author{
-Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
-\keyword{iplot}
 
