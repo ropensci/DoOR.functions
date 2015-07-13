@@ -41,11 +41,11 @@ default.val <- function(DoOR_default) {
 	## character
   if (DoOR_default == "zero") 		    { return("SFR") } # findRespNorm.R
   if (DoOR_default == "tag.ALmap") 	{ return("glomerulus") } # DoORplot_ALmap.R
-  if (DoOR_default == "tag") 		      { return("InChIKey") } # PlotChemicals.R; PlotReceptors.R; CreateDatabase.R
+  if (DoOR_default == "tag") 		      { return("InChIKey") } # DoORplot_responseProfile.R; PlotReceptors.R; CreateDatabase.R
   if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
 
 	## character vector
-	if (DoOR_default == "col.extrem") 	{ return(c("blue", "red")) } # DoORplot_ALmap.R; DoORplot_pointMatrix.R; PlotChemicals.R; PlotReceptors.R
+	if (DoOR_default == "col.extrem") 	{ return(c("blue", "red")) } # DoORplot_ALmap.R; DoORplot_pointMatrix.R; DoORplot_responseProfile.R; PlotReceptors.R
 	if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R; modelfunction.R; projectPoints.R
 
 	## data frame

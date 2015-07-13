@@ -1,6 +1,6 @@
-#' Bar Plot of Responses to Chemicals
+#' DoORplot_responseProfile
 #' 
-#' Horizontal bar plot to show the response profile of an odorant receptor.
+#' A bar plot of all DoOR responses of a given receptor.
 #' 
 #' This function is used to visualize the response profile of an odorant
 #' receptor. The data frame should contain the columns "odor class", "odor
@@ -19,7 +19,7 @@
 #' @param pic.height numeric; the height of the device; if missing, the height
 #' will be defined by data size and \code{pic.width}.
 #' @param file.name character string; file name of report; if missing, the
-#' default file name is "PlotChemicals.pdf" or "PlotChemicals.jpeg".
+#' default file name is "DoORplot_responseProfile.pdf" or "DoORplot_responseProfile.jpeg".
 #' @param cex.title numeric; the magnification to be used for main titles. The
 #' default is 1.
 #' @param x.range numeric vectors of length 2; giving the x coordinates ranges.
@@ -45,16 +45,16 @@
 #' loadRD()
 #' RP.Or35a<-modelRP(Or35a)
 #' # save bar plot as pdf flie
-#' PlotChemicals(RP.Or35a, tag="Name", PDF=TRUE, file.name="PlotChemicals.Or35a.pdf")
+#' DoORplot_responseProfile(RP.Or35a, tag="Name", PDF=TRUE, file.name="DoORplot_responseProfile.Or35a.pdf")
 #' 
 #' # save bar plot as jpeg flie
-#' PlotChemicals(RP.Or35a, tag="Name", zero="SFR", JPEG=TRUE)
+#' DoORplot_responseProfile(RP.Or35a, tag="Name", zero="SFR", JPEG=TRUE)
 #' 
 #' # show bar plot of recording data in decreasing order
 #' responses<-Or35a[,c(1:4,5)]
-#' PlotChemicals(responses[order(responses[,5],decreasing=TRUE),], tag="Name")
+#' DoORplot_responseProfile(responses[order(responses[,5],decreasing=TRUE),], tag="Name")
 #' 
-PlotChemicals <-
+DoORplot_responseProfile <-
 function(data,
 			tag = default.val("tag"),
 			zero,
@@ -66,7 +66,7 @@ function(data,
 # Neurobiology, University of Konstanz, Germany
 
 
-# PlotChemicals.R :
+# DoORplot_responseProfile.R :
 ####################
 
 # Bar plot showing the response profile of an odorant receptor
@@ -91,7 +91,7 @@ function(data,
 #  pic.width 	:  numeric; the width of the device; the default is 864.
 #  pic.height 	:  numeric; the height of the device; if missing, the height will be defined by data size and pic.width
 #  point.size 	:  numeric; pointsize of plotted text; one point is approximately one pixel, and the default is 17
-#  file.name 	:  character string; file name of report; if missing, the default file name is "PlotChemicals.pdf" or "PlotChemicals.jpeg"
+#  file.name 	:  character string; file name of report; if missing, the default file name is "DoORplot_responseProfile.pdf" or "DoORplot_responseProfile.jpeg"
 #  col.extrem 	:  a two characters vector; The default is c("blue", "red"), indicating a color range from blue to red.
 
 {
@@ -158,7 +158,7 @@ function(data,
 	
 	if (JPEG==TRUE) 
 	{
-		if (missing(file.name)) { jpeg("PlotChemicals.jpeg",width=pic.width, height=pic.height,pointsize=point.size) }
+		if (missing(file.name)) { jpeg("DoORplot_responseProfile.jpeg",width=pic.width, height=pic.height,pointsize=point.size) }
 		else 			{ jpeg(file.name,width=pic.width, height=pic.height,pointsize=point.size) }
 
 		if (range(data_vector)[1]<(-1) | range(data_vector)[2]>1) { plot.bicolor(data=rev_data_vector,cex.axes,x.range,cex.tag,name.title,cex.title) }
@@ -171,7 +171,7 @@ function(data,
 		n_page <- 0:floor(len_data_vector/rowCount)
 		if (PDF==TRUE) 
 		{
-			if (missing(file.name)) { pdf("PlotChemicals.pdf",width=6, height=8) }
+			if (missing(file.name)) { pdf("DoORplot_responseProfile.pdf",width=6, height=8) }
 			else 			{ pdf(file.name,width=6, height=8) }
 		}
 		for (i in n_page) 	
