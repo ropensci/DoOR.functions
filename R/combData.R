@@ -1,34 +1,8 @@
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-
-# combData.R:
-#############
-
-# Merge two datasets into one (by CAS number)
-
-
-#input parameters:
-###################
-
-
-#  data1 	       : data frame; 
-#  data2 	       : data frame; 
-#  by.data2 	   : character string; a column name in "data2", specifies which column will be imported
-#  assigned.name : character string; name to be assigned to the colum (see output) with the merged odor set
-#  ident         : identifier used for merging, usually InChIKey
-
-
-## output is a data frame containing all columns from data1 plus a column containing the merged odor set (CAS-numbers) from data1 and data2
-
-
-
 #' Combine Two Data
 #' 
-#' Combine two data into one by CAS number
+#' Combine two data into one byInChIKey
 #' 
-#' Data frames are merged by CAS number specifically, because chemical could
-#' have multiple names, CAS number is standard registered name of chemical.
+#' Data frames are merged by InChIKey.
 #' Data2 will be merged into data1 specified by the column name \code{by.data2}
 #' into one. The name of added column could be assigned with
 #' \code{assigned.name}. If \code{data2} contains some odors that the
@@ -45,10 +19,10 @@
 #' 
 #' library(DoOR.data)
 #' library(DoOR.function)
-#' newdata<-data.frame(CAS=c("111-1-1","222-2-2","71-23-8","333-3-3"), 
+#' newdata <- data.frame(InChIKey=odor$InChIKey[1:4], 
 #' 	new.data=c(0.4, 0.5, 0.6, 0.7))
 #' data(Or22a)
-#' new.Or22a<-combData(data1=Or22a,data2=newdata,by.data2="new.data")
+#' new.Or22a <- combData(data1 = Or22a, data2 = newdata, by.data2 = "new.data")
 #' 
 combData <- function(data1, data2, by.data2, assigned.name, ident = default.val("ident")) 
 {
