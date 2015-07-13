@@ -4,14 +4,14 @@
 #' 
 #' This function is used to visualize the response profile of an odorant
 #' receptor. The data frame should contain the columns "odor class", "odor
-#' name", "odor code", "CAS number" and "data". The default color range is blue
+#' name", "odor code", "InChIKeyr" and "data". The default color range is blue
 #' to red (from inhibitory to excitatory). If the data stems not from a merged
 #' dataset (by using \code{\link{modelRP}}) or the recording values are not
 #' normalized, only binary colors are used: blue indicates that the value is
 #' smaller than 0, red indicates that the value is bigger than 0.
 #' 
 #' @param data data frame; odorant response data e.g. Or22a
-#' @param tag character string; CAS number is the default descriptor
+#' @param tag character string; InChIKey is the default descriptor
 #' @param zero character string; where should zero be placed? e.g. zero="SFR"
 #' sets zero to the spontaneous firing rate.
 #' @param name.title character string; the main title of plot. Dafaults to
@@ -79,7 +79,7 @@ function(data,
 
 
 #  data 	:  data frame; odorant response data 
-#  tag 		:  character string; CAS number is the default label
+#  tag 		:  character string; InChIKey number is the default label
 #  zero 	:  character string; where should zero be placed? e.g. zero="SFR" sets zero to the spontaneous firing rate.
 #  name.title 	:  character string; the main title of plot. The default is "Response Profile". 
 #  cex.title 	:  numeric; the magnification to be used for main titles. The default is 1. 
@@ -140,8 +140,8 @@ function(data,
 	if (missing(zero)) { data_vector <- data_vector }
 	else 
 	{
-		if (is.data.frame(data)) { data_vector <- data[,5] - (data[data[,"CAS"]==zero,5]) }
-		else 			 { data_vector <- data$model.response[,5] - (data$model.response[data$model.response[,"CAS"]==zero,5]) }
+		if (is.data.frame(data)) { data_vector <- data[,5] - (data[data[,"InChIKey"]==zero,5]) }
+		else 			 { data_vector <- data$model.response[,5] - (data$model.response[data$model.response[,"InChIKey"]==zero,5]) }
 	}	
 
 	if (is.data.frame(data))  { names(data_vector) <- as.character(data[,tag]) }
