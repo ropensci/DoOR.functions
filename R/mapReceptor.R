@@ -14,6 +14,7 @@
 #' Correlation Coefficient between given data and selected consensus data in
 #' response matrix
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @export
 #' @keywords data
 mapReceptor <-
 function(da, by.column, Receptors, ResponseMatrix) 

@@ -11,6 +11,7 @@
 #' @param strict logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
+#' @export
 #' @details 
 #' # modelRPSEQ.R:
 #' #################

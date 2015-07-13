@@ -11,6 +11,7 @@
 #' by \code{\link{modelRP}}. It is also possible to create this frame manually
 #' using \code{\link{modelRP}}.
 #' @seealso \code{\link{modelRP}},\code{\link{CreateDatabase}}
+#' @export
 #' @keywords data
 #' @examples
 #' 

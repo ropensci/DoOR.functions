@@ -6,7 +6,9 @@
 #' their expression.
 #' @param supportData logical; if TRUE, load support data.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @export
 #' @keywords data
+#' @export
 #' @examples
 #' 
 #' library(DoOR.data)

@@ -18,6 +18,7 @@
 #' data "response.matrix", "response.range", "response.matrix_non.normalized",
 #' "response.matrix", "weight.globNorm" and "ORs".
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @export
 #' @keywords data
 #' @examples
 #' 

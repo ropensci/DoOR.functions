@@ -5,7 +5,7 @@
 \title{Generates a model response and merge data in given sequence}
 \usage{
 modelRPSEQ(data, SEQ, overlapValues = default.val("overlapValues"),
-  plot = F)
+  select.MDValue = default.val("select.MDValue"), strict = TRUE, plot = F)
 }
 \arguments{
 \item{data}{data frame; odorant response data, e.g. Or22a.}
@@ -14,6 +14,10 @@ modelRPSEQ(data, SEQ, overlapValues = default.val("overlapValues"),
 given sequence for merging data.}
 
 \item{overlapValues}{minimum overlap between studies to perfom a merge}
+
+\item{select.MDValue}{the minimum mean distance between studies to perfom a merge}
+
+\item{strict}{logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue}
 }
 \description{
 Generates a model response and merge data in given sequence.

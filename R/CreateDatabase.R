@@ -15,6 +15,7 @@
 #' @keywords data
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Shouwen Ma <\email{daniel.muench@@uni-konstanz.de}>
+#' @export
 #' @examples
 #' \dontrun{
 #' library(DoOR.data)

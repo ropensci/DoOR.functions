@@ -8,6 +8,7 @@
 #' @param sfr a numeric parameter, indicating spontaneous firing rate value.
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @keywords math
+#' @export
 #' @examples
 #' 
 #' library(DoOR.data)

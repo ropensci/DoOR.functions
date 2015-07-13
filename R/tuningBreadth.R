@@ -13,6 +13,7 @@
 #' receptor repertoire}, Cell, 125:143-160 \cr
 #' \url{http://www.cell.com/content/article/abstract?uid=PIIS0092867406003631}
 #' @keywords iplot
+#' @export
 #' @examples
 #' 
 #' library(DoOR.data)

@@ -15,6 +15,7 @@
 #' @seealso \link{findRespNorm}, \pkg{\link{ggplot2}, \link{grid}}
 #' @references Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
 #' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
+#' @export
 #' @return a ggplot2 object
 #'
 #' @examples
@@ -41,10 +42,10 @@ ALimage <- function(InChIKey,
                     colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"),
                     legend = T,
                     limits) {
-
-  if (!require(ggplot2))
-    stop("Please install lattice: install.packages('ggplot2')")
-  require(grid)
+  if (!requireNamespace("ggplot2", quietly = TRUE))
+    stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
+  if (!requireNamespace("grid", quietly = TRUE))
+    stop("grid is required for AL map plotting, please install via install.packages('grid')", call. = FALSE)
   
   if(missing(limits)) {
     response.matrix.SFRreset <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
@@ -65,41 +66,41 @@ ALimage <- function(InChIKey,
 
   
   
-  p <- ggplot(data = plotdata) + 
-    geom_polygon(data = AL.map$background, aes(x = x, y = y, group = group), fill = "grey80", color = "grey80") +
-    geom_polygon(data = AL.map$bg.cutout,  aes(x = x, y = y, group = group), fill = "white", color = "white") +
-    geom_polygon(data = AL.map$unmapped_not.olf, aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
-    geom_polygon(aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") + 
-    scale_fill_gradientn(na.value="grey65", colours=colors,space="rgb", values=DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
-    annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = 3, alpha = .5) +#, hjust=0) +
-    coord_fixed() + 
-    theme_minimal() +
-    ggtitle(main) +
-    theme(axis.text.x = element_blank(),
-          axis.ticks.x = element_blank(), 
-          axis.title.x = element_blank(),
-          axis.text.y = element_blank(),
-          axis.ticks.y = element_blank(), 
-          axis.title.y = element_blank(), 
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank()#,
-          #panel.background = element_rect(fill = "#eeeeee", color = "#eeeeee"),
-          #legend.key.size = unit(.8, "line"),
-          #legend.key.width = unit(.3, "line")
+  p <- ggplot2::ggplot(data = plotdata) + 
+    ggplot2::geom_polygon(data = AL.map$background, ggplot2::aes(x = x, y = y, group = group), fill = "grey80", color = "grey80") +
+    ggplot2::geom_polygon(data = AL.map$bg.cutout,  ggplot2::aes(x = x, y = y, group = group), fill = "white", color = "white") +
+    ggplot2::geom_polygon(data = AL.map$unmapped_not.olf, ggplot2::aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
+    ggplot2::geom_polygon(ggplot2::aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") + 
+    ggplot2::scale_fill_gradientn(na.value="grey65", colours=colors,space="rgb", values=DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
+    ggplot2::annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = 3, alpha = .5) +#, hjust=0) +
+    ggplot2::coord_fixed() + 
+    ggplot2::theme_minimal() +
+    ggplot2::ggtitle(main) +
+    ggplot2::theme(axis.text.x      = ggplot2::element_blank(),
+                   axis.ticks.x     = ggplot2::element_blank(), 
+                   axis.title.x     = ggplot2::element_blank(),
+                   axis.text.y      = ggplot2::element_blank(),
+                   axis.ticks.y     = ggplot2::element_blank(), 
+                   axis.title.y     = ggplot2::element_blank(), 
+                   panel.grid.major = ggplot2::element_blank(),
+                   panel.grid.minor = ggplot2::element_blank()#,
+                   #panel.background = element_rect(fill = "#eeeeee", color = "#eeeeee"),
+                   #legend.key.size = unit(.8, "line"),
+                   #legend.key.width = unit(.3, "line")
     )
   
   if(scalebar == F) 
-    p <- p + theme(legend.position = "none")
+    p <- p + ggplot2::theme(legend.position = "none")
 
   if(legend == T) {
   x1 <- 118; x2 <- x1 + 34; x3 <- x2 + 19.5; y <- -20; lsize <- 10
   p <- p + 
-    annotate("rect", 
+    ggplot2::annotate("rect", 
              xmin = c(x1, x2, x3) , 
              xmax = c(x1+lsize, x2+lsize, x3+lsize), 
              ymin = y, ymax = y+lsize, 
              fill = c("grey45", "grey65", "grey80")) + 
-    annotate("text", 
+    ggplot2::annotate("text", 
              x = c(x1+lsize+1.5, x2+lsize+1.5, x3+lsize+1.5) , 
              y = y + lsize / 2 , 
              label = c("unmapped", "NA", "background"), hjust = 0, size = 3.5)

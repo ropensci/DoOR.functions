@@ -29,6 +29,7 @@
 #' @param round the number of digits the imported values are rounded to.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @export
 #' @keywords data
 #' @examples
 #' 

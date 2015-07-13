@@ -38,6 +38,7 @@
 #' @param col.extrem a two characters vector; coding the colour of each end.
 #' The default is c("blue", "red").
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @export
 #' @seealso \code{\link{findRespNorm}}
 #' @keywords iplot
 #' @examples

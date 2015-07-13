@@ -26,6 +26,7 @@
 #' \code{FALSE}.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
+#' @export
 #' @examples
 #' 
 #' library(DoOR.data)

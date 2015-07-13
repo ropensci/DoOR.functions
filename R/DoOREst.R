@@ -14,6 +14,7 @@
 #' @references Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
 #' DNA microarray gene expression data: local least squares imputation., 2005,
 #' Bioinformatics, 21, 187-198
+#' @export
 #' @keywords math
 #' @examples
 #' 

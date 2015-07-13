@@ -11,11 +11,9 @@
 #'   ranges of all studies (\code{response.range})
 #' @param weightGlobNorm the dataframe containing the info about the relative
 #'   weights between receptors (\code{weight.globNorm})
-#'   
 #' @seealso \code{\link{importNewData}}
-#'   
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
-#'   
+#' @export
 #' @examples
 #' removeStudy('Bruyne.2001.WT')
 #' 

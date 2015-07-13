@@ -38,6 +38,7 @@
 #' The default is c("blue", "red").
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
+#' @export
 #' @examples
 #' 
 #' library(DoOR.data)

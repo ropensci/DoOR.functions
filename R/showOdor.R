@@ -11,6 +11,7 @@
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @seealso \code{\link{browseURL}}
 #' @keywords data
+#' @export
 #' @examples
 #' 
 #' library(DoOR.data)

@@ -28,6 +28,7 @@
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @seealso \code{\link{DoORnorm}},\code{\link{projectPoints}},
 #' \code{\link{calModel}}, \code{\link{modelfunction}}
+#' @export
 #' @keywords data
 #' 
 #' 

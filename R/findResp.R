@@ -10,6 +10,7 @@
 #' @param responseRange data frame; response ranges of studies
 #' @param Or.list a list contains reponse data of all available receptors. It
 #' can be loaded using \code{\link{loadRDList}}.
+#' @export
 #' @keywords data
 #' @examples
 #' 

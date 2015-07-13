@@ -22,6 +22,6 @@ Filter DoOR datasets before merging (remove studies with few overlapping points 
 }
 \examples{
 tmp <- filterData(Or42b)
-tmp$removed
+tmp$excluded
 }
 

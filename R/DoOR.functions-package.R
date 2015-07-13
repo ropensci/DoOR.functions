@@ -1,18 +1,16 @@
-
-
-#' DoOR Function
+#' DoOR Functions
 #' 
 #' Functions package providing manipulation and application of the DoOR.
 #' 
-#' \tabular{ll}{ Package: \tab DoOR.function\cr Type: \tab Package\cr Version:
+#' \tabular{ll}{ Package: \tab DoOR.functions\cr Type: \tab Package\cr Version:
 #' \tab 0.1-2\cr Date: \tab 2012-04-16\cr License: \tab GPL-2\cr LazyLoad: \tab
 #' yes\cr }
 #' 
-#' \bold{Type \code{help(package = DoOR.function)} to see a complete list of
+#' \bold{Type \code{help(package = DoOR.functions)} to see a complete list of
 #' datasets and functions.  Below is what you need for a quick start.}
 #' 
 #' First, load the DoOR packages, data and function package: \tabular{ll}{
-#' \code{library(DoOR.function)}: \tab \cr \code{library(DoOR.data)}: \tab \cr
+#' \code{library(DoOR.functions)}: \tab \cr \code{library(DoOR.data)}: \tab \cr
 #' }
 #' 
 #' then, load all datasets including the precomputed response matrix:
@@ -102,14 +100,13 @@
 #' \code{\link{default.val}}: \tab return default values for DoOR functions.
 #' \cr }
 #' 
-#' @name DoOR.function.package
-#' @aliases DoOR.function-package DoOR.function
+#' @name DoOR.functions.package
+#' @aliases DoOR.functions DoOR.function
 #' @docType package
 #' @author C. Giovanni Galizia \cr Daniel Muench \cr Martin Strauch \cr Anja
 #' Nissler \cr Shouwen Ma \cr
 #' 
-#' Maintainer: Daniel Muench <daniel.muench@@uni-konstanz.de> Shouwen Ma
-#' <shouwen.ma@@gmail.com>
+#' Maintainer: Daniel Muench <daniel.muench@@uni-konstanz.de>
 #' @seealso \code{\link[<pkg>:<pkg>-package]{<DoOR.data>}}
 #' @references \url{http://neuro.uni-konstanz.de/DoOR/default.html}
 #' @keywords package

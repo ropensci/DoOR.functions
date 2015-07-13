@@ -6,6 +6,7 @@
 #' @param odor.data data.frame containing information about the odorants in DoOR.
 #' @param char.columns number of character columns in each receptor data.frame.
 #' @param ident odorant identifier to be used as rownames.
+#' @export
 #'
 #' @return matrix
 #'

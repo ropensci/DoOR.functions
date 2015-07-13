@@ -7,6 +7,7 @@
 #' @param odor.data the data frame containing the odor information (defaults to ``odor``).
 #'
 #' @return character, an InChIKey
+#' @export
 #'
 #' @examples 
 #' getKey("123-92-2")

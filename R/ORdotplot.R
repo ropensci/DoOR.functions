@@ -28,6 +28,7 @@
 #' @param \dots further graphical parameters (see\code{\link{par}}).
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords iplot
+#' @export
 #' @examples
 #' 
 #' library(DoOR.data)

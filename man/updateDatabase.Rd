@@ -5,12 +5,13 @@
 \title{update response matrix}
 \usage{
 updateDatabase(receptor, permutation = TRUE, perm,
-  unglobalNorm_responseMatrix = default.val("unglobalNorm_response.matrix"),
+  responseMatrix_nn = default.val("response.matrix_non.normalized"),
   responseMatrix = default.val("response.matrix"),
   responseRange = default.val("response.range"),
   weightGlobNorm = default.val("weight.globNorm"),
-  select.MDValue = default.val("select.MDValue"),
-  overlapValues = default.val("overlapValues"), plot = F)
+  select.MDValue = default.val("select.MDValue"), strict = TRUE,
+  overlapValues = default.val("overlapValues"),
+  excluded.data = default.val("excluded.data"), plot = F)
 }
 \arguments{
 \item{receptor}{character string; name of given odorant receptor.}
@@ -20,7 +21,7 @@ permutation, if FALSE, sequence is chosen by the routine process.}
 
 \item{perm}{a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.}
 
-\item{unglobalNorm_responseMatrix}{data frame; response data that has not
+\item{responseMatrix_nn}{data frame; response data that has not
 been globally normalized.}
 
 \item{responseMatrix}{data frame; globally normalized response data.}
@@ -29,13 +30,15 @@ been globally normalized.}
 
 \item{weightGlobNorm}{data frame; weight matrix for global normalization.}
 
-\item{select.MDValue}{the minimum mean distance between studies to perfom a merge (only valid for permutation == F)}
+\item{select.MDValue}{the minimum mean distance between studies to perfom a merge (used if permutation == F or if permutation == T AND strict == T)}
+
+\item{strict}{logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue (only valid if permutation == T)}
 
 \item{overlapValues}{minimum overlap between studies to perfom a merge}
 }
 \description{
 update the globally \code{response matrix} and the unglobally normalized
-response matrix \code{unglobalNorm_response.matrix} by introducing new
+response matrix \code{response.matrix_non.normalized} by introducing new
 consensus response data of given receptor.
 }
 \details{
@@ -46,10 +49,12 @@ original recording will be computed for each permutation, the optimozed
 sequence is with the highest correlation.
 }
 \examples{
+\dontrun{
 library(DoOR.data)
 loadRD()
-# update the entry "Or67b" of data "response.matrix" and "unglobalNorm_response.matrix" with permutations.
+# update the entry "Or67b" of data "response.matrix" and "response.matrix_non.normalized" with permutations.
 # updateDatabase(receptor="Or67b", permutation = TRUE)
+}
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

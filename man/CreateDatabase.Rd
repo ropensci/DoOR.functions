@@ -6,11 +6,11 @@
 \usage{
 CreateDatabase(tag = default.val("tag"),
   select.MDValue = default.val("select.MDValue"),
-  overlapValues = default.val("overlapValues"), glob.normalization = T, ...)
+  overlapValues = default.val("overlapValues"), ...)
 }
 \arguments{
-\item{tag}{character string; format for rownames; possibilities: tag="CAS",
-tag="CID", tag="Name"}
+\item{tag}{character string; format for rownames; possibilities: "InChIKey",
+CAS", "CID", "Name"}
 
 \item{select.MDValue}{a numeric; threshold on the MD, this is used to reject
 studies that do not align sufficiently well to the response model}
@@ -18,16 +18,18 @@ studies that do not align sufficiently well to the response model}
 \item{overlapValues}{numeric; a criterion using to refuse a data set that
 has not enough overlap value.}
 
-\item{...}{pass more parameters to \code{\link{modelRP}} (e.g. \code{glob.normalization == F} to build a non-normalized response matrix)}
+\item{...}{pass more parameters to \code{\link{modelRP}}}
 }
 \description{
 computes the complete response model for all receptors in the database
 (calls \code{\link{modelRP}} for all receptors)
 }
 \examples{
+\dontrun{
 library(DoOR.data)
 loadRD()
-# mydatabase <- CreateDatabase()
+mydatabase <- CreateDatabase()
+}
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

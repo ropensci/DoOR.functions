@@ -10,6 +10,7 @@
 #'   in adult). Output is a list containing all measurements from all available
 #'   studies.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @export
 #' @keywords data
 #' @examples
 #' 

@@ -10,6 +10,7 @@
 #' @param by.y character string; specifying a column in y.
 #' @param lim.y numeric vector; x-axis limit of data y.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @export
 #' @keywords iplot
 #' @examples
 #' 
@@ -18,7 +19,7 @@
 #' data(response.range)
 #' DoORplot_compareProfiles(x=Or22a, y=Or22a, by.x="Hallem.2006.EN", by.y="Pelz.2006.AntEC50", lim.y=c(-0.5,7))
 #' 
-DP_compareProfiles <- function(x, y, by.x, by.y, lim.y, tag = default.val(DoOR_default = "tag")) {
+DoORplot_compareProfiles <- function(x, y, by.x, by.y, lim.y, tag = default.val(DoOR_default = "tag")) {
   title_x <- paste("data_X:", by.x)
   title_y <- paste("data_Y:", by.y)
   colnames(x)[which(colnames(x) == by.x)] <- title_x

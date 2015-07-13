@@ -7,7 +7,7 @@
 exportData(file.format, directory, odorantReceptors = default.val("ORs"),
   responseMatrix = default.val("response.matrix"),
   responseRange = default.val("response.range"),
-  unglobalNorm_RM = default.val("unglobalNorm_response.matrix"),
+  unglobalNorm_RM = default.val("response.matrix_non.normalized"),
   weightGlobNorm = default.val("weight.globNorm"), all.data = TRUE)
 }
 \arguments{
@@ -28,7 +28,7 @@ missing, the exported data are saved in current working directory.}
 \item{weightGlobNorm}{data frame; weight matrix for global normalizazion}
 
 \item{all.data}{logical; if TRUE, export odorant response data and supported
-data "response.matrix", "response.range", "unglobalNorm_response.matrix",
+data "response.matrix", "response.range", "response.matrix_non.normalized",
 "response.matrix", "weight.globNorm" and "ORs".}
 }
 \description{

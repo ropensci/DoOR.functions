@@ -4,8 +4,11 @@ Title: Integrating heterogeneous odorant response data into a common response mo
 Version: 1.9.0
 Date: 2015-04-20
 Author: C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler and Shouwen Ma
-Address: Universitaet Konstanz, Fachbereich Biologie, D-78457 Konstanz, Germany
-URL: http://neuro.uni-konstanz.de/DoOR/default.html
-Maintainer: Daniel Muench <daniel.muench@uni-konstanz.de>; Shouwen Ma <shouwen.ma@gmail.com>
-Description: This is a function package providing manipulation and application for DoOR. 
+Address: University of Konstanz, Fachbereich Biologie, D-78457 Konstanz, Germany
+URL: http://neuro.uni.kn/DoOR
+Maintainer: Daniel Muench <daniel.muench@uni-konstanz.de>
+Description: This is a function package providing functions to perform data manipulations and visualizations for DoOR.data. 
 License: GPLv3
+Suggests:
+  DoOR.data,
+  ggplot2

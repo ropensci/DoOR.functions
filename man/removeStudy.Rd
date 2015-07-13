@@ -19,7 +19,7 @@ receptors exidting in DoOR.}
 ranges of all studies (\code{response.range})}
 
 \item{weightGlobNorm}{the dataframe containing the info about the relative
-  weights between receptors (\code{weight.globNorm})}
+weights between receptors (\code{weight.globNorm})}
 }
 \description{
 Use this function to remove a study from the DoOR database.

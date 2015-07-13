@@ -26,6 +26,7 @@
 #' @author Shouwen Ma <\email{daniel.muench@@uni-konstanz.de}>
 #' @seealso \code{\link{modelRP}},\code{\link{modelRPSEQ}}
 #' @keywords data
+#' @export
 #' @examples
 #' \dontrun{
 #' library(DoOR.data)
