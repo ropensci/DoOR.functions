@@ -19,8 +19,8 @@ default.val <- function(DoOR_default) {
 	if (DoOR_default == "select.MDValue") 	{ return(0.1415) } # selectModel.R; modelRP.R; CreateDatabase.R; CreateDatabase.R
 	if (DoOR_default == "points.cex") 	    { return(1) } # projectPoints.R
 	if (DoOR_default == "cex.title") 	      { return(1) } # projectPoints.R
-	if (DoOR_default == "dot.size") 	      { return(3) } # ORdotplot.R
-	if (DoOR_default == "cex.labels") 	    { return(1) } # ORdotplot.R
+	if (DoOR_default == "dot.size") 	      { return(3) } # DoORplot_pointMatrix.R
+	if (DoOR_default == "cex.labels") 	    { return(1) } # DoORplot_pointMatrix.R
 
 	## integer
 	if (DoOR_default == "overlapValues") 	  { return(5) } # selectModel.R
@@ -45,7 +45,7 @@ default.val <- function(DoOR_default) {
   if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
 
 	## character vector
-	if (DoOR_default == "col.extrem") 	{ return(c("blue", "red")) } # DoORplot_ALmap.R; ORdotplot.R; PlotChemicals.R; PlotReceptors.R
+	if (DoOR_default == "col.extrem") 	{ return(c("blue", "red")) } # DoORplot_ALmap.R; DoORplot_pointMatrix.R; PlotChemicals.R; PlotReceptors.R
 	if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R; modelfunction.R; projectPoints.R
 
 	## data frame

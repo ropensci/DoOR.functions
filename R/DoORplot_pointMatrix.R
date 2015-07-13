@@ -1,4 +1,4 @@
-#' show the odorant responses across receptors with dot plot
+#' DoORplot_pointMatrix
 #' 
 #' show the odorant responses across receptors with dot plot.
 #' 
@@ -34,9 +34,9 @@
 #' library(DoOR.data)
 #' data(response.matrix)
 #' responseMatrix<-apply(response.matrix,2,function(x) resetSFR(x,sfr=x[1]))
-#' ORdotplot(responseMatrix[c(150:240),],cex.labels=0.7,type='BW',dot.size=1.5)
+#' DoORplot_pointMatrix(responseMatrix[c(150:240),],cex.labels=0.7,type='BW',dot.size=1.5)
 #' 
-ORdotplot <-
+DoORplot_pointMatrix <-
 function(data,type,dot.col="black",
 			dot.size=default.val("dot.size"),
 			col.extrem=default.val("col.extrem"),
@@ -49,7 +49,7 @@ function(data,type,dot.col="black",
 
 
 
-# ORdotplot.R :
+# DoORplot_pointMatrix.R :
 ###############
 
 # visualises odorant responses across receptors; small dots for low responses, large dots for high responses.

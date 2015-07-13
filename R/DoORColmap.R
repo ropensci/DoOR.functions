@@ -16,7 +16,7 @@
 #' rescaling to 0 ... 255), see \code{\link{rgb}}.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @seealso \code{\link{rgb}}, \code{\link{colorRamp}}, \code{\link{DoORplot_ALmap}},
-#' \code{\link{ORdotplot}}, \code{\link{PlotChemicals}},
+#' \code{\link{DoORplot_pointMatrix}}, \code{\link{PlotChemicals}},
 #' \code{\link{PlotReceptors}}
 #' @keywords color
 #' @examples
