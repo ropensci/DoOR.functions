@@ -20,7 +20,7 @@
 #' and compose them as a list.  \cr }
 #' 
 #' Try some visualizations (e.g. producing the plots from the paper):
-#' \tabular{ll}{ \code{\link{ALimage}}: \tab response to a chemical mapped onto
+#' \tabular{ll}{ \code{\link{DoORplot_ALmap}}: \tab response to a chemical mapped onto
 #' an image of the antennal lobe.\cr \code{\link{comparDiagram}}: \tab compare
 #' the results of two studies.  \cr \code{\link{ORdotplot}}: \tab Dot Plot of
 #' Odorant Responses Across Receptors. \cr \code{\link{PlotChemicals}}: \tab

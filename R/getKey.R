@@ -14,7 +14,7 @@
 #' getKey("isopentyl acetate", "Name")
 #' getKey("C(C(C)C)COC(=O)C", "SMILES")
 #' 
-#' ALimage(getKey("123-92-2"))
+#' DoORplot_ALmap(getKey("123-92-2"))
 getKey <- function(x, type = "CAS", odor.data = default.val("odor.data")) {
   result <- odor.data$InChIKey[which(odor.data[,type] == x)]
   if(is.na(x)) {

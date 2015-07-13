@@ -1,4 +1,4 @@
-#' ALimage
+#' DoORplot_ALmap
 #'
 #' Plot an antennal lobe map with color coded odorant responses.
 #'
@@ -19,22 +19,22 @@
 #' @return a ggplot2 object
 #'
 #' @examples
-#' ALimage("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = F)
-#' ALimage("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
+#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = F)
+#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #' 
-#' ALimage(getKey("123-92-2"), scalebar = F) + 
+#' DoORplot_ALmap(getKey("123-92-2"), scalebar = F) + 
 #' theme(legend.position  = "bottom", 
 #'       panel.background = element_rect(fill = "grey90", color = NA)) + 
 #' ggtitle("responses elicited by isopentyl acetate")
 #' 
 #' \dontrun{
-#' p <- ALimage(getKey("123-92-2"))
+#' p <- DoORplot_ALmap(getKey("123-92-2"))
 #' ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
-ALimage <- function(InChIKey,
+DoORplot_ALmap <- function(InChIKey,
                     responseMatrix = default.val("response.matrix"),
                     zero = default.val("zero"),
-                    tag =  default.val("tag.ALimage"), 
+                    tag =  default.val("tag.DoORplot_ALmap"), 
                     main = "Name",
                     scalebar = default.val("scalebar"),
                     DoOR.mappings = default.val("DoOR.mappings"),

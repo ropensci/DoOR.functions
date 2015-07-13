@@ -31,21 +31,21 @@ default.val <- function(DoOR_default) {
 	if (DoOR_default == "merged") 	       	  { return(TRUE) } # selectModel.R
 	if (DoOR_default == "select.MD") 	        { return(TRUE) } # calModel.R; projectPoints.R
 	if (DoOR_default == "closest") 		        { return(TRUE) } # LLSIest.R
-	if (DoOR_default == "scalebar")   	      { return(TRUE) } # ALimage.R
+	if (DoOR_default == "scalebar")   	      { return(TRUE) } # DoORplot_ALmap.R
 	if (DoOR_default == "title") 		          { return(FALSE) } # projectPoints.R
 	if (DoOR_default == "plot") 		          { return(FALSE) } # modelRP.R; projectPoints.R
 
 	## default null
-	if (DoOR_default == "main") { return(NULL) } # ALimage.R
+	if (DoOR_default == "main") { return(NULL) } # DoORplot_ALmap.R
 
 	## character
   if (DoOR_default == "zero") 		    { return("SFR") } # findRespNorm.R
-  if (DoOR_default == "tag.ALimage") 	{ return("glomerulus") } # ALimage.R
+  if (DoOR_default == "tag.ALmap") 	{ return("glomerulus") } # DoORplot_ALmap.R
   if (DoOR_default == "tag") 		      { return("InChIKey") } # PlotChemicals.R; PlotReceptors.R; CreateDatabase.R
   if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
 
 	## character vector
-	if (DoOR_default == "col.extrem") 	{ return(c("blue", "red")) } # ALimage.R; ORdotplot.R; PlotChemicals.R; PlotReceptors.R
+	if (DoOR_default == "col.extrem") 	{ return(c("blue", "red")) } # DoORplot_ALmap.R; ORdotplot.R; PlotChemicals.R; PlotReceptors.R
 	if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R; modelfunction.R; projectPoints.R
 
 	## data frame
@@ -54,7 +54,7 @@ default.val <- function(DoOR_default) {
       data(AL.map)
     }
     return(AL.map)
-  } # ALimage.R
+  } # DoORplot_ALmap.R
   
 	if (DoOR_default == "data.format") {
 	  if (!exists("data.format")) {
@@ -75,7 +75,7 @@ default.val <- function(DoOR_default) {
 	    data(odor.dist)
 	  }
 	  return(odor.dist)
-	} # ALimage.R
+	} # DoORplot_ALmap.R
   
 	if (DoOR_default == "weight.globNorm") {
 	  if (!exists("weight.globNorm")) {
@@ -97,7 +97,7 @@ default.val <- function(DoOR_default) {
 	    data(DoOR.mappings)
 	  }
 	  return(DoOR.mappings)
-	} # ALimage.R
+	} # DoORplot_ALmap.R
   
 	if (DoOR_default == "ORs") {
 	  if (!exists("ORs")) {
