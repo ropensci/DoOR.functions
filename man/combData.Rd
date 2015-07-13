@@ -36,6 +36,8 @@ new.Or22a <- combData(data1 = Or22a, data2 = newdata, by.data2 = "new.data")
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
+
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
 \keyword{data}
 
