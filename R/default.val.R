@@ -46,7 +46,7 @@ default.val <- function(DoOR_default) {
   if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
   
   ## character vector
-  if (DoOR_default == "colors") 	{ return(cc("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f") } # DoORplot_ALmap.R; DoORplot_responseMatrix.R; DoORplot_responseProfile.R; DoORplot_compareReceptors.R
+  if (DoOR_default == "colors")   { return(c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f")) } # DoORplot_ALmap.R; DoORplot_responseMatrix.R; DoORplot_responseProfile.R; DoORplot_compareReceptors.R
   if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R; modelfunction.R; projectPoints.R
   
   ## data frame

@@ -4,81 +4,32 @@
 \alias{DoORplot_responseProfile}
 \title{DoORplot_responseProfile}
 \usage{
-DoORplot_responseProfile(data, tag = default.val("tag"), zero, name.title,
-  pic.height, file.name, cex.title = 1, x.range, cex.axes = 1,
-  cex.tag = 1, PDF = FALSE, JPEG = FALSE, pic.width = 864,
-  point.size = 17, col.extrem = default.val("col.extrem"))
+DoORplot_responseProfile(data, receptor, tag = default.val("tag"),
+  colored = T, colors = default.val("colors"), limits,
+  scalebar = default.val("scalebar"))
 }
 \arguments{
-\item{data}{data frame; odorant response data e.g. Or22a}
+\item{data}{a DoOR response.matrix}
 
-\item{tag}{character string; InChIKey is the default descriptor}
+\item{receptor}{character string, receptor name, any of colnames(response.matrix)}
 
-\item{zero}{character string; where should zero be placed? e.g. zero="SFR"
-sets zero to the spontaneous firing rate.}
+\item{tag}{chemical identifier for annotation}
 
-\item{name.title}{character string; the main title of plot. Dafaults to
-"Response Profile".}
+\item{colored}{color code the bars according to the response value?}
 
-\item{pic.height}{numeric; the height of the device; if missing, the height
-will be defined by data size and \code{pic.width}.}
+\item{colors}{a vector of 5 colors (2 for values < 0, 1 value for 0 and 3 values > 0)}
 
-\item{file.name}{character string; file name of report; if missing, the
-default file name is "DoORplot_responseProfile.pdf" or "DoORplot_responseProfile.jpeg".}
+\item{limits}{the limits for the colorscale and the x axis, global range of data will be used if empty}
 
-\item{cex.title}{numeric; the magnification to be used for main titles. The
-default is 1.}
-
-\item{x.range}{numeric vectors of length 2; giving the x coordinates ranges.}
-
-\item{cex.axes}{numeric; the magnification to be used for axes. The default
-is 1.}
-
-\item{cex.tag}{numeric; the magnification to be used for tag. The default is
-1.}
-
-\item{PDF}{logical; if \code{TRUE}, then the bar plot will be saved as PDF
-file. The default is \code{FALSE}.}
-
-\item{JPEG}{logical; if \code{TRUE}, then the bar plot will be saved as JPEG
-file. The default is \code{FALSE}.}
-
-\item{pic.width}{numeric; the width of the device; the default is 864.}
-
-\item{point.size}{numeric; pointsize of plotted text; one point is
-approximately one pixel, and the default is 17.}
-
-\item{col.extrem}{a two characters vector; coding the colour of each end.
-The default is c("blue", "red").}
+\item{scalebar}{add or suppress scalebars}
+}
+\value{
+ggplot2 plot
 }
 \description{
-A bar plot of all DoOR responses of a given receptor.
-}
-\details{
-This function is used to visualize the response profile of an odorant
-receptor. The data frame should contain the columns "odor class", "odor
-name", "odor code", "InChIKeyr" and "data". The default color range is blue
-to red (from inhibitory to excitatory). If the data stems not from a merged
-dataset (by using \code{\link{modelRP}}) or the recording values are not
-normalized, only binary colors are used: blue indicates that the value is
-smaller than 0, red indicates that the value is bigger than 0.
+create a barplot of a DoOR response profile
 }
 \examples{
-library(DoOR.data)
-loadRD()
-RP.Or35a<-modelRP(Or35a)
-# save bar plot as pdf flie
-DoORplot_responseProfile(RP.Or35a, tag="Name", PDF=TRUE, file.name="DoORplot_responseProfile.Or35a.pdf")
-
-# save bar plot as jpeg flie
-DoORplot_responseProfile(RP.Or35a, tag="Name", zero="SFR", JPEG=TRUE)
-
-# show bar plot of recording data in decreasing order
-responses<-Or35a[,c(1:4,5)]
-DoORplot_responseProfile(responses[order(responses[,5],decreasing=TRUE),], tag="Name")
+DoORplot_responseProfile(response.matrix, "Or22a")
 }
-\author{
-Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
-}
-\keyword{data}
 
