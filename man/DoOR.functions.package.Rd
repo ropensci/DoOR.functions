@@ -29,10 +29,10 @@ environment . \cr } or, load all odorant reseponse data into a list:
 and compose them as a list.  \cr }
 
 Try some visualizations (e.g. producing the plots from the paper):
-\tabular{ll}{ \code{\link{ALimage}}: \tab response to a chemical mapped onto
-an image of the antennal lobe.\cr \code{\link{comparDiagram}}: \tab compare
-the results of two studies.  \cr \code{\link{ORdotplot}}: \tab Dot Plot of
-Odorant Responses Across Receptors. \cr \code{\link{PlotChemicals}}: \tab
+\tabular{ll}{ \code{\link{DoORplot_ALmap}}: \tab response to a chemical mapped onto
+an image of the antennal lobe.\cr \code{\link{DoORplot_compareProfiles}}: \tab compare
+the results of two studies.  \cr \code{\link{DoORplot_pointMatrix}}: \tab Dot Plot of
+Odorant Responses Across Receptors. \cr \code{\link{DoORplot_responseProfile}}: \tab
 bar plot:one receptor, all chemicals. \cr \code{\link{PlotReceptors}}: \tab
 bar plot: all receptors, one or more chemicals.\cr
 \code{\link{tuningBreadth}}: \tab pyramid diagram depicting a receptor's

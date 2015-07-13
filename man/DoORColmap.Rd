@@ -38,8 +38,8 @@ colscale <- DoORColmap(x=null,color.scale=TRUE)
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
 \seealso{
-\code{\link{rgb}}, \code{\link{colorRamp}}, \code{\link{ALimage}},
-\code{\link{ORdotplot}}, \code{\link{PlotChemicals}},
+\code{\link{rgb}}, \code{\link{colorRamp}}, \code{\link{DoORplot_ALmap}},
+\code{\link{DoORplot_pointMatrix}}, \code{\link{DoORplot_responseProfile}},
 \code{\link{PlotReceptors}}
 }
 \keyword{color}

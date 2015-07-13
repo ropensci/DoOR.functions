@@ -24,6 +24,6 @@ getKey("123-92-2")
 getKey("isopentyl acetate", "Name")
 getKey("C(C(C)C)COC(=O)C", "SMILES")
 
-ALimage(getKey("123-92-2"))
+DoORplot_ALmap(getKey("123-92-2"))
 }
 
