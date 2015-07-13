@@ -16,9 +16,14 @@
 #'
 
 DoORplot_responseMatrix <- function(data,
-                                 tag    = default.val("tag"),
-                                 colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"),
-                                 limits) {
+                                    tag    = default.val("tag"),
+                                    colors = c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f"),
+                                    limits) {
+  
+  if (!requireNamespace("ggplot2", quietly = TRUE))
+    stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
+  if (!requireNamespace("grid", quietly = TRUE))
+    stop("grid is required for AL map plotting, please install via install.packages('grid')", call. = FALSE)
   
   data   <- as.data.frame(data)
   if(missing(limits))
