@@ -6,7 +6,7 @@
 #' @param odorant character; an odorant name (InChIKey)
 #' @param response.vector numerical vector; a vector with responses, if empty this is taken from responseMatrix 
 #' @param responseMatrix DoOR response matrix; response vector will be taken from here, not needed if response.vector is given
-#' @param zero InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector
+#' @param zero InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector; set to NULL if you don't want to subtract anything
 #' @param fill.receptor color code; bar color for receptor tuning curve 
 #' @param fill.odorant  color code; bar color for odorant tuning curve 
 #' @param odor.main the odor identifier to plot, one of colnamed(odor)
