@@ -62,14 +62,14 @@ DoORplot_tuningCurve <- function(receptor,
     data <- data.frame(odorants = 1:length(data), value = data)
     data$odorants <- factor(data$odorants, levels = data$odorants[orderPyramid(data$value)])
     
-    plot <- ggplot(data) + 
-      geom_bar(aes(x = odorants, y = value), stat = "identity", position = "identity", width = 1, fill = fill.receptor) +
-      theme_minimal() +
-      theme(axis.text.x        = element_blank(),
-            axis.ticks.x       = element_blank(),
-            panel.grid.major.x = element_blank(),
-            panel.grid.minor.x = element_blank(),
-            plot.margin        = unit(c(1,.2,.5,-.2),"lines")
+    plot <- ggplot::ggplot(data) + 
+      ggplot::geom_bar(ggplot::aes(x = odorants, y = value), stat = "identity", position = "identity", width = 1, fill = fill.receptor) +
+      ggplot::theme_minimal() +
+      ggplot::theme(axis.text.x        = ggplot::element_blank(),
+                    axis.ticks.x       = ggplot::element_blank(),
+                    panel.grid.major.x = ggplot::element_blank(),
+                    panel.grid.minor.x = ggplot::element_blank(),
+                    plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
       ) +
       ggtitle(bquote(atop(.(
         paste(receptor, sep = "")), 
@@ -90,14 +90,14 @@ DoORplot_tuningCurve <- function(receptor,
     data <- data.frame(receptors = 1:length(data), value = data)
     data$receptors <- factor(data$receptors, levels = data$receptors[orderPyramid(data$value)])
     
-    plot <- ggplot(data) + 
-      geom_bar(aes(x = receptors, y = value), stat = "identity", position = "identity", width = 1, fill = fill.odorant) +
-      theme_minimal() +
-      theme(axis.text.x        = element_blank(),
-            axis.ticks.x       = element_blank(),
-            panel.grid.major.x = element_blank(),
-            panel.grid.minor.x = element_blank(),
-            plot.margin        = unit(c(1,.2,.5,-.2),"lines")
+    plot <- ggplot::ggplot(data) + 
+      ggplot::geom_bar(ggplot::aes(x = receptors, y = value), stat = "identity", position = "identity", width = 1, fill = fill.odorant) +
+      ggplot::theme_minimal() +
+      ggplot::theme(axis.text.x        = ggplot::element_blank(),
+                    axis.ticks.x       = ggplot::element_blank(),
+                    panel.grid.major.x = ggplot::element_blank(),
+                    panel.grid.minor.x = ggplot::element_blank(),
+                    plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
       ) +
       ggtitle(bquote(atop(.(
         paste(odor.main, sep = "")), 
