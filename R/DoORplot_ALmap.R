@@ -59,7 +59,7 @@ DoORplot_ALmap <- function(InChIKey,
   plotdata$response <- response.data$Response[match(plotdata$receptor, response.data$ORs)] # pick responses from response.data
   
   labels <- AL.map$labels
-  labels <- cbind(labels,DoOR.mappings[match(labels$glomerulus, DoOR.mappings$code),c("receptor", "sensillum", "ORN", "co.receptor", "Ors")])
+  labels <- cbind(labels,DoOR.mappings[match(labels$glomerulus, DoOR.mappings$code),c("receptor", "sensillum", "OSN", "co.receptor", "Ors")])
   
   
   main <- odor[match(InChIKey, odor$InChIKey), main]
