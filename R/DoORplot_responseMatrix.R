@@ -9,6 +9,7 @@
 #'
 #' @return a dotplot if limits[1] >= 0  or a heatmap if limits[1] < 0
 #' @export
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples 
 #' tmp <- apply(response.matrix, 2, function(x) resetSFR(x,x["SFR"]))
 #' DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = T))

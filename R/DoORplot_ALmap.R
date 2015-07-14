@@ -17,7 +17,7 @@
 #' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
 #' @export
 #' @return a ggplot2 object
-#'
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
 #' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = F)
 #' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))

@@ -12,7 +12,7 @@
 #'
 #' @return ggplot2 plot
 #' @export
-#'
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples 
 #' DoORplot_responseProfile(response.matrix, "Or22a")
 #' DoORplot_responseProfile(response.matrix, "Or22a", tag = "Name")

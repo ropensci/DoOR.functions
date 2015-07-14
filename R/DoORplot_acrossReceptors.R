@@ -10,7 +10,7 @@
 #'
 #' @return a ggplot object
 #' @export
-#'
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
 #' DoORplot_acrossReceptors(getKey("123-92-2"), tag = "CAS")
 #' DoORplot_acrossReceptors(odor$InChIKey[4:10])
