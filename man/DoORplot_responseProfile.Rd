@@ -31,5 +31,6 @@ create a barplot of a DoOR response profile
 }
 \examples{
 DoORplot_responseProfile(response.matrix, "Or22a")
+DoORplot_responseProfile(response.matrix, "Or22a", tag = "Name")
 }
 
