@@ -68,7 +68,7 @@ default.val <- function(DoOR_default) {
   } # importNewData.R
   
   if (DoOR_default == "odor.data") {
-    if (!exists("odor.data")) {
+    if (!exists("odor")) {
       data(odor)
     }
     return(odor)
