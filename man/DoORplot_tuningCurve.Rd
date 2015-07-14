@@ -2,37 +2,47 @@
 % Please edit documentation in R/DoORplot_tuningCurve.R
 \name{DoORplot_tuningCurve}
 \alias{DoORplot_tuningCurve}
-\title{Receptor tuning breadth}
+\title{DoORplot_tuningCurve}
 \usage{
-DoORplot_tuningCurve(x, ...)
+DoORplot_tuningCurve(receptor, odorant, response.vector,
+  responseMatrix = default.val("response.matrix"),
+  zero = default.val("zero"), fill.receptor = default.val("color.receptor"),
+  fill.odorant = default.val("color.odorant"), odor.main = "Name", limits)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{receptor}{character; a receptor name (one of ORS$OR)}
 
-\item{\dots}{further graphical parameters, see \code{\link{par}}}
+\item{odorant}{character; an odorant name (InChIKey)}
+
+\item{response.vector}{numerical vector; a vector with responses, if empty this is taken from responseMatrix}
+
+\item{responseMatrix}{DoOR response matrix; response vector will be taken from here, not needed if response.vector is given}
+
+\item{zero}{InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector}
+
+\item{fill.receptor}{color code; bar color for receptor tuning curve}
+
+\item{fill.odorant}{color code; bar color for odorant tuning curve}
+
+\item{odor.main}{the odor identifier to plot, one of colnamed(odor)}
+
+\item{limits}{the numerical vector of length 2; y limits for the tuning curve}
+}
+\value{
+a ggplot object
 }
 \description{
-Display the distribution of a receptor's responses (pyramid plot).
-}
-\details{
-This function is used to visualise the response spectrum of a receptor.
-Generalists have a distribution with broad tails, while specialist receptors
-have a distinct peak that decreases sharply towards the tails.
+plot a receptor or odorant tuning curve
 }
 \examples{
-library(DoOR.data)
-data(Or22a)
-x=Or22a[,"Hallem.2006.EN"]
-x<-na.omit(x)
-DoORplot_tuningCurve(x,las=2,main="Tuning Curve:Hallem.2006.EN")
+DoORplot_tuningCurve(odorant = odor$InChIKey[2])
+DoORplot_tuningCurve(receptor = "Or22a")
+
+range <- range(apply(responseMatrix, 2, function(x) resetSFR(x,x[zero])), na.rm = T)
+DoORplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
+
+DoORplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
+
+DoORplot_tuningCurve(odorant = "odor X", response.vector = rnorm(200))
 }
-\references{
-Hallem E. A. & Carlson J. R., 2006, \emph{Coding of odors by a
-receptor repertoire}, Cell, 125:143-160 \cr
-\url{http://www.cell.com/content/article/abstract?uid=PIIS0092867406003631}
-}
-\seealso{
-\code{\link{barplot}}
-}
-\keyword{iplot}
 

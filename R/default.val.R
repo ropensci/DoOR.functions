@@ -44,6 +44,9 @@ default.val <- function(DoOR_default) {
   if (DoOR_default == "tag.ALmap") 	{ return("glomerulus") } # DoORplot_ALmap.R
   if (DoOR_default == "tag") 		      { return("InChIKey") } # DoORplot_responseProfile.R; DoORplot_compareReceptors.R; CreateDatabase.R
   if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
+  if (DoOR_default == "color.receptor") {return("#5A9BD4")}  # DoORplot_tuningCurveReceptor
+  if (DoOR_default == "color.odorant")  {return("#7AC36A")}  # DoORplot_tuningCurveOdorant
+  
   
   ## character vector
   if (DoOR_default == "colors")   { return(c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f")) } # DoORplot_ALmap.R; DoORplot_responseMatrix.R; DoORplot_responseProfile.R; DoORplot_compareReceptors.R
