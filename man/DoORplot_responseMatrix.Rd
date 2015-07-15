@@ -27,4 +27,7 @@ tmp <- apply(response.matrix, 2, function(x) resetSFR(x,x["SFR"]))
 DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = T))
 DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name", limits = range(response.matrix, na.rm = T))
 }
+\author{
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
+}
 

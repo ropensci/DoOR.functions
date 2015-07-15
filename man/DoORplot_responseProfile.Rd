@@ -33,4 +33,7 @@ create a barplot of a DoOR response profile
 DoORplot_responseProfile(response.matrix, "Or22a")
 DoORplot_responseProfile(response.matrix, "Or22a", tag = "Name")
 }
+\author{
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
+}
 

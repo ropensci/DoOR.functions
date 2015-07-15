@@ -29,4 +29,7 @@ barplot of DoOR responses of a set of odorants across all responding units in Do
 DoORplot_acrossReceptors(getKey("123-92-2"), tag = "CAS")
 DoORplot_acrossReceptors(odor$InChIKey[4:10])
 }
+\author{
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
+}
 

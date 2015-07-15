@@ -11,6 +11,7 @@
 #' @param fill.odorant  color code; bar color for odorant tuning curve 
 #' @param odor.main the odor identifier to plot, one of colnamed(odor)
 #' @param limits the numerical vector of length 2; y limits for the tuning curve
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #'
 #' @return a ggplot object
 #' @export
@@ -38,9 +39,9 @@ DoORplot_tuningCurve <- function(receptor,
 ) {
   
   if (!requireNamespace("ggplot2", quietly = TRUE))
-    stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
+    stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
   if (!requireNamespace("grid", quietly = TRUE))
-    stop("grid is required for AL map plotting, please install via install.packages('grid')", call. = FALSE)
+    stop("grid is required for plotting, please install via install.packages('grid')", call. = FALSE)
   
   if(missing(receptor) & missing (odorant))
     stop("either receptor or odorant has to be specified")
@@ -62,14 +63,14 @@ DoORplot_tuningCurve <- function(receptor,
     data <- data.frame(odorants = 1:length(data), value = data)
     data$odorants <- factor(data$odorants, levels = data$odorants[orderPyramid(data$value)])
     
-    plot <- ggplot::ggplot(data) + 
-      ggplot::geom_bar(ggplot::aes(x = odorants, y = value), stat = "identity", position = "identity", width = 1, fill = fill.receptor) +
-      ggplot::theme_minimal() +
-      ggplot::theme(axis.text.x        = ggplot::element_blank(),
-                    axis.ticks.x       = ggplot::element_blank(),
-                    panel.grid.major.x = ggplot::element_blank(),
-                    panel.grid.minor.x = ggplot::element_blank(),
-                    plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
+    plot <- ggplot2::ggplot(data) + 
+      ggplot2::geom_bar(ggplot2::aes(x = odorants, y = value), stat = "identity", position = "identity", width = 1, fill = fill.receptor) +
+      ggplot2::theme_minimal() +
+      ggplot2::theme(axis.text.x        = ggplot2::element_blank(),
+                     axis.ticks.x       = ggplot2::element_blank(),
+                     panel.grid.major.x = ggplot2::element_blank(),
+                     panel.grid.minor.x = ggplot2::element_blank(),
+                     plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
       ) +
       ggtitle(bquote(atop(.(
         paste(receptor, sep = "")), 
@@ -90,14 +91,14 @@ DoORplot_tuningCurve <- function(receptor,
     data <- data.frame(receptors = 1:length(data), value = data)
     data$receptors <- factor(data$receptors, levels = data$receptors[orderPyramid(data$value)])
     
-    plot <- ggplot::ggplot(data) + 
-      ggplot::geom_bar(ggplot::aes(x = receptors, y = value), stat = "identity", position = "identity", width = 1, fill = fill.odorant) +
-      ggplot::theme_minimal() +
-      ggplot::theme(axis.text.x        = ggplot::element_blank(),
-                    axis.ticks.x       = ggplot::element_blank(),
-                    panel.grid.major.x = ggplot::element_blank(),
-                    panel.grid.minor.x = ggplot::element_blank(),
-                    plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
+    plot <- ggplot2::ggplot(data) + 
+      ggplot2::geom_bar(ggplot2::aes(x = receptors, y = value), stat = "identity", position = "identity", width = 1, fill = fill.odorant) +
+      ggplot2::theme_minimal() +
+      ggplot2::theme(axis.text.x        = ggplot2::element_blank(),
+                     axis.ticks.x       = ggplot2::element_blank(),
+                     panel.grid.major.x = ggplot2::element_blank(),
+                     panel.grid.minor.x = ggplot2::element_blank(),
+                     plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
       ) +
       ggtitle(bquote(atop(.(
         paste(odor.main, sep = "")), 

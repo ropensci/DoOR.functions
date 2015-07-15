@@ -55,6 +55,8 @@ ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 }
 \author{
 Daniel Münch \email{daniel.muench@uni-konstanz.de}
+
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
 \references{
 Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697

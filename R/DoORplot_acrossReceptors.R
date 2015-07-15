@@ -21,7 +21,7 @@ DoORplot_acrossReceptors <- function(odorants,
                                      tag  = "Name",
                                      limits) {
   if (!requireNamespace("ggplot2", quietly = TRUE))
-    stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
+    stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
   
   if (!is.null(zero)) 
     responseMatrix <- as.data.frame(apply(responseMatrix, 2, function(x) resetSFR(x,x[zero])))
@@ -34,17 +34,17 @@ DoORplot_acrossReceptors <- function(odorants,
   if(tag != "InChIKey")
     data$odorant <- odor[match(data$odorant, odor$InChIKey), tag]
   
-  plot <- ggplot(data, aes(x = odorant, y = value, fill = odorant, color = odorant)) + 
-    geom_bar(stat = "identity", position = "identity", alpha = .6) + 
-    facet_wrap( ~ dataset) + 
-    theme_minimal() + 
-    theme(panel.border = element_rect(fill = NA, color = "grey"),
-          axis.ticks.x = element_blank(),
-          axis.text.x = element_blank(), 
-          axis.title.x = element_blank()) 
+  plot <- ggplot2::ggplot(data, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) + 
+    ggplot2::geom_bar(stat = "identity", position = "identity", alpha = .6) + 
+    ggplot2::facet_wrap( ~ dataset) + 
+    ggplot2::theme_minimal() + 
+    ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA, color = "grey"),
+                   axis.ticks.x = ggplot2::element_blank(),
+                   axis.text.x = ggplot2::element_blank(), 
+                   axis.title.x = ggplot2::element_blank()) 
   
   if(!missing(limits)) 
-    plot <- plot + coord_cartesian(ylim = limits)
+    plot <- plot + ggplot2::coord_cartesian(ylim = limits)
   
   return(plot)
   

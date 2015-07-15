@@ -23,8 +23,9 @@ DoORplot_acrossOSNs <- function(odorants,
                                 zero = default.val("zero"), 
                                 tag  = "Name", 
                                 plot.type = 1) {
+  
   if (!requireNamespace("ggplot2", quietly = TRUE))
-    stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
+    stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
   
   if (!is.null(zero)) 
     responseMatrix <- as.data.frame(apply(responseMatrix, 2, function(x) resetSFR(x,x[zero])))
@@ -53,7 +54,7 @@ DoORplot_acrossOSNs <- function(odorants,
   # resort group levels (the fast, less failsave way)
   data$group <- factor(data$group)
   data$group <- factor(data$group, levels = levels(data$group)[c(3:21, 1:2, 22:length(levels(data$group)))])
-
+  
   if (plot.type == 1) { 
     plot <- ggplot2::ggplot(data, ggplot2::aes(x = OSN, y = value, fill = OSN, color = OSN)) + 
       ggplot2::geom_bar(stat = "identity", position = "identity", alpha = .6) + 

@@ -143,10 +143,10 @@ identifySensillum <- function(recording,
   
   #build grobs
   for(i in 1:length(units)) {
-    plots[[i]] <- arrangeGrob(get(paste("r",i,sep=".")) + theme(legend.position = "none"),
-                              get(paste("p",i,sep=".")) + theme(legend.position = "none"), 
-                              left = paste("unit",i),
-                              nrow = 1, widths = c(.2,.8))
+    plots[[i]] <- gridExtra::arrangeGrob(get(paste("r",i,sep=".")) + ggplot2::theme(legend.position = "none"),
+                                         get(paste("p",i,sep=".")) + ggplot2::theme(legend.position = "none"), 
+                                         left = paste("unit",i),
+                                         nrow = 1, widths = c(.2,.8))
   }
   
   if(method == "dist")
@@ -154,7 +154,7 @@ identifySensillum <- function(recording,
   if(method == "cor")
     plots[["main"]] <- paste(nshow, "highest correlations")
   
-  p <- do.call(arrangeGrob, plots)
+  p <- do.call(gridExtra::arrangeGrob, plots)
   
   
   if(ret == "plot")

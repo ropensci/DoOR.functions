@@ -32,16 +32,16 @@
 #' ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
 DoORplot_ALmap <- function(InChIKey,
-                    responseMatrix = default.val("response.matrix"),
-                    zero = default.val("zero"),
-                    tag =  default.val("tag.ALmap"), 
-                    main = "Name",
-                    scalebar = default.val("scalebar"),
-                    DoOR.mappings = default.val("DoOR.mappings"),
-                    AL.map = default.val("AL.map"),
-                    colors = default.val("colors"),
-                    legend = T,
-                    limits) {
+                           responseMatrix = default.val("response.matrix"),
+                           zero = default.val("zero"),
+                           tag =  default.val("tag.ALmap"), 
+                           main = "Name",
+                           scalebar = default.val("scalebar"),
+                           DoOR.mappings = default.val("DoOR.mappings"),
+                           AL.map = default.val("AL.map"),
+                           colors = default.val("colors"),
+                           legend = T,
+                           limits) {
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
   if (!requireNamespace("grid", quietly = TRUE))
@@ -63,7 +63,7 @@ DoORplot_ALmap <- function(InChIKey,
   
   
   main <- odor[match(InChIKey, odor$InChIKey), main]
-
+  
   
   
   p <- ggplot2::ggplot(data = plotdata) + 
@@ -91,19 +91,19 @@ DoORplot_ALmap <- function(InChIKey,
   
   if(scalebar == F) 
     p <- p + ggplot2::theme(legend.position = "none")
-
+  
   if(legend == T) {
-  x1 <- 118; x2 <- x1 + 34; x3 <- x2 + 19.5; y <- -20; lsize <- 10
-  p <- p + 
-    ggplot2::annotate("rect", 
-             xmin = c(x1, x2, x3) , 
-             xmax = c(x1+lsize, x2+lsize, x3+lsize), 
-             ymin = y, ymax = y+lsize, 
-             fill = c("grey45", "grey65", "grey80")) + 
-    ggplot2::annotate("text", 
-             x = c(x1+lsize+1.5, x2+lsize+1.5, x3+lsize+1.5) , 
-             y = y + lsize / 2 , 
-             label = c("unmapped", "NA", "background"), hjust = 0, size = 3.5)
+    x1 <- 118; x2 <- x1 + 34; x3 <- x2 + 19.5; y <- -20; lsize <- 10
+    p <- p + 
+      ggplot2::annotate("rect", 
+                        xmin = c(x1, x2, x3) , 
+                        xmax = c(x1 + lsize, x2 + lsize, x3 + lsize), 
+                        ymin = y, ymax = y+lsize, 
+                        fill = c("grey45", "grey65", "grey80")) + 
+      ggplot2::annotate("text", 
+                        x = c(x1 + lsize + 1.5, x2 + lsize + 1.5, x3 + lsize + 1.5) , 
+                        y = y + lsize / 2 , 
+                        label = c("unmapped", "NA", "background"), hjust = 0, size = 3.5)
   }
   
   return(p)

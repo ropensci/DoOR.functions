@@ -45,4 +45,7 @@ DoORplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
 
 DoORplot_tuningCurve(odorant = "odor X", response.vector = rnorm(200))
 }
+\author{
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
+}
 

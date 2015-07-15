@@ -22,9 +22,9 @@ DoORplot_responseMatrix <- function(data,
                                     limits) {
   
   if (!requireNamespace("ggplot2", quietly = TRUE))
-    stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
+    stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
   if (!requireNamespace("grid", quietly = TRUE))
-    stop("grid is required for AL map plotting, please install via install.packages('grid')", call. = FALSE)
+    stop("grid is required for plotting, please install via install.packages('grid')", call. = FALSE)
   
   data   <- as.data.frame(data)
   if(missing(limits))

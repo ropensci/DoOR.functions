@@ -25,4 +25,7 @@ prepare odor response data for plotting via ggplot2
 head(DoORmelt(Or22a, datasets = c("Hallem.2004.WT", "Pelz.2006.AntEC50")))
 head(DoORmelt(response.matrix[1:100,], na.rm = T))
 }
+\author{
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
+}
 

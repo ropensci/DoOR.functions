@@ -16,41 +16,40 @@
 #' @examples 
 #' DoORplot_responseProfile(response.matrix, "Or22a")
 #' DoORplot_responseProfile(response.matrix, "Or22a", tag = "Name")
-DoORplot_responseProfile <-
-  function(data,
-           receptor,
-           tag = default.val("tag"),
-           colored = T,
-           colors = default.val("colors"),
-           limits,
-           scalebar = default.val("scalebar")
-  ) {
-    
-    if(missing(limits) & colored == T)
-      limits <- range(data, na.rm=T)
-    
-    data <- na.omit(data.frame(odorant = rownames(data), value = data[,receptor]))
-    if(tag != "InChIKey") 
-      data$odorant <- odor[match(data$odorant, odor$InChIKey),tag]
-    data <- data[order(data$value),]
-    data$odorant <- factor(data$odorant, levels = data$odorant)
-
-    plot <- ggplot(data, ggplot2::aes(x = odorant, y = value)) + 
-      theme_minimal() +
-      coord_flip(ylim = limits) +
-      ggtitle(receptor)
-    
-    if(colored == T) {
-      plot <- plot + geom_bar(aes(fill = value), stat = "identity", position = "identity", color = "lightgrey") +
-        scale_fill_gradientn(colours = colors, space = "rgb", values = DoOR.functions:::DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits)
-    } else {
-      plot <- plot + geom_bar(stat = "identity", position = "identity", width = .9)
-    }
-    
-    if(scalebar == FALSE) {
-      plot <- plot + theme(legend.position = "none")
-    }
-    
-    return(plot)
-    
+DoORplot_responseProfile <- function(data,
+                                     receptor,
+                                     tag = default.val("tag"),
+                                     colored = T,
+                                     colors = default.val("colors"),
+                                     limits,
+                                     scalebar = default.val("scalebar")
+) {
+  
+  if(missing(limits) & colored == T)
+    limits <- range(data, na.rm=T)
+  
+  data <- na.omit(data.frame(odorant = rownames(data), value = data[,receptor]))
+  if(tag != "InChIKey") 
+    data$odorant <- odor[match(data$odorant, odor$InChIKey),tag]
+  data <- data[order(data$value),]
+  data$odorant <- factor(data$odorant, levels = data$odorant)
+  
+  plot <- ggplot2::ggplot(data, ggplot2::aes(x = odorant, y = value)) + 
+    ggplot2::theme_minimal() +
+    ggplot2::coord_flip(ylim = limits) +
+    ggplot2::ggtitle(receptor)
+  
+  if(colored == T) {
+    plot <- plot + ggplot2::geom_bar(ggplot2::aes(fill = value), stat = "identity", position = "identity", color = "lightgrey") +
+      ggplot2::scale_fill_gradientn(colours = colors, space = "rgb", values = DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits)
+  } else {
+    plot <- plot + ggplot2::geom_bar(stat = "identity", position = "identity", width = .9)
   }
+  
+  if(scalebar == FALSE) {
+    plot <- plot + ggplot2::theme(legend.position = "none")
+  }
+  
+  return(plot)
+  
+}
