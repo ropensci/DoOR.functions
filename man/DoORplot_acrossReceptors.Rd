@@ -26,7 +26,7 @@ a ggplot object
 barplot of DoOR responses of a set of odorants across all responding units in DoOR
 }
 \examples{
-DoORplot_acrossReceptors(getKey("123-92-2"), tag = "CAS")
+DoORplot_acrossReceptors(transID("123-92-2"), tag = "CAS")
 DoORplot_acrossReceptors(odor$InChIKey[4:10])
 }
 \author{

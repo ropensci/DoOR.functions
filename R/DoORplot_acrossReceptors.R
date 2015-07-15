@@ -12,7 +12,7 @@
 #' @export
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
-#' DoORplot_acrossReceptors(getKey("123-92-2"), tag = "CAS")
+#' DoORplot_acrossReceptors(transID("123-92-2"), tag = "CAS")
 #' DoORplot_acrossReceptors(odor$InChIKey[4:10])
 #' 
 DoORplot_acrossReceptors <- function(odorants,

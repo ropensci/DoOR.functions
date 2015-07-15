@@ -28,7 +28,7 @@ plot the activation patterns of one or several odorants across OSNs
 DoOR response profiles will be selected and ordered according to the OSNs they are related to. Several DoOR response profiles might exist for a given OSN (e.g. one for the OSN itself and one for the OSNs misexpressed receptor protein) but only one will be shown. Which DoOR profile is mapped to which OSN is controlled via the "code.OSN" column in \code{DoORmapings}.
 }
 \examples{
-odorants <- sapply(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), function(x) getKey(x, type = "Name"))
+odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), "Name", "InChIKey")
 DoORplot_acrossOSNs(odorants)
 DoORplot_acrossOSNs(odorants, plot.type = 2)
 }
