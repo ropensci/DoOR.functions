@@ -22,13 +22,13 @@
 #' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = F)
 #' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #' 
-#' DoORplot_ALmap(getKey("123-92-2"), scalebar = F) + 
+#' DoORplot_ALmap(transID("123-92-2"), scalebar = F) + 
 #' theme(legend.position  = "bottom", 
 #'       panel.background = element_rect(fill = "grey90", color = NA)) + 
 #' ggtitle("responses elicited by isopentyl acetate")
 #' 
 #' \dontrun{
-#' p <- DoORplot_ALmap(getKey("123-92-2"))
+#' p <- DoORplot_ALmap(transID("123-92-2"))
 #' ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
 DoORplot_ALmap <- function(InChIKey,

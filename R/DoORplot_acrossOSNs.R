@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' odorants <- sapply(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), function(x) getKey(x, type = "Name"))
+#' odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), "Name", "InChIKey")
 #' DoORplot_acrossOSNs(odorants)
 #' DoORplot_acrossOSNs(odorants, plot.type = 2)
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>

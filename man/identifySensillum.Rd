@@ -32,7 +32,7 @@ either a plot with responses sorted by highest correlations or lowest distances
 correlates the result from a SSR recording of several odorants against all DoOR response profiles
 }
 \examples{
-recording <- data.frame(odorants = c(getKey("BEDN", "Code"), getKey("ETAS", "Code"), getKey("carbon dioxide", "Name")), unit1 = c(.9,.1,.1), unit2 = c(0, .1, 1) )
+recording <- data.frame(odorants = c(transID(c("BEDN", "ETAS"), "Code"), transID("carbon dioxide", "Name")), unit1 = c(.9,.1,.1), unit2 = c(0, .1, 1) )
 identifySensillum(recording)
 identifySensillum(recording, method = "dist", nshow = 5)
 }
