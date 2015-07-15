@@ -11,4 +11,6 @@ Description: This is a function package providing functions to perform data mani
 License: GPLv3
 Suggests:
   DoOR.data,
-  ggplot2
+  ggplot2, 
+  grid,
+  gridExtra
