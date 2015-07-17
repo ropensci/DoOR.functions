@@ -9,8 +9,10 @@ URL: http://neuro.uni.kn/DoOR
 Maintainer: Daniel Muench <daniel.muench@uni-konstanz.de>
 Description: This is a function package providing functions to perform data manipulations and visualizations for DoOR.data. 
 License: GPLv3
-Suggests:
+Suggests: 
   DoOR.data,
   ggplot2, 
   grid,
-  gridExtra
+  gridExtra,
+    knitr
+VignetteBuilder: knitr
