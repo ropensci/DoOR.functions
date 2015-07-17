@@ -19,7 +19,6 @@
 #' DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = T))
 #' DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name", limits = range(response.matrix, na.rm = T))
 #' 
-
 DoORplot_responseMatrix <- function(data,
                                     tag    = default.val("tag"),
                                     colors = default.val("colors"),
