@@ -5,14 +5,20 @@
 \title{DoORplot_responseMatrix}
 \usage{
 DoORplot_responseMatrix(data, tag = default.val("tag"),
-  colors = default.val("colors"), limits)
+  colors = default.val("colors"), bw = FALSE, point = FALSE, limits)
 }
 \arguments{
 \item{data}{a subset of e.g. response.matrix}
 
 \item{tag}{the chemical identfier to plot (one of colnames(odor))}
 
-\item{colors}{the colors to use if negative values are supplied (range of 5 colors, 2 for negative values, 1 for 0 and 3 for positive values)}
+\item{colors}{the colors to use if negative values are supplied (range of 5
+colors, 2 for negative values, 1 for 0 and 3 for positive values)}
+
+\item{bw}{logical; whether to plot b&w or colored}
+
+\item{point}{logical; if \code{TRUE} a point matrix instead of a heatmap will
+  be returned (the default if you supply only positive values)}
 
 \item{limits}{the limits of the scale, will be calculated if not set}
 }

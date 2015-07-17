@@ -1,12 +1,16 @@
 #' DoORplot_responseMatrix
 #' 
 #' plot DoOR responses as a point matrix
-#'
+#' 
 #' @param data a subset of e.g. response.matrix
 #' @param tag the chemical identfier to plot (one of colnames(odor))
-#' @param colors the colors to use if negative values are supplied (range of 5 colors, 2 for negative values, 1 for 0 and 3 for positive values)
+#' @param colors the colors to use if negative values are supplied (range of 5
+#'   colors, 2 for negative values, 1 for 0 and 3 for positive values)
 #' @param limits the limits of the scale, will be calculated if not set
-#'
+#' @param bw logical; whether to plot b&w or colored
+#' @param point logical; if \code{TRUE} a point matrix instead of a heatmap will
+#'   be returned (the default if you supply only positive values)
+#'   
 #' @return a dotplot if limits[1] >= 0  or a heatmap if limits[1] < 0
 #' @export
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
@@ -14,11 +18,13 @@
 #' tmp <- apply(response.matrix, 2, function(x) resetSFR(x,x["SFR"]))
 #' DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = T))
 #' DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name", limits = range(response.matrix, na.rm = T))
-#'
+#' 
 
 DoORplot_responseMatrix <- function(data,
                                     tag    = default.val("tag"),
                                     colors = default.val("colors"),
+                                    bw     = FALSE,
+                                    point  = FALSE,
                                     limits) {
   
   if (!requireNamespace("ggplot2", quietly = TRUE))
@@ -27,28 +33,64 @@ DoORplot_responseMatrix <- function(data,
     stop("grid is required for plotting, please install via install.packages('grid')", call. = FALSE)
   
   data   <- as.data.frame(data)
+  
+  # define limits and map colors of the colorscale
   if(missing(limits))
     limits <- range(data, na.rm=T)
+  
+  if(limits[1] < 0) {
+    values <- DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
+  } else {
+    values <- DoORnorm(c(0, limits[2]/3, limits[2]/1.5, limits[2]))
+    colors <- colors[3:6]
+  }
+
   data   <- DoORmelt(data = data, na.rm = T)
   
   if(tag != "InChIKey") 
     data$odorant <- odor[match(data$odorant, odor$InChIKey),tag]
+
+  if(bw == T & point == F) {
+    bw <- F
+    message("Plotting black&white heatmaps does not work, ignoring 'bw = T' ")
+  }
   
-  
-  
-  
+  if(bw == T & point == T) {
+    bw <- F
+    message("Sorry, but we can't plot negative sized points, ignoring 'bw = FALSE'.")
+  }
+
+  if(missing(point) & missing(bw) & limits[1] >= 0) {
+    point <- T
+    bw    <- T
+    message("Only positive values, returning b&w point plot.")
+  }
+
   plot <- ggplot2::ggplot(data, ggplot2::aes(y = odorant, x = dataset)) + 
     ggplot2::theme_minimal() + 
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0, vjust = .5))
   
-  if(limits[1] < 0) {
-    plot <- plot + 
-      ggplot2::geom_tile(ggplot2::aes(fill = value)) +
-      ggplot2::scale_fill_gradientn(colours  = colors, space="rgb", 
-                                    values   = DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),
-                                    limits   = limits)
+  if(bw == F & point == F)
+    plot <- plot + ggplot2::scale_fill_gradientn(colours  = colors, space="rgb", values = values, limits  = limits)
+  if(bw == F & point == T)
+    plot <- plot + ggplot2::scale_color_gradientn(colours  = colors, space="rgb", values = values, limits  = limits)
+  
+  if(point == F) {
+    plot <- plot + ggplot2::geom_tile(ggplot2::aes(fill = value))
   } else {
-    plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value), alpha = .6) 
+    if(bw == F) {
+      if(limits[1] < 0) {
+        plot <- plot + ggplot2::geom_point(ggplot2::aes(size = abs(value), color = value), alpha = .6)
+      } else {
+        plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value, color = value), alpha = .6) 
+      }
+    } else {
+      if(limits[1] < 0) {
+        stop("Sorry, but we can't plot negative sized points, please try again with 'bw = FALSE'.")
+      } else {
+        plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value), alpha = .6)  
+      }
+    }
   }
   
   return(plot)
