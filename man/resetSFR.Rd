@@ -7,9 +7,9 @@
 resetSFR(x, sfr)
 }
 \arguments{
-\item{x}{a numeric vector of input values.}
+\item{x}{numeric or DoOR response matrix; input values}
 
-\item{sfr}{a numeric parameter, indicating spontaneous firing rate value.}
+\item{sfr}{numeric or character; either a value to subtract if x is a vector or an InChIKey if x is a DoOR response matrix}
 }
 \description{
 A function for reseting SFR to zero
@@ -20,10 +20,9 @@ Performs a simple subtraction of the SFR value.
 \examples{
 library(DoOR.data)
 data(response.matrix)
-response.matrix.SFRreset <- apply(response.matrix, 2, function(x) resetSFR(x,x['SFR']))
+response.matrix.SFRreset <- resetSFR(response.matrix, "SFR")
 }
 \author{
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
-\keyword{math}
 
