@@ -13,6 +13,6 @@ Suggests:
   DoOR.data,
   ggplot2, 
   grid,
-  gridExtra,
+  gridExtra (>= 2.0.0),
     knitr
 VignetteBuilder: knitr
