@@ -9,7 +9,7 @@ DoORplot_ALmap(InChIKey, responseMatrix = default.val("response.matrix"),
   main = "Name", scalebar = default.val("scalebar"),
   DoOR.mappings = default.val("DoOR.mappings"),
   AL.map = default.val("AL.map"), colors = default.val("colors"),
-  legend = T, limits)
+  legend = T, limits, base_size = 12)
 }
 \arguments{
 \item{InChIKey}{InChIKey specifying the odorant to plot}

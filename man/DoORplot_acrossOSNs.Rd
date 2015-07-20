@@ -5,18 +5,23 @@
 \title{DoORplot_acrossOSNs}
 \usage{
 DoORplot_acrossOSNs(odorants, responseMatrix = default.val("response.matrix"),
-  zero = default.val("zero"), tag = "Name", plot.type = 1)
+  sub, zero = default.val("zero"), tag = "Name", plot.type = 1,
+  base_size = 12)
 }
 \arguments{
 \item{odorants}{character vector; one or several InChIKeys}
 
 \item{responseMatrix}{DOOR response matrix; contains the data to plot}
 
+\item{sub}{character vector; specify one or several classes of sensilla the plot should be restricted to. One or several of: "ab" "ac", "at", "ai", "pb", "sacI", "sacII"}
+
 \item{zero}{character; InChIKey of the odorant that should be set to 0 (e.g. SFR)}
 
 \item{tag}{character; the chemical identifier to use in the plot, one of \code{colnames(odor)}}
 
 \item{plot.type}{interger; 1 or 2, defining the type of plot (1: facet_grid of odorants * sensillae; 2: facet_wrap across OSNs)}
+
+\item{base_size}{numeric; the base font size for the ggplot2 plot}
 }
 \value{
 a ggplot2 object
@@ -30,6 +35,7 @@ DoOR response profiles will be selected and ordered according to the OSNs they a
 \examples{
 odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), "Name", "InChIKey")
 DoORplot_acrossOSNs(odorants)
+DoORplot_acrossOSNs(odorants, sub = c("ac", "at"))
 DoORplot_acrossOSNs(odorants, plot.type = 2)
 }
 \author{

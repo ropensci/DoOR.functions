@@ -4,17 +4,20 @@
 \alias{DoORplot_compareProfiles}
 \title{Compare two response profiles}
 \usage{
-DoORplot_compareProfiles(x, y, by.x, by.y, tag = default.val(DoOR_default =
-  "tag"))
+DoORplot_compareProfiles(x, y, by.x, by.y, tag = "Name", base_size = 12)
 }
 \arguments{
-\item{x,y}{data frames; if only x is given, both data sets are taken from x}
+\item{x}{}
+
+\item{y}{}
 
 \item{by.x}{character string; specifying a column in x}
 
 \item{by.y}{character string; specifying a column in y}
 
-\item{tag}{name of the column that holds the chemical identifiers for merging the data (will also be used as label)}
+\item{tag}{character; the chemical identifier that will be used as odorant label.}
+
+\item{base_size}{numeric; the base font size for the ggplot2 plot}
 }
 \description{
 Orderdered bar plots for two studies, allowing for an easy comparison of the

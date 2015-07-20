@@ -4,24 +4,30 @@
 \alias{DoORplot_responseProfile}
 \title{DoORplot_responseProfile}
 \usage{
-DoORplot_responseProfile(data, receptor, tag = default.val("tag"),
+DoORplot_responseProfile(receptor,
+  responseMatrix = default.val("response.matrix"), tag = default.val("tag"),
   colored = T, colors = default.val("colors"), limits,
-  scalebar = default.val("scalebar"))
+  zero = default.val("zero"), scalebar = default.val("scalebar"),
+  base_size = 12)
 }
 \arguments{
-\item{data}{a DoOR response.matrix}
+\item{receptor}{character; receptor name, any of colnames(response.matrix)}
 
-\item{receptor}{character string, receptor name, any of colnames(response.matrix)}
+\item{responseMatrix}{a DoOR response.matrix}
 
-\item{tag}{chemical identifier for annotation}
+\item{tag}{character; chemical identifier for annotation}
 
-\item{colored}{color code the bars according to the response value?}
+\item{colored}{logical; color code the bars according to the response value?}
 
-\item{colors}{a vector of 5 colors (2 for values < 0, 1 value for 0 and 3 values > 0)}
+\item{colors}{character vector; a vector of 5 colors (2 for values < 0, 1 value for 0 and 3 values > 0)}
 
-\item{limits}{the limits for the colorscale and the x axis, global range of data will be used if empty}
+\item{limits}{numeric of length 2; the limits for the colorscale and the x axis, global range of data will be used if empty}
 
-\item{scalebar}{add or suppress scalebars}
+\item{zero}{character; the odorant response that is set to 0, defaults to "SFR"}
+
+\item{scalebar}{logical; add or suppress scalebars}
+
+\item{base_size}{numeric; the base font size for the ggplot2 plot}
 }
 \value{
 ggplot2 plot

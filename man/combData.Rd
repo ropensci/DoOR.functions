@@ -17,7 +17,7 @@ column will be combined into data1.}
 \item{assigned.name}{charater string; assigning a name to combined column.}
 }
 \description{
-Combine two data into one byInChIKey
+Combine two data sets into one byInChIKey
 }
 \details{
 Data frames are merged by InChIKey.

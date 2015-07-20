@@ -6,7 +6,7 @@
 \usage{
 DoORplot_acrossReceptors(odorants,
   responseMatrix = default.val("response.matrix"),
-  zero = default.val("zero"), tag = "Name", limits)
+  zero = default.val("zero"), tag = "Name", limits, base_size = base_size)
 }
 \arguments{
 \item{odorants}{character vecto; one or several InChIKeys}
@@ -18,6 +18,8 @@ DoORplot_acrossReceptors(odorants,
 \item{tag}{character; the chemical identifier to plot as odorant name (one of colnames(odor))}
 
 \item{limits}{numeric of length 2; if provided the ylim will range accordingly}
+
+\item{base_size}{numeric; the base font size for the ggplot2 plot}
 }
 \value{
 a ggplot object

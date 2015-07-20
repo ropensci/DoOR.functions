@@ -7,7 +7,8 @@
 DoORplot_tuningCurve(receptor, odorant, response.vector,
   responseMatrix = default.val("response.matrix"),
   zero = default.val("zero"), fill.receptor = default.val("color.receptor"),
-  fill.odorant = default.val("color.odorant"), odor.main = "Name", limits)
+  fill.odorant = default.val("color.odorant"), odor.main = "Name", limits,
+  base_size = 12)
 }
 \arguments{
 \item{receptor}{character; a receptor name (one of ORS$OR)}
@@ -18,7 +19,7 @@ DoORplot_tuningCurve(receptor, odorant, response.vector,
 
 \item{responseMatrix}{DoOR response matrix; response vector will be taken from here, not needed if response.vector is given}
 
-\item{zero}{InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector; set to NULL if you don't want to subtract anything}
+\item{zero}{InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector; set to "" if you don't want to subtract anything}
 
 \item{fill.receptor}{color code; bar color for receptor tuning curve}
 
@@ -27,6 +28,8 @@ DoORplot_tuningCurve(receptor, odorant, response.vector,
 \item{odor.main}{the odor identifier to plot, one of colnamed(odor)}
 
 \item{limits}{the numerical vector of length 2; y limits for the tuning curve}
+
+\item{base_size}{numeric; the base font size for the ggplot2 plot}
 }
 \value{
 a ggplot object
