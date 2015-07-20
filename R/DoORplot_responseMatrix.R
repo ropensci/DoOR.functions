@@ -10,6 +10,7 @@
 #' @param bw logical; whether to plot b&w or colored
 #' @param point logical; if \code{TRUE} a point matrix instead of a heatmap will
 #'   be returned (the default if you supply only positive values)
+#' @param base_size numeric; the base font size for the ggplot2 plot
 #'   
 #' @return a dotplot if limits[1] >= 0  or a heatmap if limits[1] < 0
 #' @export
@@ -24,7 +25,8 @@ DoORplot_responseMatrix <- function(data,
                                     colors = default.val("colors"),
                                     bw     = FALSE,
                                     point  = FALSE,
-                                    limits) {
+                                    limits, 
+                                    base_size = 12) {
   
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
@@ -66,7 +68,7 @@ DoORplot_responseMatrix <- function(data,
   }
 
   plot <- ggplot2::ggplot(data, ggplot2::aes(y = odorant, x = dataset)) + 
-    ggplot2::theme_minimal() + 
+    ggplot2::theme_minimal(base_size = base_size) + 
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0, vjust = .5))
   
   if(bw == F & point == F)
