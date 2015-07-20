@@ -76,14 +76,14 @@ identifySensillum <- function(recording,
   
   if (method == "dist") {
     # calc distances
-    units <- colnames(recording)[-1]
-    result  <- rbind(t(recording[,-1]), t(data))
-    result  <- as.matrix(dist(result))
-    result  <- result[(length(units)+1):nrow(result), 1:length(units)]
-    result  <- data.frame(receptor  = rownames(result), 
-                          sensillum = DoOR.mappings$sensillum[match(rownames(result), DoOR.mappings$receptor)],
-                          OSN = DoOR.mappings$OSN[match(rownames(result), DoOR.mappings$receptor)],
-                          result)
+    units  <- colnames(recording)[-1]
+    result <- rbind(t(recording[,-1]), t(data))
+    result <- as.matrix(dist(result))
+    result <- result[(length(units)+1):nrow(result), 1:length(units)]
+    result <- data.frame(receptor  = rownames(result), 
+                         sensillum = DoOR.mappings$sensillum[match(rownames(result), DoOR.mappings$receptor)],
+                         OSN = DoOR.mappings$OSN[match(rownames(result), DoOR.mappings$receptor)],
+                         result)
   }
   
   
@@ -114,7 +114,7 @@ identifySensillum <- function(recording,
     
     
     p <- ggplot2::ggplot(data.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
-      geom_bar(position = "identity", stat = "identity", alpha = .6) + 
+      ggplot2::geom_bar(position = "identity", stat = "identity", alpha = .6) + 
       ggplot2::facet_wrap(~ label, nrow = 1) +
       ggplot2::theme_minimal() + 
       ggplot2::theme(panel.border  = ggplot2::element_rect(fill = NA, color = "grey"),
@@ -127,7 +127,7 @@ identifySensillum <- function(recording,
   # plot recording
   
   for(i in 1:length(units)) {
-    rec.tmp <- data.frame(odorant = recording$odorants, value = recording[,units[i]])
+    rec.tmp <- data.frame(odorant = recording$odorants, value = recording[,units[i]], unit = paste0(units[i], "\n"))
     
     r <- ggplot2::ggplot(rec.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
       ggplot2::geom_bar(position = "identity", stat = "identity", alpha=.6) + 
@@ -137,25 +137,30 @@ identifySensillum <- function(recording,
                      axis.text.x   = ggplot2::element_blank(), 
                      axis.title.x  = ggplot2::element_blank()) + 
       #ggplot2::ggtitle(paste("unit", i, sep="")) +
-      ggplot2::geom_text(aes(y = .01, label = odorant), angle = 90, hjust = 0, vjust = .5, size = 3, color = "black")
+      ggplot2::facet_wrap(~ unit) +
+      ggplot2::geom_text(ggplot2::aes(y = .01, label = odorant), angle = 90, hjust = 0, vjust = .5, size = 3, color = "black")
     assign(paste("r",i,sep="."),r)
   }
   
   #build grobs
   for(i in 1:length(units)) {
-    plots[[i]] <- gridExtra::arrangeGrob(get(paste("r",i,sep=".")) + ggplot2::theme(legend.position = "none"),
-                                         get(paste("p",i,sep=".")) + ggplot2::theme(legend.position = "none"), 
-                                         left = paste("unit",i),
-                                         nrow = 1, widths = c(.2,.8))
+    plots[[i]] <- gridExtra::arrangeGrob(grobs = list(
+      get(paste("r",i,sep=".")) + ggplot2::theme(legend.position = "none"),
+      get(paste("p",i,sep=".")) + ggplot2::theme(legend.position = "none")
+    ), 
+    left = paste("unit",i),
+    nrow = 1, widths = c(.2,.8))
   }
   
   if(method == "dist")
-    plots[["main"]] <- paste(nshow, "lowest euclidean distances")
+    plots[["top"]] <- paste(nshow, "lowest euclidean distances")
   if(method == "cor")
-    plots[["main"]] <- paste(nshow, "highest correlations")
+    plots[["top"]] <- paste(nshow, "highest correlations")
+  
+  plots[["ncol"]] <- 1
   
   p <- do.call(gridExtra::arrangeGrob, plots)
-  
+  plot(p)  
   
   if(ret == "plot")
     return(p)
