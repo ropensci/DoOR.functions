@@ -24,7 +24,7 @@ resetSFR <- function(x, sfr) {
   } else {
     if(!(is.character(sfr) | is.factor(sfr)))
       stop("As x is a full DoOR response matrix, sfr has to be the InChIKey of the odorant that should be subtracted")
-    reset   <- apply(x, 2, function(y) resetSFR(y,y[sfr]))
+    reset   <- as.data.frame(apply(x, 2, function(y) resetSFR(y,y[sfr])))
   }
   return(reset)
 }
