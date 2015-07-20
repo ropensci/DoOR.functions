@@ -72,7 +72,7 @@ DoORplot_tuningCurve <- function(receptor,
                      panel.grid.minor.x = ggplot2::element_blank(),
                      plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
       ) +
-      ggtitle(bquote(atop(.(
+      ggplot2::ggtitle(bquote(atop(.(
         paste(receptor, sep = "")), 
         atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), "; n: ", nrow(data)))), ""))))
   } else {
