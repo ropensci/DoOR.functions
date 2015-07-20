@@ -1,6 +1,6 @@
 #' Combine Two Data
 #' 
-#' Combine two data into one byInChIKey
+#' Combine two data sets into one byInChIKey
 #' 
 #' Data frames are merged by InChIKey.
 #' Data2 will be merged into data1 specified by the column name \code{by.data2}
