@@ -6,11 +6,13 @@
 #' @param odorant character; an odorant name (InChIKey)
 #' @param response.vector numerical vector; a vector with responses, if empty this is taken from responseMatrix 
 #' @param responseMatrix DoOR response matrix; response vector will be taken from here, not needed if response.vector is given
-#' @param zero InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector; set to NULL if you don't want to subtract anything
+#' @param zero InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector; set to "" if you don't want to subtract anything
 #' @param fill.receptor color code; bar color for receptor tuning curve 
 #' @param fill.odorant  color code; bar color for odorant tuning curve 
 #' @param odor.main the odor identifier to plot, one of colnamed(odor)
+#' @param base_size numeric; the base font size for the ggplot2 plot
 #' @param limits the numerical vector of length 2; y limits for the tuning curve
+#'
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #'
 #' @return a ggplot object
@@ -35,7 +37,8 @@ DoORplot_tuningCurve <- function(receptor,
                                  fill.receptor = default.val("color.receptor"),
                                  fill.odorant  = default.val("color.odorant"),
                                  odor.main = "Name",
-                                 limits
+                                 limits,
+                                 base_size = 12
 ) {
   
   if (!requireNamespace("ggplot2", quietly = TRUE))
@@ -51,7 +54,7 @@ DoORplot_tuningCurve <- function(receptor,
   if(missing(odorant)) {
     
     if(missing(response.vector)) {
-      if (!is.null(zero)) {
+      if (!zero == "") {
         data <- na.omit(resetSFR(responseMatrix[ ,receptor], responseMatrix[zero, receptor]))
       } else {
         data <- na.omit(responseMatrix[ ,receptor])
@@ -65,7 +68,7 @@ DoORplot_tuningCurve <- function(receptor,
     
     plot <- ggplot2::ggplot(data) + 
       ggplot2::geom_bar(ggplot2::aes(x = odorants, y = value), stat = "identity", position = "identity", width = 1, fill = fill.receptor) +
-      ggplot2::theme_minimal() +
+      ggplot2::theme_minimal(base_size = base_size) +
       ggplot2::theme(axis.text.x        = ggplot2::element_blank(),
                      axis.ticks.x       = ggplot2::element_blank(),
                      panel.grid.major.x = ggplot2::element_blank(),
@@ -81,7 +84,7 @@ DoORplot_tuningCurve <- function(receptor,
     if(!missing(response.vector))
       odor.main <- odorant
     if(missing(response.vector)) {
-      if (!is.null(zero)) 
+      if (!zero == "") 
         data <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
       data <- na.omit(data[odorant,])
     } else {
@@ -93,21 +96,22 @@ DoORplot_tuningCurve <- function(receptor,
     
     plot <- ggplot2::ggplot(data) + 
       ggplot2::geom_bar(ggplot2::aes(x = receptors, y = value), stat = "identity", position = "identity", width = 1, fill = fill.odorant) +
-      ggplot2::theme_minimal() +
+      ggplot2::theme_minimal(base_size = base_size) +
       ggplot2::theme(axis.text.x        = ggplot2::element_blank(),
                      axis.ticks.x       = ggplot2::element_blank(),
                      panel.grid.major.x = ggplot2::element_blank(),
                      panel.grid.minor.x = ggplot2::element_blank(),
                      plot.margin        = grid::unit(c(1,.2,.5,-.2),"lines")
       ) +
-      ggtitle(bquote(atop(.(
+      ggplot2::labs(x = "responding units") +
+      ggplot2::ggtitle(bquote(atop(.(
         paste(odor.main, sep = "")), 
         atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), "; n: ", nrow(data)))), ""))))
     
   }
   
   if(!missing(limits))
-    plot <- plot + coord_cartesian(ylim = limits)
+    plot <- plot + ggplot2::coord_cartesian(ylim = limits)
   
   return(plot)
 }
