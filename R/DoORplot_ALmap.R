@@ -41,7 +41,8 @@ DoORplot_ALmap <- function(InChIKey,
                            AL.map = default.val("AL.map"),
                            colors = default.val("colors"),
                            legend = T,
-                           limits) {
+                           limits,
+                           base_size = 12) {
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("ggplot2 is required for AL map plotting, please install via install.packages('ggplot2')", call. = FALSE)
   if (!requireNamespace("grid", quietly = TRUE))
@@ -72,9 +73,8 @@ DoORplot_ALmap <- function(InChIKey,
     ggplot2::geom_polygon(data = AL.map$unmapped_not.olf, ggplot2::aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
     ggplot2::geom_polygon(ggplot2::aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") + 
     ggplot2::scale_fill_gradientn(na.value="grey65", colours = colors, space = "rgb", values = DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
-    ggplot2::annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = 3, alpha = .5) +#, hjust=0) +
     ggplot2::coord_fixed() + 
-    ggplot2::theme_minimal() +
+    ggplot2::theme_minimal(base_size = base_size) +
     ggplot2::ggtitle(main) +
     ggplot2::theme(axis.text.x      = ggplot2::element_blank(),
                    axis.ticks.x     = ggplot2::element_blank(), 
@@ -89,11 +89,14 @@ DoORplot_ALmap <- function(InChIKey,
                    #legend.key.width = unit(.3, "line")
     )
   
+  if(!tag == "")
+    p <- p + ggplot2::annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = .3*base_size, alpha = .5)
+  
   if(scalebar == F) 
     p <- p + ggplot2::theme(legend.position = "none")
   
   if(legend == T) {
-    x1 <- 118; x2 <- x1 + 34; x3 <- x2 + 19.5; y <- -20; lsize <- 10
+    x1 <- 118; x2 <- x1 + 38; x3 <- x2 + 19.5; y <- -20; lsize <- 10
     p <- p + 
       ggplot2::annotate("rect", 
                         xmin = c(x1, x2, x3) , 
@@ -103,7 +106,7 @@ DoORplot_ALmap <- function(InChIKey,
       ggplot2::annotate("text", 
                         x = c(x1 + lsize + 1.5, x2 + lsize + 1.5, x3 + lsize + 1.5) , 
                         y = y + lsize / 2 , 
-                        label = c("unmapped", "NA", "background"), hjust = 0, size = 3.5)
+                        label = c("unmapped", "NA", "background"), hjust = 0, size = .3*base_size)
   }
   
   return(p)
