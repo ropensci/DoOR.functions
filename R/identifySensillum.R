@@ -12,7 +12,7 @@
 #' @param sub character; if you know the class of sensillum you were recording from you can restrict the search to this subset here ("ab", "ac", "at", "pb", "sac")
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' 
-#' @return either a plot with responses sorted by highest correlations or lowest distances
+#' @return either a plot (gtable) with responses sorted by highest correlations or lowest distances, or a "dataframe" containing all calculated correlations or Euclidean distances
 #' @export
 #'
 #' @examples
@@ -168,4 +168,3 @@ identifySensillum <- function(recording,
     return(result)
   
 }
-

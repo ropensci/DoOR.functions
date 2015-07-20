@@ -26,7 +26,7 @@ identifySensillum(recording, responseMatrix = default.val("response.matrix"),
 \item{sub}{character; if you know the class of sensillum you were recording from you can restrict the search to this subset here ("ab", "ac", "at", "pb", "sac")}
 }
 \value{
-either a plot with responses sorted by highest correlations or lowest distances
+either a plot (gtable) with responses sorted by highest correlations or lowest distances, or a "dataframe" containing all calculated correlations or Euclidean distances
 }
 \description{
 correlates the result from a SSR recording of several odorants against all DoOR response profiles
