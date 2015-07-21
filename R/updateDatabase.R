@@ -137,11 +137,9 @@ updateDatabase <- function(receptor,
   message(paste("response.matrix has been updated for",receptor))
   
   # update response.matrix.excluded
-  if (length(excluded) > 0) {
     excluded.data$excluded <- as.character(excluded.data$excluded)
     excluded.data[excluded.data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
     assign("excluded.data", excluded.data, envir = .GlobalEnv)
     message(paste("excluded.data has been updated for",receptor))
-  }
-  
+
 }
