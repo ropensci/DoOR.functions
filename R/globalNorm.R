@@ -24,8 +24,6 @@
 #' @param responseRange data frame; the response range and how many odors were
 #' measured in each study.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @keywords math
-#' @export
 #' @examples
 #' 
 #' 
