@@ -1,34 +1,34 @@
-#' estimate the parameters for all optional model function
-#' 
-#' estimate the parameters for all optional model function
-#' 
-#' This function is used to estimate the parameters for optional model
-#' functions with lm() for linear model and nls() for nonlinear function:
-#' linear (\code{\link{modelfunction_linear}}), exponential
-#' (\code{\link{modelfunction_exp}}), sigmoid (\code{\link{SSlogis}}),
-#' asymptotic model with x intercept (\code{\link{SSasympOff}}), asympototic
-#' model with y intercept (\code{\link{SSasymp}}) and their inverse function,
-#' \code{\link{modelfunction_linear_inverse}},
-#' \code{\link{modelfunction_exp_inverse}},
-#' \code{\link{modelfunction_sigmoid_inverse}},
-#' \code{\link{modelfunction_asympOff_inverse}},
-#' \code{\link{modelfunction_asymp_inverse}}. The output is a list containing
-#' estimated parameter, function and inverse function expression, applied range
-#' for middle function, Leibniz's notation for computing curvic length and mean
-#' distance value "MD" of all optional model function.
-#' 
-#' @param x,y data vectors; in which to evaluate the parameters in given
-#' formula.
-#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @keywords math
-#' @examples
-#' 
-#' library(DoOR.data)
-#' loadData()
-#' x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
-#' y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
-#' MF_xy <- modelfunction(x=x,y=y)
-#' 
+# estimate the parameters for all optional model function
+# 
+# estimate the parameters for all optional model function
+# 
+# This function is used to estimate the parameters for optional model
+# functions with lm() for linear model and nls() for nonlinear function:
+# linear (\code{\link{modelfunction_linear}}), exponential
+# (\code{\link{modelfunction_exp}}), sigmoid (\code{\link{SSlogis}}),
+# asymptotic model with x intercept (\code{\link{SSasympOff}}), asympototic
+# model with y intercept (\code{\link{SSasymp}}) and their inverse function,
+# \code{\link{modelfunction_linear_inverse}},
+# \code{\link{modelfunction_exp_inverse}},
+# \code{\link{modelfunction_sigmoid_inverse}},
+# \code{\link{modelfunction_asympOff_inverse}},
+# \code{\link{modelfunction_asymp_inverse}}. The output is a list containing
+# estimated parameter, function and inverse function expression, applied range
+# for middle function, Leibniz's notation for computing curvic length and mean
+# distance value "MD" of all optional model function.
+# 
+# @param x,y data vectors; in which to evaluate the parameters in given
+# formula.
+# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+# @keywords math
+# @examples
+# 
+# library(DoOR.data)
+# loadData()
+# x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
+# y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
+# MF_xy <- modelfunction(x=x,y=y)
+# 
 modelfunction <-
 function(x, y) 
 

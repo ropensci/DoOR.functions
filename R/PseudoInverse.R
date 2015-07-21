@@ -1,22 +1,22 @@
-#' Evaluate the pseudoinvese of a matrix
-#' 
-#' Evaluate the pseudoinvese of a matrix
-#' 
-#' The pseudoinverse of the matrix x with singular value decomposition \eqn{x=U
-#' D V^'} is: \eqn{x^+ = V D^+ U^'} where D^+ is the pseudoinverse of D, which
-#' is formed by replacing every nonzero entry by its reciprocal.
-#' 
-#' @param x a matrix
-#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @seealso \code{\link{LLSIestPC}}, \code{\link{svd}}
-#' @keywords math
-#' @examples
-#' 
-#' x  <- matrix(seq(1,2,length=4),nrow = 2, ncol = 2)
-#' PI <- PseudoInverse(x)
-#' x
-#' x%*%PI%*%x
-#' 
+# Evaluate the pseudoinvese of a matrix
+# 
+# Evaluate the pseudoinvese of a matrix
+# 
+# The pseudoinverse of the matrix x with singular value decomposition \eqn{x=U
+# D V^'} is: \eqn{x^+ = V D^+ U^'} where D^+ is the pseudoinverse of D, which
+# is formed by replacing every nonzero entry by its reciprocal.
+# 
+# @param x a matrix
+# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+# @seealso \code{\link{LLSIestPC}}, \code{\link{svd}}
+# @keywords math
+# @examples
+# 
+# x  <- matrix(seq(1,2,length=4),nrow = 2, ncol = 2)
+# PI <- PseudoInverse(x)
+# x
+# x%*%PI%*%x
+# 
 PseudoInverse <-
 function(x) 
 

@@ -1,36 +1,36 @@
-#' Local Least Squares Imputation Estimation using k-nearest neighbor
-#' 
-#' Using local least squares imputation to estimate the missing values in
-#' target odorant receptors, odors will be selected by using k-nearest
-#' neighbor.
-#' 
-#' The response matrix in common scale \code{respose.matrix} allows using local
-#' least squares imputation (LLS) to estimate the missing values in target
-#' odorant receptors. Odorant responses of most structural similar odors will
-#' be constructed as a linear combination for LLS. The odors will be selected
-#' by using k-nearest neighbor that have large absolute values of Pearson
-#' correlation coefficients. \code{nodor} indicates the number of selected
-#' odors.
-#' 
-#' @param InChIKey a character string; the InChIKey of an odorant.
-#' @param receptor a character string; the name of odorant receptor.
-#' @param responseMatrix a numeric matrix; containing the normalized odorant
-#' responses.
-#' @param nodor a numeric value; specifying the number of the selected odors.
-#' @return A list with components \code{estimation}, \code{selected.receptors}
-#' and \code{selected.odors} which give the value of estimation, the selected
-#' receptors and odors with absolute values of Pearson correlation coefficients
-#' for linear combinations, respectively.
-#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @references Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
-#' DNA microarray gene expression data: local least squares imputation., 2005,
-#' Bioinformatics, 21, 187-198
-#' @keywords math
-#' @examples
-#' 
-#' library(DoOR.data)
-#' LLSIestKnn(InChIKey = "MQWCXKGKQLNYQG-UHFFFAOYSA-N", receptor = "Or22a" )
-#' 
+# Local Least Squares Imputation Estimation using k-nearest neighbor
+# 
+# Using local least squares imputation to estimate the missing values in
+# target odorant receptors, odors will be selected by using k-nearest
+# neighbor.
+# 
+# The response matrix in common scale \code{respose.matrix} allows using local
+# least squares imputation (LLS) to estimate the missing values in target
+# odorant receptors. Odorant responses of most structural similar odors will
+# be constructed as a linear combination for LLS. The odors will be selected
+# by using k-nearest neighbor that have large absolute values of Pearson
+# correlation coefficients. \code{nodor} indicates the number of selected
+# odors.
+# 
+# @param InChIKey a character string; the InChIKey of an odorant.
+# @param receptor a character string; the name of odorant receptor.
+# @param responseMatrix a numeric matrix; containing the normalized odorant
+# responses.
+# @param nodor a numeric value; specifying the number of the selected odors.
+# @return A list with components \code{estimation}, \code{selected.receptors}
+# and \code{selected.odors} which give the value of estimation, the selected
+# receptors and odors with absolute values of Pearson correlation coefficients
+# for linear combinations, respectively.
+# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+# @references Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
+# DNA microarray gene expression data: local least squares imputation., 2005,
+# Bioinformatics, 21, 187-198
+# @keywords math
+# @examples
+# 
+# library(DoOR.data)
+# LLSIestKnn(InChIKey = "MQWCXKGKQLNYQG-UHFFFAOYSA-N", receptor = "Or22a" )
+# 
 LLSIestKnn <-
 function(InChIKey, 
 		receptor, 

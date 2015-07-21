@@ -1,35 +1,35 @@
-#' select the best model function
-#' 
-#' \code{calModel} is used to return the best model function that represent the
-#' relationship between responses from study x and y..
-#' 
-#' \code{calModel} chooses the best model function from following: linear
-#' (\code{\link{modelfunction_linear}}), exponential function
-#' (\code{\link{modelfunction_exp}}), sigmoid
-#' (\code{\link{modelfunction_sigmoid}}), asymptotic model with x intercept
-#' (\code{\link{modelfunction_asympOff}}), asympototic model with y intercept
-#' (\code{\link{modelfunction_asymp}}) and their inverse model
-#' functions:(\code{\link{modelfunction_linear_inverse}}),
-#' (\code{\link{modelfunction_exp_inverse}}),
-#' (\code{\link{modelfunction_sigmoid_inverse}}),
-#' (\code{\link{modelfunction_asympOff_inverse}}) and
-#' (\code{\link{modelfunction_asymp_inverse}}).
-#' 
-#' @param x,y data vectors from study x and y (can contain NA)
-#' @param select.MD logical; if TRUE, only the best model function (in terms of
-#' MD) will be returned.
-#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @seealso \code{\link{SSlogis}},\code{\link{SSasympOff}},
-#' \code{\link{SSasymp}}
-#' @keywords data
-#' @examples
-#' 
-#' library(DoOR.data)
-#' data(Or35a)
-#' x <- DoORnorm(Or35a[,5])
-#' y <- DoORnorm(Or35a[,8])
-#' calM_xy <- calModel(x, y, select.MD = default.val("select.MD"))
-#' 
+# select the best model function
+# 
+# \code{calModel} is used to return the best model function that represent the
+# relationship between responses from study x and y..
+# 
+# \code{calModel} chooses the best model function from following: linear
+# (\code{\link{modelfunction_linear}}), exponential function
+# (\code{\link{modelfunction_exp}}), sigmoid
+# (\code{\link{modelfunction_sigmoid}}), asymptotic model with x intercept
+# (\code{\link{modelfunction_asympOff}}), asympototic model with y intercept
+# (\code{\link{modelfunction_asymp}}) and their inverse model
+# functions:(\code{\link{modelfunction_linear_inverse}}),
+# (\code{\link{modelfunction_exp_inverse}}),
+# (\code{\link{modelfunction_sigmoid_inverse}}),
+# (\code{\link{modelfunction_asympOff_inverse}}) and
+# (\code{\link{modelfunction_asymp_inverse}}).
+# 
+# @param x,y data vectors from study x and y (can contain NA)
+# @param select.MD logical; if TRUE, only the best model function (in terms of
+# MD) will be returned.
+# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+# @seealso \code{\link{SSlogis}},\code{\link{SSasympOff}},
+# \code{\link{SSasymp}}
+# @keywords data
+# @examples
+# 
+# library(DoOR.data)
+# data(Or35a)
+# x <- DoORnorm(Or35a[,5])
+# y <- DoORnorm(Or35a[,8])
+# calM_xy <- calModel(x, y, select.MD = default.val("select.MD"))
+# 
 calModel <-
 function (x, y, select.MD = default.val("select.MD") ) 
 

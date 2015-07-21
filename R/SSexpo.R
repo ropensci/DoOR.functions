@@ -1,21 +1,21 @@
-#' SelfStart estimation of exponential function
-#' 
-#' selfStart model estimates the parameters (a,b,c) of expontenial model.
-#' 
-#' The expression of eponential function is \code{a+b*exp(c*x)}.
-#' 
-#' @param x a numeric vector indicates input values in an equation.
-#' @param a a numieric parameter.
-#' @param b a numieric parameter.
-#' @param c a numieric parameter.
-#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @seealso \code{\link{nls}}, \code{\link{selfStart}}
-#' @examples
-#' 
-#' x <- -(1:100)/10
-#' y <- 1 + 10 * exp(x / 2) + rnorm(x)/10
-#' pr<-nls(y~SSexpo(x,a,b,c))
-#' 
+# SelfStart estimation of exponential function
+# 
+# selfStart model estimates the parameters (a,b,c) of expontenial model.
+# 
+# The expression of eponential function is \code{a+b*exp(c*x)}.
+# 
+# @param x a numeric vector indicates input values in an equation.
+# @param a a numieric parameter.
+# @param b a numieric parameter.
+# @param c a numieric parameter.
+# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+# @seealso \code{\link{nls}}, \code{\link{selfStart}}
+# @examples
+# 
+# x <- -(1:100)/10
+# y <- 1 + 10 * exp(x / 2) + rnorm(x)/10
+# pr<-nls(y~SSexpo(x,a,b,c))
+# 
 SSexpo <- structure(function (x, a, b, c) {
     .expr2 <- exp(c * x)
     .value <- a + b * .expr2

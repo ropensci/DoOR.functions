@@ -1,16 +1,16 @@
-#' filterData
-#' 
-#' Filter DoOR datasets before merging (remove studies with few overlapping points or SD = 0). This function is used by updateDatabase to pre filter before performing all possible merges.
-#'
-#' @param data a DoOR data frame (e.g. Or22a)
-#' @param overlapValues number of minimum overlap needed between data sets
-#' @param charColumns number of the character columns
-#'
-#' @return a list containing the filtered data set and a data frame naming the removed data sets and the reason for removal
-#'
-#' @examples 
-#' tmp <- filterData(Or42b)
-#' tmp$excluded
+# filterData
+# 
+# Filter DoOR datasets before merging (remove studies with few overlapping points or SD = 0). This function is used by updateDatabase to pre filter before performing all possible merges.
+#
+# @param data a DoOR data frame (e.g. Or22a)
+# @param overlapValues number of minimum overlap needed between data sets
+# @param charColumns number of the character columns
+#
+# @return a list containing the filtered data set and a data frame naming the removed data sets and the reason for removal
+#
+# @examples 
+# tmp <- filterData(Or42b)
+# tmp$excluded
 filterData <- function(data, overlapValues = default.val("overlapValues"), charColumns = default.val("num.charColumns")) {	
   
   recordColumn  <- as.numeric(c((charColumns + 1):dim(data)[2]) )
