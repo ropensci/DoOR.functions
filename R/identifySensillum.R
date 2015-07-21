@@ -100,9 +100,9 @@ identifySensillum <- function(recording,
   plots <- list()
   for(i in 1:length(units)) {
     if (method == "cor") 
-      cor.tmp <- result[order(result[,units[i]], decreasing = T),][1:nshow, c("receptor",units[i])]
+      cor.tmp <- result[order(result[,units[i]], decreasing = TRUE),][1:nshow, c("receptor",units[i])]
     if (method == "dist")
-      cor.tmp <- result[order(result[,units[i]], decreasing = F),][1:nshow, c("receptor",units[i])]
+      cor.tmp <- result[order(result[,units[i]], decreasing = FALSE),][1:nshow, c("receptor",units[i])]
     
     colnames(cor.tmp)[2] <- "cor"
     cor.tmp$OSN    <- DoOR.mappings$OSN[match(cor.tmp$receptor, DoOR.mappings$receptor)]

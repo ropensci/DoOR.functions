@@ -53,7 +53,7 @@ CreateDatabase <- function(tag                = default.val("tag"),
       print(paste(i, "is a empty data frame."))
       frame_data[, i] <- NA 
     } else {
-      merged <- modelRP(da, select.MDValue, overlapValues, glob.normalization = T, ...)
+      merged <- modelRP(da, select.MDValue, overlapValues, glob.normalization = TRUE, ...)
       merged.responses   <- merged$model.response[,"merged_data"]
       excluded           <- merged$excluded.data
       merged.odors       <- as.vector(merged$model.response[,tag])

@@ -42,7 +42,7 @@ modelRPSEQ <-
            overlapValues  = default.val("overlapValues"), 
            select.MDValue = default.val("select.MDValue"),
            strict         = TRUE,
-           plot           = F) {
+           plot           = FALSE) {
     nv          <- as.numeric( c( (default.val("num.charColumns")+1):dim(data)[2] ) ) # positions of columns that contain odor response vectors
     name.stud   <- names(data)[nv]
     pda         <- apply(as.data.frame(data[, nv]), 2, DoORnorm) # processing data
@@ -67,7 +67,7 @@ modelRPSEQ <-
       
       projected <- projectPoints(x, y, plot = plot, xlab = i, ylab = ylab, title = plot)
       
-      if(strict == T & projected$MD > select.MDValue)
+      if(strict == TRUE & projected$MD > select.MDValue)
         stop(paste("Mean distance between two studies above", select.MDValue))
       
       res 	  <- rep(NA, length = dim(pda)[1])

@@ -6,8 +6,8 @@
 #' @param x a numeric vector
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords math
+#' @export
 #' @examples
-#' 
 #' x <- rnorm(10)
 #' DoORnorm(x)
 #' 
@@ -16,8 +16,8 @@ DoORnorm <- function(x) {
   x.min <- min(x, na.rm = TRUE)
   if ((x.max - x.min) == 0) {
     eval <- x - x
-	} else { 
-		  eval <- (x - x.min) / (x.max - x.min) 
-	}
-return(eval)
+  } else { 
+    eval <- (x - x.min) / (x.max - x.min) 
+  }
+  return(eval)
 }

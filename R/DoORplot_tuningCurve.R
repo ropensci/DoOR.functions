@@ -22,7 +22,7 @@
 #' DoORplot_tuningCurve(odorant = odor$InChIKey[2])
 #' DoORplot_tuningCurve(receptor = "Or22a")
 #' 
-#' range <- range(apply(responseMatrix, 2, function(x) resetSFR(x,x[zero])), na.rm = T)
+#' range <- range(apply(responseMatrix, 2, function(x) resetSFR(x,x[zero])), na.rm = TRUE)
 #' DoORplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
 #' 
 #' DoORplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))

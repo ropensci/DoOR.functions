@@ -56,7 +56,7 @@ DoORplot_compareProfiles <- function(x,
 
   sorted_xy <- as.character(comb_xy[rev(order(comb_xy[ ,title_x])), "odorant"])
   
-  comb_xy <- DoORmelt(comb_xy, ident = "odorant", datasets = c(title_x, title_y), na.rm = T)
+  comb_xy <- DoORmelt(comb_xy, ident = "odorant", datasets = c(title_x, title_y), na.rm = TRUE)
   
   comb_xy$odorant <- factor(comb_xy$odorant, levels = sorted_xy)
   

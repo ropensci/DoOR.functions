@@ -38,7 +38,7 @@ DoORplot_acrossOSNs <- function(odorants,
   odorants <- as.character(odorants)
   
   data <- responseMatrix[odorants,]
-  data <- DoORmelt(as.data.frame(data), na.rm = F)
+  data <- DoORmelt(as.data.frame(data), na.rm = FALSE)
   
   if(tag != "InChIKey")
     data$odorant <- odor[match(data$odorant, odor$InChIKey), tag]

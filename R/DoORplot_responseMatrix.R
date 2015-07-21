@@ -17,8 +17,8 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples 
 #' tmp <- apply(response.matrix, 2, function(x) resetSFR(x,x["SFR"]))
-#' DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = T))
-#' DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name", limits = range(response.matrix, na.rm = T))
+#' DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
+#' DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name", limits = range(response.matrix, na.rm = TRUE))
 #' 
 DoORplot_responseMatrix <- function(data,
                                     tag    = default.val("tag"),
@@ -37,7 +37,7 @@ DoORplot_responseMatrix <- function(data,
   
   # define limits and map colors of the colorscale
   if(missing(limits))
-    limits <- range(data, na.rm=T)
+    limits <- range(data, na.rm=TRUE)
   
   if(limits[1] < 0) {
     values <- DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
@@ -46,24 +46,24 @@ DoORplot_responseMatrix <- function(data,
     colors <- colors[3:6]
   }
 
-  data   <- DoORmelt(data = data, na.rm = T)
+  data   <- DoORmelt(data = data, na.rm = TRUE)
   
   if(tag != "InChIKey") 
     data$odorant <- odor[match(data$odorant, odor$InChIKey),tag]
 
-  if(bw == T & point == F) {
-    bw <- F
-    message("Plotting black&white heatmaps does not work, ignoring 'bw = T' ")
+  if(bw == TRUE & point == FALSE) {
+    bw <- FALSE
+    message("Plotting black&white heatmaps does not work, ignoring 'bw = TRUE' ")
   }
   
-  if(bw == T & point == T) {
-    bw <- F
+  if(bw == TRUE & point == TRUE) {
+    bw <- FALSE
     message("Sorry, but we can't plot negative sized points, ignoring 'bw = FALSE'.")
   }
 
   if(missing(point) & missing(bw) & limits[1] >= 0) {
-    point <- T
-    bw    <- T
+    point <- TRUE
+    bw    <- TRUE
     message("Only positive values, returning b&w point plot.")
   }
 
@@ -71,15 +71,15 @@ DoORplot_responseMatrix <- function(data,
     ggplot2::theme_minimal(base_size = base_size) + 
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0, vjust = .5))
   
-  if(bw == F & point == F)
+  if(bw == FALSE & point == FALSE)
     plot <- plot + ggplot2::scale_fill_gradientn(colours  = colors, space="rgb", values = values, limits  = limits)
-  if(bw == F & point == T)
+  if(bw == FALSE & point == TRUE)
     plot <- plot + ggplot2::scale_color_gradientn(colours  = colors, space="rgb", values = values, limits  = limits)
   
-  if(point == F) {
+  if(point == FALSE) {
     plot <- plot + ggplot2::geom_tile(ggplot2::aes(fill = value))
   } else {
-    if(bw == F) {
+    if(bw == FALSE) {
       if(limits[1] < 0) {
         plot <- plot + ggplot2::geom_point(ggplot2::aes(size = abs(value), color = value), alpha = .6)
       } else {

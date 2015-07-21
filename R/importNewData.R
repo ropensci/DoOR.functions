@@ -70,7 +70,7 @@ importNewData <- function(file.name,
   if(any(is.na(imported.data[,ident]))) {
     nas <- which(is.na(imported.data[,ident]))
     imported.data <- droplevels(imported.data[-nas,])
-    warning('We found ', length(nas), ' missing identifier(s), this data was removed!', call. = F)
+    warning('We found ', length(nas), ' missing identifier(s), this data was removed!', call. = FALSE)
   }
   
   # check for duplicated identifiers
@@ -88,7 +88,7 @@ importNewData <- function(file.name,
   n 	<- length(nv)
   receptor_file <- colnames(imported.data)[nv]
 
-  if (round != F) {
+  if (round != FALSE) {
     imported.data[nv] <- round(imported.data[nv],round)
   }
   

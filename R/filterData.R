@@ -20,7 +20,7 @@ filterData <- function(data, overlapValues = default.val("overlapValues"), charC
   excluded <- data.frame()
   
   # remove studies with sd = 0 e.g. containing only 0
-  study.sd <- apply(apply(as.data.frame(data[,studies]), 2, range, na.rm = T), 2, sd)
+  study.sd <- apply(apply(as.data.frame(data[,studies]), 2, range, na.rm = TRUE), 2, sd)
   if(any(study.sd == 0)) {
     message(paste(receptor,": REMOVED ", studies[which(study.sd == 0)], " as it had a SD of 0.\n", sep = ""))
     excluded <- data.frame(study = studies[which(study.sd == 0)], reason = "SD = 0")
@@ -39,7 +39,7 @@ filterData <- function(data, overlapValues = default.val("overlapValues"), charC
     for(i in 1:dim(tmp)[2]) {
       a <- tmp[,i]
       b <- apply(as.data.frame(tmp[,-i]),1,function(x) any(x == TRUE))
-      overlap <- length(which(a == T &  b == T))
+      overlap <- length(which(a == TRUE &  b == TRUE))
       ol <- c(ol,overlap)
     } 
     

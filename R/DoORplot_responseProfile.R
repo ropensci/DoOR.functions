@@ -21,7 +21,7 @@
 DoORplot_responseProfile <- function(receptor,
                                      responseMatrix = default.val("response.matrix"),
                                      tag = default.val("tag"),
-                                     colored = T,
+                                     colored = TRUE,
                                      colors = default.val("colors"),
                                      limits,
                                      zero = default.val("zero"),
@@ -32,7 +32,7 @@ DoORplot_responseProfile <- function(receptor,
     responseMatrix <- resetSFR(responseMatrix, zero)
   
   if(missing(limits))
-    limits <- range(responseMatrix, na.rm=T)
+    limits <- range(responseMatrix, na.rm=TRUE)
   
   if(limits[1] < 0) {
     values <- DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
@@ -52,7 +52,7 @@ DoORplot_responseProfile <- function(receptor,
     ggplot2::coord_flip(ylim = limits) +
     ggplot2::ggtitle(receptor)
   
-  if(colored == T) {
+  if(colored == TRUE) {
     plot <- plot + ggplot2::geom_bar(ggplot2::aes(fill = value), stat = "identity", position = "identity", color = "grey") +
       ggplot2::scale_fill_gradientn(colours = colors, space = "rgb", values = values, limits = limits)
   } else {

@@ -60,7 +60,7 @@ function(da, by.column, Receptors, ResponseMatrix)
     }
     res.x <- data.frame(receptor = i, cor.coeff = cor.coeff, p.value = cor.pval, n = dim(xy)[1])
     res 	<- rbind(res,res.x)
-    res   <- res[order(res$cor.coeff, decreasing = T, na.last = T),]
+    res   <- res[order(res$cor.coeff, decreasing = TRUE, na.last = TRUE),]
   }
   return(res)
 }

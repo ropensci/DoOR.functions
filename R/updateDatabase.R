@@ -20,8 +20,8 @@
 #' @param responseRange data frame; response range of studies.
 #' @param weightGlobNorm data frame; weight matrix for global normalization.
 #' @param overlapValues minimum overlap between studies to perfom a merge
-#' @param select.MDValue the minimum mean distance between studies to perfom a merge (used if permutation == F or if permutation == T AND strict == T)
-#' @param strict logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue (only valid if permutation == T)
+#' @param select.MDValue the minimum mean distance between studies to perfom a merge (used if permutation == FALSE or if permutation == TRUE AND strict == TRUE)
+#' @param strict logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue (only valid if permutation == TRUE)
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Shouwen Ma <\email{daniel.muench@@uni-konstanz.de}>
 #' @seealso \code{\link{modelRP}},\code{\link{modelRPSEQ}}
@@ -45,7 +45,7 @@ updateDatabase <- function(receptor,
                            strict            = TRUE,
                            overlapValues     = default.val("overlapValues"),
                            excluded.data     = default.val("excluded.data"),
-                           plot = F) {	
+                           plot = FALSE) {	
   da            <- get(receptor)
   recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]

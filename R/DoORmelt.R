@@ -11,9 +11,9 @@
 # @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 # @examples
 # head(DoORmelt(Or22a, datasets = c("Hallem.2004.WT", "Pelz.2006.AntEC50")))
-# head(DoORmelt(response.matrix[1:100,], na.rm = T))
+# head(DoORmelt(response.matrix[1:100,], na.rm = TRUE))
 # 
-DoORmelt <- function(data, datasets, ident, na.rm = F) {
+DoORmelt <- function(data, datasets, ident, na.rm = FALSE) {
   if(missing(datasets))
     datasets = colnames(data)
   
@@ -28,7 +28,7 @@ DoORmelt <- function(data, datasets, ident, na.rm = F) {
     result <- rbind(result, tmp)
   }
   
-  if(na.rm == T)
+  if(na.rm == TRUE)
     result <- na.omit(result)
   
   return(result)

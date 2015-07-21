@@ -19,10 +19,11 @@
 #' @return a ggplot2 object
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
-#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = F)
+#' library(DoOR.data)
+#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
 #' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #' 
-#' DoORplot_ALmap(transID("123-92-2"), scalebar = F) + 
+#' DoORplot_ALmap(transID("123-92-2"), scalebar = FALSE) + 
 #' theme(legend.position  = "bottom", 
 #'       panel.background = element_rect(fill = "grey90", color = NA)) + 
 #' ggtitle("responses elicited by isopentyl acetate")
@@ -33,6 +34,7 @@
 #' }
 DoORplot_ALmap <- function(InChIKey,
                            responseMatrix = default.val("response.matrix"),
+                           odor = default.val("odor.data"),
                            zero = default.val("zero"),
                            tag =  default.val("tag.ALmap"), 
                            main = "Name",
@@ -40,7 +42,7 @@ DoORplot_ALmap <- function(InChIKey,
                            DoOR.mappings = default.val("DoOR.mappings"),
                            AL.map = default.val("AL.map"),
                            colors = default.val("colors"),
-                           legend = T,
+                           legend = TRUE,
                            limits,
                            base_size = 12) {
   if (!requireNamespace("ggplot2", quietly = TRUE))
@@ -50,7 +52,7 @@ DoORplot_ALmap <- function(InChIKey,
   
   if(missing(limits)) {
     response.matrix.SFRreset <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
-    limits <- range(response.matrix.SFRreset, na.rm=T)
+    limits <- range(response.matrix.SFRreset, na.rm=TRUE)
   }
   
   response.data <- getNormalizedResponses(InChIKey, zero = zero, responseMatrix = responseMatrix) 
@@ -92,10 +94,10 @@ DoORplot_ALmap <- function(InChIKey,
   if(!tag == "")
     p <- p + ggplot2::annotate("text", x = labels$x, y = labels$y, label = labels[,tag], color = "#000000", size = .3*base_size, alpha = .5)
   
-  if(scalebar == F) 
+  if(scalebar == FALSE) 
     p <- p + ggplot2::theme(legend.position = "none")
   
-  if(legend == T) {
+  if(legend == TRUE) {
     x1 <- 118; x2 <- x1 + 38; x3 <- x2 + 19.5; y <- -20; lsize <- 10
     p <- p + 
       ggplot2::annotate("rect", 

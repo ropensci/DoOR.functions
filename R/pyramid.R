@@ -26,9 +26,9 @@ pyramid <- function(n) {
 # order.pyramid <- orderPyramid(data)
 # plot(data)
 # plot(data[order.pyramid])
-orderPyramid <- function(x, na.rm = F) {
+orderPyramid <- function(x, na.rm = FALSE) {
   order.x   <- order(x)
-  if(na.rm == T)
+  if(na.rm == TRUE)
     order.x <- order.x[- which(order.x %in% which(is.na(x)))]
   length.x  <- length(order.x)
   pyramid.x <- order.x[pyramid(length.x)]
