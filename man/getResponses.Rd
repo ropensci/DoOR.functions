@@ -5,7 +5,7 @@
 \title{Find receptor responses}
 \usage{
 getResponses(odorant, responseRange = default.val("response.range"),
-  Or.list = loadRDList())
+  Or.list = load2list())
 }
 \arguments{
 \item{odorant}{a single odor provided as InChIKey}
@@ -13,7 +13,7 @@ getResponses(odorant, responseRange = default.val("response.range"),
 \item{responseRange}{data frame; response ranges of studies}
 
 \item{Or.list}{a list contains reponse data of all available receptors. It
-can be loaded using \code{\link{loadRDList}}.}
+can be loaded using \code{\link{load2list}}.}
 }
 \description{
 given a chemical, get original receptor responses from all studies in the
@@ -25,7 +25,7 @@ receptors from all available studies.
 }
 \examples{
 library(DoOR.data)
-loadRD()
+loadData()
 responses <- getResponses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 }
 \keyword{data}

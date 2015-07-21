@@ -27,7 +27,7 @@ computes the complete response model for all receptors in the database
 \examples{
 \dontrun{
 library(DoOR.data)
-loadRD()
+loadData()
 mydatabase <- CreateDatabase()
 }
 }

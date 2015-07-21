@@ -41,7 +41,7 @@ before use.
 \examples{
 library(DoOR.data)
 library(DoOR.function)
-loadRD()
+loadData()
 exportData(".txt", all.data = FALSE) 	# export odorant responses data only
 }
 \author{

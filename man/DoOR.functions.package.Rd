@@ -23,9 +23,9 @@ First, load the DoOR packages, data and function package: \tabular{ll}{
 }
 
 then, load all datasets including the precomputed response matrix:
-\tabular{ll}{ \code{\link{loadRD}}: \tab Load all data into current active
+\tabular{ll}{ \code{\link{loadData}}: \tab Load all data into current active
 environment . \cr } or, load all odorant reseponse data into a list:
-\tabular{ll}{ \code{\link{loadRDList}}: \tab Load odorant response data only
+\tabular{ll}{ \code{\link{load2list}}: \tab Load odorant response data only
 and compose them as a list.  \cr }
 
 Try some visualizations (e.g. producing the plots from the paper):
