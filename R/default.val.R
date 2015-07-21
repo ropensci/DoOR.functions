@@ -108,7 +108,7 @@ default.val <- function(DoOR_default) {
       data(ORs)
     }
     return(ORs)
-  } # exportData.R; LoadRD.R; loadRDlist.R; importNewData.R
+  } # exportData.R; loadData.R; load2list.R; importNewData.R
   
   if (DoOR_default == "response.matrix") {
     if (!exists("response.matrix")) {

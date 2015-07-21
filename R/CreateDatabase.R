@@ -19,7 +19,7 @@
 #' @examples
 #' \dontrun{
 #' library(DoOR.data)
-#' loadRD()
+#' loadData()
 #' mydatabase <- CreateDatabase()
 #' }
 CreateDatabase <- function(tag                = default.val("tag"), 
@@ -29,7 +29,7 @@ CreateDatabase <- function(tag                = default.val("tag"),
   
   excluded.data   <- data.frame(OR = ORs$OR, excluded = NA) # reset/create excluded.data
   
-  Or.list  	      <- loadRDList() 	# contains data for all receptors
+  Or.list  	      <- load2list() 	# contains data for all receptors
   Or.Names 	      <- names(Or.list)
   num_receptors 	<- length(Or.Names)	# how many receptors
   

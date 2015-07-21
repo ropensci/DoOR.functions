@@ -10,20 +10,13 @@
 #' @param c a numieric parameter.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @seealso \code{\link{nls}}, \code{\link{selfStart}}
-#' @keywords math
 #' @examples
 #' 
 #' x <- -(1:100)/10
 #' y <- 1 + 10 * exp(x / 2) + rnorm(x)/10
 #' pr<-nls(y~SSexpo(x,a,b,c))
 #' 
-SSexpo <-
-structure(function (x, a, b, c) 
-
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-{
+SSexpo <- structure(function (x, a, b, c) {
     .expr2 <- exp(c * x)
     .value <- a + b * .expr2
     .grad <- array(0, c(length(.value), 3L), list(NULL, c("a", 

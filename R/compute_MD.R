@@ -19,7 +19,7 @@
 #' @examples
 #' 
 #' library(DoOR.data)
-#' loadRD()
+#' loadData()
 #' x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
 #' y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
 #' comb.xy     <-  na.omit(cbind(x, y))

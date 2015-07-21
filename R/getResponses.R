@@ -9,16 +9,16 @@
 #' @param odorant a single odor provided as InChIKey
 #' @param responseRange data frame; response ranges of studies
 #' @param Or.list a list contains reponse data of all available receptors. It
-#' can be loaded using \code{\link{loadRDList}}.
+#' can be loaded using \code{\link{load2list}}.
 #' @export
 #' @keywords data
 #' @examples
 #' 
 #' library(DoOR.data)
-#' loadRD()
+#' loadData()
 #' responses <- getResponses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #' 
-getResponses <- function(odorant, responseRange = default.val("response.range"), Or.list = loadRDList()) {
+getResponses <- function(odorant, responseRange = default.val("response.range"), Or.list = load2list()) {
 
   studies  <- responseRange[,"study"]
 	Or.Names <- names(Or.list)

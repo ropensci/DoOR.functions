@@ -30,7 +30,7 @@
 #' @examples
 #' \dontrun{
 #' library(DoOR.data)
-#' loadRD()
+#' loadData()
 #' # update the entry "Or67b" of data "response.matrix" and "response.matrix_non.normalized" with permutations.
 #' # updateDatabase(receptor="Or67b", permutation = TRUE)
 #' }
