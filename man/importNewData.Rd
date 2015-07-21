@@ -4,7 +4,7 @@
 \alias{importNewData}
 \title{Import new data into DoOR}
 \usage{
-importNewData(file.name, file.format, dataFormat = default.val("data.format"),
+importNewData(file.name, dataFormat = default.val("data.format"),
   odor.data = default.val("odor.data"),
   weightGlobNorm = default.val("weight.globNorm"),
   responseRange = default.val("response.range"),
@@ -12,15 +12,12 @@ importNewData(file.name, file.format, dataFormat = default.val("data.format"),
 }
 \arguments{
 \item{file.name}{character string; the name of given file that contains
-response values of one or more odorant receptors.}
-
-\item{file.format}{character string; the format of given file, either ".txt"
-or ".csv"}
+response values of one or more odorant receptors, either a .csv or .txt file.}
 
 \item{dataFormat}{data frame; a data frame does not contain any response
 value but odorant information.}
 
-\item{odor.data}{data frame; a data frame that contains the odorant
+\item{odor.data}{data frame; contains the odorant
 information.}
 
 \item{weightGlobNorm}{data matrix; indicates whether given receptor has been
@@ -29,7 +26,7 @@ measured by given study.}
 \item{responseRange}{data frame; contains the information about response
 range of each study and how many odors have been measured in each study.}
 
-\item{receptors}{data frame, contains the receptor and ORN names and their
+\item{receptors}{data frame, contains the receptor and OSN names and their
 expression.}
 
 \item{ident}{the identifier used for matching, usually the InChIKey is used.}
@@ -43,16 +40,17 @@ Import or update new data and update \code{weight.globNorm}, \code{response.rang
 \code{\link{importNewData}} is used to import new data into database. If the
 data contains a new receptor or ORN, then build a new data frame for this
 receptor or ORN. If the data contains a receptor that is already present in
-database, then merge the imported data into old data frame with function
-\code{\link{combData}}. The information (e.g. response range, how many
+database, then merge the imported data into old data frame. The information (e.g. response range, how many
 receptors and odors were measured from given study) will be integrated into
 data \code{response.range}, \code{odor}, \code{ORs} and \code{weight.globNorm}.
 If an existing study is imported, \code{\link{removeStudy}} will be run first in order to perform an update.
 }
 \examples{
+\dontrun{
 import new data named "odorantResponses_Orx.txt" into database and update the support data.
 library(DoOR.data)
-importNewData(file.name="odorantResponses_Orx", file.format=".txt")
+importNewData(file.name = "odorantResponses_Orx.csv")
+}
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
