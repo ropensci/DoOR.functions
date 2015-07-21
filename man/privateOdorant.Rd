@@ -28,6 +28,7 @@ a data.frame containing odorants and the response in the receptor of interest as
 return an odorant that activates the receptor of interes exclusively
 }
 \examples{
-wef
+privateOdorant("Gr21a.Gr63a", tag = "Name")
+privateOdorant("Or22a", tag = "Name", sensillum = T)
 }
 

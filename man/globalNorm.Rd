@@ -54,5 +54,4 @@ GN_values_ORx <- globalNorm(RMAX, SMAX, MV = mergedValues_ORx, name.Stud, weight
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
-\keyword{math}
 
