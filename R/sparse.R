@@ -4,7 +4,7 @@
 #' 
 #' 
 #' @param x numerical input vector
-#' @param type type of sparseness measure, either 'sparse' for lifetime sparseness or 'kurtosis'.
+#' @param method type of sparseness measure, either 'ltk' for lifetime kurtosis or 'lts' for lifetime sparseness (see references).
 #' @details LTS is scales between \[0,1\] while LTK is not restricted. LTS only takes positive values.
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export

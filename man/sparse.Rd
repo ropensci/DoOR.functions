@@ -9,7 +9,7 @@ sparse(x, method = "ltk")
 \arguments{
 \item{x}{numerical input vector}
 
-\item{type}{type of sparseness measure, either 'sparse' for lifetime sparseness or 'kurtosis'.}
+\item{method}{type of sparseness measure, either 'ltk' for lifetime kurtosis or 'lts' for lifetime sparseness (see references).}
 }
 \description{
 Sparseness can be calculated as lifetime kurtosis (LTK, Willmore and Tolhurst, 2001) or as lifetime sparseness (LTS, Bhandawat et al., 2007).

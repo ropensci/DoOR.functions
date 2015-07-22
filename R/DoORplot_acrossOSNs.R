@@ -12,14 +12,16 @@
 #' @param plot.type interger; 1 or 2, defining the type of plot (1: facet_grid
 #'   of odorants * sensillae; 2: facet_wrap across OSNs)
 #' @param base_size numeric; the base font size for the ggplot2 plot
-#' @param sub character vector; specify one or several classes of sensilla the
+#' @param sub character vector; specify one or several classes of sensilla the 
 #'   plot should be restricted to. One or several of: "ab" "ac", "at", "ai",
 #'   "pb", "sacI", "sacII"
+#' @param DoOR_mappings data frame, containing the mappings of response profiles
+#'   to morphological structures.
 #'   
 #' @details DoOR response profiles will be selected and ordered according to the
-#'   OSNs they are related to. Several DoOR response profiles might exist for a
-#'   given OSN (e.g. one for the OSN itself and one for the OSNs misexpressed
-#'   receptor protein) but only one will be shown. Which DoOR profile is mapped
+#'   OSNs they are related to. Several DoOR response profiles might exist for a 
+#'   given OSN (e.g. one for the OSN itself and one for the OSNs misexpressed 
+#'   receptor protein) but only one will be shown. Which DoOR profile is mapped 
 #'   to which OSN is controlled via the "code.OSN" column in \code{DoORmapings}.
 #'   
 #' @return a ggplot2 object
@@ -27,7 +29,8 @@
 #' 
 #' @examples
 #' library(DoOR.data)
-#' odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), "Name", "InChIKey")
+#' odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), 
+#'                     from = "Name", to = "InChIKey")
 #' DoORplot_acrossOSNs(odorants)
 #' DoORplot_acrossOSNs(odorants, sub = c("ac", "at"))
 #' DoORplot_acrossOSNs(odorants, plot.type = 2)

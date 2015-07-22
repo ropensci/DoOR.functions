@@ -23,8 +23,8 @@ First, load the DoOR packages, data and function package: \tabular{ll}{
 }
 
 then, load all datasets including the precomputed response matrix:
-\tabular{ll}{ \code{\link{DoOR.data::loadData}}: \tab Load all data into current active
-environment . \cr } or, load all odorant reseponse data into a list:
+\tabular{ll}{ \code{loadData}: \tab Load all data into current active
+environment (function comes with DoOR.data) . \cr } or, load all odorant reseponse data into a list:
 \tabular{ll}{ \code{\link{load2list}}: \tab Load odorant response data only
 and compose them as a list.  \cr }
 
@@ -47,12 +47,8 @@ compute the complete response model for all receptors in the database (calls
 run the DoOR algorithm, that merges all measurements for one receptor. \cr }
 
 Estimate odorant responses: \tabular{ll}{ \code{\link{DoOREst}}: \tab
-estimate NA entries in a consensus response data. \cr
-\code{\link{LLSIestKnn}}: \tab Local Least Squares Imputation Estimation
-using k-nearest neighbor. \cr \code{\link{LLSIestPC}}: \tab estimate odorant
-responses using local least imputation, odors will be selected by coherent
-odors that have large absolute values of Pearson correlation coefficients.
-\cr } Project the model response values back to tested values: \tabular{ll}{
+estimate NA entries in a consensus response data. \cr }
+Project the model response values back to tested values: \tabular{ll}{
 \code{\link{backProject}}: \tab project the model response values back to
 tested values. \cr }
 

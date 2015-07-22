@@ -31,8 +31,13 @@ data(Or22a)
 data(response.range)
 data(response.matrix)
 
-DoORplot_compareProfiles(x = Or22a, y = Or22a, by.x = "Hallem.2006.EN", by.y = "Pelz.2006.AntEC50")
-DoORplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)), y = cbind(response.matrix, InChIKey = rownames(response.matrix)), by.x = "Or22a", by.y = "Or10a")
+DoORplot_compareProfiles(x = Or22a, y = Or22a,
+                         by.x = "Hallem.2006.EN",
+                         by.y = "Pelz.2006.AntEC50")
+
+DoORplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)),
+                         y = cbind(response.matrix, InChIKey = rownames(response.matrix)),
+                         by.x = "Or22a", by.y = "Or10a")
 }
 \author{
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>

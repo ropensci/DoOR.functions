@@ -18,7 +18,9 @@
 #' loadData()
 #' responses <- getResponses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #' 
-getResponses <- function(odorant, responseRange = default.val("response.range"), Or.list = load2list()) {
+getResponses <- function(odorant, 
+                         responseRange = default.val("response.range"), 
+                         Or.list = load2list()) {
 
   studies  <- responseRange[,"study"]
 	Or.Names <- names(Or.list)

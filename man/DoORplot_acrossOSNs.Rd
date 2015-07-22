@@ -17,6 +17,9 @@ DoORplot_acrossOSNs(odorants,
 
 \item{odor_data}{data frame; contains the odorant information.}
 
+\item{DoOR_mappings}{data frame, containing the mappings of response profiles
+  to morphological structures.}
+
 \item{zero}{character; InChIKey of the odorant that should be set to 0 (e.g.
 SFR)}
 
@@ -24,8 +27,8 @@ SFR)}
 \code{colnames(odor)}}
 
 \item{sub}{character vector; specify one or several classes of sensilla the
-  plot should be restricted to. One or several of: "ab" "ac", "at", "ai",
-  "pb", "sacI", "sacII"}
+plot should be restricted to. One or several of: "ab" "ac", "at", "ai",
+"pb", "sacI", "sacII"}
 
 \item{plot.type}{interger; 1 or 2, defining the type of plot (1: facet_grid
 of odorants * sensillae; 2: facet_wrap across OSNs)}
@@ -47,7 +50,8 @@ DoOR response profiles will be selected and ordered according to the
 }
 \examples{
 library(DoOR.data)
-odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), "Name", "InChIKey")
+odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
+                    from = "Name", to = "InChIKey")
 DoORplot_acrossOSNs(odorants)
 DoORplot_acrossOSNs(odorants, sub = c("ac", "at"))
 DoORplot_acrossOSNs(odorants, plot.type = 2)

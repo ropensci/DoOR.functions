@@ -1,27 +1,36 @@
 #' update response matrix
 #' 
-#' update the globally \code{response matrix} and the unglobally normalized
-#' response matrix \code{response.matrix_non.normalized} by introducing new
+#' update the globally \code{response matrix} and the unglobally normalized 
+#' response matrix \code{response.matrix_non.normalized} by introducing new 
 #' consensus response data of given receptor.
 #' 
-#' The merging sequence could be arranged by the routine process (using
-#' \code{\link{modelRP}} or taking the optimized sequence that is chosen from
-#' permutations. The mean correlation between merged responses and each
-#' original recording will be computed for each permutation, the optimozed
-#' sequence is with the highest correlation.
+#' The merging sequence could be arranged by the routine process (using 
+#' \code{\link{modelRP}} or taking the optimized sequence that is chosen from 
+#' permutations. The mean correlation between merged responses and each original
+#' recording will be computed for each permutation, the optimozed sequence is 
+#' with the highest correlation.
 #' 
 #' @param receptor character string; name of given odorant receptor.
-#' @param permutation logical; if TRUE, the sequence is chosen from
-#' permutation, if FALSE, sequence is chosen by the routine process.
-#' @param perm a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.
-#' @param response_matrix_nn data frame; response data that has not
-#' been globally normalized.
+#' @param permutation logical; if TRUE, the sequence is chosen from permutation,
+#'   if FALSE, sequence is chosen by the routine process.
+#' @param perm a matrix with one sequence of study names per row, if empty, all 
+#'   possible permutations of study names will be provided.
+#' @param response_matrix_nn data frame; response data that has not been 
+#'   globally normalized.
 #' @param response_matrix data frame; globally normalized response data.
 #' @param responseRange data frame; response range of studies.
 #' @param weightGlobNorm data frame; weight matrix for global normalization.
 #' @param overlapValues minimum overlap between studies to perfom a merge
-#' @param select.MDValue the minimum mean distance between studies to perfom a merge (used if permutation == FALSE or if permutation == TRUE AND strict == TRUE)
-#' @param strict logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue (only valid if permutation == TRUE)
+#' @param select.MDValue the minimum mean distance between studies to perfom a 
+#'   merge (used if permutation == FALSE or if permutation == TRUE AND strict ==
+#'   TRUE)
+#' @param excluded.data the data frame that contains the list of excluded data
+#'   sets.
+#' @param plot logical
+#' @param strict logical, if TRUE merging a permutation will be stopped once a 
+#'   single merge has a mean distance above select.MDValue (only valid if 
+#'   permutation == TRUE)
+#'   
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Shouwen Ma <\email{daniel.muench@@uni-konstanz.de}>
 #' @seealso \code{\link{modelRP}},\code{\link{modelRPSEQ}}
@@ -31,20 +40,21 @@
 #' \dontrun{
 #' library(DoOR.data)
 #' loadData()
-#' # update the entry "Or67b" of data "response.matrix" and "response.matrix_non.normalized" with permutations.
-#' # updateDatabase(receptor="Or67b", permutation = TRUE)
+#' # update the entry "Or67b" of data "response.matrix" and
+#' # "response.matrix_non.normalized" with permutations.
+#'  updateDatabase(receptor="Or67b", permutation = TRUE)
 #' }
 updateDatabase <- function(receptor, 
                            permutation = TRUE, 
                            perm, 
                            response_matrix_nn = default.val("response.matrix_non.normalized"), 
                            response_matrix    = default.val("response.matrix"), 
-                           responseRange     = default.val("response.range"), 
-                           weightGlobNorm    = default.val("weight.globNorm"),
-                           select.MDValue    = default.val("select.MDValue"), 
-                           strict            = TRUE,
-                           overlapValues     = default.val("overlapValues"),
-                           excluded.data     = default.val("excluded.data"),
+                           responseRange      = default.val("response.range"), 
+                           weightGlobNorm     = default.val("weight.globNorm"),
+                           select.MDValue     = default.val("select.MDValue"), 
+                           strict             = TRUE,
+                           overlapValues      = default.val("overlapValues"),
+                           excluded.data      = default.val("excluded.data"),
                            plot = FALSE) {	
   da            <- get(receptor)
   recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )

@@ -58,7 +58,7 @@ projectPoints(x = x, y = y, plot = TRUE)
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
 \seealso{
-\code{\link{calModel}}, \code{\link{modelfunction}},
-  \code{\link{optimize}}, \code{\link{integrate}}
+\code{\link{calModel}}, \code{\link{optimize}},
+  \code{\link{integrate}}
 }
 

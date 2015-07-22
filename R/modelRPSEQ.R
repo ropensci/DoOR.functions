@@ -1,30 +1,33 @@
-#' Generates a model response and merge data in given sequence
+#' modelRPSEQ
 #' 
-#' Generates a model response and merge data in given sequence.
+#' generates a model response and merge data in given sequence
 #' 
 #' 
 #' @param data data frame; odorant response data, e.g. Or22a.
-#' @param SEQ character vector; containing the names of studies indicating
-#' given sequence for merging data.
+#' @param SEQ character vector; containing the names of studies indicating given
+#'   sequence for merging data.
 #' @param overlapValues minimum overlap between studies to perfom a merge
-#' @param select.MDValue the minimum mean distance between studies to perfom a merge
-#' @param strict logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue
+#' @param select.MDValue the minimum mean distance between studies to perfom a
+#'   merge
+#' @param plot logical
+#' @param strict logical, if TRUE merging a permutation will be stopped once a
+#'   single merge has a mean distance above select.MDValue
+#'   
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
 #' @export
-#' @details 
-#' # modelRPSEQ.R:
-#' #################
+#' @details # modelRPSEQ.R: #################
 #' 
-#' # merges studies in a given sequence (determined by the user or by exhaustive enumeration and choosing the optimal sequence)
-#' 
-#' 
-#' # input parameters:
-#' ####################
+#' # merges studies in a given sequence (determined by the user or by exhaustive
+#' enumeration and choosing the optimal sequence)
 #' 
 #' 
-#' # data  : data frame; odorant response data for a given receptor, e.g. Or22a
-#' # SEQ 	: character vector; contains the names of studies that measured this receptor in a specific order (the merging sequence)
+#' # input parameters: ####################
+#' 
+#' 
+#' # data  : data frame; odorant response data for a given receptor, e.g. Or22a 
+#' # SEQ 	: character vector; contains the names of studies that measured this
+#' receptor in a specific order (the merging sequence)
 #' 
 #' # output is a numeric vector: response values
 #' 

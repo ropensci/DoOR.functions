@@ -9,7 +9,7 @@
 # @return a list containing the filtered data set and a data frame naming the removed data sets and the reason for removal
 #
 # @examples
-#' library(DoOR.data)
+# library(DoOR.data)
 # tmp <- filterData(Or42b)
 # tmp$excluded
 filterData <- function(data, overlapValues = default.val("overlapValues"), charColumns = default.val("num.charColumns")) {

@@ -3,29 +3,29 @@
 #' Plot an antennal lobe map with color coded odorant responses.
 #' 
 #' @param InChIKey InChIKey specifying the odorant to plot
-#' @param response_matrix the input data (e.g. response.matrix or
+#' @param response_matrix the input data (e.g. response.matrix or 
 #'   response.matrix_non.normalized)
 #' @param odor_data data frame; contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
-#' @param tag the labels to plot on top of the glomeruli (one of the following
-#'   \code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
+#' @param tag the labels to plot on top of the glomeruli (one of the following 
+#'   \code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus" 
 #'   or "co.receptor")
 #' @param main the title, one column of \code{odor}, defaults to "Name"
 #' @param scalebar whether or not to add a scalebar
 #' @param DoOR_mappings the data frame containing the mapping information
-#' @param colors a vector containing 6 color values (2 for values below 0, 1 0
+#' @param colors a vector containing 6 color values (2 for values below 0, 1 0 
 #'   value and 3 steps between 0 and 1)
-#' @param limits the limits for the color scale, if empty the range of the
+#' @param limits the limits for the color scale, if empty the range of the 
 #'   response matrix is taken (after setting ``zero`` to 0)
 #' @param AL.map a list containing the AL model
 #' @param legend logical, plot a legend?
 #' @param base_size numeric, the base font size for the ggplot plot
-#' @details Normalized, color coded odor responses across receptors are mapped
-#'   onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map
+#' @details Normalized, color coded odor responses across receptors are mapped 
+#'   onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map 
 #'   was a kind gift from Veit Grabe.
-#' @seealso \link{getNormalizedResponses}, \pkg{\link{ggplot2}, \link{grid}}
-#' @references Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S.,
-#'   2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila
+#' @seealso \link{getNormalizedResponses}, \pkg{ggplot2}, \pkg{grid}
+#' @references Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 
+#'   2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila 
 #'   melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
 #' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
 #' @export

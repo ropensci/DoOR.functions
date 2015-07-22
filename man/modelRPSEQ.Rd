@@ -2,7 +2,7 @@
 % Please edit documentation in R/modelRPSEQ.R
 \name{modelRPSEQ}
 \alias{modelRPSEQ}
-\title{Generates a model response and merge data in given sequence}
+\title{modelRPSEQ}
 \usage{
 modelRPSEQ(data, SEQ, overlapValues = default.val("overlapValues"),
   select.MDValue = default.val("select.MDValue"), strict = TRUE,
@@ -11,31 +11,35 @@ modelRPSEQ(data, SEQ, overlapValues = default.val("overlapValues"),
 \arguments{
 \item{data}{data frame; odorant response data, e.g. Or22a.}
 
-\item{SEQ}{character vector; containing the names of studies indicating
-given sequence for merging data.}
+\item{SEQ}{character vector; containing the names of studies indicating given
+sequence for merging data.}
 
 \item{overlapValues}{minimum overlap between studies to perfom a merge}
 
-\item{select.MDValue}{the minimum mean distance between studies to perfom a merge}
+\item{select.MDValue}{the minimum mean distance between studies to perfom a
+merge}
 
-\item{strict}{logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue}
+\item{strict}{logical, if TRUE merging a permutation will be stopped once a
+  single merge has a mean distance above select.MDValue}
+
+\item{plot}{logical}
 }
 \description{
-Generates a model response and merge data in given sequence.
+generates a model response and merge data in given sequence
 }
 \details{
-# modelRPSEQ.R:
-#################
+# modelRPSEQ.R: #################
 
-# merges studies in a given sequence (determined by the user or by exhaustive enumeration and choosing the optimal sequence)
+# merges studies in a given sequence (determined by the user or by exhaustive
+enumeration and choosing the optimal sequence)
 
 
-# input parameters:
-####################
+# input parameters: ####################
 
 
 # data  : data frame; odorant response data for a given receptor, e.g. Or22a
-# SEQ 	: character vector; contains the names of studies that measured this receptor in a specific order (the merging sequence)
+# SEQ 	: character vector; contains the names of studies that measured this
+receptor in a specific order (the merging sequence)
 
 # output is a numeric vector: response values
 }

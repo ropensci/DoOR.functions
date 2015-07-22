@@ -11,9 +11,9 @@
 #' returned, which give the coordinates of double observations (defined as 
 #' (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)). 
 #' Both data frames contain seven columns: "ID" indicating the original position
-#' of data x and y; "x", "y" indicating the coordinate of observation; "X", "Y"
-#' indicating the coordinate of projected point on the functional line;
-#' "distance" indicating the distances between \code{(xmin, f(xmin))} and all
+#' of data x and y; "x", "y" indicating the coordinate of observation; "X", "Y" 
+#' indicating the coordinate of projected point on the functional line; 
+#' "distance" indicating the distances between \code{(xmin, f(xmin))} and all 
 #' points on the functional line; "NDR" indicating the normalized distances 
 #' across all the distance values.
 #' 
@@ -31,8 +31,8 @@
 #'   \code{FALSE}.
 #' @param \dots further graphical parameters
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @seealso \code{\link{calModel}}, \code{\link{modelfunction}}, 
-#'   \code{\link{optimize}}, \code{\link{integrate}}
+#' @seealso \code{\link{calModel}}, \code{\link{optimize}},
+#'   \code{\link{integrate}}
 #' @export
 #' @examples
 #' 

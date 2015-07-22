@@ -33,14 +33,20 @@
 #' 
 #' @examples
 #' library(DoOR.data)
-#' recording <- data.frame(odorants = c(transID(c("BEDN", "ETAS"), "Code"), transID("carbon dioxide", "Name")), unit1 = c(.9,.1,.1), unit2 = c(0, .1, 1) )
+#' recording <- data.frame(
+#'    odorants = c(transID(c("BEDN", "ETAS"), "Code"), 
+#'    transID("carbon dioxide", "Name")), 
+#'    unit1 = c(.9,.1,.1), 
+#'    unit2 = c(0, .1, 1)
+#' )
+#' 
 #' identifySensillum(recording)
 #' identifySensillum(recording, method = "dist", nshow = 5)
 #' 
 identifySensillum <- function(recording,
                               response_matrix = default.val("response.matrix"),
-                              odor_data = default.val("odor"),
-                              DoOR_mappings = default.val("DoOR_mappings"),
+                              odor_data       = default.val("odor"),
+                              DoOR_mappings   = default.val("DoOR_mappings"),
                               tag     = "Name",
                               min.cor = .9,
                               nshow   = 10,

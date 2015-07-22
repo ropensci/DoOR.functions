@@ -1,24 +1,24 @@
 #' DoOR Functions
-#' 
+#'
 #' Functions package providing manipulation and application of the DoOR.
-#' 
+#'
 #' \tabular{ll}{ Package: \tab DoOR.functions\cr Type: \tab Package\cr Version:
 #' \tab 0.1-2\cr Date: \tab 2012-04-16\cr License: \tab GPL-2\cr LazyLoad: \tab
 #' yes\cr }
-#' 
+#'
 #' \bold{Type \code{help(package = DoOR.functions)} to see a complete list of
 #' datasets and functions.  Below is what you need for a quick start.}
-#' 
+#'
 #' First, load the DoOR packages, data and function package: \tabular{ll}{
 #' \code{library(DoOR.functions)}: \tab \cr \code{library(DoOR.data)}: \tab \cr
 #' }
-#' 
+#'
 #' then, load all datasets including the precomputed response matrix:
-#' \tabular{ll}{ \code{\link{DoOR.data::loadData}}: \tab Load all data into current active
-#' environment . \cr } or, load all odorant reseponse data into a list:
+#' \tabular{ll}{ \code{loadData}: \tab Load all data into current active
+#' environment (function comes with DoOR.data) . \cr } or, load all odorant reseponse data into a list:
 #' \tabular{ll}{ \code{\link{load2list}}: \tab Load odorant response data only
 #' and compose them as a list.  \cr }
-#' 
+#'
 #' Try some visualizations (e.g. producing the plots from the paper):
 #' \tabular{ll}{ \code{\link{DoORplot_ALmap}}: \tab response to a chemical mapped onto
 #' an image of the antennal lobe.\cr \code{\link{DoORplot_compareProfiles}}: \tab compare
@@ -30,42 +30,35 @@
 #' \code{\link{getResponses}}: \tab given a chemical, get original responses from
 #' all studies in the database.\cr \code{\link{getNormalizedResponses}}: \tab given a
 #' chemical, get normalised responses from all studies in the database.\cr}
-#' 
+#'
 #' In case you wish to create your own response model (e.g. because you want to
 #' include your own datasets): \tabular{ll}{ \code{\link{CreateDatabase}}: \tab
 #' compute the complete response model for all receptors in the database (calls
 #' \code{\link{modelRP}} for all receptors). \cr \code{\link{modelRP}}: \tab
 #' run the DoOR algorithm, that merges all measurements for one receptor. \cr }
-#' 
+#'
 #' Estimate odorant responses: \tabular{ll}{ \code{\link{DoOREst}}: \tab
-#' estimate NA entries in a consensus response data. \cr
-#' \code{\link{LLSIestKnn}}: \tab Local Least Squares Imputation Estimation
-#' using k-nearest neighbor. \cr \code{\link{LLSIestPC}}: \tab estimate odorant
-#' responses using local least imputation, odors will be selected by coherent
-#' odors that have large absolute values of Pearson correlation coefficients.
-#' \cr } Project the model response values back to tested values: \tabular{ll}{
+#' estimate NA entries in a consensus response data. \cr }
+#' Project the model response values back to tested values: \tabular{ll}{
 #' \code{\link{backProject}}: \tab project the model response values back to
 #' tested values. \cr }
-#' 
+#'
 #' Introduce new data into DoOR and update the supported data sets:
 #' \tabular{ll}{ \code{\link{importNewData}}: \tab import new data into DoOR,
 #' and update the weight, response range and receptor names. \cr
 #' \code{\link{updateDatabase}}: \tab update response matrix by calculating new
 #' consensus response data for a given receptor. \cr }
-#' 
+#'
 #' See the Vignettes and the help pages for more documentation.
-#' 
+#'
 #' @name DoOR.functions.package
 #' @aliases DoOR.functions DoOR.function
 #' @docType package
 #' @author C. Giovanni Galizia \cr Daniel Muench \cr Martin Strauch \cr Anja
 #' Nissler \cr Shouwen Ma \cr
-#' 
+#'
 #' Maintainer: Daniel Münch <daniel.muench@@uni-konstanz.de>
 #' @seealso \code{\link[<pkg>:<pkg>-package]{<DoOR.data>}}
 #' @references \url{http://neuro.uni-konstanz.de/DoOR/default.html}
 #' @keywords package
 NULL
-
-
-
