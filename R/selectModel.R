@@ -1,70 +1,43 @@
-# compute the data pairwise and and selects a pair with the lowest "MD" value.
-# 
-# compute the data pairwise using function \code{\link{calModel}} and selects
-# a pair with the lowest "MD" value.
-# 
-# This function is used in \code{\link{modelRP}} to select the first pair or
-# next data set for merging. The output is a list containing "selected.x" and
-# "selected.y" that specify which data plots against another, and "best.model"
-# that is used in function \code{\link{projectPoints}}.
-# 
-# @param candidate a character vector; contains the names of studies.
-# @param data_candidate a data frame; odorant response data that only contains
-# value columns.
-# @param merged_data numeric vector; merged data
-# @param overlapValues numeric; a criterion using to refuse a data set that
-# has not enough overlap value.
-# @param merged logical; if merged is \code{TRUE}, calculate models between
-# merged_data and candidate data. If \code{FALSE}, calculate models between
-# candidates.
-# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-# @seealso \code{\link{projectPoints}},\code{\link{modelRP}}
-# @keywords data
-# @examples
-# 
-# library(DoOR.data)
-# data(Or35a)
-# studies<-names(Or35a)[c(5:9)]
-# data_candidate<-Or35a[,c(5:9)]
-# Norm_data_candidate<-apply(data_candidate,2,DoORnorm)
-# selectModel(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
-# 
-selectModel <-
-function(candidate, 
-			data_candidate, 
-			merged_data,
-			overlapValues = default.val("overlapValues"),
-			merged = default.val("merged") ) 
-
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-
-# selectModel.R :
-#################
-
-# tries several fitting functions (e.g. exponential, sigmoidal, ...) using "calModel.R" and selects the one with minimum "MD" value. 
-
-
-# input parameters:
-####################
-
-#  candidate 	  : a character vector; names of studies
-#  data_candidate : a data frame; odorant response data (without odorant information etc.)
-#  merged_data 	  : numeric vector; merged data
-#  overlapValues  : numeric; a criterion using to refuse a data set that has not enough overlap value.
-#  merged 	  : logical; if merged is TRUE, calculate models between merged_data (the growing response model) and candidate data (a study). 
-#                            If FALSE, calculate models between candidates (studies).
-
-
-# output: character   : "selected.x", "selected.y"  (names of the studies on x- and y- axis)  
-#         "best.model": the best model (in the format returned by calModel.R) 
-
-{
-  initial 	  <-
-    list(
-      model.name = "no.fitted.model", cal.parameters = NA, MD = default.val("select.MDValue")
-    )
+#' compute the data pairwise and and selects a pair with the lowest "MD" value.
+#'
+#' compute the data pairwise using function \code{\link{calModel}} and selects
+#' a pair with the lowest "MD" value.
+#'
+#' This function is used in \code{\link{modelRP}} to select the first pair or
+#' next data set for merging. The output is a list containing "selected.x" and
+#' "selected.y" that specify which data plots against another, and "best.model"
+#' that is used in function \code{\link{projectPoints}}.
+#'
+#' @param candidate a character vector; contains the names of studies.
+#' @param data_candidate a data frame; odorant response data that only contains
+#' value columns.
+#' @param merged_data numeric vector; merged data
+#' @param overlapValues numeric; a criterion using to refuse a data set that
+#' has not enough overlap value.
+#' @param merged logical; if merged is \code{TRUE}, calculate models between
+#' merged_data and candidate data. If \code{FALSE}, calculate models between
+#' candidates.
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @seealso \code{\link{projectPoints}},\code{\link{modelRP}}
+#' @keywords data
+#' @export
+#' @examples
+#'
+#' library(DoOR.data)
+#' data(ac3B)
+#' studies<-names(ac3B)[c(7:9)]
+#' data_candidate<-ac3B[,c(7:9)]
+#' Norm_data_candidate <-apply(data_candidate, 2, DoORnorm)
+#' selectModel(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
+#'
+selectModel <- function(candidate,
+                        data_candidate,
+                        merged_data,
+                        overlapValues = default.val("overlapValues"),
+                        merged = default.val("merged") ) {
+  initial <- list(
+    model.name = "no.fitted.model", cal.parameters = NA, MD = default.val("select.MDValue")
+  )
   curr.model    <- list(initial = initial)
   best.model    <- curr.model
   selected.y    <- character()

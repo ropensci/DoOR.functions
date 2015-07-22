@@ -1,90 +1,52 @@
-# projects data points onto the curve defined by the model function
-# 
-# For internal use in the merging process (see also \code{\link{modelRP}}).
-# The model function is choosen by \code{\link{calModel}}.
-# \code{\link{projectPoints}} then projects the data points from the datasets
-# to be merged onto the curve defined by the model function. It computes the
-# closest distance from a data point to a point on the curve by numerical
-# optimisation.
-# 
-# A list with two data frames "Double.Observations" and "Single.Observation"
-# is returned, which give the coordinates of double observations (defined as
-# (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)).
-# Both data frames contain seven columns: "ID" indicating the original
-# position of data x and y; "x", "y" indicating the coordinate of observation;
-# "X", "Y" indicating the coordinate of projected point on the functional
-# line; "distance" indicating the distances between \code{(xmin, f(xmin))} and
-# all points on the functional line; "NDR" indicating the normalized distances
-# across all the distance values.
-# 
-# @param x,y numeric vectors of data values; coordinate vectors of points to
-# plot, the coordinates can contain \code{NA} values.
-# @param xylim numeric vectors; x, y limits of the plot.
-# @param best.model a list; containing the parameters, function, inverse
-# function, Leibniz's notation for distance calculation and MD value. if
-# missing, the best model will be generated automatically.
-# @param plot logical; If \code{FALSE}, plotting is suppressed. Default is
-# \code{FALSE}.
-# @param points.cex a numerical value; giving the magnification level of
-# symbols relative to the default size.
-# @param title logical; If \code{TRUE}, title is shown. Default is
-# \code{FALSE}.
-# @param cex.title numeric; The magnification to be used for main titles
-# relative to the current setting of cex.
-# @param \dots further graphical parameters
-# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-# @seealso \code{\link{calModel}}, \code{\link{modelfunction}},
-# \code{\link{optimize}}, \code{\link{integrate}}
-# @keywords math
-# @examples
-# 
-# library(DoOR.data)
-# data(Or23a)
-# x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
-# y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
-# projectPoints(x = x, y = y, plot = TRUE)
-# 
-projectPoints <-
-  function(x, y, xylim, best.model, 
-           plot = default.val("plot"), 
-           points.cex = default.val("points.cex"),
-           title = default.val("title"), 
-           cex.title = default.val("cex.title"), 
-           ...)
-    
-    # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-    # Neurobiology, University of Konstanz, Germany
-    
-    
-    
-    # projectPoints.R :
-    #####################
-
-# projects measured data points onto the model function, thereby creating the model response
-
-
-# input parameters:
-####################
-
-
-# x,y 		: numerical vectors of measurements; coordinate vectors of points to plot, the coordinates can contain NA values. 
-# best.model 	: a list; containing the parameters, function, inverse function, Leibniz's notation for distance calculation and MD value. if missing, the best model will be generated automatically.
-#
-# graphical parameters:
-#
-# xylim 	: numeric vectors; x, y limits of the plot.
-# plot 		: logical; If FALSE, plotting is suppressed. Default is FALSE.  
-# points.cex 	: a numerical value; giving the magnification level of symbols relative to the default size. 
-# title 	: logical; if TRUE, title is shown. Default is FALSE. 
-# cex.title 	: numeric; The magnification to be used for main titles relative to the current setting of cex. 
-# dots 		: further graphical parameters	  
-
-
-# output is a list containing two data frames "Double.Observations" (projected from values observed in both studies) and "Single.Observation" (projected from values observed in one study only). 
-# Both data frames contain "ID" (odor ID), "x" and "y" (coordinates for observed values), "X"and "Y" (coordinateds for projected values), 
-# "distance" (distance bwtween points), "NDR" (normalized distance).
-
-{ 
+#' projects data points onto the curve defined by the model function
+#' 
+#' For internal use in the merging process (see also \code{\link{modelRP}}). The
+#' model function is choosen by \code{\link{calModel}}. 
+#' \code{\link{projectPoints}} then projects the data points from the datasets 
+#' to be merged onto the curve defined by the model function. It computes the 
+#' closest distance from a data point to a point on the curve by numerical 
+#' optimisation.
+#' 
+#' A list with two data frames "Double.Observations" and "Single.Observation" is
+#' returned, which give the coordinates of double observations (defined as 
+#' (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)). 
+#' Both data frames contain seven columns: "ID" indicating the original position
+#' of data x and y; "x", "y" indicating the coordinate of observation; "X", "Y"
+#' indicating the coordinate of projected point on the functional line;
+#' "distance" indicating the distances between \code{(xmin, f(xmin))} and all
+#' points on the functional line; "NDR" indicating the normalized distances 
+#' across all the distance values.
+#' 
+#' @param x,y numeric vectors of data values; coordinate vectors of points to 
+#'   plot, the coordinates can contain \code{NA} values.
+#' @param xylim numeric vectors; x, y limits of the plot.
+#' @param best.model a list; containing the parameters, function, inverse 
+#'   function, Leibniz's notation for distance calculation and MD value. if 
+#'   missing, the best model will be generated automatically.
+#' @param plot logical; If \code{FALSE}, plotting is suppressed. Default is 
+#'   \code{FALSE}.
+#' @param points_cex a numerical value; giving the magnification level of 
+#'   symbols relative to the default size.
+#' @param title logical; If \code{TRUE}, title is shown. Default is 
+#'   \code{FALSE}.
+#' @param \dots further graphical parameters
+#' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @seealso \code{\link{calModel}}, \code{\link{modelfunction}}, 
+#'   \code{\link{optimize}}, \code{\link{integrate}}
+#' @export
+#' @examples
+#' 
+#' library(DoOR.data)
+#' data(Or23a)
+#' x <- DoORnorm(Or23a[,'Hallem.2004.EN'])
+#' y <- DoORnorm(Or23a[,'Hallem.2006.EN'])
+#' projectPoints(x = x, y = y, plot = TRUE)
+#' 
+projectPoints <- function(x, y, xylim, best.model, 
+                          plot = default.val("plot"), 
+                          points_cex = default.val("points.cex"),
+                          title = default.val("title"), 
+                          ...) { 
   
   
   # subfunctions:
@@ -93,7 +55,7 @@ projectPoints <-
   #             1: available on x
   #             2: available on y
   #             3: available in both datasets
-  available <- function(x) { return(sum(which(sapply(x,is.na) == FALSE))) }
+  available <- function(x) {return(sum(which(sapply(x,is.na) == FALSE))) }
   
   
   
@@ -289,11 +251,11 @@ projectPoints <-
     
     if (!missing(xylim)) 
     { 
-      plot(y~x, xlim=xylim, ylim=xylim, cex=points.cex, type="n", ...)
+      plot(y~x, xlim=xylim, ylim=xylim, cex=points_cex, type="n", ...)
     }
     else
     { 
-      plot(y~x,xlim=range(c(range.projected_all.X,range.projected_all.x)), ylim=range(c(range.projected_all.Y,range.projected_all.y)),cex=points.cex, type="n", ...)
+      plot(y~x,xlim=range(c(range.projected_all.X,range.projected_all.x)), ylim=range(c(range.projected_all.Y,range.projected_all.y)),cex=points_cex, type="n", ...)
     }
     
     seg_y=which(is.na(projected_all$x))
@@ -311,7 +273,7 @@ projectPoints <-
     }
     
     segments(projected_all[,'X'],projected_all[,'Y'],projected_all[,'x'],projected_all[,'y'],col='red')			
-    points(projected_all[,'X'],projected_all[,'Y'],col="green",cex=points.cex)
+    points(projected_all[,'X'],projected_all[,'Y'],col="green",cex=points_cex)
     
     intervalCurve 	  <- numeric()
     seq_intervalCurve <- seq(from=range.projected_all.X[1],to=range.projected_all.X[2],length=100)
