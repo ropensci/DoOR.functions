@@ -8,15 +8,15 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-```{r, echo=FALSE, message=FALSE, results='hide'}
+Apart from merging data and performing calculations on it, the `DoOR.functions` package provides several ways to visualize the data served by the `DoOR.data` package. Please see the [DoOR.function vignette](DoOR.functions.html) for instructions on how to install and load both functions and data. The plotting functions can be identified by their common prefix `DoORplot_`, most of them make use of the `ggplot2` package which makes it possible to override most all of the theming options.
+
+First we need to load packages and data:
+```{r, echo = T, message = TRUE, results='hide'}
 #load data
-require(DoOR.functions)
-require(DoOR.data)
-require(ggplot2)
+library(DoOR.functions)
+library(DoOR.data)
 loadData()
 ```
-
-Apart from merging data and performing calculations on it, the `DoOR.functions` package provides several ways to visualize the data served by the `DoOR.data` package. Please see the [DoOR.function vignette](DoOR.functions.html) for instructions on how to install and load both functions and data. The plotting functions can be identified by their common prefix `DoORplot_`, most of them make use of the `ggplot2` package which makes it possible to override most all of the theming options.
 
 ## DoORplot_responseMatrix
 `DoORplot_responseMatrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `resetSFR(response.matrix, "SFR")`) it will be shown as color coded heatmap.
@@ -87,6 +87,7 @@ DoORplot_tuningCurve(odorant = transID("carbon dioxide", from = "Name"), fill.od
 
 As mentioned, all of these plot are generated with the ggplot2 package which makes it possible to override theming:
 ```{r}
+library(ggplot2)
 DoORplot_tuningCurve(odorant = transID("carbon dioxide", from = "Name"), base_size = 8) + 
   theme(panel.background = element_rect(fill = "grey", color = "magenta"))
 ```
