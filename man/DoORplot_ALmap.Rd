@@ -5,7 +5,7 @@
 \title{DoORplot_ALmap}
 \usage{
 DoORplot_ALmap(InChIKey, response_matrix = default.val("response.matrix"),
-  odor = default.val("odor.data"), zero = default.val("zero"),
+  odor = default.val("odor_data"), zero = default.val("zero"),
   tag = default.val("tag.ALmap"), main = "Name",
   scalebar = default.val("scalebar"),
   DoOR.mappings = default.val("DoOR.mappings"),

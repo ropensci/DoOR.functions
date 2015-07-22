@@ -4,7 +4,7 @@
 #'
 #' @param odorants character vecto; one or several InChIKeys
 #' @param response_matrix DoOR response matrix; a DoOR response matrix as data source
-#' @param odor.data data frame; contains the odorant information.
+#' @param odor_data data frame; contains the odorant information.
 #' @param zero character; an InChIKey of the odorant that should be set to 0
 #' @param tag character; the chemical identifier to plot as odorant name (one of colnames(odor))
 #' @param limits numeric of length 2; if provided the ylim will range accordingly
@@ -20,7 +20,7 @@
 #'
 DoORplot_acrossReceptors <- function(odorants,
                                      response_matrix = default.val("response.matrix"),
-                                     odor.data = default.val("odor.data"),
+                                     odor_data = default.val("odor_data"),
                                      zero = default.val("zero"),
                                      tag  = "Name",
                                      limits,
@@ -37,7 +37,7 @@ DoORplot_acrossReceptors <- function(odorants,
   data <- DoORmelt(as.data.frame(data), na.rm = TRUE)
 
   if(tag != "InChIKey")
-    data$odorant <- odor.data[match(data$odorant, odor.data$InChIKey), tag]
+    data$odorant <- odor_data[match(data$odorant, odor_data$InChIKey), tag]
 
   plot <- ggplot2::ggplot(data, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
     ggplot2::geom_bar(stat = "identity", position = "identity", alpha = .6) +

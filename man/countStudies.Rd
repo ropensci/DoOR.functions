@@ -4,14 +4,14 @@
 \alias{countStudies}
 \title{countStudies}
 \usage{
-countStudies(ors = default.val("ORs"), odor.data = default.val("odor.data"),
+countStudies(ors = default.val("ORs"), odor_data = default.val("odor_data"),
   char.columns = default.val("num.charColumns"),
   ident = default.val("ident"))
 }
 \arguments{
 \item{ors}{data.frame containing all receptors exidting in DoOR.}
 
-\item{odor.data}{data.frame containing information about the odorants in DoOR.}
+\item{odor_data}{data.frame containing information about the odorants in DoOR.}
 
 \item{char.columns}{number of character columns in each receptor data.frame.}
 

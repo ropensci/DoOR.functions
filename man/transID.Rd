@@ -5,7 +5,7 @@
 \title{transID}
 \usage{
 transID(x, from = "CAS", to = "InChIKey",
-  odor.data = default.val("odor.data"))
+  odor_data = default.val("odor_data"))
 }
 \arguments{
 \item{x}{character vector; one or many chemical identifiers}
@@ -14,7 +14,7 @@ transID(x, from = "CAS", to = "InChIKey",
 
 \item{to}{character; the type of identifier to translate from (one of the column names of ``odor``)}
 
-\item{odor.data}{the data frame containing the odor information (defaults to ``odor``).}
+\item{odor_data}{the data frame containing the odor information (defaults to ``odor``).}
 }
 \value{
 character vector of translated chemical identifiers

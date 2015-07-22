@@ -8,7 +8,7 @@
 #'   this is taken from response_matrix
 #' @param response_matrix DoOR response matrix; response vector will be taken
 #'   from here, not needed if response.vector is given
-#' @param odor.data data frame; contains the odorant information.
+#' @param odor_data data frame; contains the odorant information.
 #' @param zero InChIKey; will be set to zero, default is SFR, ignored when data
 #'   is provided via response.vector; set to "" if you don't want to subtract
 #'   anything
@@ -39,7 +39,7 @@ DoORplot_tuningCurve <- function(receptor,
                                  odorant,
                                  response.vector,
                                  response_matrix = default.val("response.matrix"),
-                                 odor.data = default.val("odor.data")
+                                 odor_data = default.val("odor_data")
                                  zero = default.val("zero"),
                                  fill.receptor = default.val("color.receptor"),
                                  fill.odorant  = default.val("color.odorant"),
@@ -87,7 +87,7 @@ DoORplot_tuningCurve <- function(receptor,
         atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), "; n: ", nrow(data)))), ""))))
   } else {
     odorant <- as.character(odorant)
-    odor.main <- odor.data[which(odor.data$InChIKey == odorant), odor.main]
+    odor.main <- odor_data[which(odor_data$InChIKey == odorant), odor.main]
     if(!missing(response.vector))
       odor.main <- odorant
     if(missing(response.vector)) {

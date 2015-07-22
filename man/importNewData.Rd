@@ -5,7 +5,7 @@
 \title{Import new data into DoOR}
 \usage{
 importNewData(file.name, dataFormat = default.val("data.format"),
-  odor.data = default.val("odor.data"),
+  odor_data = default.val("odor_data"),
   weightGlobNorm = default.val("weight.globNorm"),
   responseRange = default.val("response.range"),
   receptors = default.val("ORs"), ident = default.val("ident"), round = 3)
@@ -17,7 +17,7 @@ response values of one or more odorant receptors, either a .csv or .txt file.}
 \item{dataFormat}{data frame; a data frame does not contain any response
 value but odorant information.}
 
-\item{odor.data}{data frame; contains the odorant
+\item{odor_data}{data frame; contains the odorant
 information.}
 
 \item{weightGlobNorm}{data matrix; indicates whether given receptor has been

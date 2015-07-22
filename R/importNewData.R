@@ -17,7 +17,7 @@
 #'   file.
 #' @param dataFormat data frame; a data frame does not contain any response 
 #'   value but odorant information.
-#' @param odor.data data frame; contains the odorant information.
+#' @param odor_data data frame; contains the odorant information.
 #' @param weightGlobNorm data matrix; indicates whether given receptor has been 
 #'   measured by given study.
 #' @param responseRange data frame; contains the information about response 
@@ -39,7 +39,7 @@
 #' 
 importNewData <- function(file.name, 
                           dataFormat = default.val("data.format"),
-                          odor.data  = default.val("odor.data"), 
+                          odor_data  = default.val("odor_data"), 
                           weightGlobNorm = default.val("weight.globNorm"), 
                           responseRange  = default.val("response.range"), 
                           receptors = default.val("ORs"),
@@ -122,13 +122,13 @@ importNewData <- function(file.name,
   responseRange <- rbind(responseRange, responseRange_new)
   
   # update data frame "odor" and data.format if new odor is available.
-  matchtoOdor <- match(imported.data[,ident],odor.data[,ident])
+  matchtoOdor <- match(imported.data[,ident],odor_data[,ident])
   whichNA     <- which(is.na(matchtoOdor))
   
   stats$updatedOdors <- length(na.omit(matchtoOdor))
   stats$newOdors     <- length(whichNA) 
   
-  if (!identical(odor.data[1:5],dataFormat)) 
+  if (!identical(odor_data[1:5],dataFormat)) 
     stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.") 
   if (is.na(whichNA[1])) {
     message("There were no new odors imported.")
@@ -139,42 +139,42 @@ importNewData <- function(file.name,
     newOdor 	<- as.character(imported.data[whichNA,"Name"])
     message(paste(newOdor, " - is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
     
-    dim_odor 	<- dim(odor.data)
+    dim_odor 	<- dim(odor_data)
     
-    odor.data[(dim_odor[1]+length(whichNA)),] 		<- NA
+    odor_data[(dim_odor[1]+length(whichNA)),] 		<- NA
     
-    levels(odor.data$InChIKey) <- union(levels(odor.data$InChIKey),levels(imported.data$InChIKey))
-    odor.data[(dim_odor[1]+(1:length(whichNA))),"InChIKey"]       <-   as.character(imported.data[whichNA,"InChIKey"])
+    levels(odor_data$InChIKey) <- union(levels(odor_data$InChIKey),levels(imported.data$InChIKey))
+    odor_data[(dim_odor[1]+(1:length(whichNA))),"InChIKey"]       <-   as.character(imported.data[whichNA,"InChIKey"])
     
-    levels(odor.data$Name) <- union(levels(odor.data$Name),levels(imported.data$Name))
-    odor.data[(dim_odor[1]+(1:length(whichNA))),"Name"]    	      <-   as.character(imported.data[whichNA,"Name"])
+    levels(odor_data$Name) <- union(levels(odor_data$Name),levels(imported.data$Name))
+    odor_data[(dim_odor[1]+(1:length(whichNA))),"Name"]    	      <-   as.character(imported.data[whichNA,"Name"])
     
     if ('CAS' %in% colnames(imported.data)) {
-      levels(odor.data$CAS) <- union(levels(odor.data$CAS),levels(imported.data$CAS))
-      odor.data[(dim_odor[1]+(1:length(whichNA))),"CAS"]    	<- as.character(imported.data[whichNA,"CAS"])
+      levels(odor_data$CAS) <- union(levels(odor_data$CAS),levels(imported.data$CAS))
+      odor_data[(dim_odor[1]+(1:length(whichNA))),"CAS"]    	<- as.character(imported.data[whichNA,"CAS"])
     }
     
     if ('CID' %in% colnames(imported.data)) {
-      levels(odor.data$CID) <- union(levels(odor.data$CID),levels(imported.data$CID))
-      odor.data[(dim_odor[1]+(1:length(whichNA))),"CID"]    	      <-   as.character(imported.data[whichNA,"CID"])
+      levels(odor_data$CID) <- union(levels(odor_data$CID),levels(imported.data$CID))
+      odor_data[(dim_odor[1]+(1:length(whichNA))),"CID"]    	      <-   as.character(imported.data[whichNA,"CID"])
     }
     
     if ('Class' %in% colnames(imported.data)) {
-      levels(odor.data$Class) <- union(levels(odor.data$Class),levels(imported.data$Class))
-      odor.data[(dim_odor[1]+(1:length(whichNA))),"Class"]    	    <-   as.character(imported.data[whichNA,"Class"])
+      levels(odor_data$Class) <- union(levels(odor_data$Class),levels(imported.data$Class))
+      odor_data[(dim_odor[1]+(1:length(whichNA))),"Class"]    	    <-   as.character(imported.data[whichNA,"Class"])
     }
     
     if ('InChI' %in% colnames(imported.data)) {
-      levels(odor.data$InChI) <- union(levels(odor.data$InChI),levels(imported.data$InChI))
-      odor.data[(dim_odor[1]+(1:length(whichNA))),"InChI"]          <-   as.character(imported.data[whichNA,"InChI"])
+      levels(odor_data$InChI) <- union(levels(odor_data$InChI),levels(imported.data$InChI))
+      odor_data[(dim_odor[1]+(1:length(whichNA))),"InChI"]          <-   as.character(imported.data[whichNA,"InChI"])
     }
     
     if ('SMILES' %in% colnames(imported.data)) {
-      levels(odor.data$SMILES) <- union(levels(odor.data$SMILES),levels(imported.data$SMILES))
-      odor.data[(dim_odor[1]+(1:length(whichNA))),"SMILES"]       <-   as.character(imported.data[whichNA,"SMILES"])
+      levels(odor_data$SMILES) <- union(levels(odor_data$SMILES),levels(imported.data$SMILES))
+      odor_data[(dim_odor[1]+(1:length(whichNA))),"SMILES"]       <-   as.character(imported.data[whichNA,"SMILES"])
     }
     
-    dataFormat <- odor.data[1:5]
+    dataFormat <- odor_data[1:5]
     
     message("If data was provided, 'CAS', 'NAME', 'CID', 'Class', 'InChI' and 'SMILES' columns were updated.")
   }
@@ -263,7 +263,7 @@ importNewData <- function(file.name,
   assign("weight.globNorm", weightGlobNorm, envir = .GlobalEnv)
   assign("response.range", responseRange, envir = .GlobalEnv)
   assign("ORs", receptors, envir = .GlobalEnv)
-  assign("odor", odor.data, envir = .GlobalEnv)
+  assign("odor", odor_data, envir = .GlobalEnv)
   
   message()
   message(paste('###################\n',

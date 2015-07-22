@@ -4,7 +4,7 @@
 #' 
 #' @param odorants character vector; one or several InChIKeys
 #' @param response_matrix DOOR response matrix; contains the data to plot
-#' @param odor.data data frame; contains the odorant information.
+#' @param odor_data data frame; contains the odorant information.
 #' @param zero character; InChIKey of the odorant that should be set to 0 (e.g.
 #'   SFR)
 #' @param tag character; the chemical identifier to use in the plot, one of
@@ -34,7 +34,7 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 DoORplot_acrossOSNs <- function(odorants,
                                 response_matrix = default.val("response.matrix"),
-                                odor.data = default.val("odor.data"),
+                                odor_data = default.val("odor_data"),
                                 zero = default.val("zero"),
                                 tag  = "Name",
                                 sub,
@@ -53,7 +53,7 @@ DoORplot_acrossOSNs <- function(odorants,
   data <- DoORmelt(as.data.frame(data), na.rm = FALSE)
   
   if(tag != "InChIKey")
-    data$odorant <- odor.data[match(data$odorant, odor.data$InChIKey), tag]
+    data$odorant <- odor_data[match(data$odorant, odor_data$InChIKey), tag]
   
   data$sensillum <- DoOR.mappings[match(data$dataset, DoOR.mappings$receptor), "sensillum"]
   data$OSN       <- DoOR.mappings[match(data$dataset, DoOR.mappings$receptor), "code.OSN"]

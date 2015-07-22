@@ -8,7 +8,7 @@
 #'   called "unit1" etc. for each unit, containing responses (or estimates) 
 #'   scaled between 0 and 1 (see examples)
 #' @param response_matrix DoOR response matrix; the data to compair against
-#' @param odor.data data frame; contains the odorant information.
+#' @param odor_data data frame; contains the odorant information.
 #' @param tag character; the chemical identifier to use in plots, one of 
 #'   \code{colnames(odor)}
 #' @param min.cor numeric; a minimum correlation value, the function will check 
@@ -38,7 +38,7 @@
 #' 
 identifySensillum <- function(recording,
                               response_matrix = default.val("response.matrix"),
-                              odor.data = default.val("odor.data"),
+                              odor_data = default.val("odor_data"),
                               tag     = "Name",
                               min.cor = .9,
                               nshow   = 10,
@@ -107,8 +107,8 @@ identifySensillum <- function(recording,
   # plots
   # change odor identifier for plotting
   if(tag != "InChIKey") {
-    recording$odorants <- odor.data[match(recording$odorants, odor.data$InChIKey), tag]
-    rownames(data)     <- odor.data[match(rownames(data), odor.data$InChIKey), tag]
+    recording$odorants <- odor_data[match(recording$odorants, odor_data$InChIKey), tag]
+    rownames(data)     <- odor_data[match(rownames(data), odor_data$InChIKey), tag]
   }
   
   # plot data

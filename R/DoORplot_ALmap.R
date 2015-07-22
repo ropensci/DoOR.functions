@@ -5,7 +5,7 @@
 #' @param InChIKey InChIKey specifying the odorant to plot
 #' @param response_matrix the input data (e.g. response.matrix or
 #'   response.matrix_non.normalized)
-#' @param odor.data data frame; contains the odorant information.
+#' @param odor_data data frame; contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
 #' @param tag the labels to plot on top of the glomeruli (one of the following
 #'   \code{DoOR.mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
@@ -44,7 +44,7 @@
 #' }
 DoORplot_ALmap <- function(InChIKey,
                            response_matrix = default.val("response.matrix"),
-                           odor.data = default.val("odor.data"),
+                           odor_data = default.val("odor_data"),
                            zero = default.val("zero"),
                            tag =  default.val("tag.ALmap"),
                            main = "Name",
@@ -75,7 +75,7 @@ DoORplot_ALmap <- function(InChIKey,
   labels <- cbind(labels,DoOR.mappings[match(labels$glomerulus, DoOR.mappings$code),c("receptor", "sensillum", "OSN", "co.receptor", "Ors")])
 
 
-  main <- odor.data[match(InChIKey, odor$InChIKey), main]
+  main <- odor_data[match(InChIKey, odor$InChIKey), main]
 
 
 
