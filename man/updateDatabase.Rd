@@ -11,7 +11,7 @@ updateDatabase(receptor, permutation = TRUE, perm,
   weightGlobNorm = default.val("weight.globNorm"),
   select.MDValue = default.val("select.MDValue"), strict = TRUE,
   overlapValues = default.val("overlapValues"),
-  excluded.data = default.val("excluded.data"), plot = F)
+  excluded.data = default.val("excluded.data"), plot = FALSE)
 }
 \arguments{
 \item{receptor}{character string; name of given odorant receptor.}
@@ -30,9 +30,9 @@ been globally normalized.}
 
 \item{weightGlobNorm}{data frame; weight matrix for global normalization.}
 
-\item{select.MDValue}{the minimum mean distance between studies to perfom a merge (used if permutation == F or if permutation == T AND strict == T)}
+\item{select.MDValue}{the minimum mean distance between studies to perfom a merge (used if permutation == FALSE or if permutation == TRUE AND strict == TRUE)}
 
-\item{strict}{logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue (only valid if permutation == T)}
+\item{strict}{logical, if TRUE merging a permutation will be stopped once a single merge has a mean distance above select.MDValue (only valid if permutation == TRUE)}
 
 \item{overlapValues}{minimum overlap between studies to perfom a merge}
 }

@@ -6,7 +6,7 @@
 \usage{
 DoORplot_responseProfile(receptor,
   responseMatrix = default.val("response.matrix"), tag = default.val("tag"),
-  colored = T, colors = default.val("colors"), limits,
+  colored = TRUE, colors = default.val("colors"), limits,
   zero = default.val("zero"), scalebar = default.val("scalebar"),
   base_size = 12)
 }

@@ -1,11 +1,13 @@
-#' Update the DoOR odor data with info from \code{odor}
-#'
+#' updateOdorInfo
+#' 
+#' Update the DoOR odor data with info from \code{odor}. For the function to
+#' work, all DoOR data has to be loaded.
+#' 
 #' @author Daniel Münch, \email{daniel@@muench.bio}
 #' @export
-#'
-#'
-updateOdorInfo <- function() 
-{
+#' 
+#' 
+updateOdorInfo <- function() {
   for(i in ORs$OR)
   {
     tmp <- get(i, envir = .GlobalEnv)

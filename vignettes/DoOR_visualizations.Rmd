@@ -13,7 +13,7 @@ vignette: >
 require(DoOR.functions)
 require(DoOR.data)
 require(ggplot2)
-loadRD()
+loadData()
 ```
 
 Apart from merging data and performing calculations on it, the `DoOR.functions` package provides several ways to visualize the data served by the `DoOR.data` package. Please see the [DoOR.function vignette](DoOR.functions.html) for instructions on how to install and load both functions and data. The plotting functions can be identified by their common prefix `DoORplot_`, most of them make use of the `ggplot2` package which makes it possible to override most all of the theming options.

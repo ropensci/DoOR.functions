@@ -5,11 +5,12 @@
 \title{DoORplot_ALmap}
 \usage{
 DoORplot_ALmap(InChIKey, responseMatrix = default.val("response.matrix"),
-  zero = default.val("zero"), tag = default.val("tag.ALmap"),
-  main = "Name", scalebar = default.val("scalebar"),
+  odor = default.val("odor.data"), zero = default.val("zero"),
+  tag = default.val("tag.ALmap"), main = "Name",
+  scalebar = default.val("scalebar"),
   DoOR.mappings = default.val("DoOR.mappings"),
   AL.map = default.val("AL.map"), colors = default.val("colors"),
-  legend = T, limits, base_size = 12)
+  legend = TRUE, limits, base_size = 12)
 }
 \arguments{
 \item{InChIKey}{InChIKey specifying the odorant to plot}
@@ -40,17 +41,18 @@ Plot an antennal lobe map with color coded odorant responses.
 Normalized, color coded odor responses across receptors are mapped onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map was a kind gift from Veit Grabe.
 }
 \examples{
-DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = F)
+library(DoOR.data)
+DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
 DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 
-DoORplot_ALmap(transID("123-92-2"), scalebar = F) +
-theme(legend.position  = "bottom",
-      panel.background = element_rect(fill = "grey90", color = NA)) +
-ggtitle("responses elicited by isopentyl acetate")
+DoORplot_ALmap(transID("123-92-2"), scalebar = FALSE) +
+ggplot2::theme(legend.position  = "bottom",
+      panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
+ggplot2::ggtitle("responses elicited by isopentyl acetate")
 
 \dontrun{
 p <- DoORplot_ALmap(transID("123-92-2"))
-ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
+ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 }
 }
 \author{

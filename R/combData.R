@@ -2,16 +2,15 @@
 # 
 # Combine two data sets into one byInChIKey
 # 
-# Data frames are merged by InChIKey.
-# Data2 will be merged into data1 specified by the column name \code{by.data2}
-# into one. The name of added column could be assigned with
-# \code{assigned.name}. If \code{data2} contains some odors that the
-# \code{data1} do not have, then the new odors will be added into output.
+# Data frames are merged by InChIKey. Data2 will be merged into data1 specified
+# by the column name \code{by.data2} into one. The name of added column could be
+# assigned with \code{assigned.name}. If \code{data2} contains some odors that
+# the \code{data1} do not have, then the new odors will be added into output.
 # 
 # @param data1 data frame; the object to be added.
 # @param data2 data frame; it will be merged to "data1".
-# @param by.data2 character string; a column name in "data2", specify which
-# column will be combined into data1.
+# @param by.data2 character string; a column name in "data2", specify which 
+#   column will be combined into data1.
 # @param assigned.name charater string; assigning a name to combined column.
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 # @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>

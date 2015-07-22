@@ -4,7 +4,7 @@
 \alias{privateOdorant}
 \title{privateOdorant}
 \usage{
-privateOdorant(receptor, sensillum = F,
+privateOdorant(receptor, sensillum = FALSE,
   responseMatrix = default.val("response.matrix"),
   zero = default.val("zero"), nshow = 5, tag)
 }
@@ -29,6 +29,6 @@ return an odorant that activates the receptor of interes exclusively
 }
 \examples{
 privateOdorant("Gr21a.Gr63a", tag = "Name")
-privateOdorant("Or22a", tag = "Name", sensillum = T)
+privateOdorant("Or22a", tag = "Name", sensillum = TRUE)
 }
 

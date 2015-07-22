@@ -5,7 +5,8 @@
 \title{Generates a model response and merge data in given sequence}
 \usage{
 modelRPSEQ(data, SEQ, overlapValues = default.val("overlapValues"),
-  select.MDValue = default.val("select.MDValue"), strict = TRUE, plot = F)
+  select.MDValue = default.val("select.MDValue"), strict = TRUE,
+  plot = FALSE)
 }
 \arguments{
 \item{data}{data frame; odorant response data, e.g. Or22a.}

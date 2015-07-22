@@ -1,5 +1,5 @@
 #' privateOdorant
-#' 
+#'
 #' return an odorant that activates the receptor of interes exclusively
 #'
 #' @param receptor character; name of a DoOR responding unit (one of \code{ORs$Or})
@@ -12,19 +12,20 @@
 #' @return a data.frame containing odorants and the response in the receptor of interest as well as the maximum response of the remaining receptors and their difference
 #' @export
 #'
-#' @examples 
+#' @examples
+#' library(DoOR.data)
 #' privateOdorant("Gr21a.Gr63a", tag = "Name")
 #' privateOdorant("Or22a", tag = "Name", sensillum = TRUE)
-#' 
+#'
 privateOdorant <- function(receptor,
                            sensillum = FALSE,
                            responseMatrix = default.val("response.matrix"),
                            zero = default.val("zero"),
-                           nshow = 5, 
+                           nshow = 5,
                            tag) {
-  if(!zero == "") 
+  if(!zero == "")
     responseMatrix <- resetSFR(responseMatrix, zero)
-  
+
   if(sensillum == TRUE) {
     sensillum <- as.character(DoOR.mappings$sensillum[which(DoOR.mappings$receptor == receptor)])
     receptors <- as.character(DoOR.mappings$receptor[which(DoOR.mappings$sensillum == sensillum)])
@@ -34,19 +35,19 @@ privateOdorant <- function(receptor,
     if(!any(receptors == receptor))
       stop("The receptor you are interested in is not expressed in the sensillum you selected, please check!")
   }
-  
+
   pos <- which(colnames(responseMatrix) == receptor)
-  tmp <- data.frame(x          = responseMatrix[ ,pos], 
+  tmp <- data.frame(x          = responseMatrix[ ,pos],
                     max.others = suppressWarnings(apply(as.data.frame(responseMatrix[ ,-pos]), 1, max, na.rm = TRUE)),
                     n          = apply(as.data.frame(responseMatrix[ ,-pos]), 1, function(x) length(na.omit(x))))
   tmp$difference <- tmp$x - tmp$max.others
   tmp <- subset(tmp, !is.na(x) & n > 0)
   colnames(tmp)[1] <- receptor
-  
+
   if(!missing(tag))
     rownames(tmp) <- transID(rownames(tmp), "InChIKey", tag)
-  
+
   tmp <- tmp[order(tmp$diff, decreasing = TRUE), ][c(1:nshow), ]
-  
+
   return(tmp)
 }

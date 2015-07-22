@@ -1,27 +1,29 @@
 #' Import new data into DoOR
 #' 
-#' Import or update new data and update \code{weight.globNorm}, \code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
+#' Import or update new data and update \code{weight.globNorm}, 
+#' \code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
 #' 
-#' \code{\link{importNewData}} is used to import new data into database. If the
-#' data contains a new receptor or ORN, then build a new data frame for this
-#' receptor or ORN. If the data contains a receptor that is already present in
-#' database, then merge the imported data into old data frame. The information (e.g. response range, how many
-#' receptors and odors were measured from given study) will be integrated into
-#' data \code{response.range}, \code{odor}, \code{ORs} and \code{weight.globNorm}.
-#' If an existing study is imported, \code{\link{removeStudy}} will be run first in order to perform an update.
+#' \code{\link{importNewData}} is used to import new data into database. If the 
+#' data contains a new receptor or ORN, then build a new data frame for this 
+#' receptor or ORN. If the data contains a receptor that is already present in 
+#' database, then merge the imported data into old data frame. The information 
+#' (e.g. response range, how many receptors and odors were measured from given 
+#' study) will be integrated into data \code{response.range}, \code{odor}, 
+#' \code{ORs} and \code{weight.globNorm}. If an existing study is imported, 
+#' \code{\link{removeStudy}} will be run first in order to perform an update.
 #' 
-#' @param file.name character string; the name of given file that contains
-#' response values of one or more odorant receptors, either a .csv or .txt file.
-#' @param dataFormat data frame; a data frame does not contain any response
-#' value but odorant information.
-#' @param odor.data data frame; contains the odorant
-#' information.
-#' @param weightGlobNorm data matrix; indicates whether given receptor has been
-#' measured by given study.
-#' @param responseRange data frame; contains the information about response
-#' range of each study and how many odors have been measured in each study.
-#' @param receptors data frame, contains the receptor and OSN names and their
-#' expression.
+#' @param file.name character string; the name of given file that contains 
+#'   response values of one or more odorant receptors, either a .csv or .txt 
+#'   file.
+#' @param dataFormat data frame; a data frame does not contain any response 
+#'   value but odorant information.
+#' @param odor.data data frame; contains the odorant information.
+#' @param weightGlobNorm data matrix; indicates whether given receptor has been 
+#'   measured by given study.
+#' @param responseRange data frame; contains the information about response 
+#'   range of each study and how many odors have been measured in each study.
+#' @param receptors data frame, contains the receptor and OSN names and their 
+#'   expression.
 #' @param ident the identifier used for matching, usually the InChIKey is used.
 #' @param round the number of digits the imported values are rounded to.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
@@ -47,12 +49,12 @@ importNewData <- function(file.name,
   if (any(grep(".txt$", file.name))) { 
     imported.data <- read.table(file.name) 
     file.name <- gsub(".txt$", "", file.name)
-                      }
+  }
   if (any(grep(".csv$", file.name))) { 
     imported.data <- read.csv(file.name) 
     file.name <- gsub(".csv$", "", file.name)
-    }
-
+  }
+  
   # check for already existing studies
   if (any(file.name %in% responseRange$study)) {
     existing <- which(file.name %in% responseRange$study)
@@ -76,7 +78,7 @@ importNewData <- function(file.name,
   # check for duplicated identifiers
   if(any(duplicated(tolower(imported.data[,ident])))) 
     stop('There are duplicated identifiers in the new dataset, please solve this first.')
- 
+  
   # convert CID to character    
   whichCIDCol <- grep("CID",names(imported.data))
   if (!is.na(whichCIDCol[1])) {
@@ -87,7 +89,7 @@ importNewData <- function(file.name,
   nv 	<- as.numeric(which(sapply(imported.data, is.numeric)))
   n 	<- length(nv)
   receptor_file <- colnames(imported.data)[nv]
-
+  
   if (round != FALSE) {
     imported.data[nv] <- round(imported.data[nv],round)
   }
@@ -111,8 +113,8 @@ importNewData <- function(file.name,
   }
   
   # update data frame "response range"
-  responseRange_new.file 	<- range(imported.data[,nv],na.rm=TRUE)
-  responseRange_new     	<- data.frame(study   = file.name,
+  responseRange_new.file <- range(imported.data[,nv],na.rm=TRUE)
+  responseRange_new      <- data.frame(study   = file.name,
                                        min 	  = responseRange_new.file[1],
                                        max  	  = responseRange_new.file[2],
                                        n_odors = sum(apply(!is.na(imported.data[nv]),1,sum) > 0))# dim(imported.data)[1]) # changed as the old way also returned NAs
@@ -262,7 +264,7 @@ importNewData <- function(file.name,
   assign("response.range", responseRange, envir = .GlobalEnv)
   assign("ORs", receptors, envir = .GlobalEnv)
   assign("odor", odor.data, envir = .GlobalEnv)
-
+  
   message()
   message(paste('###################\n',
                 'Import statistics:\n',
