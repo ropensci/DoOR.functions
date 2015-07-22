@@ -3,8 +3,9 @@
 #' plot DoOR responses as a point matrix
 #' 
 #' @param data a subset of e.g. response.matrix
+#' @param odor.data data frame; contains the odorant information.
 #' @param tag the chemical identfier to plot (one of colnames(odor))
-#' @param colors the colors to use if negative values are supplied (range of 5
+#' @param colors the colors to use if negative values are supplied (range of 5 
 #'   colors, 2 for negative values, 1 for 0 and 3 for positive values)
 #' @param limits the limits of the scale, will be calculated if not set
 #' @param bw logical; whether to plot b&w or colored
@@ -15,17 +16,19 @@
 #' @return a dotplot if limits[1] >= 0  or a heatmap if limits[1] < 0
 #' @export
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
-#' @examples 
+#' @examples
+#' library(DoOR.data)
 #' tmp <- apply(response.matrix, 2, function(x) resetSFR(x,x["SFR"]))
 #' DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
 #' DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name", limits = range(response.matrix, na.rm = TRUE))
 #' 
 DoORplot_responseMatrix <- function(data,
+                                    odor.data = default.val("odor.data"),
                                     tag    = default.val("tag"),
                                     colors = default.val("colors"),
                                     bw     = FALSE,
                                     point  = FALSE,
-                                    limits, 
+                                    limits,
                                     base_size = 12) {
   
   if (!requireNamespace("ggplot2", quietly = TRUE))
@@ -45,12 +48,12 @@ DoORplot_responseMatrix <- function(data,
     values <- DoORnorm(c(0, limits[2]/3, limits[2]/1.5, limits[2]))
     colors <- colors[3:6]
   }
-
+  
   data   <- DoORmelt(data = data, na.rm = TRUE)
   
-  if(tag != "InChIKey") 
-    data$odorant <- odor[match(data$odorant, odor$InChIKey),tag]
-
+  if(tag != "InChIKey")
+    data$odorant <- odor.data[match(data$odorant, odor.data$InChIKey),tag]
+  
   if(bw == TRUE & point == FALSE) {
     bw <- FALSE
     message("Plotting black&white heatmaps does not work, ignoring 'bw = TRUE' ")
@@ -60,15 +63,15 @@ DoORplot_responseMatrix <- function(data,
     bw <- FALSE
     message("Sorry, but we can't plot negative sized points, ignoring 'bw = FALSE'.")
   }
-
+  
   if(missing(point) & missing(bw) & limits[1] >= 0) {
     point <- TRUE
     bw    <- TRUE
     message("Only positive values, returning b&w point plot.")
   }
-
-  plot <- ggplot2::ggplot(data, ggplot2::aes(y = odorant, x = dataset)) + 
-    ggplot2::theme_minimal(base_size = base_size) + 
+  
+  plot <- ggplot2::ggplot(data, ggplot2::aes(y = odorant, x = dataset)) +
+    ggplot2::theme_minimal(base_size = base_size) +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0, vjust = .5))
   
   if(bw == FALSE & point == FALSE)
@@ -83,13 +86,13 @@ DoORplot_responseMatrix <- function(data,
       if(limits[1] < 0) {
         plot <- plot + ggplot2::geom_point(ggplot2::aes(size = abs(value), color = value), alpha = .6)
       } else {
-        plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value, color = value), alpha = .6) 
+        plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value, color = value), alpha = .6)
       }
     } else {
       if(limits[1] < 0) {
         stop("Sorry, but we can't plot negative sized points, please try again with 'bw = FALSE'.")
       } else {
-        plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value), alpha = .6)  
+        plot <- plot + ggplot2::geom_point(ggplot2::aes(size = value), alpha = .6)
       }
     }
   }
