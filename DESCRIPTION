@@ -12,8 +12,9 @@ License: GPL-3
 Encoding: UTF-8
 Imports:
   utils
-Suggests: 
-  DoOR.data,
+Depends: 
+  DoOR.data
+Suggests:
   ggplot2, 
   grid,
   gridExtra (>= 2.0.0),
