@@ -1,7 +1,7 @@
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage(paste0("\nWelcome to ",  packageDescription(pkgname)$Package,
-                               "\nVersion: ",  packageDescription(pkgname)$Version,
-                               "\nReleased: ", packageDescription(pkgname)$Date,
+  packageStartupMessage(paste0("\nWelcome to ", utils::packageDescription(pkgname)$Package,
+                               "\nVersion: "  , utils::packageDescription(pkgname)$Version,
+                               "\nReleased: " , utils::packageDescription(pkgname)$Date,
                                "\n\nRemember to also load DoOR.data.\n"
   ))
 }
