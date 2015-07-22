@@ -5,7 +5,7 @@
 \title{DoORplot_responseProfile}
 \usage{
 DoORplot_responseProfile(receptor,
-  responseMatrix = default.val("response.matrix"), tag = default.val("tag"),
+  response_matrix = default.val("response.matrix"), tag = default.val("tag"),
   colored = TRUE, colors = default.val("colors"), limits,
   zero = default.val("zero"), scalebar = default.val("scalebar"),
   base_size = 12)
@@ -13,7 +13,7 @@ DoORplot_responseProfile(receptor,
 \arguments{
 \item{receptor}{character; receptor name, any of colnames(response.matrix)}
 
-\item{responseMatrix}{a DoOR response.matrix}
+\item{response_matrix}{a DoOR response.matrix}
 
 \item{tag}{character; chemical identifier for annotation}
 

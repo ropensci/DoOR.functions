@@ -7,7 +7,7 @@
 #'   "odorants" containing InChIKeys of the tested odorrant, and one column 
 #'   called "unit1" etc. for each unit, containing responses (or estimates) 
 #'   scaled between 0 and 1 (see examples)
-#' @param responseMatrix DoOR response matrix; the data to compair against
+#' @param response_matrix DoOR response matrix; the data to compair against
 #' @param odor.data data frame; contains the odorant information.
 #' @param tag character; the chemical identifier to use in plots, one of 
 #'   \code{colnames(odor)}
@@ -37,7 +37,7 @@
 #' identifySensillum(recording, method = "dist", nshow = 5)
 #' 
 identifySensillum <- function(recording,
-                              responseMatrix = default.val("response.matrix"),
+                              response_matrix = default.val("response.matrix"),
                               odor.data = default.val("odor.data"),
                               tag     = "Name",
                               min.cor = .9,
@@ -57,7 +57,7 @@ identifySensillum <- function(recording,
   
   recording$odorants  <- as.character(recording$odorants)
   
-  data <- responseMatrix[recording$odorants,]
+  data <- response_matrix[recording$odorants,]
   if(is.na(nshow))
     nshow <- length(data)
   

@@ -4,7 +4,7 @@
 \alias{DoORplot_ALmap}
 \title{DoORplot_ALmap}
 \usage{
-DoORplot_ALmap(InChIKey, responseMatrix = default.val("response.matrix"),
+DoORplot_ALmap(InChIKey, response_matrix = default.val("response.matrix"),
   odor = default.val("odor.data"), zero = default.val("zero"),
   tag = default.val("tag.ALmap"), main = "Name",
   scalebar = default.val("scalebar"),
@@ -15,7 +15,7 @@ DoORplot_ALmap(InChIKey, responseMatrix = default.val("response.matrix"),
 \arguments{
 \item{InChIKey}{InChIKey specifying the odorant to plot}
 
-\item{responseMatrix}{the input data (e.g. response.matrix or response.matrix_non.normalized)}
+\item{response_matrix}{the input data (e.g. response.matrix or response.matrix_non.normalized)}
 
 \item{zero}{the odorant to set to zero (defaults to "SFR")}
 

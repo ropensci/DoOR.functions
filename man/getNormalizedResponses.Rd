@@ -5,7 +5,7 @@
 \title{Find normalised receptor responses}
 \usage{
 getNormalizedResponses(odors, zero = default.val("zero"),
-  responseMatrix = default.val("response.matrix"))
+  response_matrix = default.val("response.matrix"))
 }
 \arguments{
 \item{odors}{character vector; one or more odors provided as InChIKey.}
@@ -13,7 +13,7 @@ getNormalizedResponses(odors, zero = default.val("zero"),
 \item{zero}{InChIKey of background that should be set to zero. The default is "SFR", i.e. the spontaneous
 firing rate.}
 
-\item{responseMatrix}{a data frame; as e.g. "response.matrix" that is loaded
+\item{response_matrix}{a data frame; as e.g. "response.matrix" that is loaded
 by \code{\link{modelRP}}. It is also possible to create this frame manually
 using \code{\link{modelRP}}.}
 }
@@ -25,7 +25,7 @@ database.
 library(DoOR.data)
 odors <- c("MLFHJEHSLIIPHL-UHFFFAOYSA-N","OBNCKNCVKJNDBV-UHFFFAOYSA-N","IKHGUXGNUITLKF-UHFFFAOYSA-N")
 data(response.matrix)
-result <- getNormalizedResponses(odors, responseMatrix = response.matrix)
+result <- getNormalizedResponses(odors, response_matrix = response.matrix)
 }
 \seealso{
 \code{\link{modelRP}},\code{\link{CreateDatabase}}

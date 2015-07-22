@@ -3,7 +3,7 @@
 #' Plot an antennal lobe map with color coded odorant responses.
 #' 
 #' @param InChIKey InChIKey specifying the odorant to plot
-#' @param responseMatrix the input data (e.g. response.matrix or
+#' @param response_matrix the input data (e.g. response.matrix or
 #'   response.matrix_non.normalized)
 #' @param odor.data data frame; contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
@@ -43,7 +43,7 @@
 #' ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
 DoORplot_ALmap <- function(InChIKey,
-                           responseMatrix = default.val("response.matrix"),
+                           response_matrix = default.val("response.matrix"),
                            odor.data = default.val("odor.data"),
                            zero = default.val("zero"),
                            tag =  default.val("tag.ALmap"),
@@ -61,11 +61,11 @@ DoORplot_ALmap <- function(InChIKey,
     stop("grid is required for AL map plotting, please install via install.packages('grid')", call. = FALSE)
 
   if(missing(limits)) {
-    response.matrix.SFRreset <- apply(responseMatrix, 2, function(x) resetSFR(x,x[zero]))
+    response.matrix.SFRreset <- apply(response_matrix, 2, function(x) resetSFR(x,x[zero]))
     limits <- range(response.matrix.SFRreset, na.rm=TRUE)
   }
 
-  response.data <- getNormalizedResponses(InChIKey, zero = zero, responseMatrix = responseMatrix)
+  response.data <- getNormalizedResponses(InChIKey, zero = zero, response_matrix = response_matrix)
 
   plotdata <- AL.map[["glomeruli"]]
   plotdata$receptor <- DoOR.mappings$receptor[match(plotdata$glomerulus, DoOR.mappings$code)] # match mapped glomeruli and extract receptor names

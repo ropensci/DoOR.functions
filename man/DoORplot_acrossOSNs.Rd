@@ -4,14 +4,14 @@
 \alias{DoORplot_acrossOSNs}
 \title{DoORplot_acrossOSNs}
 \usage{
-DoORplot_acrossOSNs(odorants, responseMatrix = default.val("response.matrix"),
+DoORplot_acrossOSNs(odorants, response_matrix = default.val("response.matrix"),
   sub, zero = default.val("zero"), tag = "Name", plot.type = 1,
   base_size = 12)
 }
 \arguments{
 \item{odorants}{character vector; one or several InChIKeys}
 
-\item{responseMatrix}{DOOR response matrix; contains the data to plot}
+\item{response_matrix}{DOOR response matrix; contains the data to plot}
 
 \item{sub}{character vector; specify one or several classes of sensilla the plot should be restricted to. One or several of: "ab" "ac", "at", "ai", "pb", "sacI", "sacII"}
 

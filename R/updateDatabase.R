@@ -14,9 +14,9 @@
 #' @param permutation logical; if TRUE, the sequence is chosen from
 #' permutation, if FALSE, sequence is chosen by the routine process.
 #' @param perm a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.
-#' @param responseMatrix_nn data frame; response data that has not
+#' @param response_matrix_nn data frame; response data that has not
 #' been globally normalized.
-#' @param responseMatrix data frame; globally normalized response data.
+#' @param response_matrix data frame; globally normalized response data.
 #' @param responseRange data frame; response range of studies.
 #' @param weightGlobNorm data frame; weight matrix for global normalization.
 #' @param overlapValues minimum overlap between studies to perfom a merge
@@ -37,8 +37,8 @@
 updateDatabase <- function(receptor, 
                            permutation = TRUE, 
                            perm, 
-                           responseMatrix_nn = default.val("response.matrix_non.normalized"), 
-                           responseMatrix    = default.val("response.matrix"), 
+                           response_matrix_nn = default.val("response.matrix_non.normalized"), 
+                           response_matrix    = default.val("response.matrix"), 
                            responseRange     = default.val("response.range"), 
                            weightGlobNorm    = default.val("weight.globNorm"),
                            select.MDValue    = default.val("select.MDValue"), 
@@ -109,18 +109,18 @@ updateDatabase <- function(receptor,
   
   # update  response.matrix_non.normalized
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merge)
-  matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(responseMatrix_nn))
+  matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix_nn))
   findNA_InChIKey <- which(is.na(matchInChIKey))
   if (!is.na(findNA_InChIKey[1])) {
-    addRow <- matrix(NA, nrow=length(findNA_InChIKey), ncol= dim(responseMatrix_nn)[2])
-    colnames(addRow) <- colnames(responseMatrix_nn)
+    addRow <- matrix(NA, nrow=length(findNA_InChIKey), ncol= dim(response_matrix_nn)[2])
+    colnames(addRow) <- colnames(response_matrix_nn)
     rownames(addRow) <- merged_data_withInChIKey[findNA_InChIKey,"InChIKey"]
-    responseMatrix_nn <- rbind(responseMatrix_nn,addRow)
-    responseMatrix <- rbind(responseMatrix,addRow)
-    matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(responseMatrix_nn))
+    response_matrix_nn <- rbind(response_matrix_nn,addRow)
+    response_matrix <- rbind(response_matrix,addRow)
+    matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix_nn))
   }
-  responseMatrix_nn[matchInChIKey, receptor] <- merge
-  assign("response.matrix_non.normalized", responseMatrix_nn, envir = .GlobalEnv)
+  response_matrix_nn[matchInChIKey, receptor] <- merge
+  assign("response.matrix_non.normalized", response_matrix_nn, envir = .GlobalEnv)
   message(paste("response.matrix_non.normalized has been updated for",receptor))
   
   # update response.matrix
@@ -130,10 +130,10 @@ updateDatabase <- function(receptor,
   Smax         <- responseRange[mp_orx,"max"]
   merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merge, name.Stud = name.Stud, responseRange = responseRange, weightGlobNorm = weightGlobNorm)
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merged_data)
-  matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(responseMatrix))
-  responseMatrix[matchInChIKey, receptor] <- merged_data
+  matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix))
+  response_matrix[matchInChIKey, receptor] <- merged_data
   
-  assign("response.matrix", responseMatrix, envir = .GlobalEnv)
+  assign("response.matrix", response_matrix, envir = .GlobalEnv)
   message(paste("response.matrix has been updated for",receptor))
   
   # update response.matrix.excluded

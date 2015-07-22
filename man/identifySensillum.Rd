@@ -4,14 +4,14 @@
 \alias{identifySensillum}
 \title{identifySensillum}
 \usage{
-identifySensillum(recording, responseMatrix = default.val("response.matrix"),
+identifySensillum(recording, response_matrix = default.val("response.matrix"),
   tag = "Name", min.cor = 0.9, nshow = 10, ret = "plot",
   method = "cor", sub)
 }
 \arguments{
 \item{recording}{data frame; a data frame with the following columns "odorants" containing InChIKeys of the tested odorrant, and one column called "unit1" etc. for each unit, containing responses (or estimates) scaled between 0 and 1 (see examples)}
 
-\item{responseMatrix}{DoOR response matrix; the data to compair against}
+\item{response_matrix}{DoOR response matrix; the data to compair against}
 
 \item{tag}{character; the chemical identifier to use in plots, one of \code{colnames(odor)}}
 

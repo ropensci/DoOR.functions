@@ -2,7 +2,7 @@
 #' 
 #' create a barplot of a DoOR response profile
 #' 
-#' @param responseMatrix a DoOR response.matrix
+#' @param response_matrix a DoOR response.matrix
 #' @param odor.data data frame; contains the odorant information.
 #' @param receptor character; receptor name, any of colnames(response.matrix)
 #' @param tag character; chemical identifier for annotation
@@ -24,7 +24,7 @@
 #' DoORplot_responseProfile(response.matrix, "Or22a")
 #' DoORplot_responseProfile(response.matrix, "Or22a", tag = "Name")
 DoORplot_responseProfile <- function(receptor,
-                                     responseMatrix = default.val("response.matrix"),
+                                     response_matrix = default.val("response.matrix"),
                                      odor.data = default.val("odor.data"),
                                      tag = default.val("tag"),
                                      colored = TRUE,
@@ -35,10 +35,10 @@ DoORplot_responseProfile <- function(receptor,
                                      base_size = 12
 ) {
   if(zero != "")
-    responseMatrix <- resetSFR(responseMatrix, zero)
+    response_matrix <- resetSFR(response_matrix, zero)
   
   if(missing(limits))
-    limits <- range(responseMatrix, na.rm=TRUE)
+    limits <- range(response_matrix, na.rm=TRUE)
   
   if(limits[1] < 0) {
     values <- DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
@@ -47,13 +47,13 @@ DoORplot_responseProfile <- function(receptor,
     colors <- colors[3:6]
   }
   
-  responseMatrix <- na.omit(data.frame(odorant = rownames(responseMatrix), value = responseMatrix[,receptor]))
+  response_matrix <- na.omit(data.frame(odorant = rownames(response_matrix), value = response_matrix[,receptor]))
   if(tag != "InChIKey")
-    responseMatrix$odorant <- odor.data[match(responseMatrix$odorant, odor.data$InChIKey),tag]
-  responseMatrix <- responseMatrix[order(responseMatrix$value),]
-  responseMatrix$odorant <- factor(responseMatrix$odorant, levels = responseMatrix$odorant)
+    response_matrix$odorant <- odor.data[match(response_matrix$odorant, odor.data$InChIKey),tag]
+  response_matrix <- response_matrix[order(response_matrix$value),]
+  response_matrix$odorant <- factor(response_matrix$odorant, levels = response_matrix$odorant)
   
-  plot <- ggplot2::ggplot(responseMatrix, ggplot2::aes(x = odorant, y = value)) +
+  plot <- ggplot2::ggplot(response_matrix, ggplot2::aes(x = odorant, y = value)) +
     ggplot2::theme_minimal(base_size = base_size) +
     ggplot2::coord_flip(ylim = limits) +
     ggplot2::ggtitle(receptor)

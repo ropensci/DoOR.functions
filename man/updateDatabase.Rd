@@ -5,8 +5,8 @@
 \title{update response matrix}
 \usage{
 updateDatabase(receptor, permutation = TRUE, perm,
-  responseMatrix_nn = default.val("response.matrix_non.normalized"),
-  responseMatrix = default.val("response.matrix"),
+  response_matrix_nn = default.val("response.matrix_non.normalized"),
+  response_matrix = default.val("response.matrix"),
   responseRange = default.val("response.range"),
   weightGlobNorm = default.val("weight.globNorm"),
   select.MDValue = default.val("select.MDValue"), strict = TRUE,
@@ -21,10 +21,10 @@ permutation, if FALSE, sequence is chosen by the routine process.}
 
 \item{perm}{a matrix with one sequence of study names per row, if empty, all possible permutations of study names will be provided.}
 
-\item{responseMatrix_nn}{data frame; response data that has not
+\item{response_matrix_nn}{data frame; response data that has not
 been globally normalized.}
 
-\item{responseMatrix}{data frame; globally normalized response data.}
+\item{response_matrix}{data frame; globally normalized response data.}
 
 \item{responseRange}{data frame; response range of studies.}
 

@@ -5,13 +5,13 @@
 \title{DoORplot_acrossReceptors}
 \usage{
 DoORplot_acrossReceptors(odorants,
-  responseMatrix = default.val("response.matrix"),
+  response_matrix = default.val("response.matrix"),
   zero = default.val("zero"), tag = "Name", limits, base_size = base_size)
 }
 \arguments{
 \item{odorants}{character vecto; one or several InChIKeys}
 
-\item{responseMatrix}{DoOR response matrix; a DoOR response matrix as data source}
+\item{response_matrix}{DoOR response matrix; a DoOR response matrix as data source}
 
 \item{zero}{character; an InChIKey of the odorant that should be set to 0}
 

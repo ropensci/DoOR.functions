@@ -18,7 +18,7 @@ loadData()
 
 Apart from merging data and performing calculations on it, the `DoOR.functions` package provides several ways to visualize the data served by the `DoOR.data` package. Please see the [DoOR.function vignette](DoOR.functions.html) for instructions on how to install and load both functions and data. The plotting functions can be identified by their common prefix `DoORplot_`, most of them make use of the `ggplot2` package which makes it possible to override most all of the theming options.
 
-## DoORplot_ responseMatrix
+## DoORplot_responseMatrix
 `DoORplot_responseMatrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `resetSFR(response.matrix, "SFR")`) it will be shown as color coded heatmap.
 
 ```{r,fig.width=7.1, fig.height=4}

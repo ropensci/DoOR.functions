@@ -14,7 +14,7 @@
 # 
 # @param InChIKey a character string; the InChIKey of an odorant.
 # @param receptor a character string; the name of odorant receptor.
-# @param responseMatrix a numeric matrix; containing the normalized odorant
+# @param response_matrix a numeric matrix; containing the normalized odorant
 # responses.
 # @param nodor a numeric value; specifying the number of the selected odors.
 # @return A list with components \code{estimation}, \code{selected.receptors}
@@ -34,7 +34,7 @@
 LLSIestKnn <-
 function(InChIKey, 
 		receptor, 
- 		responseMatrix = default.val("response.matrix"), 
+ 		response_matrix = default.val("response.matrix"), 
 		nodor = 3)
 {
 
@@ -78,30 +78,30 @@ function(InChIKey,
 
 
 	# localize the target receptor and odor in sorted response matrix
-	whereTargetReceptor 	<- match(receptor,colnames(responseMatrix))
-	whereTargetodor 	<- match(InChIKey,rownames(responseMatrix))
+	whereTargetReceptor 	<- match(receptor,colnames(response_matrix))
+	whereTargetodor 	<- match(InChIKey,rownames(response_matrix))
 
 	# non-NA vectors (b ("candicateOdors") and w ("candicateReceptors") ) as candicates
-	candicateReceptors 	<- which(!is.na(responseMatrix[whereTargetodor,]))
-	Name_candicateReceptors <- colnames(responseMatrix)[candicateReceptors]
-	candicateOdors 		<- which(!is.na(responseMatrix[,whereTargetReceptor]))
-	Name_candicateOdors 	<- rownames(responseMatrix)[candicateOdors]
+	candicateReceptors 	<- which(!is.na(response_matrix[whereTargetodor,]))
+	Name_candicateReceptors <- colnames(response_matrix)[candicateReceptors]
+	candicateOdors 		<- which(!is.na(response_matrix[,whereTargetReceptor]))
+	Name_candicateOdors 	<- rownames(response_matrix)[candicateOdors]
 
 
 	# omit the columns and rows that contain NA
 
-	candi_A <- na.omit( responseMatrix[candicateOdors, candicateReceptors])
+	candi_A <- na.omit( response_matrix[candicateOdors, candicateReceptors])
 
 	# detect the posistions of selected odors and receptors
-	matchOdor <- match( rownames(candi_A),rownames(responseMatrix) )
-	matchReceptor <- match( colnames(candi_A), colnames(responseMatrix) )
+	matchOdor <- match( rownames(candi_A),rownames(response_matrix) )
+	matchReceptor <- match( colnames(candi_A), colnames(response_matrix) )
 
 	# vector "w"
-	w <- c( as.matrix( responseMatrix[InChIKey, matchReceptor] ) )
-	selectReceptor <- names(responseMatrix[InChIKey, matchReceptor])
+	w <- c( as.matrix( response_matrix[InChIKey, matchReceptor] ) )
+	selectReceptor <- names(response_matrix[InChIKey, matchReceptor])
 
 	# the odors are not yet sorted.
-	unsorted_b <- c( as.matrix( responseMatrix[matchOdor, receptor] ) )
+	unsorted_b <- c( as.matrix( response_matrix[matchOdor, receptor] ) )
 
 	## sorting odors:
 

@@ -5,7 +5,7 @@
 \title{privateOdorant}
 \usage{
 privateOdorant(receptor, sensillum = FALSE,
-  responseMatrix = default.val("response.matrix"),
+  response_matrix = default.val("response.matrix"),
   zero = default.val("zero"), nshow = 5, tag)
 }
 \arguments{
@@ -13,7 +13,7 @@ privateOdorant(receptor, sensillum = FALSE,
 
 \item{sensillum}{logical; restrict the search to the sensillum the receptor is expressed in?}
 
-\item{responseMatrix}{DoOR response matrix; the input data to perform the search on}
+\item{response_matrix}{DoOR response matrix; the input data to perform the search on}
 
 \item{zero}{character; an odorant that should be set to 0}
 

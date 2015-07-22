@@ -60,14 +60,14 @@ function(da, nodor, method = "PC")
 	if (method == "Knn") {
 		tryestmatine <- try(LLSIestKnn(InChIKey = inchikey, 
 					receptor = receptor, 
-					responseMatrix = inputdata, 
+					response_matrix = inputdata, 
 					nodor=nodor),TRUE)
 	}
 
 	if (method == "PC") {
 		tryestmatine <- try(LLSIestPC(InChIKey = inchikey, 
 					receptor = receptor, 
-					responseMatrix = inputdata, 
+					response_matrix = inputdata, 
 					nodor=nodor),TRUE)
 	}
 

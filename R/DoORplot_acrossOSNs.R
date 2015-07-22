@@ -3,7 +3,7 @@
 #' plot the activation patterns of one or several odorants across OSNs
 #' 
 #' @param odorants character vector; one or several InChIKeys
-#' @param responseMatrix DOOR response matrix; contains the data to plot
+#' @param response_matrix DOOR response matrix; contains the data to plot
 #' @param odor.data data frame; contains the odorant information.
 #' @param zero character; InChIKey of the odorant that should be set to 0 (e.g.
 #'   SFR)
@@ -33,7 +33,7 @@
 #' DoORplot_acrossOSNs(odorants, plot.type = 2)
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 DoORplot_acrossOSNs <- function(odorants,
-                                responseMatrix = default.val("response.matrix"),
+                                response_matrix = default.val("response.matrix"),
                                 odor.data = default.val("odor.data"),
                                 zero = default.val("zero"),
                                 tag  = "Name",
@@ -45,11 +45,11 @@ DoORplot_acrossOSNs <- function(odorants,
     stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
   
   if (!is.null(zero))
-    responseMatrix <- as.data.frame(apply(responseMatrix, 2, function(x) resetSFR(x,x[zero])))
+    response_matrix <- as.data.frame(apply(response_matrix, 2, function(x) resetSFR(x,x[zero])))
   
   odorants <- as.character(odorants)
   
-  data <- responseMatrix[odorants,]
+  data <- response_matrix[odorants,]
   data <- DoORmelt(as.data.frame(data), na.rm = FALSE)
   
   if(tag != "InChIKey")

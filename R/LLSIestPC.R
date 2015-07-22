@@ -14,7 +14,7 @@
 # 
 # @param InChIKey a character string; the InChIKey number of odorant compound.
 # @param receptor a character string; the name of odorant receptor.
-# @param responseMatrix a numeric matrix; containing the normalized odorant
+# @param response_matrix a numeric matrix; containing the normalized odorant
 # responses.
 # @param nodor a numeric value; specifying the number of the selected odors.
 # @return A list with components \code{estimation}, \code{selected.receptors}
@@ -34,7 +34,7 @@
 LLSIestPC <-
 function(InChIKey, 
 		receptor, 
-		responseMatrix = default.val("response.matrix"),
+		response_matrix = default.val("response.matrix"),
 		nodor = 2)
 # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
 # Neurobiology, University of Konstanz, Germany
@@ -47,7 +47,7 @@ function(InChIKey,
 
 #  InChIKey 		   	: a character string; the InChIKey number of odorant compound.
 #  receptor 	   	: a character string; the name of odorant receptor.
-#  responseMatrix 	: a numeric matrix; containing the normalized odorant responses.
+#  response_matrix 	: a numeric matrix; containing the normalized odorant responses.
 #  nodor 		: a numeric; specifying how many odors will be selected. If missing, all candicate odors will be selected after sorting.
 
 
@@ -90,29 +90,29 @@ function(InChIKey,
 	#	[b    	A]
 	# where "alfa" is the unknown odorant response, "w" is a vector of odorant responses of target odor, "b" is a vector of odorant responses of target receptor, after completing "b" and "w", the matrix "A" is formed.
 
-	responseMatrix 		<- as.data.frame(responseMatrix)
+	response_matrix 		<- as.data.frame(response_matrix)
 	# localize the target receptor and odor in sorted response matrix
-	whereTargetReceptor 	<- match(receptor,colnames(responseMatrix))
-	whereTargetodor 	<- match(InChIKey,rownames(responseMatrix))
+	whereTargetReceptor 	<- match(receptor,colnames(response_matrix))
+	whereTargetodor 	<- match(InChIKey,rownames(response_matrix))
 
 	# non-NA vectors (b ("candicateOdors") and w ("candicateReceptors") ) as candicates
-	candicateReceptors 	<- which(!is.na(responseMatrix[whereTargetodor,]))
-	Name_candicateReceptors <- colnames(responseMatrix)[candicateReceptors]
-	candicateOdors 		<- which(!is.na(responseMatrix[,whereTargetReceptor]))
-	Name_candicateOdors 	<- rownames(responseMatrix)[candicateOdors]
+	candicateReceptors 	<- which(!is.na(response_matrix[whereTargetodor,]))
+	Name_candicateReceptors <- colnames(response_matrix)[candicateReceptors]
+	candicateOdors 		<- which(!is.na(response_matrix[,whereTargetReceptor]))
+	Name_candicateOdors 	<- rownames(response_matrix)[candicateOdors]
 
 
 	# omit the columns and rows that contain NA
 
-	candi_A <- na.omit( responseMatrix[candicateOdors, candicateReceptors])
+	candi_A <- na.omit( response_matrix[candicateOdors, candicateReceptors])
 
 	# detect the posistions of selected odors and receptors
-	matchOdor <- match( rownames(candi_A),rownames(responseMatrix) )
-	matchReceptor <- match( colnames(candi_A), colnames(responseMatrix) )
+	matchOdor <- match( rownames(candi_A),rownames(response_matrix) )
+	matchReceptor <- match( colnames(candi_A), colnames(response_matrix) )
 
 	# vector "w"
-	w <- c( as.matrix( responseMatrix[InChIKey, matchReceptor] ) )
-	selectReceptor <- names(responseMatrix[InChIKey, matchReceptor])
+	w <- c( as.matrix( response_matrix[InChIKey, matchReceptor] ) )
+	selectReceptor <- names(response_matrix[InChIKey, matchReceptor])
 
 	# find neighbors
 	kNeighbors <- nearest(target = w, candicate = candi_A, k = nodor)
@@ -123,7 +123,7 @@ function(InChIKey,
 	A <- candi_A[selectedOdor,]
 
 	# vector "b"
-	b <- responseMatrix[selectedOdor, receptor]
+	b <- response_matrix[selectedOdor, receptor]
 	
 	# transpose matrix A
 	if (dim(A)[1] == 1) { transp_A <- t(t(c(as.matrix(A)))) } # transpose from 1 x m to m x 1 matrix
