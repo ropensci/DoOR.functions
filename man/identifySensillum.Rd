@@ -5,33 +5,53 @@
 \title{identifySensillum}
 \usage{
 identifySensillum(recording, response_matrix = default.val("response.matrix"),
-  tag = "Name", min.cor = 0.9, nshow = 10, ret = "plot",
-  method = "cor", sub)
+  odor_data = default.val("odor"),
+  DoOR_mappings = default.val("DoOR_mappings"), tag = "Name",
+  min.cor = 0.9, nshow = 10, ret = "plot", method = "cor", sub)
 }
 \arguments{
-\item{recording}{data frame; a data frame with the following columns "odorants" containing InChIKeys of the tested odorrant, and one column called "unit1" etc. for each unit, containing responses (or estimates) scaled between 0 and 1 (see examples)}
+\item{recording}{data frame; a data frame with the following columns
+"odorants" containing InChIKeys of the tested odorrant, and one column
+called "unit1" etc. for each unit, containing responses (or estimates)
+scaled between 0 and 1 (see examples)}
 
 \item{response_matrix}{DoOR response matrix; the data to compair against}
 
-\item{tag}{character; the chemical identifier to use in plots, one of \code{colnames(odor)}}
+\item{odor_data}{data frame; contains the odorant information.}
 
-\item{min.cor}{numeric; a minimum correlation value, the function will check wether there is a higher correlation for all units within a single sensillum}
+\item{DoOR_mappings}{the data frame containing the mapping information}
 
-\item{nshow}{numeric; the number of plots to nshow, plot e.g. only the top 10 matches}
+\item{tag}{character; the chemical identifier to use in plots, one of
+\code{colnames(odor)}}
 
-\item{ret}{character; wether to return the "plot" or the "dataframe" with the correlations/distances}
+\item{min.cor}{numeric; a minimum correlation value, the function will check
+wether there is a higher correlation for all units within a single
+sensillum}
 
-\item{method}{character; the method for similarity calculations: correlation ("cor") or Euclidean distances ("dist")}
+\item{nshow}{numeric; the number of plots to nshow, plot e.g. only the top 10
+matches}
 
-\item{sub}{character; if you know the class of sensillum you were recording from you can restrict the search to this subset here ("ab", "ac", "at", "pb", "sac")}
+\item{ret}{character; wether to return the "plot" or the "dataframe" with the
+correlations/distances}
+
+\item{method}{character; the method for similarity calculations: correlation
+("cor") or Euclidean distances ("dist")}
+
+\item{sub}{character; if you know the class of sensillum you were recording
+from you can restrict the search to this subset here ("ab", "ac", "at",
+"pb", "sac")}
 }
 \value{
-either a plot (gtable) with responses sorted by highest correlations or lowest distances, or a "dataframe" containing all calculated correlations or Euclidean distances
+either a plot (gtable) with responses sorted by highest correlations
+  or lowest distances, or a "dataframe" containing all calculated
+  correlations or Euclidean distances
 }
 \description{
-correlates the result from a SSR recording of several odorants against all DoOR response profiles
+correlates the result from a SSR recording of several odorants against all
+DoOR response profiles
 }
 \examples{
+library(DoOR.data)
 recording <- data.frame(odorants = c(transID(c("BEDN", "ETAS"), "Code"), transID("carbon dioxide", "Name")), unit1 = c(.9,.1,.1), unit2 = c(0, .1, 1) )
 identifySensillum(recording)
 identifySensillum(recording, method = "dist", nshow = 5)

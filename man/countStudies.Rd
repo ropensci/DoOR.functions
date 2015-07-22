@@ -4,14 +4,15 @@
 \alias{countStudies}
 \title{countStudies}
 \usage{
-countStudies(ors = default.val("ORs"), odor_data = default.val("odor_data"),
+countStudies(ors = default.val("ORs"), odor_data = default.val("odor"),
   char.columns = default.val("num.charColumns"),
   ident = default.val("ident"))
 }
 \arguments{
 \item{ors}{data.frame containing all receptors exidting in DoOR.}
 
-\item{odor_data}{data.frame containing information about the odorants in DoOR.}
+\item{odor_data}{data.frame containing information about the odorants in
+DoOR.}
 
 \item{char.columns}{number of character columns in each receptor data.frame.}
 
@@ -21,9 +22,12 @@ countStudies(ors = default.val("ORs"), odor_data = default.val("odor_data"),
 matrix
 }
 \description{
-returns a matrix indiating how many studies have recorded individual receptor-odorant combinations
+returns a matrix indiating how many studies have recorded individual
+receptor-odorant combinations
 }
 \examples{
+library(DoOR.data)
+loadData()
 count <- countStudies()
 image(count)
 }

@@ -19,7 +19,7 @@ coefficient) and "Knn" (k nearest neighbors)) for estimation, the default is
 Estimate the missing entries in a response data
 }
 \details{
-A warp programe using \code{\link{LLSIestPC}} or \code{\link{LLSIestKnn}}
+A warp programe using Pearson Correlation or k-nearest neighbors
 estimate the missing entries in a response data.
 }
 \examples{

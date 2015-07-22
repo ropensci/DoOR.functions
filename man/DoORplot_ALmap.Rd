@@ -5,31 +5,43 @@
 \title{DoORplot_ALmap}
 \usage{
 DoORplot_ALmap(InChIKey, response_matrix = default.val("response.matrix"),
-  odor = default.val("odor_data"), zero = default.val("zero"),
+  odor_data = default.val("odor"),
+  DoOR_mappings = default.val("DoOR_mappings"), zero = default.val("zero"),
   tag = default.val("tag.ALmap"), main = "Name",
-  scalebar = default.val("scalebar"),
-  DoOR.mappings = default.val("DoOR.mappings"),
-  AL.map = default.val("AL.map"), colors = default.val("colors"),
-  legend = TRUE, limits, base_size = 12)
+  scalebar = default.val("scalebar"), AL.map = default.val("AL.map"),
+  colors = default.val("colors"), legend = TRUE, limits, base_size = 12)
 }
 \arguments{
 \item{InChIKey}{InChIKey specifying the odorant to plot}
 
-\item{response_matrix}{the input data (e.g. response.matrix or response.matrix_non.normalized)}
+\item{response_matrix}{the input data (e.g. response.matrix or
+response.matrix_non.normalized)}
+
+\item{odor_data}{data frame; contains the odorant information.}
+
+\item{DoOR_mappings}{the data frame containing the mapping information}
 
 \item{zero}{the odorant to set to zero (defaults to "SFR")}
 
-\item{tag}{the labels to plot on top of the glomeruli (one of the following \code{DoOR.mappings} columns: "receptor", "sensillum", "ORN", "glomerulus" or "co.receptor")}
+\item{tag}{the labels to plot on top of the glomeruli (one of the following
+\code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
+or "co.receptor")}
 
 \item{main}{the title, one column of \code{odor}, defaults to "Name"}
 
 \item{scalebar}{whether or not to add a scalebar}
 
-\item{DoOR.mappings}{the darta frame containing the mapping information}
+\item{AL.map}{a list containing the AL model}
 
-\item{colors}{a vector containing 6 color values (2 for values below 0, 1 0 value and 3 steps between 0 and 1)}
+\item{colors}{a vector containing 6 color values (2 for values below 0, 1 0
+value and 3 steps between 0 and 1)}
 
-\item{limits}{the limits for the color scale, if empty the range of the response matrix is taken (after setting ``zero`` to 0)}
+\item{legend}{logical, plot a legend?}
+
+\item{limits}{the limits for the color scale, if empty the range of the
+response matrix is taken (after setting ``zero`` to 0)}
+
+\item{base_size}{numeric, the base font size for the ggplot plot}
 }
 \value{
 a ggplot2 object
@@ -38,12 +50,15 @@ a ggplot2 object
 Plot an antennal lobe map with color coded odorant responses.
 }
 \details{
-Normalized, color coded odor responses across receptors are mapped onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map was a kind gift from Veit Grabe.
+Normalized, color coded odor responses across receptors are mapped
+  onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map
+  was a kind gift from Veit Grabe.
 }
 \examples{
 library(DoOR.data)
 DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
-DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
+DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
+   color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 
 DoORplot_ALmap(transID("123-92-2"), scalebar = FALSE) +
 ggplot2::theme(legend.position  = "bottom",
@@ -61,7 +76,9 @@ Daniel Münch \email{daniel.muench@uni-konstanz.de}
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
 \references{
-Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
+Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S.,
+  2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila
+  melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
 }
 \seealso{
 \link{getNormalizedResponses}, \pkg{\link{ggplot2}, \link{grid}}

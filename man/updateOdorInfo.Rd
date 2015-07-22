@@ -2,12 +2,13 @@
 % Please edit documentation in R/updateOdorInfo.R
 \name{updateOdorInfo}
 \alias{updateOdorInfo}
-\title{Update the DoOR odor data with info from \code{odor}}
+\title{updateOdorInfo}
 \usage{
 updateOdorInfo()
 }
 \description{
-Update the DoOR odor data with info from \code{odor}
+Update the DoOR odor data with info from \code{odor}. For the function to
+work, all DoOR data has to be loaded.
 }
 \author{
 Daniel Münch, \email{daniel@muench.bio}

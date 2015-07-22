@@ -4,14 +4,17 @@
 \alias{DoORplot_acrossReceptors}
 \title{DoORplot_acrossReceptors}
 \usage{
-DoORplot_acrossReceptors(odorants,
+DoORplot_acrossReceptors(odorant,
   response_matrix = default.val("response.matrix"),
-  zero = default.val("zero"), tag = "Name", limits, base_size = base_size)
+  odor_data = default.val("odor"), zero = default.val("zero"),
+  tag = "Name", limits, base_size = 12)
 }
 \arguments{
-\item{odorants}{character vecto; one or several InChIKeys}
+\item{odorant}{character vecto; one or several InChIKeys}
 
 \item{response_matrix}{DoOR response matrix; a DoOR response matrix as data source}
+
+\item{odor_data}{data frame; contains the odorant information.}
 
 \item{zero}{character; an InChIKey of the odorant that should be set to 0}
 
@@ -25,9 +28,11 @@ DoORplot_acrossReceptors(odorants,
 a ggplot object
 }
 \description{
-barplot of DoOR responses of a set of odorants across all responding units in DoOR
+barplot of DoOR responses of a set of odorant across all responding units in DoOR
 }
 \examples{
+library(DoOR.data)
+data(odor)
 DoORplot_acrossReceptors(transID("123-92-2"), tag = "CAS")
 DoORplot_acrossReceptors(odor$InChIKey[4:10])
 }

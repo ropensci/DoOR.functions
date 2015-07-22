@@ -7,15 +7,17 @@
 DoORplot_compareProfiles(x, y, by.x, by.y, tag = "Name", base_size = 12)
 }
 \arguments{
-\item{x}{}
+\item{x}{the input data frame the first response profile will be taken from}
 
-\item{y}{}
+\item{y}{the input data frame the second response profile will be taken from
+(x will be taken if y is missing)}
 
 \item{by.x}{character string; specifying a column in x}
 
 \item{by.y}{character string; specifying a column in y}
 
-\item{tag}{character; the chemical identifier that will be used as odorant label.}
+\item{tag}{character; the chemical identifier that will be used as odorant
+  label.}
 
 \item{base_size}{numeric; the base font size for the ggplot2 plot}
 }
@@ -27,8 +29,10 @@ two studies / response profiles'.
 library(DoOR.data)
 data(Or22a)
 data(response.range)
-DoORplot_compareProfiles(x=Or22a, y=Or22a, by.x="Hallem.2006.EN", by.y="Pelz.2006.AntEC50")
-DoORplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)), y = cbind(response.matrix, InChIKey = rownames(response.matrix)), by.x = "Or22a", by.y = "Or10a", lim.y=c(0,1))
+data(response.matrix)
+
+DoORplot_compareProfiles(x = Or22a, y = Or22a, by.x = "Hallem.2006.EN", by.y = "Pelz.2006.AntEC50")
+DoORplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)), y = cbind(response.matrix, InChIKey = rownames(response.matrix)), by.x = "Or22a", by.y = "Or10a")
 }
 \author{
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>

@@ -39,10 +39,12 @@ Please load ORs from data package DoOR.data by typing (\code{data(ORs)})
 before use.
 }
 \examples{
+\dontrun{
 library(DoOR.data)
-library(DoOR.function)
+library(DoOR.functions)
 loadData()
 exportData(".txt", all.data = FALSE) 	# export odorant responses data only
+}
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

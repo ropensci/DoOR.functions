@@ -50,7 +50,6 @@ library(DoOR.data)
 data(Or35a)
 data(weight.globNorm)
 data(response.range)
-# merge data without R2 selection
 RP.Or35a <- modelRP(Or35a, plot = TRUE)
 }
 \author{

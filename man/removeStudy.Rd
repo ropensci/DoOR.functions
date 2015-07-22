@@ -27,6 +27,8 @@ Use this function to remove a study from the DoOR database.
 during the import process (e.g. because you imported updated data).
 }
 \examples{
+library(DoOR.data)
+loadData()
 removeStudy('Bruyne.2001.WT')
 }
 \author{

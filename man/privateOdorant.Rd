@@ -6,7 +6,8 @@
 \usage{
 privateOdorant(receptor, sensillum = FALSE,
   response_matrix = default.val("response.matrix"),
-  zero = default.val("zero"), nshow = 5, tag)
+  DoOR_mappings = default.val("DoOR_mappings"), zero = default.val("zero"),
+  nshow = 5, tag)
 }
 \arguments{
 \item{receptor}{character; name of a DoOR responding unit (one of \code{ORs$Or})}
@@ -14,6 +15,8 @@ privateOdorant(receptor, sensillum = FALSE,
 \item{sensillum}{logical; restrict the search to the sensillum the receptor is expressed in?}
 
 \item{response_matrix}{DoOR response matrix; the input data to perform the search on}
+
+\item{DoOR_mappings}{the data frame containing the mapping information}
 
 \item{zero}{character; an odorant that should be set to 0}
 
@@ -28,6 +31,7 @@ a data.frame containing odorants and the response in the receptor of interest as
 return an odorant that activates the receptor of interes exclusively
 }
 \examples{
+library(DoOR.data)
 privateOdorant("Gr21a.Gr63a", tag = "Name")
 privateOdorant("Or22a", tag = "Name", sensillum = TRUE)
 }

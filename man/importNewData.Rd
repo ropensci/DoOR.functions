@@ -5,20 +5,20 @@
 \title{Import new data into DoOR}
 \usage{
 importNewData(file.name, dataFormat = default.val("data.format"),
-  odor_data = default.val("odor_data"),
+  odor_data = default.val("odor"),
   weightGlobNorm = default.val("weight.globNorm"),
   responseRange = default.val("response.range"),
   receptors = default.val("ORs"), ident = default.val("ident"), round = 3)
 }
 \arguments{
 \item{file.name}{character string; the name of given file that contains
-response values of one or more odorant receptors, either a .csv or .txt file.}
+response values of one or more odorant receptors, either a .csv or .txt
+file.}
 
 \item{dataFormat}{data frame; a data frame does not contain any response
 value but odorant information.}
 
-\item{odor_data}{data frame; contains the odorant
-information.}
+\item{odor_data}{data frame; contains the odorant information.}
 
 \item{weightGlobNorm}{data matrix; indicates whether given receptor has been
 measured by given study.}
@@ -34,16 +34,18 @@ expression.}
 \item{round}{the number of digits the imported values are rounded to.}
 }
 \description{
-Import or update new data and update \code{weight.globNorm}, \code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
+Import or update new data and update \code{weight.globNorm},
+\code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
 }
 \details{
 \code{\link{importNewData}} is used to import new data into database. If the
 data contains a new receptor or ORN, then build a new data frame for this
 receptor or ORN. If the data contains a receptor that is already present in
-database, then merge the imported data into old data frame. The information (e.g. response range, how many
-receptors and odors were measured from given study) will be integrated into
-data \code{response.range}, \code{odor}, \code{ORs} and \code{weight.globNorm}.
-If an existing study is imported, \code{\link{removeStudy}} will be run first in order to perform an update.
+database, then merge the imported data into old data frame. The information
+(e.g. response range, how many receptors and odors were measured from given
+study) will be integrated into data \code{response.range}, \code{odor},
+\code{ORs} and \code{weight.globNorm}. If an existing study is imported,
+\code{\link{removeStudy}} will be run first in order to perform an update.
 }
 \examples{
 \dontrun{

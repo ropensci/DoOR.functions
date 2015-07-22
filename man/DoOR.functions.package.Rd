@@ -23,7 +23,7 @@ First, load the DoOR packages, data and function package: \tabular{ll}{
 }
 
 then, load all datasets including the precomputed response matrix:
-\tabular{ll}{ \code{\link{loadData}}: \tab Load all data into current active
+\tabular{ll}{ \code{\link{DoOR.data::loadData}}: \tab Load all data into current active
 environment . \cr } or, load all odorant reseponse data into a list:
 \tabular{ll}{ \code{\link{load2list}}: \tab Load odorant response data only
 and compose them as a list.  \cr }
@@ -33,8 +33,7 @@ Try some visualizations (e.g. producing the plots from the paper):
 an image of the antennal lobe.\cr \code{\link{DoORplot_compareProfiles}}: \tab compare
 the results of two studies.  \cr \code{\link{DoORplot_responseMatrix}}: \tab Dot Plot of
 Odorant Responses Across Receptors. \cr \code{\link{DoORplot_responseProfile}}: \tab
-bar plot:one receptor, all chemicals. \cr \code{\link{DoORplot_compareReceptors}}: \tab
-bar plot: all receptors, one or more chemicals.\cr
+bar plot: one receptor, all chemicals. \cr
 \code{\link{DoORplot_tuningCurve}}: \tab pyramid diagram depicting a receptor's
 tuning breadth. \cr } Try some queries: \tabular{ll}{
 \code{\link{getResponses}}: \tab given a chemical, get original responses from
@@ -60,58 +59,16 @@ tested values. \cr }
 Introduce new data into DoOR and update the supported data sets:
 \tabular{ll}{ \code{\link{importNewData}}: \tab import new data into DoOR,
 and update the weight, response range and receptor names. \cr
-\code{\link{updateDatabase}}: \tab update response matrix by introducing new
-consensus response data of given receptor. \cr } or, introduce new data into
-a specific receptor: \tabular{ll}{ \code{\link{combData}}: \tab combine two
-datasets via InChIKeys. \cr }
+\code{\link{updateDatabase}}: \tab update response matrix by calculating new
+consensus response data for a given receptor. \cr }
 
-Model functions and inverse model functions: \tabular{ll}{
-\code{\link{modelfunction_asymp}}: \tab Asymptotic Model \cr
-\code{\link{modelfunction_asympOff}}: \tab Asymptotic Model with an Offset
-\cr \code{\link{modelfunction_exp}}: \tab exponential Model \cr
-\code{\link{modelfunction_linear}}: \tab Linear Model \cr
-\code{\link{modelfunction_sigmoid}}: \tab Logistic Model \cr
-
-\code{\link{modelfunction_asymp_inverse}}: \tab inverse Asymptotic Model \cr
-\code{\link{modelfunction_asympOff_inverse}}: \tab inverse Asymptotic Model
-with an Offset \cr \code{\link{modelfunction_exp_inverse}}: \tab inverse
-exponential Model \cr \code{\link{modelfunction_linear_inverse}}: \tab
-inverse Linear Model \cr \code{\link{modelfunction_sigmoid_inverse}}: \tab
-inverse Logistic Model \cr } Leibniz's notation for computing the curvic
-length: \tabular{ll}{ \code{\link{dsdx_asymp}}: \tab Leibniz's notation for
-asymptotic model \cr \code{\link{dsdx_asympOff}}: \tab Leibniz's notation
-for asymptotic model with an Offset \cr \code{\link{dsdx_exp}}: \tab
-Leibniz's notation for exponential model \cr \code{\link{dsdx_linear}}: \tab
-Leibniz's notation for linear model \cr \code{\link{dsdx_sigmoid}}: \tab
-Leibniz's notation for logistic model \cr
-
-\code{\link{dsdx_asymp_inverse}}: \tab Leibniz's notation for inverse
-asymptotic model \cr \code{\link{dsdx_asympOff_inverse}}: \tab Leibniz's
-notation for inverse asymptotic model with an Offset \cr
-\code{\link{dsdx_exp_inverse}}: \tab Leibniz's notation for inverse
-exponential model \cr \code{\link{dsdx_linear_inverse}}: \tab Leibniz's
-notation for inverse linear model \cr \code{\link{dsdx_sigmoid_inverse}}:
-\tab Leibniz's notation for inverse logistic model \cr } Supported functions
-and maths: \tabular{ll}{ \code{\link{calModel}}: \tab return the best model
-function. \cr \code{\link{compute_MD}}: \tab compute the mean distance. \cr
-\code{\link{DoORColmap}}: \tab assign a color code for consensus response.
-\cr \code{\link{DoORnorm}}: \tab normalize the data in values from 0 to 1.
-\cr \code{\link{intervalFun}}: \tab intrval function with a specified middle
-function. \cr \code{\link{PseudoInverse}}: \tab evaluate the pseudoinvese of
-a matrix. \cr \code{\link{projectPoints}}: \tab projects data points onto
-the curve defined by the model function. \cr \code{\link{resetSFR}}: \tab
-reset SFR to zero. \cr \code{\link{selectModel}}: \tab compute the data
-pairwise and and selects a pair with the lowest "MD" value. \cr
-\code{\link{SSexpo}}: \tab selfStart model estimate the parameters of
-expontenial model. \cr } Default values: \tabular{ll}{
-\code{\link{default.val}}: \tab return default values for DoOR functions.
-\cr }
+See the Vignettes and the help pages for more documentation.
 }
 \author{
 C. Giovanni Galizia \cr Daniel Muench \cr Martin Strauch \cr Anja
 Nissler \cr Shouwen Ma \cr
 
-Maintainer: Daniel Muench <daniel.muench@uni-konstanz.de>
+Maintainer: Daniel Münch <daniel.muench@uni-konstanz.de>
 }
 \references{
 \url{http://neuro.uni-konstanz.de/DoOR/default.html}

@@ -4,22 +4,31 @@
 \alias{DoORplot_acrossOSNs}
 \title{DoORplot_acrossOSNs}
 \usage{
-DoORplot_acrossOSNs(odorants, response_matrix = default.val("response.matrix"),
-  sub, zero = default.val("zero"), tag = "Name", plot.type = 1,
-  base_size = 12)
+DoORplot_acrossOSNs(odorants,
+  response_matrix = default.val("response.matrix"),
+  odor_data = default.val("odor"),
+  DoOR_mappings = default.val("DoOR_mappings"), zero = default.val("zero"),
+  tag = "Name", sub, plot.type = 1, base_size = 12)
 }
 \arguments{
 \item{odorants}{character vector; one or several InChIKeys}
 
 \item{response_matrix}{DOOR response matrix; contains the data to plot}
 
-\item{sub}{character vector; specify one or several classes of sensilla the plot should be restricted to. One or several of: "ab" "ac", "at", "ai", "pb", "sacI", "sacII"}
+\item{odor_data}{data frame; contains the odorant information.}
 
-\item{zero}{character; InChIKey of the odorant that should be set to 0 (e.g. SFR)}
+\item{zero}{character; InChIKey of the odorant that should be set to 0 (e.g.
+SFR)}
 
-\item{tag}{character; the chemical identifier to use in the plot, one of \code{colnames(odor)}}
+\item{tag}{character; the chemical identifier to use in the plot, one of
+\code{colnames(odor)}}
 
-\item{plot.type}{interger; 1 or 2, defining the type of plot (1: facet_grid of odorants * sensillae; 2: facet_wrap across OSNs)}
+\item{sub}{character vector; specify one or several classes of sensilla the
+  plot should be restricted to. One or several of: "ab" "ac", "at", "ai",
+  "pb", "sacI", "sacII"}
+
+\item{plot.type}{interger; 1 or 2, defining the type of plot (1: facet_grid
+of odorants * sensillae; 2: facet_wrap across OSNs)}
 
 \item{base_size}{numeric; the base font size for the ggplot2 plot}
 }
@@ -30,9 +39,14 @@ a ggplot2 object
 plot the activation patterns of one or several odorants across OSNs
 }
 \details{
-DoOR response profiles will be selected and ordered according to the OSNs they are related to. Several DoOR response profiles might exist for a given OSN (e.g. one for the OSN itself and one for the OSNs misexpressed receptor protein) but only one will be shown. Which DoOR profile is mapped to which OSN is controlled via the "code.OSN" column in \code{DoORmapings}.
+DoOR response profiles will be selected and ordered according to the
+  OSNs they are related to. Several DoOR response profiles might exist for a
+  given OSN (e.g. one for the OSN itself and one for the OSNs misexpressed
+  receptor protein) but only one will be shown. Which DoOR profile is mapped
+  to which OSN is controlled via the "code.OSN" column in \code{DoORmapings}.
 }
 \examples{
+library(DoOR.data)
 odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), "Name", "InChIKey")
 DoORplot_acrossOSNs(odorants)
 DoORplot_acrossOSNs(odorants, sub = c("ac", "at"))

@@ -43,8 +43,8 @@ Generates a model response and merge data in given sequence.
 library(DoOR.data)
 data(Or35a)
 data(response.range)
-SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Yao.2005.WT")
-selected.merg <- modelRPSEQ(Or35a, SEQ = SEQ)
+SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")
+selected.merg <- modelRPSEQ(Or35a, SEQ = SEQ, plot = TRUE)
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

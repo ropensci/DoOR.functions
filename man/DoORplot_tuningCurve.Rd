@@ -6,7 +6,8 @@
 \usage{
 DoORplot_tuningCurve(receptor, odorant, response.vector,
   response_matrix = default.val("response.matrix"),
-  zero = default.val("zero"), fill.receptor = default.val("color.receptor"),
+  odor_data = default.val("odor"), zero = default.val("zero"),
+  fill.receptor = default.val("color.receptor"),
   fill.odorant = default.val("color.odorant"), odor.main = "Name", limits,
   base_size = 12)
 }
@@ -15,11 +16,17 @@ DoORplot_tuningCurve(receptor, odorant, response.vector,
 
 \item{odorant}{character; an odorant name (InChIKey)}
 
-\item{response.vector}{numerical vector; a vector with responses, if empty this is taken from response_matrix}
+\item{response.vector}{numerical vector; a vector with responses, if empty
+this is taken from response.matrix}
 
-\item{response_matrix}{DoOR response matrix; response vector will be taken from here, not needed if response.vector is given}
+\item{response_matrix}{DoOR response matrix; response vector will be taken
+from here, not needed if response.vector is given}
 
-\item{zero}{InChIKey; will be set to zero, default is SFR, ignored when data is provided via response.vector; set to "" if you don't want to subtract anything}
+\item{odor_data}{data frame; contains the odorant information.}
+
+\item{zero}{InChIKey; will be set to zero, default is SFR, ignored when data
+is provided via response.vector; set to "" if you don't want to subtract
+anything}
 
 \item{fill.receptor}{color code; bar color for receptor tuning curve}
 
@@ -38,10 +45,14 @@ a ggplot object
 plot a receptor or odorant tuning curve
 }
 \examples{
+library(DoOR.data)
+data(response.matrix)
+data(odor)
+
 DoORplot_tuningCurve(odorant = odor$InChIKey[2])
 DoORplot_tuningCurve(receptor = "Or22a")
 
-range <- range(apply(response_matrix, 2, function(x) resetSFR(x,x[zero])), na.rm = TRUE)
+range <- range(resetSFR(response.matrix, "SFR"), na.rm = TRUE)
 DoORplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
 
 DoORplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))

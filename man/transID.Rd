@@ -4,8 +4,7 @@
 \alias{transID}
 \title{transID}
 \usage{
-transID(x, from = "CAS", to = "InChIKey",
-  odor_data = default.val("odor_data"))
+transID(x, from = "CAS", to = "InChIKey", odor_data = default.val("odor"))
 }
 \arguments{
 \item{x}{character vector; one or many chemical identifiers}
@@ -23,10 +22,9 @@ character vector of translated chemical identifiers
 Translate chemical identifiers from one to the other.
 }
 \examples{
+library(DoOR.data)
 transID("123-92-2")
 transID("isopentyl acetate", "Name")
 transID("C(C(C)C)COC(=O)C", "SMILES", "Name")
-
-DoORplot_ALmap(getKey("123-92-2"))
 }
 

@@ -4,12 +4,14 @@
 \alias{DoORplot_responseMatrix}
 \title{DoORplot_responseMatrix}
 \usage{
-DoORplot_responseMatrix(data, tag = default.val("tag"),
-  colors = default.val("colors"), bw = FALSE, point = FALSE, limits,
-  base_size = 12)
+DoORplot_responseMatrix(data, odor_data = default.val("odor"),
+  tag = default.val("tag"), colors = default.val("colors"), bw = FALSE,
+  point = FALSE, limits, base_size = 12)
 }
 \arguments{
 \item{data}{a subset of e.g. response.matrix}
+
+\item{odor_data}{data frame; contains the odorant information.}
 
 \item{tag}{the chemical identfier to plot (one of colnames(odor))}
 
@@ -32,7 +34,9 @@ a dotplot if limits[1] >= 0  or a heatmap if limits[1] < 0
 plot DoOR responses as a point matrix
 }
 \examples{
-tmp <- apply(response.matrix, 2, function(x) resetSFR(x,x["SFR"]))
+library(DoOR.data)
+data(response.matrix)
+tmp <- resetSFR(response.matrix, "SFR")
 DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
 DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name", limits = range(response.matrix, na.rm = TRUE))
 }

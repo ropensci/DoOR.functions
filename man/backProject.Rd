@@ -21,7 +21,7 @@ responses in "con.data".}
 is the data that to be back projected.}
 }
 \value{
-Output of \code{\link{backProject}} is a list containing a numeric
+Output of backProject is a list containing a numeric
 vector ($rescale) and a data frame ($output).  "rescale" is used to rescale
 the normalized data to original scale. "output" contains the whole
 "bp.data", and consensus value from "cons.data", "projected.Y" (normalized
@@ -31,7 +31,7 @@ back projected data) and rescaled back projected data "bp.data".
 project the model response values back to tested values
 }
 \details{
-\code{\link{backProject}} is used to project the model response values back
+backProject is used to project the model response values back
 to tested values.  The process of back projection is following serval steps:
 \itemize{ \item 1. normalize two data set in values from 0 to 1; \item 2.
 plot "bp.data" against "cons.data"; \item 3. choose the best fitting model
@@ -44,9 +44,4 @@ between unnormalized data and normalized data using linear regression; \item
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
-\seealso{
-\code{\link{DoORnorm}},\code{\link{projectPoints}},
-\code{\link{calModel}}, \code{\link{modelfunction}}
-}
-\keyword{data}
 

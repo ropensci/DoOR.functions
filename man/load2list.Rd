@@ -13,6 +13,8 @@ a list
 returns all original DoOR response data as a list
 }
 \examples{
+library(DoOR.data)
+loadData()
 lst <- load2list()
 }
 \author{
