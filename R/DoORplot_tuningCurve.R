@@ -39,7 +39,7 @@ DoORplot_tuningCurve <- function(receptor,
                                  odorant,
                                  response.vector,
                                  response_matrix = default.val("response.matrix"),
-                                 odor_data = default.val("odor_data")
+                                 odor_data = default.val("odor_data"),
                                  zero = default.val("zero"),
                                  fill.receptor = default.val("color.receptor"),
                                  fill.odorant  = default.val("color.odorant"),
