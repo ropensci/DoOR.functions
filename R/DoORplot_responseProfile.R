@@ -21,11 +21,12 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
 #' library(DoOR.data)
-#' DoORplot_responseProfile(response.matrix, "Or22a")
-#' DoORplot_responseProfile(response.matrix, "Or22a", tag = "Name")
+#' data(response.matrix)
+#' DoORplot_responseProfile("Or22a", response.matrix)
+#' DoORplot_responseProfile("Or22a", response.matrix, tag = "Name")
 DoORplot_responseProfile <- function(receptor,
                                      response_matrix = default.val("response.matrix"),
-                                     odor_data = default.val("odor_data"),
+                                     odor_data = default.val("odor"),
                                      tag = default.val("tag"),
                                      colored = TRUE,
                                      colors = default.val("colors"),

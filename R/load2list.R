@@ -8,6 +8,7 @@
 #'
 #' @examples
 #' library(DoOR.data)
+#' loadData()
 #' lst <- load2list()
 load2list <- function() {
   if(!exists("ORs"))

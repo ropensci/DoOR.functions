@@ -8,15 +8,18 @@
 #' @param odor_data data frame; contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
 #' @param tag the labels to plot on top of the glomeruli (one of the following
-#'   \code{DoOR.mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
+#'   \code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
 #'   or "co.receptor")
 #' @param main the title, one column of \code{odor}, defaults to "Name"
 #' @param scalebar whether or not to add a scalebar
-#' @param DoOR.mappings the darta frame containing the mapping information
+#' @param DoOR_mappings the data frame containing the mapping information
 #' @param colors a vector containing 6 color values (2 for values below 0, 1 0
 #'   value and 3 steps between 0 and 1)
 #' @param limits the limits for the color scale, if empty the range of the
 #'   response matrix is taken (after setting ``zero`` to 0)
+#' @param AL.map a list containing the AL model
+#' @param legend logical, plot a legend?
+#' @param base_size numeric, the base font size for the ggplot plot
 #' @details Normalized, color coded odor responses across receptors are mapped
 #'   onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map
 #'   was a kind gift from Veit Grabe.
@@ -31,7 +34,8 @@
 #' @examples
 #' library(DoOR.data)
 #' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
-#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", color = c("magenta", "pink", "white", "yellow", "orange", "red"))
+#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", 
+#'    color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #' 
 #' DoORplot_ALmap(transID("123-92-2"), scalebar = FALSE) +
 #' ggplot2::theme(legend.position  = "bottom",
@@ -44,12 +48,12 @@
 #' }
 DoORplot_ALmap <- function(InChIKey,
                            response_matrix = default.val("response.matrix"),
-                           odor_data = default.val("odor_data"),
+                           odor_data = default.val("odor"),
+                           DoOR_mappings = default.val("DoOR_mappings"),
                            zero = default.val("zero"),
                            tag =  default.val("tag.ALmap"),
                            main = "Name",
                            scalebar = default.val("scalebar"),
-                           DoOR.mappings = default.val("DoOR.mappings"),
                            AL.map = default.val("AL.map"),
                            colors = default.val("colors"),
                            legend = TRUE,
@@ -68,11 +72,11 @@ DoORplot_ALmap <- function(InChIKey,
   response.data <- getNormalizedResponses(InChIKey, zero = zero, response_matrix = response_matrix)
 
   plotdata <- AL.map[["glomeruli"]]
-  plotdata$receptor <- DoOR.mappings$receptor[match(plotdata$glomerulus, DoOR.mappings$code)] # match mapped glomeruli and extract receptor names
+  plotdata$receptor <- DoOR_mappings$receptor[match(plotdata$glomerulus, DoOR_mappings$code)] # match mapped glomeruli and extract receptor names
   plotdata$response <- response.data$Response[match(plotdata$receptor, response.data$ORs)] # pick responses from response.data
 
   labels <- AL.map$labels
-  labels <- cbind(labels,DoOR.mappings[match(labels$glomerulus, DoOR.mappings$code),c("receptor", "sensillum", "OSN", "co.receptor", "Ors")])
+  labels <- cbind(labels,DoOR_mappings[match(labels$glomerulus, DoOR_mappings$code),c("receptor", "sensillum", "OSN", "co.receptor", "Ors")])
 
 
   main <- odor_data[match(InChIKey, odor$InChIKey), main]

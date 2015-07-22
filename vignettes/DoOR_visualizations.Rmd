@@ -152,7 +152,7 @@ DoORplot_acrossReceptors(odors, tag = "Name", base_size = 8)
 
 
 ## DoORplot_acrossOSNs
-`DoORplot_acrossOSNs()` is similar to `DoORplot_acrossReceptors()` but the responding units are sorted according to the sensory neuron they belong to. This sorting is controlled via `DoOR.mappings` from the `DoOR.data` package. There are 2 types of plot that `DoORplot_acrossOSNs()` can return. Type 2 dirctly resembles `DoORplot_acrossReceptors()`:
+`DoORplot_acrossOSNs()` is similar to `DoORplot_acrossReceptors()` but the responding units are sorted according to the sensory neuron they belong to. This sorting is controlled via `DoOR_mappings` from the `DoOR.data` package. There are 2 types of plot that `DoORplot_acrossOSNs()` can return. Type 2 directly resembles `DoORplot_acrossReceptors()`:
 
 ```{r, fig.width = 6, fig.height = 6}
 DoORplot_acrossOSNs(odors, base_size = 8, plot.type = 2)

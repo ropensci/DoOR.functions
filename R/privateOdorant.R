@@ -5,6 +5,7 @@
 #' @param receptor character; name of a DoOR responding unit (one of \code{ORs$Or})
 #' @param sensillum logical; restrict the search to the sensillum the receptor is expressed in?
 #' @param response_matrix DoOR response matrix; the input data to perform the search on
+#' @param DoOR_mappings the data frame containing the mapping information
 #' @param zero character; an odorant that should be set to 0
 #' @param nshow numeric; the number of private odorants to return
 #' @param tag character; the chemical identifier to give the odorant names in (on of \code{colnames(odor)})
@@ -20,6 +21,7 @@
 privateOdorant <- function(receptor,
                            sensillum = FALSE,
                            response_matrix = default.val("response.matrix"),
+                           DoOR_mappings = default.val("DoOR_mappings"),
                            zero = default.val("zero"),
                            nshow = 5,
                            tag) {
@@ -27,8 +29,8 @@ privateOdorant <- function(receptor,
     response_matrix <- resetSFR(response_matrix, zero)
 
   if(sensillum == TRUE) {
-    sensillum <- as.character(DoOR.mappings$sensillum[which(DoOR.mappings$receptor == receptor)])
-    receptors <- as.character(DoOR.mappings$receptor[which(DoOR.mappings$sensillum == sensillum)])
+    sensillum <- as.character(DoOR_mappings$sensillum[which(DoOR_mappings$receptor == receptor)])
+    receptors <- as.character(DoOR_mappings$receptor[which(DoOR_mappings$sensillum == sensillum)])
     receptors <- colnames(response_matrix)[which(colnames(response_matrix) %in% receptors)]
     response_matrix <- response_matrix[ ,receptors]
     message(paste0("\n>> Checking only against the ", sensillum, " sensillum (", paste(receptors, collapse =", "),") <<"))

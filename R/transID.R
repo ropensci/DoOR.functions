@@ -1,5 +1,5 @@
 #' transID
-#' 
+#'
 #' Translate chemical identifiers from one to the other.
 #'
 #' @param x character vector; one or many chemical identifiers
@@ -10,13 +10,13 @@
 #' @return character vector of translated chemical identifiers
 #' @export
 #'
-#' @examples 
+#' @examples
+#' library(DoOR.data)
 #' transID("123-92-2")
 #' transID("isopentyl acetate", "Name")
 #' transID("C(C(C)C)COC(=O)C", "SMILES", "Name")
 #' 
-#' DoORplot_ALmap(getKey("123-92-2"))
-transID <- function(x, from = "CAS", to = "InChIKey", odor_data = default.val("odor_data")) {
+transID <- function(x, from = "CAS", to = "InChIKey", odor_data = default.val("odor")) {
   result <- odor_data[match(x, odor_data[ , from]), to]
  if(length(result) == 0) {
     warning("No match, returning NA.")

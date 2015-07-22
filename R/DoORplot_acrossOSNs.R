@@ -34,7 +34,8 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 DoORplot_acrossOSNs <- function(odorants,
                                 response_matrix = default.val("response.matrix"),
-                                odor_data = default.val("odor_data"),
+                                odor_data = default.val("odor"),
+                                DoOR_mappings = default.val("DoOR_mappings"),
                                 zero = default.val("zero"),
                                 tag  = "Name",
                                 sub,
@@ -55,8 +56,8 @@ DoORplot_acrossOSNs <- function(odorants,
   if(tag != "InChIKey")
     data$odorant <- odor_data[match(data$odorant, odor_data$InChIKey), tag]
   
-  data$sensillum <- DoOR.mappings[match(data$dataset, DoOR.mappings$receptor), "sensillum"]
-  data$OSN       <- DoOR.mappings[match(data$dataset, DoOR.mappings$receptor), "code.OSN"]
+  data$sensillum <- DoOR_mappings[match(data$dataset, DoOR_mappings$receptor), "sensillum"]
+  data$OSN       <- DoOR_mappings[match(data$dataset, DoOR_mappings$receptor), "code.OSN"]
   data           <- subset(data, sensillum != "")
   data$OSN       <- gsub("ab|ac|at|ai|pb|sacI|sacII|[0-9]", "", data$OSN)
   data           <- subset(data, !is.na(OSN))

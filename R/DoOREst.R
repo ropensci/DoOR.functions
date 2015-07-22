@@ -2,7 +2,7 @@
 #' 
 #' Estimate the missing entries in a response data
 #' 
-#' A warp programe using \code{\link{LLSIestPC}} or \code{\link{LLSIestKnn}}
+#' A warp programe using Pearson Correlation or k-nearest neighbors
 #' estimate the missing entries in a response data.
 #' 
 #' @param da a data frame or matrix; contaning the consensus response values.

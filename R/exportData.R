@@ -21,12 +21,12 @@
 #' @export
 #' @keywords data
 #' @examples
-#' 
+#' \dontrun{
 #' library(DoOR.data)
-#' library(DoOR.function)
+#' library(DoOR.functions)
 #' loadData()
 #' exportData(".txt", all.data = FALSE) 	# export odorant responses data only
-#' 
+#' }
 exportData <-
 function(file.format, directory, 
 	odorantReceptors = default.val("ORs"),  

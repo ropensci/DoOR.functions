@@ -9,6 +9,7 @@
 #'   scaled between 0 and 1 (see examples)
 #' @param response_matrix DoOR response matrix; the data to compair against
 #' @param odor_data data frame; contains the odorant information.
+#' @param DoOR_mappings the data frame containing the mapping information
 #' @param tag character; the chemical identifier to use in plots, one of 
 #'   \code{colnames(odor)}
 #' @param min.cor numeric; a minimum correlation value, the function will check 
@@ -38,7 +39,8 @@
 #' 
 identifySensillum <- function(recording,
                               response_matrix = default.val("response.matrix"),
-                              odor_data = default.val("odor_data"),
+                              odor_data = default.val("odor"),
+                              DoOR_mappings = default.val("DoOR_mappings"),
                               tag     = "Name",
                               min.cor = .9,
                               nshow   = 10,
@@ -62,7 +64,7 @@ identifySensillum <- function(recording,
     nshow <- length(data)
   
   if(!missing(sub)) {
-    subset <- as.character(DoOR.mappings$receptor[grep(paste0("^",sub), DoOR.mappings$sensillum)])
+    subset <- as.character(DoOR_mappings$receptor[grep(paste0("^",sub), DoOR_mappings$sensillum)])
     which(colnames(data) %in% subset)
     data <- data[,which(colnames(data) %in% subset)]
   }
@@ -71,8 +73,8 @@ identifySensillum <- function(recording,
     # calulate correlations
     units  <- colnames(recording)[-1]
     result <- data.frame(receptor = colnames(data))
-    result$sensillum <- DoOR.mappings$sensillum[match(result$receptor, DoOR.mappings$receptor)]
-    result$OSN <- DoOR.mappings$OSN[match(result$receptor, DoOR.mappings$receptor)]
+    result$sensillum <- DoOR_mappings$sensillum[match(result$receptor, DoOR_mappings$receptor)]
+    result$OSN <- DoOR_mappings$OSN[match(result$receptor, DoOR_mappings$receptor)]
     for(i in 1:length(units)) {
       corx <- apply(data, 2, function(x) cor(x, recording[,units[i]]) )
       corx <- data.frame(receptor = names(corx), value = corx)
@@ -98,8 +100,8 @@ identifySensillum <- function(recording,
     result <- as.matrix(dist(result))
     result <- result[(length(units)+1):nrow(result), 1:length(units)]
     result <- data.frame(receptor  = rownames(result),
-                         sensillum = DoOR.mappings$sensillum[match(rownames(result), DoOR.mappings$receptor)],
-                         OSN = DoOR.mappings$OSN[match(rownames(result), DoOR.mappings$receptor)],
+                         sensillum = DoOR_mappings$sensillum[match(rownames(result), DoOR_mappings$receptor)],
+                         OSN = DoOR_mappings$OSN[match(rownames(result), DoOR_mappings$receptor)],
                          result)
   }
   
@@ -122,7 +124,7 @@ identifySensillum <- function(recording,
       cor.tmp <- result[order(result[,units[i]], decreasing = FALSE),][1:nshow, c("receptor",units[i])]
     
     colnames(cor.tmp)[2] <- "cor"
-    cor.tmp$OSN    <- DoOR.mappings$OSN[match(cor.tmp$receptor, DoOR.mappings$receptor)]
+    cor.tmp$OSN    <- DoOR_mappings$OSN[match(cor.tmp$receptor, DoOR_mappings$receptor)]
     cor.tmp$label  <- paste(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", method, ": ", round(cor.tmp$cor, 5), sep = "")
     data.tmp       <- droplevels(subset(data.melt, dataset %in% cor.tmp$receptor))
     data.tmp$label <- cor.tmp$label[match(data.tmp$dataset, cor.tmp$receptor)]

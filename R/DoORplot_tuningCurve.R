@@ -1,11 +1,11 @@
 #' DoORplot_tuningCurve
-#' 
+#'
 #' plot a receptor or odorant tuning curve
-#' 
+#'
 #' @param receptor character; a receptor name (one of ORS$OR)
 #' @param odorant character; an odorant name (InChIKey)
 #' @param response.vector numerical vector; a vector with responses, if empty
-#'   this is taken from response_matrix
+#'   this is taken from response.matrix
 #' @param response_matrix DoOR response matrix; response vector will be taken
 #'   from here, not needed if response.vector is given
 #' @param odor_data data frame; contains the odorant information.
@@ -17,29 +17,32 @@
 #' @param odor.main the odor identifier to plot, one of colnamed(odor)
 #' @param base_size numeric; the base font size for the ggplot2 plot
 #' @param limits the numerical vector of length 2; y limits for the tuning curve
-#'   
+#'
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
-#'   
+#'
 #' @return a ggplot object
 #' @export
-#' 
+#'
 #' @examples
 #' library(DoOR.data)
+#' data(response.matrix)
+#' data(odor)
+#' 
 #' DoORplot_tuningCurve(odorant = odor$InChIKey[2])
 #' DoORplot_tuningCurve(receptor = "Or22a")
-#' 
-#' range <- range(apply(response_matrix, 2, function(x) resetSFR(x,x[zero])), na.rm = TRUE)
+#'
+#' range <- range(resetSFR(response.matrix, "SFR"), na.rm = TRUE)
 #' DoORplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
-#' 
+#'
 #' DoORplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
-#' 
+#'
 #' DoORplot_tuningCurve(odorant = "odor X", response.vector = rnorm(200))
-#' 
+#'
 DoORplot_tuningCurve <- function(receptor,
                                  odorant,
                                  response.vector,
                                  response_matrix = default.val("response.matrix"),
-                                 odor_data = default.val("odor_data"),
+                                 odor_data = default.val("odor"),
                                  zero = default.val("zero"),
                                  fill.receptor = default.val("color.receptor"),
                                  fill.odorant  = default.val("color.odorant"),
@@ -47,19 +50,19 @@ DoORplot_tuningCurve <- function(receptor,
                                  limits,
                                  base_size = 12
 ) {
-  
+
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
   if (!requireNamespace("grid", quietly = TRUE))
     stop("grid is required for plotting, please install via install.packages('grid')", call. = FALSE)
-  
+
   if(missing(receptor) & missing (odorant))
     stop("either receptor or odorant has to be specified")
   if(!missing(receptor) & !missing (odorant))
     stop("only one of receptor or odorant must to be specified")
-  
+
   if(missing(odorant)) {
-    
+
     if(missing(response.vector)) {
       if (!zero == "") {
         data <- na.omit(resetSFR(response_matrix[ ,receptor], response_matrix[zero, receptor]))
@@ -69,10 +72,10 @@ DoORplot_tuningCurve <- function(receptor,
     } else {
       data <- na.omit(response.vector)
     }
-    
+
     data <- data.frame(odorants = 1:length(data), value = data)
     data$odorants <- factor(data$odorants, levels = data$odorants[orderPyramid(data$value)])
-    
+
     plot <- ggplot2::ggplot(data) +
       ggplot2::geom_bar(ggplot2::aes(x = odorants, y = value), stat = "identity", position = "identity", width = 1, fill = fill.receptor) +
       ggplot2::theme_minimal(base_size = base_size) +
@@ -97,10 +100,10 @@ DoORplot_tuningCurve <- function(receptor,
     } else {
       data <- response.vector
     }
-    
+
     data <- data.frame(receptors = 1:length(data), value = data)
     data$receptors <- factor(data$receptors, levels = data$receptors[orderPyramid(data$value)])
-    
+
     plot <- ggplot2::ggplot(data) +
       ggplot2::geom_bar(ggplot2::aes(x = receptors, y = value), stat = "identity", position = "identity", width = 1, fill = fill.odorant) +
       ggplot2::theme_minimal(base_size = base_size) +
@@ -114,11 +117,11 @@ DoORplot_tuningCurve <- function(receptor,
       ggplot2::ggtitle(bquote(atop(.(
         paste(odor.main, sep = "")),
         atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), "; n: ", nrow(data)))), ""))))
-    
+
   }
-  
+
   if(!missing(limits))
     plot <- plot + ggplot2::coord_cartesian(ylim = limits)
-  
+
   return(plot)
 }

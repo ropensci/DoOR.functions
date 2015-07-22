@@ -18,7 +18,7 @@
 # @examples
 # 
 # library(DoOR.data)
-# library(DoOR.function)
+# library(DoOR.functions)
 # newdata <- data.frame(InChIKey=odor$InChIKey[1:4], 
 # 	new.data=c(0.4, 0.5, 0.6, 0.7))
 # data(Or22a)

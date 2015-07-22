@@ -1,25 +1,26 @@
 #' countStudies
-#' 
+#'
 #' returns a matrix indiating how many studies have recorded individual
 #' receptor-odorant combinations
-#' 
+#'
 #' @param ors data.frame containing all receptors exidting in DoOR.
 #' @param odor_data data.frame containing information about the odorants in
 #'   DoOR.
 #' @param char.columns number of character columns in each receptor data.frame.
 #' @param ident odorant identifier to be used as rownames.
 #' @export
-#' 
+#'
 #' @return matrix
-#'   
+#'
 #' @examples
 #' library(DoOR.data)
+#' loadData()
 #' count <- countStudies()
 #' image(count)
-#' 
-countStudies <- function(ors = default.val("ORs"), 
-                         odor_data = default.val("odor_data"), 
-                         char.columns = default.val("num.charColumns"), 
+#'
+countStudies <- function(ors = default.val("ORs"),
+                         odor_data = default.val("odor"),
+                         char.columns = default.val("num.charColumns"),
                          ident = default.val("ident")) {
   counts <- matrix(nrow = dim(odor_data)[1], dimnames = c(odor_data[ident]))
   for (i in 1:length(ors$OR)) {

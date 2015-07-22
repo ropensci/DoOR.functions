@@ -1,8 +1,8 @@
 #' DoORplot_acrossReceptors
 #'
-#' barplot of DoOR responses of a set of odorants across all responding units in DoOR
+#' barplot of DoOR responses of a set of odorant across all responding units in DoOR
 #'
-#' @param odorants character vecto; one or several InChIKeys
+#' @param odorant character vecto; one or several InChIKeys
 #' @param response_matrix DoOR response matrix; a DoOR response matrix as data source
 #' @param odor_data data frame; contains the odorant information.
 #' @param zero character; an InChIKey of the odorant that should be set to 0
@@ -15,25 +15,26 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
 #' library(DoOR.data)
+#' data(odor)
 #' DoORplot_acrossReceptors(transID("123-92-2"), tag = "CAS")
 #' DoORplot_acrossReceptors(odor$InChIKey[4:10])
 #'
-DoORplot_acrossReceptors <- function(odorants,
+DoORplot_acrossReceptors <- function(odorant,
                                      response_matrix = default.val("response.matrix"),
-                                     odor_data = default.val("odor_data"),
+                                     odor_data = default.val("odor"),
                                      zero = default.val("zero"),
                                      tag  = "Name",
                                      limits,
-                                     base_size = base_size) {
+                                     base_size = 12) {
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
 
   if (!is.null(zero))
     response_matrix <- as.data.frame(apply(response_matrix, 2, function(x) resetSFR(x,x[zero])))
 
-  odorants <- as.character(odorants)
+  odorant <- as.character(odorant)
 
-  data <- response_matrix[odorants,]
+  data <- response_matrix[odorant,]
   data <- DoORmelt(as.data.frame(data), na.rm = TRUE)
 
   if(tag != "InChIKey")
