@@ -1,66 +1,48 @@
-#' Mapping the given receptor into response matrix
+#' mapReceptor
 #' 
-#' Mapping the given receptor into response matrix by comparing their linear
-#' relationship (Pearson Correlation Coefficient).
+#' Identifying the source of unknown response data by correlating it agains all
+#' DoOR responding units.
 #' 
 #' 
-#' @param da data frame; odorant response data for a given receptor, e.g.
-#' Or22a.
-#' @param by.column character string; specifying the column in "da" that
-#' contains the response values.
-#' @param Receptors character vector; containing the names of receptor that
-#' specify the consensus values in response matrix
-#' @param ResponseMatrix output is a numeric vector that contains the Pearson
-#' Correlation Coefficient between given data and selected consensus data in
-#' response matrix
+#' @param data data frame, containing two columns, one called "odorants" and one
+#'   "responses" providing InChIKeys and odorant responses respectively.
+#' @param response_matrix output is a numeric vector that contains the Pearson 
+#'   Correlation Coefficient between given data and selected consensus data in
+#' @param nshow numeric, if defined, only this number of results will be
+#'   returned response matrix
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
-#' @keywords data
-mapReceptor <-
-function(da, by.column, Receptors, ResponseMatrix) 
-
-# part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
-# Neurobiology, University of Konstanz, Germany
-
-
-# mapReceptor.R:
-#################
-
-# Mapping the given receptor into response matrix by comparing their linear relationship (Pearson Correlation Coefficient). 
-
-# input parameters:
-####################
-
-
-# da 		 : data frame; odorant response data for a given receptor, e.g. Or22a. 
-# by.column 	 : character string; specifying the column in "da" that contains the response values.
-# Receptors 	 : character vector; containing the names of receptor that specify the consensus values in response matrix
-# ResponseMatrix : a numeric matrix; containing the consensus response values.
-
-# output is a numeric vector that contains the Pearson Correlation Coefficient between given data and selected consensus data in response matrix.
-{
-  res 		<- data.frame()
-  matchOdor 	<- match(da[,"InChIKey"], rownames(ResponseMatrix))
-  for (i in Receptors) {
-    dataVector 	    <- da[,by.column]
-    ResponseMatrixi <- ResponseMatrix[matchOdor,i]
-    xy 		          <- na.omit(cbind(dataVector,ResponseMatrixi))
-    # if no data available for selected receptor or no overlapped values with the selected receptor, then return NA and run next loop
-    if (is.na(which(!is.na(ResponseMatrix[matchOdor,i]))[1]) | dim(xy)[1] < 3) {
-      cor.coeff <- NA
-      cor.pval  <- NA
-    } else if (lm(ResponseMatrixi ~ dataVector)$coef[2] == 0 | is.na(lm(ResponseMatrixi ~ dataVector)$coef[2])) {
-      # if the two data are fitted horizontally or vertically, then return NA and run next loop
-      cor.coeff <- NA
-      cor.pval  <- NA
-    } else {
-      correl <- cor.test(x = dataVector,y = ResponseMatrixi)
-      cor.coeff <- correl$estimate
-      cor.pval  <- correl$p.value
-    }
-    res.x <- data.frame(receptor = i, cor.coeff = cor.coeff, p.value = cor.pval, n = dim(xy)[1])
-    res 	<- rbind(res,res.x)
-    res   <- res[order(res$cor.coeff, decreasing = TRUE, na.last = TRUE),]
-  }
-  return(res)
+#' @examples 
+#'   loadData()
+#'   data <- data.frame(odorants  = Or22a$InChIKey,
+#'                      responses = Or22a$Hallem.2004.EN)
+#'   data <- na.omit(data)
+#'   mapReceptor(data = data)
+mapReceptor <- function(data, 
+                        response_matrix = default.val("response.matrix"),
+                        nshow) {
+  data$odorants   <- as.character(data$odorants)
+  res             <- data.frame()
+  response_matrix <- response_matrix[match(data$odorants, rownames(response_matrix)),]
+  
+  # remove n < 3
+  n <- which(apply(!is.na(response_matrix), 2, sum) < 3)
+  message(paste("skipped ", paste(names(response_matrix)[n], collapse = ", "), " as overlap (n) was < 3", sep=""))
+  
+  response_matrix <- response_matrix[ , -n]
+  
+  result <- apply(response_matrix, 2, function(x) cor.test(x, data$responses))
+  
+  result <- data.frame(responding.unit = names(result),
+                       n               = apply(!is.na(response_matrix), 2, sum),
+                       cor             = unlist(sapply(result, "[","estimate")),
+                       p.value         = unlist(sapply(result, "[","p.value")))
+  
+  result <- result[order(result$cor, decreasing = T),]
+  
+  if(!missing(nshow))
+    result <- result[1:nshow, ]
+  
+  return(result)
 }
