@@ -17,17 +17,18 @@
 #'   sensillum
 #' @param nshow numeric; the number of plots to nshow, plot e.g. only the top 10
 #'   matches
-#' @param ret character; wether to return the "plot" or the "dataframe" with the
+#' @param plot logical; if TRUE returns the plot, else returns the data frame with the
 #'   correlations/distances
 #' @param method character; the method for similarity calculations: correlation 
 #'   ("cor") or Euclidean distances ("dist")
 #' @param sub character; if you know the class of sensillum you were recording 
 #'   from you can restrict the search to this subset here ("ab", "ac", "at", 
 #'   "pb", "sac")
+#' @param base_size numeric, the base font size of the ggplot plots 
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #'   
 #' @return either a plot (gtable) with responses sorted by highest correlations 
-#'   or lowest distances, or a "dataframe" containing all calculated 
+#'   or lowest distances, or a data frame containing all calculated 
 #'   correlations or Euclidean distances
 #' @export
 #' 
@@ -50,11 +51,12 @@ identifySensillum <- function(recording,
                               tag     = "Name",
                               min.cor = .9,
                               nshow   = 10,
-                              ret     = "plot",
                               method  = "cor",
-                              sub) {
+                              sub,
+                              base_size = 12,
+                              plot = TRUE) {
   
-  if(ret == "plot") {
+  if(plot == TRUE) {
     if (!requireNamespace("ggplot2", quietly = TRUE))
       stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
     if (!requireNamespace("grid", quietly = TRUE))
@@ -119,77 +121,75 @@ identifySensillum <- function(recording,
     rownames(data)     <- odor_data[match(rownames(data), odor_data$InChIKey), tag]
   }
   
-  # plot data
-  
-  data.melt <- DoORmelt(data)
-  plots <- list()
-  for(i in 1:length(units)) {
-    if (method == "cor")
-      cor.tmp <- result[order(result[,units[i]], decreasing = TRUE),][1:nshow, c("receptor",units[i])]
-    if (method == "dist")
-      cor.tmp <- result[order(result[,units[i]], decreasing = FALSE),][1:nshow, c("receptor",units[i])]
+  if(plot == TRUE) {
+    # plot data
     
-    colnames(cor.tmp)[2] <- "cor"
-    cor.tmp$OSN    <- DoOR_mappings$OSN[match(cor.tmp$receptor, DoOR_mappings$receptor)]
-    cor.tmp$label  <- paste(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", method, ": ", round(cor.tmp$cor, 5), sep = "")
-    data.tmp       <- droplevels(subset(data.melt, dataset %in% cor.tmp$receptor))
-    data.tmp$label <- cor.tmp$label[match(data.tmp$dataset, cor.tmp$receptor)]
-    data.tmp$label <- factor(data.tmp$label, levels = cor.tmp$label)
+    data.melt <- DoORmelt(data)
+    plots <- list()
+    for(i in 1:length(units)) {
+      if (method == "cor")
+        cor.tmp <- result[order(result[,units[i]], decreasing = TRUE),][1:nshow, c("receptor",units[i])]
+      if (method == "dist")
+        cor.tmp <- result[order(result[,units[i]], decreasing = FALSE),][1:nshow, c("receptor",units[i])]
+      
+      colnames(cor.tmp)[2] <- "cor"
+      cor.tmp$OSN    <- DoOR_mappings$OSN[match(cor.tmp$receptor, DoOR_mappings$receptor)]
+      cor.tmp$label  <- paste(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", method, ": ", round(cor.tmp$cor, 5), sep = "")
+      data.tmp       <- droplevels(subset(data.melt, dataset %in% cor.tmp$receptor))
+      data.tmp$label <- cor.tmp$label[match(data.tmp$dataset, cor.tmp$receptor)]
+      data.tmp$label <- factor(data.tmp$label, levels = cor.tmp$label)
+      
+      
+      
+      p <- ggplot2::ggplot(data.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
+        ggplot2::geom_bar(position = "identity", stat = "identity", alpha = .6) +
+        ggplot2::facet_wrap(~ label, nrow = 1) +
+        ggplot2::theme_minimal(base_size = base_size) +
+        ggplot2::theme(panel.border  = ggplot2::element_rect(fill = NA, color = "grey"),
+                       axis.ticks.x  = ggplot2::element_blank(),
+                       axis.text.x   = ggplot2::element_blank(),
+                       axis.title.x  = ggplot2::element_blank())
+      assign(paste("p",i,sep="."),p)
+    }
     
+    # plot recording
     
+    for(i in 1:length(units)) {
+      rec.tmp <- data.frame(odorant = recording$odorants, value = recording[,units[i]], unit = paste0(units[i], "\n"))
+      
+      r <- ggplot2::ggplot(rec.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
+        ggplot2::geom_bar(position = "identity", stat = "identity", alpha=.6) +
+        ggplot2::theme_minimal(base_size = base_size) +
+        ggplot2::theme(panel.border  = ggplot2::element_rect(fill = NA, color = "grey"),
+                       axis.ticks.x  = ggplot2::element_blank(),
+                       axis.text.x   = ggplot2::element_blank(),
+                       axis.title.x  = ggplot2::element_blank()) +
+        #ggplot2::ggtitle(paste("unit", i, sep="")) +
+        ggplot2::facet_wrap(~ unit) +
+        ggplot2::geom_text(ggplot2::aes(y = .01, label = odorant), angle = 90, hjust = 0, vjust = .5, size = .3 * base_size, color = "black")
+      assign(paste("r",i,sep="."),r)
+    }
     
-    p <- ggplot2::ggplot(data.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
-      ggplot2::geom_bar(position = "identity", stat = "identity", alpha = .6) +
-      ggplot2::facet_wrap(~ label, nrow = 1) +
-      ggplot2::theme_minimal() +
-      ggplot2::theme(panel.border  = ggplot2::element_rect(fill = NA, color = "grey"),
-                     axis.ticks.x  = ggplot2::element_blank(),
-                     axis.text.x   = ggplot2::element_blank(),
-                     axis.title.x  = ggplot2::element_blank())
-    assign(paste("p",i,sep="."),p)
-  }
-  
-  # plot recording
-  
-  for(i in 1:length(units)) {
-    rec.tmp <- data.frame(odorant = recording$odorants, value = recording[,units[i]], unit = paste0(units[i], "\n"))
+    #build grobs
+    for(i in 1:length(units)) {
+      plots[[i]] <- gridExtra::arrangeGrob(grobs = list(
+        get(paste("r",i,sep=".")) + ggplot2::theme(legend.position = "none"),
+        get(paste("p",i,sep=".")) + ggplot2::theme(legend.position = "none")
+      ),
+      left = units[i],
+      nrow = 1, widths = c(.2,.8))
+    }
     
-    r <- ggplot2::ggplot(rec.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
-      ggplot2::geom_bar(position = "identity", stat = "identity", alpha=.6) +
-      ggplot2::theme_minimal() +
-      ggplot2::theme(panel.border  = ggplot2::element_rect(fill = NA, color = "grey"),
-                     axis.ticks.x  = ggplot2::element_blank(),
-                     axis.text.x   = ggplot2::element_blank(),
-                     axis.title.x  = ggplot2::element_blank()) +
-      #ggplot2::ggtitle(paste("unit", i, sep="")) +
-      ggplot2::facet_wrap(~ unit) +
-      ggplot2::geom_text(ggplot2::aes(y = .01, label = odorant), angle = 90, hjust = 0, vjust = .5, size = 3, color = "black")
-    assign(paste("r",i,sep="."),r)
-  }
-  
-  #build grobs
-  for(i in 1:length(units)) {
-    plots[[i]] <- gridExtra::arrangeGrob(grobs = list(
-      get(paste("r",i,sep=".")) + ggplot2::theme(legend.position = "none"),
-      get(paste("p",i,sep=".")) + ggplot2::theme(legend.position = "none")
-    ),
-    left = paste("unit",i),
-    nrow = 1, widths = c(.2,.8))
-  }
-  
-  if(method == "dist")
-    plots[["top"]] <- paste(nshow, "lowest euclidean distances")
-  if(method == "cor")
-    plots[["top"]] <- paste(nshow, "highest correlations")
-  
-  plots[["ncol"]] <- 1
-  
-  p <- do.call(gridExtra::arrangeGrob, plots)
-  plot(p)
-  
-  if(ret == "plot")
-    return(p)
-  if(ret == "dataframe")
+    if(method == "dist")
+      plots[["top"]] <- paste(nshow, "lowest euclidean distances")
+    if(method == "cor")
+      plots[["top"]] <- paste(nshow, "highest correlations")
+    
+    plots[["ncol"]] <- 1
+    
+    do.call(gridExtra::grid.arrange, plots)
+    
+  } else {
     return(result)
-  
+  } 
 }
