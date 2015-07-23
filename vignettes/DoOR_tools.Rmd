@@ -15,8 +15,8 @@ The `DoOR.functions` package provides tools for the analysis of the data provide
 * [Loading data](#loading)
 * [Identifying the sensillum we are recording from with `identifySensillum()`](#identifySensillum)
 * [Finding neuron-specific odorants with `privateOdorant()`](#privateOdorant)
+* [Mapping response data from an unknown source with `mapReceptor()`](#mapReceptor)
 
-----------
 
 
 ## Loading data{#loading}
@@ -82,9 +82,6 @@ So apparently our fake recording came from the ab1 sensillum, which was admitted
 
 
 
-
-
-
 ## Finding neuron-specific odorants with `privateOdorant()` {#privateOdorant}
 There may be several cases where we might be interested in so called _private odorants_, odorants that specificly activate a given receptor or sensory neuron. Might it be that we are looking for diagnostic odorants for sensillum identification or that we want to activate a specific neuronal pathway. `privateOdorant()` returns candidate odorants for that task.
 
@@ -107,11 +104,25 @@ Ethyl 2-methylbutanoate sounds like a good hit, it has the same difference to th
 
 
 
-## mapReceptor
+## Mapping response data from an unknown source with `mapReceptor()`{#mapReceptor}
+Similar to `identifySensillum()`, `mapReceptor()` correlates a response vector to all responding units of the  existing DoOR consensus data. Let's grab a data set from Or22a and see where it ends up:
+```{r}
+data <- data.frame(odorants  = Or22a$InChIKey, responses = Or22a$Hallem.2006.EN)
+data <- na.omit(data)
+head(data)
+mapReceptor(data = data, nshow = 5)
+```
+This example was a bit circular as the tested data contributed to the consensus data...
+
+
 
 ## backProject
 
+
+
 ## DoOREst
+
+
 
 ## sparse
 

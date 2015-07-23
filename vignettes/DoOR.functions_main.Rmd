@@ -7,13 +7,26 @@ vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
----
+--- 
 
 DoOR consists of two R packages and both are needed for DoOR to work properly. One package, `DoOR.data` contains all the _Drosophila_ odor responses we gathered from labs around the world or recorded ourselves. The other package `DoOR.functions` contains the DoOR framework for integrating heterogeneous data sets as well as analysis tools and functions for visalization. 
 
 In this vignette we describe how to build, modify and update DoOR and introduce some helper functions. There are two other vignettes explaining the [plotting functions](DoOR_visualizations.html) and the [analysis tools](DoOR_tools.html) in detail.
+##
 
-## loading DoOR
+## Content
+* [loading DoOR](#loading)
+* [Modifying, building and updating DoOR](#building)
+    * [Importing new data with `importNewData()`](#importNewData)
+    * [Building the complete data base with `CreateDatabase()`](#CreateDatabase)
+    * [Updating parts of the data base with `updateDatabase()`](#updateDatabase)
+    * [`modelRP()` and `modelRPSEQ()`](#model)
+    * [Removing a study with `removeStudy()`](#removeStudy)
+    * [Updating the odor information with `updateOdorInfo()`](#updateOdorInfo)
+* [Helper functions](#helper)
+
+
+## loading DoOR{#loading}
 The first step after starting R is to attach both packages and to load the response data:
 
 ```{r, results='hide'}
@@ -25,10 +38,11 @@ loadData()
 
 
 
-# Modifying, building and updating DoOR
+# Modifying, building and updating DoOR{#building}
 DoOR comes with all the original data sets as well as with a pre-computed version of the consensus matrix `response.matrix` where all data was integrated using the DoOR merging algorithms (see paper for details on how the algorithm works). The values in `response.matrix` are globally normalized with values scaled `[0,1]`. `response.matrix_non.normalized` is a version of the consensus data that is not globally normalized meaning that responses are scaled `[0,1]` within each _responding unit_ (receptor, sensory neuron, glomerulus...).
 
-## Importing new data with `importNewData()`
+
+## Importing new data with `importNewData()`{#importNewData}
 It is easy to add new response data to DoOR, we only have to take care to provide it in the right format:
 
 * either a .csv or a .txt file with fields separated by colons or tabs (see `?read.table` for detailed specifications).
@@ -84,11 +98,11 @@ See `?importNewData` for more details. We can e.g. import data also based on CAS
 If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/web/packages/webchem/) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
 
 
-## Building the complete data base with `CreateDatabase()`
+## Building the complete data base with `CreateDatabase()`{#CreatDatabase}
 Once we imported new data we can use `CreateDatabase()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad, these studies will be recorded in `excluded.data`.
 
 
-## Updating parts of the data base with `updateDatabase()`
+## Updating parts of the data base with `updateDatabase()`{#updateDatabase}
 If we imported new data only for a few receptors, we can update the data base with `updateDatabase()`. There are two ways to update the data base:
 
 ### using the heuristic approach
@@ -108,7 +122,7 @@ updateDatabase("Or67a", permutation = T, plot = F)
 ```
 
 
-## `modelRP()` and `modelRPSEQ()`
+## `modelRP()` and `modelRPSEQ()`{#model}
 `updateDatabase()` and `createDatabse()` call `modelRP()` and `modelRPSEQ()` to perform the merges and update the different DoOR objects. If we only want to perform a merge we can call them both directly.
 
 ### merging using the heuristic with `modelRP()`
@@ -118,23 +132,33 @@ merge <- modelRP(Or67a, plot = F)
 knitr::kable(head(merge$model.response))
 ```
 
+### merging in a specific sequence with `modelRPSEQ()`
+`updateDatabase()` with `permutation = TRUE` calls `modelRPSEQ()`. Like `modelRP()` we can also call modelRPSEQ directly:
+```{r, fig.width=5, fig.height=5.5}
+SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")
+merge <- modelRPSEQ(Or35a, SEQ = SEQ, plot = TRUE)
+head(merge)
+```
 
-## Removing a study with `removeStudy()`
+
+## Removing a study with `removeStudy()`{#removeStudy}
 `removeStudy()` will remove a data set from all DoOR data objects. If we import a data set that already exists with `importNewData()`, `removeStudy()` will automatically run before the data is imported.
 
 ```{r}
 removeStudy(study = "Hallem.2004.EN")
 ```
 
-## Updating the odor information with `updateOdorInfo()`
+
+## Updating the odor information with `updateOdorInfo()`{#updateOdorInfo}
 If we edit the general odor information in `DoOR.data::odor` we need to update all other DoOR objects with the new information. `updateOdorInfo()` overwrites the first 5 column of the DoOR responding units data frames (e.g. `Or22a`), it does not add or remove lines!
 
 
 
-# Helper functions
+# Helper functions{#helper}
 There are several small helper functions that belong to `DoOR.functions`.
 
-## `transID()`
+
+## `transID()`{#transID}
 Maybe **the** most important little function in DoOR. With `transID()` we can translate odorant identifiers, e.g. from CAS numberst to InChIKeys or to Names. The information is taken from `DoOR.data::odor`, any `colnames(odor)` can be used to define input or output:
 ```{r}
 transID("123-92-2")
@@ -146,7 +170,8 @@ transID(odorants, from = "Name", to = "InChI")
 
 ```
 
-## `resetSFR()`
+
+## `resetSFR()`{#resetSFR}
 `resetSFR()` subtracts the values of a specified odorant from a response vector or from the whole response matrix. It is usually used to subtract the spontaneous firing rate of an odorant, thus setting it to zero and restoring inhibitory responses. We treat SFR like a normal odorant during the merging process, thus it becomes > 0 if negative values exist (as all data gets rescaled `[0,1]` before merging).
 
 `resetSFR()` works either on the whole `response.matrix`, then an odorant InChIKey has to be specified for subtraction. Or it subtracts a value from a response vector.
@@ -160,7 +185,8 @@ knitr::kable(rm_sfrReset[1:10,6:15], digits = 2)
 resetSFR(x = c(1:10), sfr = 4)
 ```
 
-## `default.val()`
+
+## `default.val()`{#default.val}
 `default.val()` returns default values for several parameters used by the DoOR functions, e.g. the default odor identifier of the colors used in plots.
 
 ```{r}
@@ -168,7 +194,8 @@ default.val("ident")
 default.val("colors")
 ```
 
-## `getResponses()`
+
+## `getResponses()`{#getResponses}
 `getResponses()` returns the response values of one or several odorants across individual data sets.
 ```{r}
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")
@@ -177,7 +204,8 @@ responses <- na.omit(responses)
 knitr::kable(head(responses))
 ```
 
-## `getNormalizedResponses()`
+
+## `getNormalizedResponses()`{getNormalizedResponses}
 `getNormalizedResponses()` gathers responses to the specified odorants from the response.matrix and resets the SFR _via_ `resetSFR()`:
 ```{r}
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")
@@ -186,13 +214,13 @@ responses <- na.omit(responses)
 knitr::kable(head(responses))
 ```
 
-## `countStudies()`
+
+## `countStudies()`{#countStudies}
 `countStudies()` counts the number of studies that measured a given odorant-responding unit combination.
 ```{r}
 counts <- countStudies()
 knitr::kable(counts[1:10,6:15])
 ```
 
-## `exportData()`
 
-
+## `exportData()`{#exportData}
