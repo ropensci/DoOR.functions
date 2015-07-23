@@ -72,7 +72,7 @@ identifySensillum <- function(recording,
     nshow <- length(data)
   
   if(!missing(sub)) {
-    subset <- as.character(DoOR_mappings$receptor[grep(paste0("^",sub), DoOR_mappings$sensillum)])
+    subset <- as.character(DoOR_mappings$receptor[grep(paste0("^", sub, collapse = "|"), DoOR_mappings$sensillum)])
     which(colnames(data) %in% subset)
     data <- data[,which(colnames(data) %in% subset)]
   }
