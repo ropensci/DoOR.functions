@@ -1,0 +1,117 @@
+---
+title: "DoOR analysis tools"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `DoOR.functions` package provides tools for the analysis of the data provided by the `DoOR.data` package.
+
+## Content
+* [Loading data](#loading)
+* [Identifying the sensillum we are recording from with `identifySensillum()`](#identifySensillum)
+* [Finding neuron-specific odorants with `privateOdorant()`](#privateOdorant)
+
+----------
+
+
+## Loading data{#loading}
+First we need to load packages and data:
+```{r, echo = T, message = TRUE, results='hide'}
+#load data
+library(DoOR.functions)
+library(DoOR.data)
+loadData()
+```
+
+## Identifying the sensillum we are recording from with `identifySensillum()` {#identifySensillum}
+Imaginn we perform a electrophysiological recording from a _Drosophil_ sensillum (single sensilum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`privateOdorant()`](#privateOdorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identifySensillum()`.
+
+Let's make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxyde) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called `odorants` with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron). 
+
+```{r}
+recording <- data.frame(
+  odorants = c(transID(c("BEDN", "ETAS"), "Code"), 
+               transID("carbon dioxide", "Name")), 
+  unit1 = c(.9,.1,.1), 
+  unit2 = c(0, .1, 1)
+)
+```
+Next we feed the recording to the function:
+
+### using correlations
+```{r, fig.width=7.1, fig.height=4.5}
+identifySensillum(recording, base_size = 8)
+```
+Note that the function tells us that it found hits for all units in ab1 and ab5, meaning that e.g. within the four neurons housed in the ab1 sensillum both of our units had good matches. You can set this correlation theshold with `min.cor`. If we increase the threshold to 0.99 only ab1 is returned as a double match:
+
+```{r, fig.width=7.1, fig.height=4.5, fig.show='hide'}
+identifySensillum(recording, min.cor = .99)
+```
+
+We can define the number of best hits that we want to get returned (the default is 10):
+```{r, fig.width=7.1, fig.height=4.5}
+identifySensillum(recording, nshow = 5, base_size = 8)
+```
+And if we know e.g. that we are recording from a basiconic sensillum we can restrict the search to one or a few sensilla types:
+```{r, fig.width=7.1, fig.height=4.5}
+identifySensillum(recording, sub = "ab", nshow = 5, base_size = 8)
+identifySensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
+```
+
+### using Euclidean distances
+Instead of correlations we can also use the Euclidean distance as a (dis)similarity measure:
+
+```{r, fig.width=7.1, fig.height=4.5}
+identifySensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size = 8)
+```
+
+### returning data instead of plots
+We can also return the correlation/distance data instead of the plot when setting `plot =FALSE`:
+```{r}
+sensillumX <- identifySensillum(recording, method = "dist", sub = "ab", plot = F)
+head(sensillumX)
+```
+
+
+So apparently our fake recording came from the ab1 sensillum, which was admittedly quite obvious as we had a strong carbon dioxide response and ab1 houses the carbon dioxide receptor :)
+
+
+
+
+
+
+## Finding neuron-specific odorants with `privateOdorant()` {#privateOdorant}
+There may be several cases where we might be interested in so called _private odorants_, odorants that specificly activate a given receptor or sensory neuron. Might it be that we are looking for diagnostic odorants for sensillum identification or that we want to activate a specific neuronal pathway. `privateOdorant()` returns candidate odorants for that task.
+
+Let's say we want to specifically activate Or22a neurons:
+```{r}
+privateOdorant("Or22a")
+```
+
+Maybe we better return the odorant names instead of InChiKeys:
+```{r}
+privateOdorant("Or22a", tag = "Name")
+```
+So according to the function sec-amyl acetate would be a good candidate. It activates Or22a at 0.4 (DoOR response, max is 1) while the maximum activation in all other tested responding units (receptors, neurons, glomeruli) is 0.016, a difference of 0.40. Sounds good but it was tested only in 4 other responding units, so I would rather go for ethyl hexanoate with ~ the same difference but being tested in 29 other responding units.
+
+We can also restrict the search to the sensillum the responding units of interest is related to:
+```{r}
+privateOdorant("Or22a", tag = "Name", sensillum = T)
+```
+Ethyl 2-methylbutanoate sounds like a good hit, it has the same difference to the other units as ethyl hexanoate but hardly elicits a response at all from the other neuron. The n of 1 is fine as there are only 2 neurons housed in the ab3 sensillum.
+
+
+
+## mapReceptor
+
+## backProject
+
+## DoOREst
+
+## sparse
+
