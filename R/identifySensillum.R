@@ -95,7 +95,7 @@ identifySensillum <- function(recording,
     cor.tmp <- droplevels(subset(result, sensillum != ""))
     for(i in levels(cor.tmp$sensillum)) {
       tmp <- subset(cor.tmp, sensillum == i)
-      if(all(apply(tmp[,-c(1:3)], 2 , function(x) any(na.omit(x) > min.cor)))) {
+      if(all(apply(as.data.frame(tmp[,-c(1:3)]), 2 , function(x) any(na.omit(x) > min.cor)))) {
         message(paste("found correlations above ", min.cor, " for all ",length(units), " units in: ", i, sep=""))
       }
     }
