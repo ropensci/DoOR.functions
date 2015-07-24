@@ -5,13 +5,13 @@
 #' A wrapper programe for using Pearson Correlation or k-nearest neighbors to
 #' estimate the missing entries in a response matrix.
 #' 
-#' @param data a data frame or matrix; contaning the consensus response values
-#' @param nodor a numeric value; specifying the number of the selected odors
-#' @param method character string; specifying the method ("PC" (Pearson's
+#' @param data a data frame or matrix, contaning the consensus response values
+#' @param nodor a numeric value, specifying the number of the selected odors
+#' @param method character string, specifying the method ("PC" (Pearson's
 #' coefficient) and "Knn" (k nearest neighbors)) for estimation, the default is
 #' "PC".
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @references Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
+#' @references Kim, H., Golub, G. H. & Park, H., Missing value estimation for
 #' DNA microarray gene expression data: local least squares imputation., 2005,
 #' Bioinformatics, 21, 187-198
 #' @export

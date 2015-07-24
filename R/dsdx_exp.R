@@ -5,7 +5,7 @@
 # expression : sqrt(1 + (b * (exp(input * c) * c))^2)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "a", "b", "c"
+# @param parms numeric vector, parameters with given names: "a", "b", "c"
 # @keywords math
 # @examples
 # 
@@ -22,7 +22,7 @@ function(input, parms)
 ## Leibniz's notation for computing the curvic length on exponential model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "a", "b", "c"
+# parms : numeric vector, parameters with given names: "a", "b", "c"
 
 ## expression : sqrt(1 + (b * (exp(input * c) * c))^2)
 

@@ -8,13 +8,13 @@
 #' "selected.y" that specify which data plots against another, and "best.model"
 #' that is used in function \code{\link{projectPoints}}.
 #'
-#' @param candidate a character vector; contains the names of studies.
-#' @param data_candidate a data frame; odorant response data that only contains
+#' @param candidate a character vector, contains the names of studies.
+#' @param data_candidate a data frame, odorant response data that only contains
 #' value columns.
-#' @param merged_data numeric vector; merged data
-#' @param overlapValues numeric; a criterion using to refuse a data set that
+#' @param merged_data numeric vector, merged data
+#' @param overlapValues numeric, a criterion using to refuse a data set that
 #' has not enough overlap value.
-#' @param merged logical; if merged is \code{TRUE}, calculate models between
+#' @param merged logical, if merged is \code{TRUE}, calculate models between
 #' merged_data and candidate data. If \code{FALSE}, calculate models between
 #' candidates.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>

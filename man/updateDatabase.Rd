@@ -14,22 +14,22 @@ updateDatabase(receptor, permutation = TRUE, perm,
   excluded.data = default.val("excluded.data"), plot = FALSE)
 }
 \arguments{
-\item{receptor}{character string; name of given odorant receptor.}
+\item{receptor}{character string, name of given odorant receptor.}
 
-\item{permutation}{logical; if TRUE, the sequence is chosen from permutation,
+\item{permutation}{logical, if TRUE, the sequence is chosen from permutation,
 if FALSE, sequence is chosen by the routine process.}
 
 \item{perm}{a matrix with one sequence of study names per row, if empty, all
 possible permutations of study names will be provided.}
 
-\item{response_matrix_nn}{data frame; response data that has not been
+\item{response_matrix_nn}{data frame, response data that has not been
 globally normalized.}
 
-\item{response_matrix}{data frame; globally normalized response data.}
+\item{response_matrix}{data frame, globally normalized response data.}
 
-\item{responseRange}{data frame; response range of studies.}
+\item{responseRange}{data frame, response range of studies.}
 
-\item{weightGlobNorm}{data frame; weight matrix for global normalization.}
+\item{weightGlobNorm}{data frame, weight matrix for global normalization.}
 
 \item{select.MDValue}{the minimum mean distance between studies to perfom a
 merge (used if permutation == FALSE or if permutation == TRUE AND strict ==

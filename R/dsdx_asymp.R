@@ -6,7 +6,7 @@
 # exp(lrc))))^2)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "lrc",
+# @param parms numeric vector, parameters with given names: "Asym", "lrc",
 # "R0"
 # @seealso \code{\link{SSasymp}}
 # @references Jose Pinheiro and Douglas Bates
@@ -26,7 +26,7 @@ function(input, parms)
 ## Leibniz's notation for computing the curvic length on Asymptotic Model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "lrc", "R0"
+# parms : numeric vector, parameters with given names: "Asym", "lrc", "R0"
 
 ## expression : sqrt(1+(-((R0 - Asym) * (exp(-exp(lrc) * input) * exp(lrc))))^2)
 

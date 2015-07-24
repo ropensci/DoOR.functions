@@ -2,17 +2,17 @@
 #' 
 #' plot the activation patterns of one or several odorants across OSNs
 #' 
-#' @param odorants character vector; one or several InChIKeys
-#' @param response_matrix DOOR response matrix; contains the data to plot
-#' @param odor_data data frame; contains the odorant information.
-#' @param zero character; InChIKey of the odorant that should be set to 0 (e.g.
+#' @param odorants character vector, one or several InChIKeys
+#' @param response_matrix DOOR response matrix, contains the data to plot
+#' @param odor_data data frame, contains the odorant information.
+#' @param zero character, InChIKey of the odorant that should be set to 0 (e.g.
 #'   SFR)
-#' @param tag character; the chemical identifier to use in the plot, one of
+#' @param tag character, the chemical identifier to use in the plot, one of
 #'   \code{colnames(odor)}
-#' @param plot.type interger; 1 or 2, defining the type of plot (1: facet_grid
-#'   of odorants * sensillae; 2: facet_wrap across OSNs)
-#' @param base_size numeric; the base font size for the ggplot2 plot
-#' @param sub character vector; specify one or several classes of sensilla the 
+#' @param plot.type interger, 1 or 2, defining the type of plot (1: facet_grid
+#'   of odorants * sensillae, 2: facet_wrap across OSNs)
+#' @param base_size numeric, the base font size for the ggplot2 plot
+#' @param sub character vector, specify one or several classes of sensilla the 
 #'   plot should be restricted to. One or several of: "ab" "ac", "at", "ai",
 #'   "pb", "sacI", "sacII"
 #' @param DoOR_mappings data frame, containing the mappings of response profiles

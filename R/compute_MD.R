@@ -8,7 +8,7 @@
 # distance value $MD and a data frame $data showing the coordinates of
 # observations, projected points and the distances between them.
 # 
-# @param x,y data vectors; in which to evaluate the parameters in given
+# @param x,y data vectors, in which to evaluate the parameters in given
 # formula.
 # @param range.X numeric vector, defining the range of x, where the model
 # function will be applied.
@@ -44,7 +44,7 @@ function(x, y, range.X, parms, fun)
 
 ## compute the mean distance between observations and their cloest points on fitted curve.
 
-# x and y 	: data vectors; in which to evaluate the parameters in given formula.
+# x and y 	: data vectors, in which to evaluate the parameters in given formula.
 # range.X 	: numeric vector, defining the range of x, where the model function will be applied.
 # parms   	: parameters of model function.
 # fun 		: model function

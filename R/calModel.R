@@ -11,7 +11,7 @@
 #'
 #'
 #'@param x,y data vectors from study x and y (can contain NA)
-#'@param select.MD logical; if TRUE, only the best model function (in terms of 
+#'@param select.MD logical, if TRUE, only the best model function (in terms of 
 #'  MD) will be returned.
 #'@author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #'@export

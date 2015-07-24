@@ -4,8 +4,8 @@
 #' 
 #' Performs a simple subtraction of the SFR value.
 #' 
-#' @param x numeric or DoOR response matrix; input values
-#' @param sfr numeric or character; either a value to subtract if x is a vector or an InChIKey if x is a DoOR response matrix
+#' @param x numeric or DoOR response matrix, input values
+#' @param sfr numeric or character, either a value to subtract if x is a vector or an InChIKey if x is a DoOR response matrix
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
 #' @examples

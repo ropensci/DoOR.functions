@@ -3,25 +3,25 @@
 #' correlates the result from a SSR recording of several odorants against all 
 #' DoOR response profiles
 #' 
-#' @param recording data frame; a data frame with the following columns 
+#' @param recording data frame, a data frame with the following columns 
 #'   "odorants" containing InChIKeys of the tested odorrant, and one column 
 #'   called "unit1" etc. for each unit, containing responses (or estimates) 
 #'   scaled between 0 and 1 (see examples)
-#' @param response_matrix DoOR response matrix; the data to compair against
-#' @param odor_data data frame; contains the odorant information.
+#' @param response_matrix DoOR response matrix, the data to compair against
+#' @param odor_data data frame, contains the odorant information.
 #' @param DoOR_mappings the data frame containing the mapping information
-#' @param tag character; the chemical identifier to use in plots, one of 
+#' @param tag character, the chemical identifier to use in plots, one of 
 #'   \code{colnames(odor)}
-#' @param min.cor numeric; a minimum correlation value, the function will check 
+#' @param min.cor numeric, a minimum correlation value, the function will check 
 #'   wether there is a higher correlation for all units within a single 
 #'   sensillum
-#' @param nshow numeric; the number of plots to nshow, plot e.g. only the top 10
+#' @param nshow numeric, the number of plots to nshow, plot e.g. only the top 10
 #'   matches
-#' @param plot logical; if TRUE returns the plot, else returns the data frame with the
+#' @param plot logical, if TRUE returns the plot, else returns the data frame with the
 #'   correlations/distances
-#' @param method character; the method for similarity calculations: correlation 
+#' @param method character, the method for similarity calculations: correlation 
 #'   ("cor") or Euclidean distances ("dist")
-#' @param sub character; if you know the class of sensillum you were recording 
+#' @param sub character, if you know the class of sensillum you were recording 
 #'   from you can restrict the search to this subset here ("ab", "ac", "at", 
 #'   "pb", "sac")
 #' @param base_size numeric, the base font size of the ggplot plots 

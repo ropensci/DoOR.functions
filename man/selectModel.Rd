@@ -9,17 +9,17 @@ selectModel(candidate, data_candidate, merged_data,
   merged = default.val("merged"))
 }
 \arguments{
-\item{candidate}{a character vector; contains the names of studies.}
+\item{candidate}{a character vector, contains the names of studies.}
 
-\item{data_candidate}{a data frame; odorant response data that only contains
+\item{data_candidate}{a data frame, odorant response data that only contains
 value columns.}
 
-\item{merged_data}{numeric vector; merged data}
+\item{merged_data}{numeric vector, merged data}
 
-\item{overlapValues}{numeric; a criterion using to refuse a data set that
+\item{overlapValues}{numeric, a criterion using to refuse a data set that
 has not enough overlap value.}
 
-\item{merged}{logical; if merged is \code{TRUE}, calculate models between
+\item{merged}{logical, if merged is \code{TRUE}, calculate models between
 merged_data and candidate data. If \code{FALSE}, calculate models between
 candidates.}
 }

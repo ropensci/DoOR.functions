@@ -11,29 +11,29 @@ DoORplot_acrossOSNs(odorants,
   tag = "Name", sub, plot.type = 1, base_size = 12)
 }
 \arguments{
-\item{odorants}{character vector; one or several InChIKeys}
+\item{odorants}{character vector, one or several InChIKeys}
 
-\item{response_matrix}{DOOR response matrix; contains the data to plot}
+\item{response_matrix}{DOOR response matrix, contains the data to plot}
 
-\item{odor_data}{data frame; contains the odorant information.}
+\item{odor_data}{data frame, contains the odorant information.}
 
 \item{DoOR_mappings}{data frame, containing the mappings of response profiles
   to morphological structures.}
 
-\item{zero}{character; InChIKey of the odorant that should be set to 0 (e.g.
+\item{zero}{character, InChIKey of the odorant that should be set to 0 (e.g.
 SFR)}
 
-\item{tag}{character; the chemical identifier to use in the plot, one of
+\item{tag}{character, the chemical identifier to use in the plot, one of
 \code{colnames(odor)}}
 
-\item{sub}{character vector; specify one or several classes of sensilla the
+\item{sub}{character vector, specify one or several classes of sensilla the
 plot should be restricted to. One or several of: "ab" "ac", "at", "ai",
 "pb", "sacI", "sacII"}
 
-\item{plot.type}{interger; 1 or 2, defining the type of plot (1: facet_grid
-of odorants * sensillae; 2: facet_wrap across OSNs)}
+\item{plot.type}{interger, 1 or 2, defining the type of plot (1: facet_grid
+of odorants * sensillae, 2: facet_wrap across OSNs)}
 
-\item{base_size}{numeric; the base font size for the ggplot2 plot}
+\item{base_size}{numeric, the base font size for the ggplot2 plot}
 }
 \value{
 a ggplot2 object

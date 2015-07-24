@@ -5,7 +5,7 @@
 # expression : xmid - scal * log((Asym / input) - 1)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "xmid",
+# @param parms numeric vector, parameters with given names: "Asym", "xmid",
 # "scal"
 # @seealso \code{\link{SSlogis}}
 # @references Jose Pinheiro and Douglas Bates
@@ -25,7 +25,7 @@ function(input, parms)
 ## inverse Logistic Model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "xmid", "scal"
+# parms : numeric vector, parameters with given names: "Asym", "xmid", "scal"
 
 ## expression : xmid - scal * log((Asym / input) - 1)
 ## reference and author(s) : Jose Pinheiro and Douglas Bates

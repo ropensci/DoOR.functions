@@ -11,37 +11,37 @@ identifySensillum(recording, response_matrix = default.val("response.matrix"),
   plot = TRUE)
 }
 \arguments{
-\item{recording}{data frame; a data frame with the following columns
+\item{recording}{data frame, a data frame with the following columns
 "odorants" containing InChIKeys of the tested odorrant, and one column
 called "unit1" etc. for each unit, containing responses (or estimates)
 scaled between 0 and 1 (see examples)}
 
-\item{response_matrix}{DoOR response matrix; the data to compair against}
+\item{response_matrix}{DoOR response matrix, the data to compair against}
 
-\item{odor_data}{data frame; contains the odorant information.}
+\item{odor_data}{data frame, contains the odorant information.}
 
 \item{DoOR_mappings}{the data frame containing the mapping information}
 
-\item{tag}{character; the chemical identifier to use in plots, one of
+\item{tag}{character, the chemical identifier to use in plots, one of
 \code{colnames(odor)}}
 
-\item{min.cor}{numeric; a minimum correlation value, the function will check
+\item{min.cor}{numeric, a minimum correlation value, the function will check
 wether there is a higher correlation for all units within a single
 sensillum}
 
-\item{nshow}{numeric; the number of plots to nshow, plot e.g. only the top 10
+\item{nshow}{numeric, the number of plots to nshow, plot e.g. only the top 10
 matches}
 
-\item{method}{character; the method for similarity calculations: correlation
+\item{method}{character, the method for similarity calculations: correlation
 ("cor") or Euclidean distances ("dist")}
 
-\item{sub}{character; if you know the class of sensillum you were recording
+\item{sub}{character, if you know the class of sensillum you were recording
 from you can restrict the search to this subset here ("ab", "ac", "at",
 "pb", "sac")}
 
 \item{base_size}{numeric, the base font size of the ggplot plots}
 
-\item{plot}{logical; if TRUE returns the plot, else returns the data frame with the
+\item{plot}{logical, if TRUE returns the plot, else returns the data frame with the
 correlations/distances}
 }
 \value{

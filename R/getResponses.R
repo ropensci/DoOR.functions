@@ -7,7 +7,7 @@
 #' receptors from all available studies.
 #' 
 #' @param odorant a single odor provided as InChIKey
-#' @param responseRange data frame; response ranges of studies
+#' @param responseRange data frame, response ranges of studies
 #' @param Or.list a list contains reponse data of all available receptors. It
 #' can be loaded using \code{\link{load2list}}.
 #' @export

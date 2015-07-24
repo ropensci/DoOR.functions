@@ -8,22 +8,22 @@ projectPoints(x, y, xylim, best.model, plot = default.val("plot"),
   points_cex = default.val("points.cex"), title = default.val("title"), ...)
 }
 \arguments{
-\item{x,y}{numeric vectors of data values; coordinate vectors of points to
+\item{x,y}{numeric vectors of data values, coordinate vectors of points to
 plot, the coordinates can contain \code{NA} values.}
 
-\item{xylim}{numeric vectors; x, y limits of the plot.}
+\item{xylim}{numeric vectors, x, y limits of the plot.}
 
-\item{best.model}{a list; containing the parameters, function, inverse
+\item{best.model}{a list, containing the parameters, function, inverse
 function, Leibniz's notation for distance calculation and MD value. if
 missing, the best model will be generated automatically.}
 
-\item{plot}{logical; If \code{FALSE}, plotting is suppressed. Default is
+\item{plot}{logical, If \code{FALSE}, plotting is suppressed. Default is
 \code{FALSE}.}
 
-\item{points_cex}{a numerical value; giving the magnification level of
+\item{points_cex}{a numerical value, giving the magnification level of
 symbols relative to the default size.}
 
-\item{title}{logical; If \code{TRUE}, title is shown. Default is
+\item{title}{logical, If \code{TRUE}, title is shown. Default is
 \code{FALSE}.}
 
 \item{\dots}{further graphical parameters}
@@ -43,10 +43,10 @@ A list with two data frames "double.observations" and "single.observations" is
 returned, which give the coordinates of double observations (defined as
 (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)).
 Both data frames contain seven columns: "ID" indicating the original position
-of data x and y; "x", "y" indicating the coordinate of observation; "X", "Y"
-indicating the coordinate of projected point on the function;
+of data x and y, "x", "y" indicating the coordinate of observation, "X", "Y"
+indicating the coordinate of projected point on the function,
 "distance" indicating the distances between \code{(xmin, f(xmin))} and all
-points on the functional line; "NDR" indicating the normalized distances
+points on the functional line, "NDR" indicating the normalized distances
 across all the distance values.
 }
 \examples{

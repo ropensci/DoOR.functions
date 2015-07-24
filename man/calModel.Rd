@@ -9,7 +9,7 @@ calModel(x, y, select.MD = default.val("select.MD"))
 \arguments{
 \item{x,y}{data vectors from study x and y (can contain NA)}
 
-\item{select.MD}{logical; if TRUE, only the best model function (in terms of
+\item{select.MD}{logical, if TRUE, only the best model function (in terms of
 MD) will be returned.}
 }
 \description{

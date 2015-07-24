@@ -12,14 +12,14 @@ DoORplot_compareProfiles(x, y, by.x, by.y, tag = "Name", base_size = 12)
 \item{y}{the input data frame the second response profile will be taken from
 (x will be taken if y is missing)}
 
-\item{by.x}{character string; specifying a column in x}
+\item{by.x}{character string, specifying a column in x}
 
-\item{by.y}{character string; specifying a column in y}
+\item{by.y}{character string, specifying a column in y}
 
-\item{tag}{character; the chemical identifier that will be used as odorant
+\item{tag}{character, the chemical identifier that will be used as odorant
   label.}
 
-\item{base_size}{numeric; the base font size for the ggplot2 plot}
+\item{base_size}{numeric, the base font size for the ggplot2 plot}
 }
 \description{
 Orderdered bar plots for two studies, allowing for an easy comparison of the

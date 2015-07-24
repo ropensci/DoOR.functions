@@ -11,17 +11,17 @@
 # sum(weight_odors[i]) ). The global normalized output is equal to that merged
 # consensus vector (in values [0, 1]) multiply by a weighted scale.
 # 
-# @param RMAX numeric vector; a vector across all studies of maximum responses
+# @param RMAX numeric vector, a vector across all studies of maximum responses
 # for this receptor.
-# @param SMAX numeric vector; a vector across all studies of maximum response
+# @param SMAX numeric vector, a vector across all studies of maximum response
 # in all receptors available in each study.
-# @param MV numeric vector; a vector of model response values to be normalized
+# @param MV numeric vector, a vector of model response values to be normalized
 # (for this receptor).
-# @param name.Stud character vector; names of involved studies.
-# @param weightGlobNorm data matrix; a receptor-by-study matrix; value 1
-# indicates available measurement in this study for this receptor; value NA
+# @param name.Stud character vector, names of involved studies.
+# @param weightGlobNorm data matrix, a receptor-by-study matrix, value 1
+# indicates available measurement in this study for this receptor, value NA
 # indicates NOT.
-# @param responseRange data frame; the response range and how many odors were
+# @param responseRange data frame, the response range and how many odors were
 # measured in each study.
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 # @examples

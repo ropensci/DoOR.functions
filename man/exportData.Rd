@@ -11,23 +11,23 @@ exportData(file.format, directory, odorantReceptors = default.val("ORs"),
   weightGlobNorm = default.val("weight.globNorm"), all.data = TRUE)
 }
 \arguments{
-\item{file.format}{character string; the format of given file, either ".txt"
+\item{file.format}{character string, the format of given file, either ".txt"
 or ".csv"}
 
-\item{directory}{character string; naming a directory for writing. If
+\item{directory}{character string, naming a directory for writing. If
 missing, the exported data are saved in current working directory.}
 
-\item{odorantReceptors}{data frame; receptor names and expressions}
+\item{odorantReceptors}{data frame, receptor names and expressions}
 
-\item{response_matrix}{data matrix; an global unnormalized responses matrix}
+\item{response_matrix}{data matrix, an global unnormalized responses matrix}
 
-\item{responseRange}{data frame; response ranges for each study}
+\item{responseRange}{data frame, response ranges for each study}
 
-\item{unglobalNorm_RM}{data matrix; an unnormalized responses matrix}
+\item{unglobalNorm_RM}{data matrix, an unnormalized responses matrix}
 
-\item{weightGlobNorm}{data frame; weight matrix for global normalizazion}
+\item{weightGlobNorm}{data frame, weight matrix for global normalizazion}
 
-\item{all.data}{logical; if TRUE, export odorant response data and supported
+\item{all.data}{logical, if TRUE, export odorant response data and supported
 data "response.matrix", "response.range", "response.matrix_non.normalized",
 "response.matrix", "weight.globNorm" and "ORs".}
 }

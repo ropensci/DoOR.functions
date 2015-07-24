@@ -10,7 +10,7 @@ getResponses(odorant, responseRange = default.val("response.range"),
 \arguments{
 \item{odorant}{a single odor provided as InChIKey}
 
-\item{responseRange}{data frame; response ranges of studies}
+\item{responseRange}{data frame, response ranges of studies}
 
 \item{Or.list}{a list contains reponse data of all available receptors. It
 can be loaded using \code{\link{load2list}}.}

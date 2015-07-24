@@ -3,17 +3,17 @@
 #' create a barplot of a DoOR response profile
 #' 
 #' @param response_matrix a DoOR response.matrix
-#' @param odor_data data frame; contains the odorant information.
-#' @param receptor character; receptor name, any of colnames(response.matrix)
-#' @param tag character; chemical identifier for annotation
-#' @param colored logical; color code the bars according to the response value?
-#' @param colors character vector; a vector of 5 colors (2 for values < 0, 1
+#' @param odor_data data frame, contains the odorant information.
+#' @param receptor character, receptor name, any of colnames(response.matrix)
+#' @param tag character, chemical identifier for annotation
+#' @param colored logical, color code the bars according to the response value?
+#' @param colors character vector, a vector of 5 colors (2 for values < 0, 1
 #'   value for 0 and 3 values > 0)
-#' @param limits numeric of length 2; the limits for the colorscale and the x
+#' @param limits numeric of length 2, the limits for the colorscale and the x
 #'   axis, global range of data will be used if empty
-#' @param scalebar logical; add or suppress scalebars
-#' @param base_size numeric; the base font size for the ggplot2 plot
-#' @param zero character; the odorant response that is set to 0, defaults to
+#' @param scalebar logical, add or suppress scalebars
+#' @param base_size numeric, the base font size for the ggplot2 plot
+#' @param zero character, the odorant response that is set to 0, defaults to
 #'   "SFR"
 #'   
 #' @return ggplot2 plot

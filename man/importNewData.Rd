@@ -11,19 +11,19 @@ importNewData(file.name, dataFormat = default.val("data.format"),
   receptors = default.val("ORs"), ident = default.val("ident"), round = 3)
 }
 \arguments{
-\item{file.name}{character string; the name of given file that contains
+\item{file.name}{character string, the name of given file that contains
 response values of one or more odorant receptors, either a .csv or .txt
 file.}
 
-\item{dataFormat}{data frame; a data frame does not contain any response
+\item{dataFormat}{data frame, a data frame does not contain any response
 value but odorant information.}
 
-\item{odor_data}{data frame; contains the odorant information.}
+\item{odor_data}{data frame, contains the odorant information.}
 
-\item{weightGlobNorm}{data matrix; indicates whether given receptor has been
+\item{weightGlobNorm}{data matrix, indicates whether given receptor has been
 measured by given study.}
 
-\item{responseRange}{data frame; contains the information about response
+\item{responseRange}{data frame, contains the information about response
 range of each study and how many odors have been measured in each study.}
 
 \item{receptors}{data frame, contains the receptor and OSN names and their

@@ -17,7 +17,7 @@
 # for middle function, Leibniz's notation for computing curvic length and mean
 # distance value "MD" of all optional model function.
 # 
-# @param x,y data vectors; in which to evaluate the parameters in given
+# @param x,y data vectors, in which to evaluate the parameters in given
 # formula.
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 # @keywords math
@@ -37,7 +37,7 @@ function(x, y)
 
 ## estimate the parameters for all optional model function with lm() for linear model and nls() for nonlinear function.
 
-# x and y: data vectors; in which to evaluate the parameters in given formula.
+# x and y: data vectors, in which to evaluate the parameters in given formula.
 
 ## output is a list containing estimated parameter, function and inverse function expression, applied range for middle function, Leibniz's notation for computing curvic length and mean distance value "MD" of each model function.
 

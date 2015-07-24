@@ -5,16 +5,16 @@
 #' Please load ORs from data package DoOR.data by typing (\code{data(ORs)})
 #' before use.
 #' 
-#' @param file.format character string; the format of given file, either ".txt"
+#' @param file.format character string, the format of given file, either ".txt"
 #' or ".csv"
-#' @param directory character string; naming a directory for writing. If
+#' @param directory character string, naming a directory for writing. If
 #' missing, the exported data are saved in current working directory.
-#' @param odorantReceptors data frame; receptor names and expressions
-#' @param response_matrix data matrix; an global unnormalized responses matrix
-#' @param responseRange data frame; response ranges for each study
-#' @param unglobalNorm_RM data matrix; an unnormalized responses matrix
-#' @param weightGlobNorm data frame; weight matrix for global normalizazion
-#' @param all.data logical; if TRUE, export odorant response data and supported
+#' @param odorantReceptors data frame, receptor names and expressions
+#' @param response_matrix data matrix, an global unnormalized responses matrix
+#' @param responseRange data frame, response ranges for each study
+#' @param unglobalNorm_RM data matrix, an unnormalized responses matrix
+#' @param weightGlobNorm data frame, weight matrix for global normalizazion
+#' @param all.data logical, if TRUE, export odorant response data and supported
 #' data "response.matrix", "response.range", "response.matrix_non.normalized",
 #' "response.matrix", "weight.globNorm" and "ORs".
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
@@ -50,14 +50,14 @@ function(file.format, directory,
 # input parameters :
 #####################
 
-# file.format 			: character; either ".txt" or ".csv"
-# directory 			: character string; directory for writing. If missing, the current working directory will be chosen.
-# odorantReceptors 		: data frame; receptor names 
-# response_matrix 		: data matrix; an global normalized response matrix 
-# responseRange 		: data frame; response ranges for each study 
-# unglobalNorm_RM 	        : data matrix; an unnormalized response matrix 
-# weightGlobNorm 		: data frame; weight matrix for global normalisation 
-# all.data  			: logical; if TRUE, export odorant response data plus all other information: "response.matrix", "response.range", "response.matrix_non.normalized", 
+# file.format 			: character, either ".txt" or ".csv"
+# directory 			: character string, directory for writing. If missing, the current working directory will be chosen.
+# odorantReceptors 		: data frame, receptor names 
+# response_matrix 		: data matrix, an global normalized response matrix 
+# responseRange 		: data frame, response ranges for each study 
+# unglobalNorm_RM 	        : data matrix, an unnormalized response matrix 
+# weightGlobNorm 		: data frame, weight matrix for global normalisation 
+# all.data  			: logical, if TRUE, export odorant response data plus all other information: "response.matrix", "response.range", "response.matrix_non.normalized", 
 #                                 "response.matrix", "weight.globNorm" and "ORs".
 
 

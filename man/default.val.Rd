@@ -7,7 +7,7 @@
 default.val(DoOR_default)
 }
 \arguments{
-\item{DoOR_default}{a character string; indicating which argument is to be
+\item{DoOR_default}{a character string, indicating which argument is to be
 returned for DoOR functions.}
 }
 \description{

@@ -12,17 +12,17 @@
 # correlation coefficients. \code{nodor} indicates the number of selected
 # odors.
 # 
-# @param InChIKey a character string; the InChIKey number of odorant compound.
-# @param receptor a character string; the name of odorant receptor.
-# @param response_matrix a numeric matrix; containing the normalized odorant
+# @param InChIKey a character string, the InChIKey number of odorant compound.
+# @param receptor a character string, the name of odorant receptor.
+# @param response_matrix a numeric matrix, containing the normalized odorant
 # responses.
-# @param nodor a numeric value; specifying the number of the selected odors.
+# @param nodor a numeric value, specifying the number of the selected odors.
 # @return A list with components \code{estimation}, \code{selected.receptors}
 # and \code{selected.odors} which give the value of estimation, the selected
 # receptors and odors with absolute values of Pearson correlation coefficients
 # for linear combinations, respectively.
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-# @references Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
+# @references Kim, H., Golub, G. H. & Park, H., Missing value estimation for
 # DNA microarray gene expression data: local least squares imputation., 2005,
 # Bioinformatics, 21, 187-198
 # @keywords math
@@ -45,10 +45,10 @@ LLSIestPC <-
 
 ## Using local least squares imputation to estimate the missing values in target odorant receptors.
 
-#  InChIKey 		   	: a character string; the InChIKey number of odorant compound.
-#  receptor 	   	: a character string; the name of odorant receptor.
-#  response_matrix 	: a numeric matrix; containing the normalized odorant responses.
-#  nodor 		: a numeric; specifying how many odors will be selected. If missing, all candicate odors will be selected after sorting.
+#  InChIKey 		   	: a character string, the InChIKey number of odorant compound.
+#  receptor 	   	: a character string, the name of odorant receptor.
+#  response_matrix 	: a numeric matrix, containing the normalized odorant responses.
+#  nodor 		: a numeric, specifying how many odors will be selected. If missing, all candicate odors will be selected after sorting.
 
 
 ## output: 	

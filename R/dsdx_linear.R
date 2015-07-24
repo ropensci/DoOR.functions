@@ -5,7 +5,7 @@
 # expression : sqrt(1+(Slope)^2)*input^0
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Intercept",
+# @param parms numeric vector, parameters with given names: "Intercept",
 # "Slope"
 # @keywords math
 # @examples
@@ -23,7 +23,7 @@ function(input, parms)
 ## Leibniz's notation for computing the curvic length on linear model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Intercept", "Slope"
+# parms : numeric vector, parameters with given names: "Intercept", "Slope"
 
 ## expression : sqrt(1+(Slope)^2)*input^0
 

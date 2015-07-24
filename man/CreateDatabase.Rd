@@ -9,13 +9,13 @@ CreateDatabase(tag = default.val("tag"),
   overlapValues = default.val("overlapValues"), ...)
 }
 \arguments{
-\item{tag}{character string; format for rownames; possibilities: "InChIKey",
+\item{tag}{character string, format for rownames, possibilities: "InChIKey",
 CAS", "CID", "Name"}
 
-\item{select.MDValue}{a numeric; threshold on the MD, this is used to reject
+\item{select.MDValue}{a numeric, threshold on the MD, this is used to reject
 studies that do not align sufficiently well to the response model}
 
-\item{overlapValues}{numeric; a criterion using to refuse a data set that
+\item{overlapValues}{numeric, a criterion using to refuse a data set that
 has not enough overlap value.}
 
 \item{...}{pass more parameters to \code{\link{modelRP}}}

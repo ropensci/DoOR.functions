@@ -5,7 +5,7 @@
 # expression : Asym+(R0-Asym)*exp(-exp(lrc)*input)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "R0",
+# @param parms numeric vector, parameters with given names: "Asym", "R0",
 # "lrc"
 # @seealso \code{\link{SSasymp}}
 # @references Jose Pinheiro and Douglas Bates
@@ -25,7 +25,7 @@ function(input, parms)
 # Neurobiology, University of Konstanz, Germany
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "R0", "lrc"
+# parms : numeric vector, parameters with given names: "Asym", "R0", "lrc"
 
 ## expression : Asym+(R0-Asym)*exp(-exp(lrc)*input)
 ## reference and author(s) : Jose Pinheiro and Douglas Bates

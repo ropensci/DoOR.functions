@@ -10,19 +10,19 @@ privateOdorant(receptor, sensillum = FALSE,
   nshow = 5, tag)
 }
 \arguments{
-\item{receptor}{character; name of a DoOR responding unit (one of \code{ORs$Or})}
+\item{receptor}{character, name of a DoOR responding unit (one of \code{ORs$Or})}
 
-\item{sensillum}{logical; restrict the search to the sensillum the receptor is expressed in?}
+\item{sensillum}{logical, restrict the search to the sensillum the receptor is expressed in?}
 
-\item{response_matrix}{DoOR response matrix; the input data to perform the search on}
+\item{response_matrix}{DoOR response matrix, the input data to perform the search on}
 
 \item{DoOR_mappings}{the data frame containing the mapping information}
 
-\item{zero}{character; an odorant that should be set to 0}
+\item{zero}{character, an odorant that should be set to 0}
 
-\item{nshow}{numeric; the number of private odorants to return}
+\item{nshow}{numeric, the number of private odorants to return}
 
-\item{tag}{character; the chemical identifier to give the odorant names in (on of \code{colnames(odor)})}
+\item{tag}{character, the chemical identifier to give the odorant names in (on of \code{colnames(odor)})}
 }
 \value{
 a data.frame containing odorants and the response in the receptor of interest as well as the maximum response of the remaining receptors and their difference

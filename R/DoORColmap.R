@@ -4,11 +4,11 @@
 # [0, 1]
 # 
 # 
-# @param x numeric vector; consensus response data, which is in range of [0,
+# @param x numeric vector, consensus response data, which is in range of [0,
 # 1].
-# @param col.extrem character vector; The default is c("blue", "red"), i.e.
+# @param col.extrem character vector, The default is c("blue", "red"), i.e.
 # the color scale ranges from blue to red
-# @param color.scale logical; the default is FALSE, indicating that the result
+# @param color.scale logical, the default is FALSE, indicating that the result
 # returns a color code for given value. If TRUE, the result returns the whole
 # spectrum (255) color codes.
 # @return A character vector with elements of 7 or 9 characters, "#" followed
@@ -42,14 +42,14 @@ function(x, col.extrem = default.val("col.extrem"), color.scale = FALSE)
 # paramters:
 #############
 
-#  x 		: numeric vector; consensus response data, which is in range of [0, 1].
-#  col.extrem 	: character vector;  The default is c("blue", "red"), i.e. the color scale ranges from blue to red 
-#  color.scale 	: logical; the default is FALSE, indicating that the result returns a color code for given value. If TRUE, the result returns the whole spectrum (255) color codes.
+#  x 		: numeric vector, consensus response data, which is in range of [0, 1].
+#  col.extrem 	: character vector,  The default is c("blue", "red"), i.e. the color scale ranges from blue to red 
+#  color.scale 	: logical, the default is FALSE, indicating that the result returns a color code for given value. If TRUE, the result returns the whole spectrum (255) color codes.
 
 # output:
 #############
 
-# character vector; a color code vector for the given consensus response data.
+# character vector, a color code vector for the given consensus response data.
 
 {
 	# define color ramps for the lower part (default : from "blue" to "white")

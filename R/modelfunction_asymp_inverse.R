@@ -5,7 +5,7 @@
 # expression : -log((input-Asym)/(R0-Asym))/exp(lrc)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "R0",
+# @param parms numeric vector, parameters with given names: "Asym", "R0",
 # "lrc"
 # @references Jose Pinheiro and Douglas Bates
 # @keywords math
@@ -24,7 +24,7 @@ function(input, parms)
 ## inverse Asymptotic Model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "R0", "lrc"
+# parms : numeric vector, parameters with given names: "Asym", "R0", "lrc"
 
 ## expression : -log((input-Asym)/(R0-Asym))/exp(lrc)
 ## reference and author(s) : Jose Pinheiro and Douglas Bates

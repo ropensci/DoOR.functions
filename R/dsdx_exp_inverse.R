@@ -7,7 +7,7 @@
 # expression : sqrt(1 + (1/b/((input - a)/b)/c)^2)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "a", "b", "c"
+# @param parms numeric vector, parameters with given names: "a", "b", "c"
 # @seealso \code{\link{SSexpo}}
 # @references Jose Pinheiro and Douglas Bates
 # @keywords math
@@ -26,7 +26,7 @@ function(input, parms)
 ## Leibniz's notation for computing the curvic length on inverse exponential model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "a", "b", "c"
+# parms : numeric vector, parameters with given names: "a", "b", "c"
 
 ## expression : sqrt(1 + (1/b/((input - a)/b)/c)^2)
 

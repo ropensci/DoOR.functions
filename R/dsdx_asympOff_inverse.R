@@ -7,7 +7,7 @@
 # expression : sqrt(1+(1/Asym/(1 - input/Asym)/(exp(lrc)))^2)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "lrc",
+# @param parms numeric vector, parameters with given names: "Asym", "lrc",
 # "c0"
 # @seealso \code{\link{SSasympOff}}
 # @references Jose Pinheiro and Douglas Bates
@@ -27,7 +27,7 @@ function(input, parms)
 ## Leibniz's notation for computing the curvic length on inverse Asymptotic Model with an Offset
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "lrc", "c0"
+# parms : numeric vector, parameters with given names: "Asym", "lrc", "c0"
 
 ## expression : sqrt(1+(1/Asym/(1 - input/Asym)/(exp(lrc)))^2)
 

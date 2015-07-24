@@ -2,9 +2,9 @@
 #'
 #' Translate chemical identifiers from one to the other.
 #'
-#' @param x character vector; one or many chemical identifiers
-#' @param from character; the type of identifier to translate from (one of the column names of ``odor``)
-#' @param to character; the type of identifier to translate from (one of the column names of ``odor``)
+#' @param x character vector, one or many chemical identifiers
+#' @param from character, the type of identifier to translate from (one of the column names of ``odor``)
+#' @param to character, the type of identifier to translate from (one of the column names of ``odor``)
 #' @param odor_data the data frame containing the odor information (defaults to ``odor``).
 #'
 #' @return character vector of translated chemical identifiers

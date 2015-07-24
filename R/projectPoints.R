@@ -13,23 +13,23 @@
 #' returned, which give the coordinates of double observations (defined as 
 #' (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)). 
 #' Both data frames contain seven columns: "ID" indicating the original position
-#' of data x and y; "x", "y" indicating the coordinate of observation; "X", "Y" 
-#' indicating the coordinate of projected point on the function; 
+#' of data x and y, "x", "y" indicating the coordinate of observation, "X", "Y" 
+#' indicating the coordinate of projected point on the function, 
 #' "distance" indicating the distances between \code{(xmin, f(xmin))} and all 
-#' points on the functional line; "NDR" indicating the normalized distances 
+#' points on the functional line, "NDR" indicating the normalized distances 
 #' across all the distance values.
 #' 
-#' @param x,y numeric vectors of data values; coordinate vectors of points to 
+#' @param x,y numeric vectors of data values, coordinate vectors of points to 
 #'   plot, the coordinates can contain \code{NA} values.
-#' @param xylim numeric vectors; x, y limits of the plot.
-#' @param best.model a list; containing the parameters, function, inverse 
+#' @param xylim numeric vectors, x, y limits of the plot.
+#' @param best.model a list, containing the parameters, function, inverse 
 #'   function, Leibniz's notation for distance calculation and MD value. if 
 #'   missing, the best model will be generated automatically.
-#' @param plot logical; If \code{FALSE}, plotting is suppressed. Default is 
+#' @param plot logical, If \code{FALSE}, plotting is suppressed. Default is 
 #'   \code{FALSE}.
-#' @param points_cex a numerical value; giving the magnification level of 
+#' @param points_cex a numerical value, giving the magnification level of 
 #'   symbols relative to the default size.
-#' @param title logical; If \code{TRUE}, title is shown. Default is 
+#' @param title logical, If \code{TRUE}, title is shown. Default is 
 #'   \code{FALSE}.
 #' @param \dots further graphical parameters
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
@@ -90,13 +90,13 @@ projectPoints <- function(x, y, xylim, best.model,
   # construct the best fitting interval function, comprising the result of calModel() (stored in "best.model")  
   
   
-  # function.name : character; the name of chosen model
-  # parms   : numeric vector; the corresponding parameters
-  # ff     : expression; the chosen model (fitting) function
-  # range.X   : numeric vector; the range of x axis for the middle function
-  # ff_inverse   : expression; the corresponding inverse function
-  # dsdx     : expression; Leibniz's notation for distance calculation on the functional line 
-  # MD.value   : numeric; median distance
+  # function.name : character, the name of chosen model
+  # parms   : numeric vector, the corresponding parameters
+  # ff     : expression, the chosen model (fitting) function
+  # range.X   : numeric vector, the range of x axis for the middle function
+  # ff_inverse   : expression, the corresponding inverse function
+  # dsdx     : expression, Leibniz's notation for distance calculation on the functional line 
+  # MD.value   : numeric, median distance
   
   function.name <- names(best.model)
   parms         <- best.model[[1]]$parameters

@@ -11,18 +11,18 @@
 #' dataset is below the correlation threshold (select.MDValue). Datasets
 #' excluded based on this criterion will be appended in a separate list.  }
 #' 
-#' @param da data frame; a selected receptor containing measured responses from
+#' @param da data frame, a selected receptor containing measured responses from
 #' studies.
-#' @param select.MDValue numeric; threshold on the MD for rejecting a fit.
-#' @param overlapValues numeric; a criterion using to refuse a data set that
+#' @param select.MDValue numeric, threshold on the MD for rejecting a fit.
+#' @param overlapValues numeric, a criterion using to refuse a data set that
 #' has not enough overlap value.
-#' @param responseRange data frame; contains response ranges for all studies.
-#' @param weightGlobNorm data frame; a binary data matrix; 1 indicates given
+#' @param responseRange data frame, contains response ranges for all studies.
+#' @param weightGlobNorm data frame, a binary data matrix, 1 indicates given
 #' odor has been measured in given study, NA indicates NOT.
-#' @param glob.normalization logical; default is \code{TRUE}; performs a global
+#' @param glob.normalization logical, default is \code{TRUE}, performs a global
 #' normalization for the model response. Otherwise (\code{FALSE}) response
 #' values will be given in value from 0 to 1.
-#' @param plot logical; If \code{FALSE}, plotting is suppressed. Default is
+#' @param plot logical, If \code{FALSE}, plotting is suppressed. Default is
 #' \code{FALSE}.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data

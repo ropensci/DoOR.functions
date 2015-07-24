@@ -7,11 +7,11 @@
 DoOREst(data, nodor, method = "PC")
 }
 \arguments{
-\item{data}{a data frame or matrix; contaning the consensus response values}
+\item{data}{a data frame or matrix, contaning the consensus response values}
 
-\item{nodor}{a numeric value; specifying the number of the selected odors}
+\item{nodor}{a numeric value, specifying the number of the selected odors}
 
-\item{method}{character string; specifying the method ("PC" (Pearson's
+\item{method}{character string, specifying the method ("PC" (Pearson's
 coefficient) and "Knn" (k nearest neighbors)) for estimation, the default is
 "PC".}
 }
@@ -34,7 +34,7 @@ est.data <- DoOREst(data = subset, nodor = 6)
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
 \references{
-Kim, H.; Golub, G. H. & Park, H., Missing value estimation for
+Kim, H., Golub, G. H. & Park, H., Missing value estimation for
 DNA microarray gene expression data: local least squares imputation., 2005,
 Bioinformatics, 21, 187-198
 }

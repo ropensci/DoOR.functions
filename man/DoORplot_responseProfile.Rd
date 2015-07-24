@@ -12,28 +12,28 @@ DoORplot_responseProfile(receptor,
   base_size = 12)
 }
 \arguments{
-\item{receptor}{character; receptor name, any of colnames(response.matrix)}
+\item{receptor}{character, receptor name, any of colnames(response.matrix)}
 
 \item{response_matrix}{a DoOR response.matrix}
 
-\item{odor_data}{data frame; contains the odorant information.}
+\item{odor_data}{data frame, contains the odorant information.}
 
-\item{tag}{character; chemical identifier for annotation}
+\item{tag}{character, chemical identifier for annotation}
 
-\item{colored}{logical; color code the bars according to the response value?}
+\item{colored}{logical, color code the bars according to the response value?}
 
-\item{colors}{character vector; a vector of 5 colors (2 for values < 0, 1
+\item{colors}{character vector, a vector of 5 colors (2 for values < 0, 1
 value for 0 and 3 values > 0)}
 
-\item{limits}{numeric of length 2; the limits for the colorscale and the x
+\item{limits}{numeric of length 2, the limits for the colorscale and the x
 axis, global range of data will be used if empty}
 
-\item{zero}{character; the odorant response that is set to 0, defaults to
+\item{zero}{character, the odorant response that is set to 0, defaults to
   "SFR"}
 
-\item{scalebar}{logical; add or suppress scalebars}
+\item{scalebar}{logical, add or suppress scalebars}
 
-\item{base_size}{numeric; the base font size for the ggplot2 plot}
+\item{base_size}{numeric, the base font size for the ggplot2 plot}
 }
 \value{
 ggplot2 plot

@@ -5,7 +5,7 @@
 # expression : Intercept + Slope * input
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Intercept",
+# @param parms numeric vector, parameters with given names: "Intercept",
 # "Slope"
 # @keywords math
 # @examples
@@ -23,7 +23,7 @@ function(input, parms)
 # Neurobiology, University of Konstanz, Germany
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Intercept", "Slope"
+# parms : numeric vector, parameters with given names: "Intercept", "Slope"
 
 ## expression : Intercept + Slope * input
 

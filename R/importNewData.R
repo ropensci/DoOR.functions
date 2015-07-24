@@ -12,15 +12,15 @@
 #' \code{ORs} and \code{weight.globNorm}. If an existing study is imported,
 #' \code{\link{removeStudy}} will be run first in order to perform an update.
 #'
-#' @param file.name character string; the name of given file that contains
+#' @param file.name character string, the name of given file that contains
 #'   response values of one or more odorant receptors, either a .csv or .txt
 #'   file.
-#' @param dataFormat data frame; a data frame does not contain any response
+#' @param dataFormat data frame, a data frame does not contain any response
 #'   value but odorant information.
-#' @param odor_data data frame; contains the odorant information.
-#' @param weightGlobNorm data matrix; indicates whether given receptor has been
+#' @param odor_data data frame, contains the odorant information.
+#' @param weightGlobNorm data matrix, indicates whether given receptor has been
 #'   measured by given study.
-#' @param responseRange data frame; contains the information about response
+#' @param responseRange data frame, contains the information about response
 #'   range of each study and how many odors have been measured in each study.
 #' @param receptors data frame, contains the receptor and OSN names and their
 #'   expression.
@@ -180,7 +180,7 @@ importNewData <- function(file.name,
   }
 
   ##########
-  # if there is a new receptor or ORN update data frame "ORs"; NOTE: the AL projection pattern (DoOR.mappings) should be added manually
+  # if there is a new receptor or ORN update data frame "ORs", NOTE: the AL projection pattern (DoOR.mappings) should be added manually
   ##########
 
   match_receptor <- match(receptor_file, receptors[,"OR"])

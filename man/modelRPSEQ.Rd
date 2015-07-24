@@ -9,9 +9,9 @@ modelRPSEQ(data, SEQ, overlapValues = default.val("overlapValues"),
   plot = FALSE)
 }
 \arguments{
-\item{data}{data frame; odorant response data, e.g. Or22a.}
+\item{data}{data frame, odorant response data, e.g. Or22a.}
 
-\item{SEQ}{character vector; containing the names of studies indicating given
+\item{SEQ}{character vector, containing the names of studies indicating given
 sequence for merging data.}
 
 \item{overlapValues}{minimum overlap between studies to perfom a merge}
@@ -37,8 +37,8 @@ enumeration and choosing the optimal sequence)
 # input parameters: ####################
 
 
-# data  : data frame; odorant response data for a given receptor, e.g. Or22a
-# SEQ 	: character vector; contains the names of studies that measured this
+# data  : data frame, odorant response data for a given receptor, e.g. Or22a
+# SEQ 	: character vector, contains the names of studies that measured this
 receptor in a specific order (the merging sequence)
 
 # output is a numeric vector: response values

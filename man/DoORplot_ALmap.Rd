@@ -17,7 +17,7 @@ DoORplot_ALmap(InChIKey, response_matrix = default.val("response.matrix"),
 \item{response_matrix}{the input data (e.g. response.matrix or
 response.matrix_non.normalized)}
 
-\item{odor_data}{data frame; contains the odorant information.}
+\item{odor_data}{data frame, contains the odorant information.}
 
 \item{DoOR_mappings}{the data frame containing the mapping information}
 

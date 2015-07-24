@@ -2,13 +2,13 @@
 #'
 #' barplot of DoOR responses of a set of odorant across all responding units in DoOR
 #'
-#' @param odorant character vecto; one or several InChIKeys
-#' @param response_matrix DoOR response matrix; a DoOR response matrix as data source
-#' @param odor_data data frame; contains the odorant information.
-#' @param zero character; an InChIKey of the odorant that should be set to 0
-#' @param tag character; the chemical identifier to plot as odorant name (one of colnames(odor))
-#' @param limits numeric of length 2; if provided the ylim will range accordingly
-#' @param base_size numeric; the base font size for the ggplot2 plot
+#' @param odorant character vecto, one or several InChIKeys
+#' @param response_matrix DoOR response matrix, a DoOR response matrix as data source
+#' @param odor_data data frame, contains the odorant information.
+#' @param zero character, an InChIKey of the odorant that should be set to 0
+#' @param tag character, the chemical identifier to plot as odorant name (one of colnames(odor))
+#' @param limits numeric of length 2, if provided the ylim will range accordingly
+#' @param base_size numeric, the base font size for the ggplot2 plot
 #'
 #' @return a ggplot object
 #' @export

@@ -10,10 +10,10 @@
 # function.
 # 
 # @param x numeric vector of data values
-# @param range.X numeric vector; specifying the range of x-axis for applying
+# @param range.X numeric vector, specifying the range of x-axis for applying
 # middle function.
 # @param middleFun a function
-# @param parms numeric vector; parameters of middle function
+# @param parms numeric vector, parameters of middle function
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 # @keywords math
 #
@@ -29,9 +29,9 @@ function(x, range.X, middleFun, parms)
 ## intrval function
 
 #  x 		: numeric vector of data values
-#  range.X 	: numeric vector; specifying the range of x-axis for applying middle function.
+#  range.X 	: numeric vector, specifying the range of x-axis for applying middle function.
 #  middleFun 	: a function
-#  parms 	: numeric vector; parameters of middle function
+#  parms 	: numeric vector, parameters of middle function
 
 {
 	# if the values of input are small than the minimum of range.X, apply lowerFun, a linear function with a slope that equal 1.

@@ -8,12 +8,12 @@ getNormalizedResponses(odors, zero = default.val("zero"),
   response_matrix = default.val("response.matrix"))
 }
 \arguments{
-\item{odors}{character vector; one or more odors provided as InChIKey.}
+\item{odors}{character vector, one or more odors provided as InChIKey.}
 
 \item{zero}{InChIKey of background that should be set to zero. The default is
 "SFR", i.e. the spontaneous firing rate.}
 
-\item{response_matrix}{a data frame; as e.g. "response.matrix" that is loaded
+\item{response_matrix}{a data frame, as e.g. "response.matrix" that is loaded
 by \code{\link{modelRP}}. It is also possible to create this frame manually
 using \code{\link{modelRP}}.}
 }

@@ -5,7 +5,7 @@
 # expression : a + b * exp (c * input)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "a", "b", "c"
+# @param parms numeric vector, parameters with given names: "a", "b", "c"
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 # @seealso \code{\link{SSexpo}}
 # @keywords math
@@ -24,7 +24,7 @@ function(input, parms)
 # Neurobiology, University of Konstanz, Germany
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "a", "b", "c"
+# parms : numeric vector, parameters with given names: "a", "b", "c"
 
 ## expression : a + b * exp (c * input)
 

@@ -4,7 +4,7 @@
 #
 # @param data data frame containing either subsets of response.matrix or identifier and data columns (e.g. Or22a)
 # @param ident chemical identifier, if empty rownames of data will be used
-# @param datasets column names of data sets to use, important when using response data (e.g. Or22a); if empty all columns will be used
+# @param datasets column names of data sets to use, important when using response data (e.g. Or22a), if empty all columns will be used
 # @param na.rm should NAs be removed
 #
 # @return "long" data frame for plotting with ggplot2

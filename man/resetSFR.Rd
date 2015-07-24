@@ -7,9 +7,9 @@
 resetSFR(x, sfr)
 }
 \arguments{
-\item{x}{numeric or DoOR response matrix; input values}
+\item{x}{numeric or DoOR response matrix, input values}
 
-\item{sfr}{numeric or character; either a value to subtract if x is a vector or an InChIKey if x is a DoOR response matrix}
+\item{sfr}{numeric or character, either a value to subtract if x is a vector or an InChIKey if x is a DoOR response matrix}
 }
 \description{
 A function for reseting SFR to zero

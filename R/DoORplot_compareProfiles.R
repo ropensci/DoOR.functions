@@ -7,10 +7,10 @@
 #' @param x the input data frame the first response profile will be taken from
 #' @param y the input data frame the second response profile will be taken from 
 #'   (x will be taken if y is missing)
-#' @param by.x character string; specifying a column in x
-#' @param by.y character string; specifying a column in y
-#' @param base_size numeric; the base font size for the ggplot2 plot
-#' @param tag character; the chemical identifier that will be used as odorant 
+#' @param by.x character string, specifying a column in x
+#' @param by.y character string, specifying a column in y
+#' @param base_size numeric, the base font size for the ggplot2 plot
+#' @param tag character, the chemical identifier that will be used as odorant 
 #'   label.
 #'   
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>

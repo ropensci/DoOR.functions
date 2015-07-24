@@ -1,31 +1,31 @@
 #' DoORplot_ALmap
-#' 
+#'
 #' Plot an antennal lobe map with color coded odorant responses.
-#' 
+#'
 #' @param InChIKey InChIKey specifying the odorant to plot
-#' @param response_matrix the input data (e.g. response.matrix or 
+#' @param response_matrix the input data (e.g. response.matrix or
 #'   response.matrix_non.normalized)
-#' @param odor_data data frame; contains the odorant information.
+#' @param odor_data data frame, contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
-#' @param tag the labels to plot on top of the glomeruli (one of the following 
-#'   \code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus" 
+#' @param tag the labels to plot on top of the glomeruli (one of the following
+#'   \code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
 #'   or "co.receptor")
 #' @param main the title, one column of \code{odor}, defaults to "Name"
 #' @param scalebar whether or not to add a scalebar
 #' @param DoOR_mappings the data frame containing the mapping information
-#' @param colors a vector containing 6 color values (2 for values below 0, 1 0 
+#' @param colors a vector containing 6 color values (2 for values below 0, 1 0
 #'   value and 3 steps between 0 and 1)
-#' @param limits the limits for the color scale, if empty the range of the 
+#' @param limits the limits for the color scale, if empty the range of the
 #'   response matrix is taken (after setting ``zero`` to 0)
 #' @param AL.map a list containing the AL model
 #' @param legend logical, plot a legend?
 #' @param base_size numeric, the base font size for the ggplot plot
-#' @details Normalized, color coded odor responses across receptors are mapped 
-#'   onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map 
+#' @details Normalized, color coded odor responses across receptors are mapped
+#'   onto a map of the \emph{Drosophila} antennal lobe. The antennal lobe map
 #'   was a kind gift from Veit Grabe.
 #' @seealso \link{getNormalizedResponses}, \pkg{ggplot2}, \pkg{grid}
-#' @references Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S., 
-#'   2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila 
+#' @references Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S.,
+#'   2014. A digital in vivo 3D atlas of the antennal lobe of Drosophila
 #'   melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
 #' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
 #' @export
@@ -34,14 +34,14 @@
 #' @examples
 #' library(DoOR.data)
 #' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
-#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors", 
+#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
 #'    color = c("magenta", "pink", "white", "yellow", "orange", "red"))
-#' 
+#'
 #' DoORplot_ALmap(transID("123-92-2"), scalebar = FALSE) +
 #' ggplot2::theme(legend.position  = "bottom",
 #'       panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
 #' ggplot2::ggtitle("responses elicited by isopentyl acetate")
-#' 
+#'
 #' \dontrun{
 #' p <- DoORplot_ALmap(transID("123-92-2"))
 #' ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
@@ -112,7 +112,11 @@ DoORplot_ALmap <- function(InChIKey,
     p <- p + ggplot2::theme(legend.position = "none")
 
   if(legend == TRUE) {
-    x1 <- 118; x2 <- x1 + 38; x3 <- x2 + 19.5; y <- -20; lsize <- 10
+    x1 <- 118
+    x2 <- x1 + 38
+    x3 <- x2 + 19.5
+    y  <- -20
+    lsize <- 10
     p <- p +
       ggplot2::annotate("rect",
                         xmin = c(x1, x2, x3) ,

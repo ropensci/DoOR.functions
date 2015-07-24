@@ -4,10 +4,10 @@
 #' database.
 #' 
 #' 
-#' @param odors character vector; one or more odors provided as InChIKey.
+#' @param odors character vector, one or more odors provided as InChIKey.
 #' @param zero InChIKey of background that should be set to zero. The default is
 #'   "SFR", i.e. the spontaneous firing rate.
-#' @param response_matrix a data frame; as e.g. "response.matrix" that is loaded
+#' @param response_matrix a data frame, as e.g. "response.matrix" that is loaded
 #'   by \code{\link{modelRP}}. It is also possible to create this frame manually
 #'   using \code{\link{modelRP}}.
 #' @seealso \code{\link{modelRP}},\code{\link{CreateDatabase}}

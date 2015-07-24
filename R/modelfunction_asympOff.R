@@ -5,7 +5,7 @@
 # expression : Asym*(1 - exp(-exp(lrc)*(input - c0)))
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "lrc",
+# @param parms numeric vector, parameters with given names: "Asym", "lrc",
 # "c0"
 # @seealso \code{\link{SSasympOff}}
 # @references Jose Pinheiro and Douglas Bates
@@ -25,7 +25,7 @@ function(input, parms)
 # Neurobiology, University of Konstanz, Germany
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "lrc", "c0"
+# parms : numeric vector, parameters with given names: "Asym", "lrc", "c0"
 
 ## expression : Asym*(1 - exp(-exp(lrc)*(input - c0)))
 ## reference and author(s) : Jose Pinheiro and Douglas Bates

@@ -12,31 +12,31 @@ DoORplot_tuningCurve(receptor, odorant, response.vector,
   base_size = 12)
 }
 \arguments{
-\item{receptor}{character; a receptor name (one of ORS$OR)}
+\item{receptor}{character, a receptor name (one of ORS$OR)}
 
-\item{odorant}{character; an odorant name (InChIKey)}
+\item{odorant}{character, an odorant name (InChIKey)}
 
-\item{response.vector}{numerical vector; a vector with responses, if empty
+\item{response.vector}{numerical vector, a vector with responses, if empty
 this is taken from response.matrix}
 
-\item{response_matrix}{DoOR response matrix; response vector will be taken
+\item{response_matrix}{DoOR response matrix, response vector will be taken
 from here, not needed if response.vector is given}
 
-\item{odor_data}{data frame; contains the odorant information.}
+\item{odor_data}{data frame, contains the odorant information.}
 
-\item{zero}{InChIKey; will be set to zero, default is SFR, ignored when data
-is provided via response.vector; set to "" if you don't want to subtract
+\item{zero}{InChIKey, will be set to zero, default is SFR, ignored when data
+is provided via response.vector, set to "" if you don't want to subtract
 anything}
 
-\item{fill.receptor}{color code; bar color for receptor tuning curve}
+\item{fill.receptor}{color code, bar color for receptor tuning curve}
 
-\item{fill.odorant}{color code; bar color for odorant tuning curve}
+\item{fill.odorant}{color code, bar color for odorant tuning curve}
 
 \item{odor.main}{the odor identifier to plot, one of colnamed(odor)}
 
-\item{limits}{the numerical vector of length 2; y limits for the tuning curve}
+\item{limits}{the numerical vector of length 2, y limits for the tuning curve}
 
-\item{base_size}{numeric; the base font size for the ggplot2 plot}
+\item{base_size}{numeric, the base font size for the ggplot2 plot}
 }
 \value{
 a ggplot object

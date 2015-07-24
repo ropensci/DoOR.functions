@@ -4,11 +4,11 @@
 #' (calls \code{\link{modelRP}} for all receptors)
 #' 
 #' 
-#' @param tag character string; format for rownames; possibilities: "InChIKey",
+#' @param tag character string, format for rownames, possibilities: "InChIKey",
 #'   CAS", "CID", "Name"
-#' @param select.MDValue a numeric; threshold on the MD, this is used to reject 
+#' @param select.MDValue a numeric, threshold on the MD, this is used to reject 
 #'   studies that do not align sufficiently well to the response model
-#' @param overlapValues numeric; a criterion using to refuse a data set that
+#' @param overlapValues numeric, a criterion using to refuse a data set that
 #' has not enough overlap value.
 #' @param ... pass more parameters to \code{\link{modelRP}}
 #' @seealso \code{\link{modelRP}}

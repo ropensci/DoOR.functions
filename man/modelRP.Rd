@@ -12,24 +12,24 @@ modelRP(da, select.MDValue = default.val("select.MDValue"),
   plot = default.val("plot"))
 }
 \arguments{
-\item{da}{data frame; a selected receptor containing measured responses from
+\item{da}{data frame, a selected receptor containing measured responses from
 studies.}
 
-\item{select.MDValue}{numeric; threshold on the MD for rejecting a fit.}
+\item{select.MDValue}{numeric, threshold on the MD for rejecting a fit.}
 
-\item{overlapValues}{numeric; a criterion using to refuse a data set that
+\item{overlapValues}{numeric, a criterion using to refuse a data set that
 has not enough overlap value.}
 
-\item{responseRange}{data frame; contains response ranges for all studies.}
+\item{responseRange}{data frame, contains response ranges for all studies.}
 
-\item{weightGlobNorm}{data frame; a binary data matrix; 1 indicates given
+\item{weightGlobNorm}{data frame, a binary data matrix, 1 indicates given
 odor has been measured in given study, NA indicates NOT.}
 
-\item{glob.normalization}{logical; default is \code{TRUE}; performs a global
+\item{glob.normalization}{logical, default is \code{TRUE}, performs a global
 normalization for the model response. Otherwise (\code{FALSE}) response
 values will be given in value from 0 to 1.}
 
-\item{plot}{logical; If \code{FALSE}, plotting is suppressed. Default is
+\item{plot}{logical, If \code{FALSE}, plotting is suppressed. Default is
 \code{FALSE}.}
 }
 \description{

@@ -2,21 +2,21 @@
 #'
 #' plot a receptor or odorant tuning curve
 #'
-#' @param receptor character; a receptor name (one of ORS$OR)
-#' @param odorant character; an odorant name (InChIKey)
-#' @param response.vector numerical vector; a vector with responses, if empty
+#' @param receptor character, a receptor name (one of ORS$OR)
+#' @param odorant character, an odorant name (InChIKey)
+#' @param response.vector numerical vector, a vector with responses, if empty
 #'   this is taken from response.matrix
-#' @param response_matrix DoOR response matrix; response vector will be taken
+#' @param response_matrix DoOR response matrix, response vector will be taken
 #'   from here, not needed if response.vector is given
-#' @param odor_data data frame; contains the odorant information.
-#' @param zero InChIKey; will be set to zero, default is SFR, ignored when data
-#'   is provided via response.vector; set to "" if you don't want to subtract
+#' @param odor_data data frame, contains the odorant information.
+#' @param zero InChIKey, will be set to zero, default is SFR, ignored when data
+#'   is provided via response.vector, set to "" if you don't want to subtract
 #'   anything
-#' @param fill.receptor color code; bar color for receptor tuning curve
-#' @param fill.odorant  color code; bar color for odorant tuning curve
+#' @param fill.receptor color code, bar color for receptor tuning curve
+#' @param fill.odorant  color code, bar color for odorant tuning curve
 #' @param odor.main the odor identifier to plot, one of colnamed(odor)
-#' @param base_size numeric; the base font size for the ggplot2 plot
-#' @param limits the numerical vector of length 2; y limits for the tuning curve
+#' @param base_size numeric, the base font size for the ggplot2 plot
+#' @param limits the numerical vector of length 2, y limits for the tuning curve
 #'
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #'
@@ -87,7 +87,7 @@ DoORplot_tuningCurve <- function(receptor,
       ) +
       ggplot2::ggtitle(bquote(atop(.(
         paste(receptor, sep = "")),
-        atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), "; n: ", nrow(data)))), ""))))
+        atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), ", n: ", nrow(data)))), ""))))
   } else {
     odorant <- as.character(odorant)
     odor.main <- odor_data[which(odor_data$InChIKey == odorant), odor.main]
@@ -116,7 +116,7 @@ DoORplot_tuningCurve <- function(receptor,
       ggplot2::labs(x = "responding units") +
       ggplot2::ggtitle(bquote(atop(.(
         paste(odor.main, sep = "")),
-        atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), "; n: ", nrow(data)))), ""))))
+        atop(italic(.(paste0("kurtosis: ",round(sparse(data$value),2), ", n: ", nrow(data)))), ""))))
 
   }
 

@@ -6,7 +6,7 @@
 # (exp((xmid - input)/scal)))^2)^2)
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "xmid",
+# @param parms numeric vector, parameters with given names: "Asym", "xmid",
 # "scal"
 # @seealso \code{\link{SSlogis}}
 # @references Jose Pinheiro and Douglas Bates
@@ -26,7 +26,7 @@ function(input, parms)
 ## Leibniz's notation for computing the curvic length on Logistic Model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "xmid", "scal"
+# parms : numeric vector, parameters with given names: "Asym", "xmid", "scal"
 
 ## expression : sqrt(1+(Asym * ((exp((xmid - input)/scal)) * (1/scal))/(1 + (exp((xmid - input)/scal)))^2)^2)
 

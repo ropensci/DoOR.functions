@@ -5,7 +5,7 @@
 # expression : c0 - (log(1 - (input / Asym)) / exp(lrc))
 # 
 # @param input numeric vector of data values
-# @param parms numeric vector; parameters with given names: "Asym", "c0",
+# @param parms numeric vector, parameters with given names: "Asym", "c0",
 # "lrc"
 # @seealso \code{\link{SSasympOff}}
 # @references Jose Pinheiro and Douglas Bates
@@ -25,7 +25,7 @@ function(input, parms)
 ## inverse Asymptotic Model with an Offset
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "Asym", "lrc", "c0"
+# parms : numeric vector, parameters with given names: "Asym", "lrc", "c0"
 
 ## expression : c0 - (log(1 - (input / Asym)) / exp(lrc))
 ## reference and author(s) : Jose Pinheiro and Douglas Bates

@@ -10,16 +10,16 @@
 #' recording will be computed for each permutation, the optimozed sequence is 
 #' with the highest correlation.
 #' 
-#' @param receptor character string; name of given odorant receptor.
-#' @param permutation logical; if TRUE, the sequence is chosen from permutation,
+#' @param receptor character string, name of given odorant receptor.
+#' @param permutation logical, if TRUE, the sequence is chosen from permutation,
 #'   if FALSE, sequence is chosen by the routine process.
 #' @param perm a matrix with one sequence of study names per row, if empty, all 
 #'   possible permutations of study names will be provided.
-#' @param response_matrix_nn data frame; response data that has not been 
+#' @param response_matrix_nn data frame, response data that has not been 
 #'   globally normalized.
-#' @param response_matrix data frame; globally normalized response data.
-#' @param responseRange data frame; response range of studies.
-#' @param weightGlobNorm data frame; weight matrix for global normalization.
+#' @param response_matrix data frame, globally normalized response data.
+#' @param responseRange data frame, response range of studies.
+#' @param weightGlobNorm data frame, weight matrix for global normalization.
 #' @param overlapValues minimum overlap between studies to perfom a merge
 #' @param select.MDValue the minimum mean distance between studies to perfom a 
 #'   merge (used if permutation == FALSE or if permutation == TRUE AND strict ==

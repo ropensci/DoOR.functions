@@ -7,11 +7,11 @@
 # assigned with \code{assigned.name}. If \code{data2} contains some odors that
 # the \code{data1} do not have, then the new odors will be added into output.
 # 
-# @param data1 data frame; the object to be added.
-# @param data2 data frame; it will be merged to "data1".
-# @param by.data2 character string; a column name in "data2", specify which 
+# @param data1 data frame, the object to be added.
+# @param data2 data frame, it will be merged to "data1".
+# @param by.data2 character string, a column name in "data2", specify which 
 #   column will be combined into data1.
-# @param assigned.name charater string; assigning a name to combined column.
+# @param assigned.name charater string, assigning a name to combined column.
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 # @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 # @keywords data

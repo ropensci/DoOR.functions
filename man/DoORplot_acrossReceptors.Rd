@@ -10,19 +10,19 @@ DoORplot_acrossReceptors(odorant,
   tag = "Name", limits, base_size = 12)
 }
 \arguments{
-\item{odorant}{character vecto; one or several InChIKeys}
+\item{odorant}{character vecto, one or several InChIKeys}
 
-\item{response_matrix}{DoOR response matrix; a DoOR response matrix as data source}
+\item{response_matrix}{DoOR response matrix, a DoOR response matrix as data source}
 
-\item{odor_data}{data frame; contains the odorant information.}
+\item{odor_data}{data frame, contains the odorant information.}
 
-\item{zero}{character; an InChIKey of the odorant that should be set to 0}
+\item{zero}{character, an InChIKey of the odorant that should be set to 0}
 
-\item{tag}{character; the chemical identifier to plot as odorant name (one of colnames(odor))}
+\item{tag}{character, the chemical identifier to plot as odorant name (one of colnames(odor))}
 
-\item{limits}{numeric of length 2; if provided the ylim will range accordingly}
+\item{limits}{numeric of length 2, if provided the ylim will range accordingly}
 
-\item{base_size}{numeric; the base font size for the ggplot2 plot}
+\item{base_size}{numeric, the base font size for the ggplot2 plot}
 }
 \value{
 a ggplot object

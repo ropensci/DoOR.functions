@@ -4,8 +4,8 @@
 #' deltaF/F...)
 #' 
 #' The process of back projection is the following: \itemize{ \item 1. rescale
-#' both data sets to [0,1]; \item 2. find the best fitting model between
-#' "bp.data" and "cons.data" (lowest MD value); \item 3. project the consensus
+#' both data sets to [0,1], \item 2. find the best fitting model between
+#' "bp.data" and "cons.data" (lowest MD value), \item 3. project the consensus
 #' data onto the fitted curv, these are now our normalized, back projected
 #' responses \item 4. rescale all responses to the scale of the original data
 #' via a linear fit.  }

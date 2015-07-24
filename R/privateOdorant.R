@@ -2,13 +2,13 @@
 #'
 #' return an odorant that activates the receptor of interes exclusively
 #'
-#' @param receptor character; name of a DoOR responding unit (one of \code{ORs$Or})
-#' @param sensillum logical; restrict the search to the sensillum the receptor is expressed in?
-#' @param response_matrix DoOR response matrix; the input data to perform the search on
+#' @param receptor character, name of a DoOR responding unit (one of \code{ORs$Or})
+#' @param sensillum logical, restrict the search to the sensillum the receptor is expressed in?
+#' @param response_matrix DoOR response matrix, the input data to perform the search on
 #' @param DoOR_mappings the data frame containing the mapping information
-#' @param zero character; an odorant that should be set to 0
-#' @param nshow numeric; the number of private odorants to return
-#' @param tag character; the chemical identifier to give the odorant names in (on of \code{colnames(odor)})
+#' @param zero character, an odorant that should be set to 0
+#' @param nshow numeric, the number of private odorants to return
+#' @param tag character, the chemical identifier to give the odorant names in (on of \code{colnames(odor)})
 #'
 #' @return a data.frame containing odorants and the response in the receptor of interest as well as the maximum response of the remaining receptors and their difference
 #' @export

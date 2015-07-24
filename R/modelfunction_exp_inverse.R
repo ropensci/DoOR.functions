@@ -5,7 +5,7 @@
 # expression : (log((input-a)/b))/c
 # 
 # @param input numeric vector of data value
-# @param parms numeric vector; parameters with given names: "a", "b", "c"
+# @param parms numeric vector, parameters with given names: "a", "b", "c"
 # @seealso \code{\link{SSexpo}}
 # @keywords math
 # @examples
@@ -23,7 +23,7 @@ function(input, parms)
 ## inverse exponential Model
 
 # input : numeric vector of data values
-# parms : numeric vector; parameters with given names: "a", "b", "c"
+# parms : numeric vector, parameters with given names: "a", "b", "c"
 
 ## expression : (log((input-a)/b))/c
 
