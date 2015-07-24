@@ -16,6 +16,8 @@ The `DoOR.functions` package provides tools for the analysis of the data provide
 * [Identifying the sensillum we are recording from with `identifySensillum()`](#identifySensillum)
 * [Finding neuron-specific odorants with `privateOdorant()`](#privateOdorant)
 * [Mapping response data from an unknown source with `mapReceptor()`](#mapReceptor)
+* [Changing the response unit with `backProject()`](#backProject)
+* [Quantifying tuning curves with `sparse()`](#sparse)
 
 
 
@@ -116,13 +118,43 @@ This example was a bit circular as the tested data contributed to the consensus 
 
 
 
-## backProject
+## Changing the response unit (spkikes, deltaF/F, ...) with `backProject()`{#backProject}
+The DoOR consensus data is normalized to values between 0 and 1. If we want to compare the DoOR data to one of our own recordings, it would be great to have the DoOR data in the same unit as our owne data (e.g. spikerate). This is what we can do with `backProject()`,  we can rescale the DoOR data to fit a given response template.
+
+As an example, let's take the data Hallem et al. recorded from Or22a _via_ calcium imaging and rescale the DoOR responses accordingly. The template has to have 2 columns named `odorants` and `responses`:
+```{r, fig.width = 4.5, fig.height = 4.5}
+template <- data.frame(odorants  = Or22a$InChIKey, 
+                       responses = Or22a$Hallem.2006.EN)
+
+bp <- backProject(template, responding.unit = "Or22a")
+plot(bp$backprojected$original.data, 
+     bp$backprojected$backprojected.data, 
+     xlab = "DoOR consensus response", 
+     ylab = "backprojected data [spikes, Hallem.2006.EN]"
+)
+
+head(bp$backprojected)
+
+```
+All the yellow lines in the first plot represent odorantt responses that were not available in the original data set but were projected onto the fitted function and rescaled to the units in "Hallem.2006.EN". The second plot shows the relationship between the rescaled data and the original consensus responses.
+
+
+## Quantifying tuning curves with `sparse()`{#sparse}
+The width of a tuning curve, i.e. for examplt to how many odorants a receptor shows strong responses, can be quantified using different sparseness measures. We implemented kurtosis[^1] and sparseness[^2] in `sparse()`. A high kurtosis or sparseness value indicates a narrow tuning curve (see also `DoORplot_tuningCurve()` in the [DoOR visualization vignette](DoOR_visualizations.html#tuningCurve)). While kurtosis is able to deal with negative values, sparseness can't and thus all values will be transformed to absolute values. Sparseness scales between 0 and 1, kurtosis between -∞ and ∞, a kurtisis of 0 corresponds to the Gaussian distribution.
+
+```{r}
+rm.SFRreset <- resetSFR(response.matrix, "SFR")
+
+sparse(x = rm.SFRreset[,"Or69a"], method = "ltk")
+sparse(x = rm.SFRreset[,"Or69a"], method = "lts")
+
+sparse(x = rm.SFRreset[,"Gr21a.Gr63a"], method = "ltk")
+sparse(x = rm.SFRreset[,"Gr21a.Gr63a"], method = "lts")
+
+```
 
 
 
-## DoOREst
 
-
-
-## sparse
-
+[^1]: Willmore, B., Tolhurst, D.J., 2001. Characterizing the sparseness of neural codes. Network 12, 255–270. doi:10.1080/net.12.3.255.270
+[^2]: Bhandawat, V., Olsen, S.R., Gouwens, N.W., Schlief, M.L., Wilson, R.I., 2007. Sensory processing in the Drosophila antennal lobe increases reliability and separability of ensemble odor representations. Nature neuroscience 10, 1474–82. doi:10.1038/nn1976
