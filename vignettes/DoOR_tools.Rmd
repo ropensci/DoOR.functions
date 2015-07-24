@@ -29,9 +29,9 @@ loadData()
 ```
 
 ## Identifying the sensillum we are recording from with `identifySensillum()` {#identifySensillum}
-Imaginn we perform a electrophysiological recording from a _Drosophil_ sensillum (single sensilum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`privateOdorant()`](#privateOdorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identifySensillum()`.
+Imagine we perform an electrophysiological recording from a _Drosophila_ sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`privateOdorant()`](#privateOdorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identifySensillum()`.
 
-Let's make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxyde) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called `odorants` with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron). 
+Let's make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxide) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called `odorants` with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron). 
 
 ```{r}
 recording <- data.frame(
@@ -57,7 +57,7 @@ We can define the number of best hits that we want to get returned (the default 
 ```{r, fig.width=7.1, fig.height=4.5}
 identifySensillum(recording, nshow = 5, base_size = 8)
 ```
-And if we know e.g. that we are recording from a basiconic sensillum we can restrict the search to one or a few sensilla types:
+And if we know e.g. that we are recording from a basiconic sensillum we can restrict the search to one or a few sensillum types:
 ```{r, fig.width=7.1, fig.height=4.5}
 identifySensillum(recording, sub = "ab", nshow = 5, base_size = 8)
 identifySensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
@@ -83,18 +83,18 @@ So apparently our fake recording came from the ab1 sensillum, which was admitted
 
 
 ## Finding neuron-specific odorants with `privateOdorant()` {#privateOdorant}
-There may be several cases where we might be interested in so called _private odorants_, odorants that specificly activate a given receptor or sensory neuron. Might it be that we are looking for diagnostic odorants for sensillum identification or that we want to activate a specific neuronal pathway. `privateOdorant()` returns candidate odorants for that task.
+There may be several cases where we might be interested in so called _private odorants_, odorants that specifically activate a given receptor or sensory neuron. Maybe we are looking for diagnostic odorants for sensillum identification or we want to activate a specific neuronal pathway, `privateOdorant()` returns candidate odorants for that task.
 
 Let's say we want to specifically activate Or22a neurons:
 ```{r}
 privateOdorant("Or22a")
 ```
 
-Maybe we better return the odorant names instead of InChiKeys:
+We might want to return the odorant names instead of InChiKeys:
 ```{r}
 privateOdorant("Or22a", tag = "Name")
 ```
-So according to the function sec-amyl acetate would be a good candidate. It activates Or22a at 0.4 (DoOR response, max is 1) while the maximum activation in all other tested responding units (receptors, neurons, glomeruli) is 0.016, a difference of 0.40. Sounds good but it was tested only in 4 other responding units, so I would rather go for ethyl hexanoate with ~ the same difference but being tested in 29 other responding units.
+So according to the function sec-amyl acetate would be a good candidate. It activates Or22a at 0.4 (DoOR response, max is 1) while the maximum activation in all other tested responding units (receptors, neurons, glomeruli) is 0.016, a difference of 0.40. Sounds good, but it was tested only in 4 other responding units, so I would rather go for ethyl hexanoate with about the same difference but being tested in 29 other responding units.
 
 We can also restrict the search to the sensillum the responding units of interest is related to:
 ```{r}
