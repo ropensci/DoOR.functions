@@ -118,7 +118,7 @@ This example was a bit circular as the tested data contributed to the consensus 
 
 
 
-## Changing the response unit (spkikes, deltaF/F, ...) with `backProject()`{#backProject}
+## Changing the response unit (spikes, deltaF/F, ...) with `backProject()`{#backProject}
 The DoOR consensus data is normalized to values between 0 and 1. If we want to compare the DoOR data to one of our own recordings, it would be great to have the DoOR data in the same unit as our owne data (e.g. spikerate). This is what we can do with `backProject()`,  we can rescale the DoOR data to fit a given response template.
 
 As an example, let's take the data Hallem et al. recorded from Or22a _via_ calcium imaging and rescale the DoOR responses accordingly. The template has to have 2 columns named `odorants` and `responses`:
