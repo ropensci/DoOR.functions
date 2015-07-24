@@ -1,92 +1,86 @@
 #' backProject
 #' 
-#' project the model response values back into your scale of interest (spike, deltaF/F...)
+#' project the model response values back into your scale of interest (spike,
+#' deltaF/F...)
 #' 
-#' The process of back projection is following serval steps:
-#' \itemize{ \item 1. rescale both data sets to [0,1]; 
-#'           \item 2. plot "bp.data" against "cons.data"; 
-#'           \item 3. choose the best fitting model with the lowest "MD" value; 
-#'           \item 4. project the consensus values from "x"
-#' onto fitted line, those projected Y coordinates are normalized back
-#' projected values; 
-#'           \item 5. estimate the parameters ("intercept" and "slope")
-#' between unnormalized data and normalized data using linear regression; 
-#'           \item 6. rescale all projected Y coordinates with the parameters.  }
+#' The process of back projection is the following: \itemize{ \item 1. rescale
+#' both data sets to [0,1]; \item 2. find the best fitting model between
+#' "bp.data" and "cons.data" (lowest MD value); \item 3. project the consensus
+#' data onto the fitted curv, these are now our normalized, back projected
+#' responses \item 4. rescale all responses to the scale of the original data
+#' via a linear fit.  }
 #' 
-#' @param cons.data a data frame; containing model response values.
-#' @param bp.data a data frame; containing the data will be back projected.
-#' @param tag.odor a character string; indicating which row will be used for
-#' matching two data.
-#' @param tag.cons.data a character string; specifying which column is model
-#' responses in "con.data".
-#' @param tag.bp.data a character string; specifying which column in "bp.data"
-#' is the data that to be back projected.
-#' @return Output of backProject is a list containing a numeric
-#' vector ($rescale) and a data frame ($output).  "rescale" is used to rescale
-#' the normalized data to original scale. "output" contains the whole
-#' "bp.data", and consensus value from "cons.data", "projected.Y" (normalized
-#' back projected data) and rescaled back projected data "bp.data".
+#' @param template.data data frame, the data that provides the scale to
+#'   transform to, containing InChIKeys in a column called "odorants" and
+#'   responses in a column called "responses"
+#' @param responding.unit character, the name of the receptor/OSN/glomerulus
+#'   which responses should be transformed
+#' @param response_matrix DoOR response mnatrix, the source data is picked from
+#'   here
+#'   
+#' @return Output of backProject is a list containing a data frame with the
+#'   backprojected data, the original data, the data used as a template and the
+#'   data that resulted from fitting source and template (before rescaling to
+#'   the template scale). additionaly the parameters of the linear fit between
+#'   the source and template response scale is returned.
+#' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @export
 #' 
-backProject <- function(cons.data,bp.data,tag.odor,tag.cons.data,tag.bp.data) {
-    
-    con.data <- as.data.frame(cons.data)
-    bp.data  <- as.data.frame(bp.data)
-    
-    
-    # match rows of the study and the model response
-    
-    match_two_data <- match(con.data[,tag.odor], bp.data[,tag.odor])
-    
-    
-    # normalize the two dataframes to the range [0, 1] and bind them together
-    # study             : y-axis 
-    # model response    : x-axis.
-    
-    xy <- cbind(DoORnorm(cons.data[,tag.cons.data]), DoORnorm(bp.data[match_two_data,tag.bp.data]))
-    
-    
-    # plot the two dataframes against each other, find the best fitting function and project
-    # the points onto the functional line.
-    
-    calM		   <- calModel(x=xy[,1],y=xy[,2])
-    projected 	   <- projectPoints(x=xy[,1],y=xy[,2],best.model=calM, plot=TRUE,title=TRUE, xlab=tag.cons.data, ylab=tag.bp.data)
-    
-    projected_back     <- rbind(projected$double.observations[,c('ID','Y')],projected$single.observations[,c('ID','Y')])
-    #projected_back normalised:
-    projected_back_NDR <- rbind(projected$double.observations[,c('ID','NDR')],projected$single.observations[,c('ID','NDR')])
-    
-    
-    match_double.observations_ID <- projected$double.observations[, c('ID')] 		# find overlapping odors
-    normalized_bp_DO 	     <- projected$double.observations[, c('y')]			# Y-coordinates of normalized data (double.observations)
-    unnormalized_bp_DO 	     <- bp.data[match_double.observations_ID, tag.bp.data]	# Y-coordinates of unnormalized data (double.observations)
-    
-    
-    
-    # set unnormalized data (unnormalized_bp_DO) as response (dependent) variable, 
-    # normalized data (normalized_bp_DO) as predictor (independent variable), 
-    # estimate the Intercept and Slope
-    
-    g 	<- lm(unnormalized_bp_DO~normalized_bp_DO)
-    parms 	<- c(g$coef[1], g$coef[2])
-    
-    
-    
-    # rescale data "projected_back" back to the original scale. 
-    
-    match_odor  		<- match(seq(1:dim(bp.data)[1]),projected_back[,'ID'])
-    rescaled_projected_back <- parms[1] + parms[2] * projected_back[match_odor,'Y']	
-    
-    
-    
-    
-    
-    # pack into output list
-    backProject <- list(rescale = c("Intercept"=as.vector(g$coef[1]),"Slope"=as.vector(g$coef[2])),
-                        output  = data.frame(bp.data,
-                                             consensus.value = projected_back_NDR[match_odor,"NDR"],
-                                             projected.Y 	= projected_back[match_odor,"Y"],
-                                             bp.data 	= rescaled_projected_back))
-    return(backProject)
-  }
+#' @examples 
+#' data(Or22a)
+#' data(response.matrix)
+#' template.data <- data.frame(odorants = Or22a$InChIKey, 
+#'                             responses = Or22a$Hallem.2004.EN)
+#' bp <- backProject(template.data, "Or22a")
+#' 
+#' plot(bp$backprojected$original.data, 
+#'      bp$backprojected$backprojected.data, 
+#'      xlab = "DoOR consensus response", 
+#'      ylab = "spikes [Hallem.2004.EN]"
+#' )
+#' 
+backProject <- function(template.data,
+                        responding.unit,
+                        response_matrix = default.val("response.matrix")) {
+  
+  template.data$odorants <- as.character(template.data$odorants)
+  source.data <- data.frame(odorants = rownames(response_matrix), cons.responses = response_matrix[,responding.unit], stringsAsFactors = F)
+  
+  # combine the data
+  match.st <- match(source.data$odorants, template.data$odorants)
+  xy       <- cbind(DoORnorm(source.data$cons.responses), 
+                    DoORnorm(template.data$responses[match.st]))
+  
+  # find the best fitting model and project all points along the fitted curve
+  best.model <- calModel(x = xy[,1], y = xy[,2])
+  projected  <- projectPoints(x = xy[,1], y = xy[,2], best.model = best.model, plot = TRUE, title = TRUE, xlab = paste(responding.unit, "[consensus data]"), ylab = "template data")
+  
+  # extract the projected and the normalized projected data
+  projected.back     <- rbind(projected$double.observations[,c('ID','Y')], projected$single.observations[,c('ID','Y')])
+  projected.back_NDR <- rbind(projected$double.observations[,c('ID','NDR')], projected$single.observations[,c('ID','NDR')])
+  
+  # extract normalized and original values of the double observations (points/odorants that appear in both data sets)
+  double.observations_ID   <- projected$double.observations[,'ID'] # IDs
+  double.observations_norm <- projected$double.observations[,'y']  # normalized values
+  double.observations_orig <- template.data[double.observations_ID, 'responses'] # original values
+  
+  # perform a linear fit for "translation" of the consensus scale into the template scale
+  translate       <- lm(double.observations_orig ~ double.observations_norm)
+  translate.parms <- c(translate$coef[1], translate$coef[2])
+  
+  # now rescale the whole data set according to these parameters
+  match.sp <- match(1:dim(source.data)[1], projected.back[,'ID'])
+  projected.back_rescaled <- translate.parms[1] + translate.parms[2] * projected.back[match.sp,'Y'] 
+  
+  back.projected <- list(backprojected = 
+                           data.frame(odorants           = source.data$odorants,
+                                      backprojected.data = projected.back_rescaled,
+                                      original.data      = source.data$cons.responses,
+                                      template.data      = template.data$responses[match.st],
+                                      fitted.data        = projected.back_NDR[match.sp,"NDR"]),
+                         rescale.function = 
+                           c("intercept" = as.vector(translate.parms[1]), 
+                             "slope"     = as.vector(translate.parms[2])))
+  return(back.projected)
+} 

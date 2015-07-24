@@ -2,46 +2,57 @@
 % Please edit documentation in R/backProject.R
 \name{backProject}
 \alias{backProject}
-\title{project the model response values back to tested values}
+\title{backProject}
 \usage{
-backProject(cons.data, bp.data, tag.odor, tag.cons.data, tag.bp.data)
+backProject(template.data, responding.unit,
+  response_matrix = default.val("response.matrix"))
 }
 \arguments{
-\item{cons.data}{a data frame; containing model response values.}
+\item{template.data}{data frame, the data that provides the scale to
+transform to, containing InChIKeys in a column called "odorants" and
+responses in a column called "responses"}
 
-\item{bp.data}{a data frame; containing the data will be back projected.}
+\item{responding.unit}{character, the name of the receptor/OSN/glomerulus
+which responses should be transformed}
 
-\item{tag.odor}{a character string; indicating which row will be used for
-matching two data.}
-
-\item{tag.cons.data}{a character string; specifying which column is model
-responses in "con.data".}
-
-\item{tag.bp.data}{a character string; specifying which column in "bp.data"
-is the data that to be back projected.}
+\item{response_matrix}{DoOR response mnatrix, the source data is picked from
+  here}
 }
 \value{
-Output of backProject is a list containing a numeric
-vector ($rescale) and a data frame ($output).  "rescale" is used to rescale
-the normalized data to original scale. "output" contains the whole
-"bp.data", and consensus value from "cons.data", "projected.Y" (normalized
-back projected data) and rescaled back projected data "bp.data".
+Output of backProject is a list containing a data frame with the
+  backprojected data, the original data, the data used as a template and the
+  data that resulted from fitting source and template (before rescaling to
+  the template scale). additionaly the parameters of the linear fit between
+  the source and template response scale is returned.
 }
 \description{
-project the model response values back to tested values
+project the model response values back into your scale of interest (spike,
+deltaF/F...)
 }
 \details{
-backProject is used to project the model response values back
-to tested values.  The process of back projection is following serval steps:
-\itemize{ \item 1. normalize two data set in values from 0 to 1; \item 2.
-plot "bp.data" against "cons.data"; \item 3. choose the best fitting model
-with the lowest "MD" value; \item 4. project the consensus values from "x"
-onto fitted line, those projected Y coordinates are normalized back
-projected values; \item 5. estimate the parameters ("intercept" and "slope")
-between unnormalized data and normalized data using linear regression; \item
-6. rescale all projected Y coordinates with the parameters.  }
+The process of back projection is the following: \itemize{ \item 1. rescale
+both data sets to [0,1]; \item 2. find the best fitting model between
+"bp.data" and "cons.data" (lowest MD value); \item 3. project the consensus
+data onto the fitted curv, these are now our normalized, back projected
+responses \item 4. rescale all responses to the scale of the original data
+via a linear fit.  }
+}
+\examples{
+data(Or22a)
+data(response.matrix)
+template.data <- data.frame(odorants = Or22a$InChIKey,
+                            responses = Or22a$Hallem.2004.EN)
+bp <- backProject(template.data, "Or22a")
+
+plot(bp$backprojected$original.data,
+     bp$backprojected$backprojected.data,
+     xlab = "DoOR consensus response",
+     ylab = "spikes [Hallem.2004.EN]"
+)
 }
 \author{
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
+
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
 
