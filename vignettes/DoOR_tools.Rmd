@@ -49,7 +49,7 @@ Next we feed the recording to the function:
 ```{r, fig.width=7.1, fig.height=4.5}
 identifySensillum(recording, base_size = 8)
 ```
-Note that the function tells us that it found hits for all units in ab1 and ab5, meaning that e.g. within the four neurons housed in the ab1 sensillum both of our units had good matches. You can set this correlation theshold with `min.cor`. If we increase the threshold to 0.99 only ab1 is returned as a double match:
+Note that the function tells us that it found hits for all units in ab1 and ab5, meaning that e.g. within the four neurons housed in the ab1 sensillum both of our units had good matches. You can set this correlation threshold with `min.cor`. If we increase the threshold to 0.99 only ab1 is returned as a double match:
 
 ```{r, fig.width=7.1, fig.height=4.5, fig.show='hide'}
 identifySensillum(recording, min.cor = .99)
@@ -59,7 +59,7 @@ We can define the number of best hits that we want to get returned (the default 
 ```{r, fig.width=7.1, fig.height=4.5}
 identifySensillum(recording, nshow = 5, base_size = 8)
 ```
-And if we know e.g. that we are recording from a basiconic sensillum we can restrict the search to one or a few sensillum types:
+And if we know e.g. that we are recording from a basiconic sensillum we can restrict the search to one or a few sensilla types:
 ```{r, fig.width=7.1, fig.height=4.5}
 identifySensillum(recording, sub = "ab", nshow = 5, base_size = 8)
 identifySensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
@@ -106,7 +106,7 @@ Ethyl 2-methylbutanoate sounds like a good hit, it has the same difference to th
 
 
 ## Mapping response data from an unknown source with `mapReceptor()`{#mapReceptor}
-Similar to `identifySensillum()`, `mapReceptor()` correlates a response vector to all responding units of the  existing DoOR consensus data. Let's grab a data set from Or22a and see where it ends up:
+Similar to `identifySensillum()`, `mapReceptor()` correlates a response vector to all responding units of the existing DoOR consensus data. Let's grab a data set from Or22a and see where it ends up:
 ```{r}
 data <- data.frame(odorants  = Or22a$InChIKey, responses = Or22a$Hallem.2006.EN)
 data <- na.omit(data)
@@ -135,11 +135,11 @@ plot(bp$backprojected$original.data,
 head(bp$backprojected)
 
 ```
-All the yellow lines in the first plot represent odorantt responses that were not available in the original data set but were projected onto the fitted function and rescaled to the units in "Hallem.2006.EN". The second plot shows the relationship between the rescaled data and the original consensus responses.
+All the yellow lines in the first plot represent odorant responses that were not available in the original data set but were projected onto the fitted function and rescaled to the units in "Hallem.2006.EN". The second plot shows the relationship between the rescaled data and the original consensus responses.
 
 
 ## Quantifying tuning curves with `sparse()`{#sparse}
-The width of a tuning curve, i.e. for examplt to how many odorants a receptor shows strong responses, can be quantified using different sparseness measures. We implemented kurtosis[^1] and sparseness[^2] in `sparse()`. A high kurtosis or sparseness value indicates a narrow tuning curve (see also `DoORplot_tuningCurve()` in the [DoOR visualization vignette](DoOR_visualizations.html#tuningCurve)). While kurtosis is able to deal with negative values, sparseness can't and thus all values will be transformed to absolute values. Sparseness scales between 0 and 1, kurtosis between -∞ and ∞, a kurtisis of 0 corresponds to the Gaussian distribution.
+The width of a tuning curve, i.e. for example to how many odorants a receptor shows strong responses, can be quantified using different sparseness measures. We implemented kurtosis[^1] and sparseness[^2] in `sparse()`. A high kurtosis or sparseness value indicates a narrow tuning curve (see also `DoORplot_tuningCurve()` in the [DoOR visualization vignette](DoOR_visualizations.html#tuningCurve)). While kurtosis is able to deal with negative values, sparseness can't and thus all values will be transformed to absolute values. Sparseness scales between 0 and 1, kurtosis between -∞ and ∞, a kurtisis of 0 corresponds to the Gaussian distribution.
 
 ```{r}
 rm.SFRreset <- resetSFR(response.matrix, "SFR")

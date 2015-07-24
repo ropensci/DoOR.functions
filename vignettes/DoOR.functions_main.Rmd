@@ -26,7 +26,7 @@ In this vignette we describe how to build, modify and update DoOR and introduce 
 * [Helper functions](#helper)
 
 
-## loading DoOR{#loading}
+## Loading DoOR{#loading}
 The first step after starting R is to attach both packages and to load the response data:
 
 ```{r, results='hide'}
@@ -94,7 +94,7 @@ Any of the following will be imported:
 
 See `?importNewData` for more details. We can e.g. import data also based on CAS or CID instead of InChIKey.
 
-#### looking up InChIKeys
+#### Looking up InChIKeys
 If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/web/packages/webchem/) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
 
 
@@ -105,14 +105,14 @@ Once we imported new data we can use `CreateDatabase()` in order to rebuild both
 ## Updating parts of the data base with `updateDatabase()`{#updateDatabase}
 If we imported new data only for a few receptors, we can update the data base with `updateDatabase()`. There are two ways to update the data base:
 
-### using the heuristic approach
+### Using the heuristic approach
 This is the faster way to perform a merge of all data sets. All possible binary combinations of data sets will be merged using 10 different fitting functions on the odorants that were measured in both data sets. The two data sets yielding the "best merge" (i.e. lowest mean deviations of points from the fitted function) will be merged. The process of pairwise merges will be repeated with the "merged_data" against the remaining data sets until all of them are included:
 
 ```{r, fig.width = 7.1, fig.height = 5.5}
 updateDatabase("Or92a", permutation = F, plot = T)
 ```
 
-### trying all permutations
+### Trying all permutations
 The more exhaustive way to update the data base is to test all possible sequences of data set merges, calculating the mean deviations from all original data sets and selecting the merge that produces the lowest mean deviations. This approach works well for responding units that contain a low number of recorded data sets. For responding units containing 5 data sets we have to calculate merges for 120 different sequences. With 6 it is already 720 sequences and with 10 data sets we have to test > 3.6 million different sequences.
 
 While this can be done _via_ parallel computing, this is nothing you should try on your home PC. For the pre-computed response matrices we performed matches using the permutation approach for all responding units that contained a maximum of 10 different data sets on a computing cluster. For DoOR 2.0 these are all responding units except Or22a.
@@ -125,14 +125,14 @@ updateDatabase("Or67a", permutation = T, plot = F)
 ## `modelRP()` and `modelRPSEQ()`{#model}
 `updateDatabase()` and `createDatabse()` call `modelRP()` and `modelRPSEQ()` to perform the merges and update the different DoOR objects. If we only want to perform a merge we can call them both directly.
 
-### merging using the heuristic with `modelRP()`
+### Merging using the heuristic with `modelRP()`
 `modelRP()` returns a list containing the merged data, the names of the excluded data sets (if any) and the names of the included data sets (if any were excluded).
 ```{r, fig.width = 7.1, fig.height = 5.5}
 merge <- modelRP(Or67a, plot = F)
 knitr::kable(head(merge$model.response))
 ```
 
-### merging in a specific sequence with `modelRPSEQ()`
+### Merging in a specific sequence with `modelRPSEQ()`
 `updateDatabase()` with `permutation = TRUE` calls `modelRPSEQ()`. Like `modelRP()` we can also call modelRPSEQ directly:
 ```{r, fig.width=5, fig.height=5.5}
 SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")

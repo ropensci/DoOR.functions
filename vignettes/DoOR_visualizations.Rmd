@@ -78,7 +78,7 @@ DoORplot_tuningCurve(receptor = "receptor X", response.vector = c(1:100), base_s
 ```
 
 ### Odorants
-`DoORplot_tuningCurve()` can as well be used to visualize the ensemble of responding units that is activated by a given odorant. Therefore we specify an odorant name instead of a response unit name:
+`DoORplot_tuningCurve()` can as well be used to visualize the ensemble of responding units that is activated by a given odorant. Therefore, we specify an odorant name instead of a response unit name:
 ```{r}
 DoORplot_tuningCurve(odorant = "PGMYKACGEOXYJE-UHFFFAOYSA-N", base_size = 8)
 ```
@@ -123,7 +123,7 @@ DoORplot_responseProfile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
 As the name indicates, with `DoORplot_compareProfiles()` we can plot two response profiles side by side for comparison. The syntax here differs from the previous plots as we can use it also to compare the original data sets in DoOR.
 
 
-### comparing original data sets
+### Comparing original data sets
 This time, with `x` and `y` we have to specify a whole data.frame, `by.x` and `by.y`  take the corresponding column names that will be plotted. If `x` is not specified, both `by.x` and `by.y` will be taken from `x`.
 
 ```{r}
@@ -133,7 +133,7 @@ DoORplot_compareProfiles(x = Or22a, y = Or22a, by.x = "Pelz.2006.AntEC50",
 
 We see that the measured Or22a sensory neuron responses in these two data sets are in good accordance.
 
-### comparing DoOR response profiles
+### Comparing DoOR response profiles
 Next we compare two DoOR consensus response profiles, measurements of the misexpressed receptor Or35a and recordings from the ac3B sensory neuron that naturally expresses Or35a:
 ```{r, fig.width = 7.1}
 DoORplot_compareProfiles(x = response.matrix, by.x = "Or35a", by.y = "ac3B",
