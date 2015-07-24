@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 --- 
 
-DoOR consists of two R packages and both are needed for DoOR to work properly. One package, `DoOR.data` contains all the _Drosophila_ odor responses we gathered from labs around the world or recorded ourselves. The other package `DoOR.functions` contains the DoOR framework for integrating heterogeneous data sets as well as analysis tools and functions for visalization. 
+DoOR consists of two R packages and both are needed for DoOR to work properly. One package, `DoOR.data` contains all the _Drosophila_ odor responses we gathered from labs around the world or recorded ourselves. The other package `DoOR.functions` contains the DoOR framework for integrating heterogeneous data sets as well as analysis tools and functions for visualization. 
 
 In this vignette we describe how to build, modify and update DoOR and introduce some helper functions. There are two other vignettes explaining the [plotting functions](DoOR_visualizations.html) and the [analysis tools](DoOR_tools.html) in detail.
 ##
@@ -98,15 +98,15 @@ See `?importNewData` for more details. We can e.g. import data also based on CAS
 If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/web/packages/webchem/) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
 
 
-## Building the complete data base with `CreateDatabase()`{#CreatDatabase}
-Once we imported new data we can use `CreateDatabase()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad, these studies will be recorded in `excluded.data`.
+## Building the complete data base with `CreateDatabase()`{#CreateDatabase}
+Once we imported new data we can use `CreateDatabase()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in `excluded.data`.
 
 
 ## Updating parts of the data base with `updateDatabase()`{#updateDatabase}
 If we imported new data only for a few receptors, we can update the data base with `updateDatabase()`. There are two ways to update the data base:
 
 ### using the heuristic approach
-This is the faster way to perform a merge of all data sets. All possible binary combinations of data sets will be merged using 10 different fitting functions on the odorants that were measured in both data sets. The two data sets yielding the "best merge" (i.e. lowest mean deviantions of points from the fitted function) will be merged. The process of pairwise merges will be repeated with the "merged_data" against the remaining data sets till all of them are included:
+This is the faster way to perform a merge of all data sets. All possible binary combinations of data sets will be merged using 10 different fitting functions on the odorants that were measured in both data sets. The two data sets yielding the "best merge" (i.e. lowest mean deviations of points from the fitted function) will be merged. The process of pairwise merges will be repeated with the "merged_data" against the remaining data sets until all of them are included:
 
 ```{r, fig.width = 7.1, fig.height = 5.5}
 updateDatabase("Or92a", permutation = F, plot = T)
@@ -115,7 +115,7 @@ updateDatabase("Or92a", permutation = F, plot = T)
 ### trying all permutations
 The more exhaustive way to update the data base is to test all possible sequences of data set merges, calculating the mean deviations from all original data sets and selecting the merge that produces the lowest mean deviations. This approach works well for responding units that contain a low number of recorded data sets. For responding units containing 5 data sets we have to calculate merges for 120 different sequences. With 6 it is already 720 sequences and with 10 data sets we have to test > 3.6 million different sequences.
 
-While this can be done _via_ parallel computing, this is nothing you should try on your home PC. For the pre computed response matrices we performed matches using the permutation approach for all responding units that contained a maximum of 10 different data sets on a computing cluster. For DoOR 2.0 these are all responding units except Or22a.
+While this can be done _via_ parallel computing, this is nothing you should try on your home PC. For the pre-computed response matrices we performed matches using the permutation approach for all responding units that contained a maximum of 10 different data sets on a computing cluster. For DoOR 2.0 these are all responding units except Or22a.
 
 ```{r, fig.width = 7.1, fig.height = 5.5}
 updateDatabase("Or67a", permutation = T, plot = F)
@@ -150,7 +150,7 @@ removeStudy(study = "Hallem.2004.EN")
 
 
 ## Updating the odor information with `updateOdorInfo()`{#updateOdorInfo}
-If we edit the general odor information in `DoOR.data::odor` we need to update all other DoOR objects with the new information. `updateOdorInfo()` overwrites the first 5 column of the DoOR responding units data frames (e.g. `Or22a`), it does not add or remove lines!
+If we edit the general odor information in `DoOR.data::odor` we need to update all other DoOR objects with the new information. `updateOdorInfo()` overwrites the first 5 columns of the DoOR responding units data frames (e.g. `Or22a`), it does not add or remove lines!
 
 
 
@@ -159,7 +159,7 @@ There are several small helper functions that belong to `DoOR.functions`.
 
 
 ## `transID()`{#transID}
-Maybe **the** most important little function in DoOR. With `transID()` we can translate odorant identifiers, e.g. from CAS numberst to InChIKeys or to Names. The information is taken from `DoOR.data::odor`, any `colnames(odor)` can be used to define input or output:
+Maybe **the** most important little function in DoOR. With `transID()` we can translate odorant identifiers, e.g. from CAS numbers to InChIKeys or to names. The information is taken from `DoOR.data::odor`, any `colnames(odor)` can be used to define input or output:
 ```{r}
 transID("123-92-2")
 transID("123-92-2", to = "Name")
