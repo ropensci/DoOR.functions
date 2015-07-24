@@ -159,7 +159,7 @@ DoORplot_acrossReceptors(odors, tag = "Name", base_size = 8)
 DoORplot_acrossOSNs(odors, base_size = 8, plot.type = 2)
 ```
 
-In type 1 the data is split according to odorant X sensillum, the color is assigned to the corresponding neuron A-D or X-Z if the neurons' identity is unknown:
+In type 1 the data is split according to odorant X sensillum, the color is assigned to the corresponding neuron A-D or X-Z if the neuron's identity is unknown:
 ```{r, fig.width = 7.1, fig.height = 5}
 DoORplot_acrossOSNs(odors, base_size = 8, plot.type = 1)
 ```
