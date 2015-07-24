@@ -117,7 +117,7 @@ The more exhaustive way to update the data base is to test all possible sequence
 
 While this can be done _via_ parallel computing, this is nothing you should try on your home PC. For the pre computed response matrices we performed matches using the permutation approach for all responding units that contained a maximum of 10 different data sets on a computing cluster. For DoOR 2.0 these are all responding units except Or22a.
 
-```{r, fig.width = 7.1, fig.height = 5.5, cache=TRUE}
+```{r, fig.width = 7.1, fig.height = 5.5}
 updateDatabase("Or67a", permutation = T, plot = F)
 ```
 
@@ -127,7 +127,7 @@ updateDatabase("Or67a", permutation = T, plot = F)
 
 ### merging using the heuristic with `modelRP()`
 `modelRP()` returns a list containing the merged data, the names of the excluded data sets (if any) and the names of the included data sets (if any were excluded).
-```{r, fig.width = 7.1, fig.height = 5.5, cache=TRUE}
+```{r, fig.width = 7.1, fig.height = 5.5}
 merge <- modelRP(Or67a, plot = F)
 knitr::kable(head(merge$model.response))
 ```

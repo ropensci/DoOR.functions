@@ -10,6 +10,18 @@ vignette: >
 ---
 Apart from merging data and performing calculations on it, the `DoOR.functions` package provides several ways to visualize the data served by the `DoOR.data` package. Please see the [DoOR.function vignette](DoOR.functions.html) for instructions on how to install and load both functions and data. The plotting functions can be identified by their common prefix `DoORplot_`, most of them make use of the `ggplot2` package which makes it possible to override most all of the theming options.
 
+## Content
+* [Loading data](#loading)
+* [Visualizing odorants _vs_ responding units with `DoORplot_responseMatrix()`](#responseMatrix)
+* [Visualizing ensemble responses with `DoORplot_ALmap()`](#ALmap)
+* [Visualizing tuning curves with `DoORplot_tuningCurve()`](#tuningCurve)
+* [Visualizing response profiles `DoORplot_responseProfile()`](#responseProile)
+* [Comparing response profiles `DoORplot_compareProfiles()`](#compareProfiles)
+* [Visualizing odorant responses across responding units with `DoORplot_acrossReceptors()`](#acrossReceptors)
+* [Visualizing odorant responses across OSNs with `DoORplot_acrossOSNs()`](#across_OSNs)
+
+
+## Loading data{#loading}
 First we need to load packages and data:
 ```{r, echo = T, message = TRUE, results='hide'}
 #load data
@@ -18,7 +30,7 @@ library(DoOR.data)
 loadData()
 ```
 
-## DoORplot_responseMatrix
+## Visualizing odorants _vs_ responding units with `DoORplot_responseMatrix()`{#responseMatrix}
 `DoORplot_responseMatrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `resetSFR(response.matrix, "SFR")`) it will be shown as color coded heatmap.
 
 ```{r,fig.width=7.1, fig.height=4}
@@ -30,9 +42,7 @@ If the data contains negative values, a colored response matrix will be plotted:
 DoORplot_responseMatrix(resetSFR(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
 ```
 
-
-
-## DoORplot_ALmap
+## Visualizing ensemble responses with `DoORplot_ALmap()`{#ALmap}
 With `DoORplot_ALmap()` we can visualize the ensemble response a given odorant elicits across DoOR responding units (receptors, sensory neurons, glomeruli, ... ) as a hypothetical antennal lobe activation pattern. 
 ```{r, fig.width=7.1}
 DoORplot_ALmap("QSJXEFYPDANLFS-UHFFFAOYSA-N", base_size = 8)
@@ -47,8 +57,7 @@ If we prefer the plain activation pattern without annotations at all:
 DoORplot_ALmap(transID("628-63-7", from = "CAS"), tag = "", main = "", legend = F, scalebar = F)
 ```
 
-
-## DoORplot_tuningCurve
+## Visualizing tuning curves with `DoORplot_tuningCurve()`{#tuningCurve}
 ### Responding units
 
 The set of odorants a given responding unit is responsive to can be described as its tuning curve. With `DoORplot_tuningCurve()` we can easily display such a tuning curve together with its kurtosis. Kurtosis is a measure of the shape of the tuning curve , i.e. whether a responding unit is narrowly tuned to a few odorants (high kurtosis), or whether it responds to many odorants (low kurtosis). The gaussian distribution has a kurtosis of 0. 
@@ -92,8 +101,7 @@ DoORplot_tuningCurve(odorant = transID("carbon dioxide", from = "Name"), base_si
   theme(panel.background = element_rect(fill = "grey", color = "magenta"))
 ```
 
-
-## DoORplot_responseProfile
+## Visualizing response profiles `DoORplot_responseProfile()`{#responseProile}
 `DoORplot_responseProfile` creates a horizontal bar plot of the response profile of a given receptor. It displays the same data as `DoORplot_tuningCurve` but focusses on the odorant identity.
 
 Per default the response strength is displayed as bar height as well as color code:
@@ -111,10 +119,8 @@ And if we prefer monochrome data:
 DoORplot_responseProfile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
 ```
 
-
-## DoORplot_compareProfiles
+## Comparing response profiles `DoORplot_compareProfiles()`{#compareProfiles}
 As the name indicates, with `DoORplot_compareProfiles()` we can plot two response profiles side by side for comparison. The syntax here differs from the prvious plots as we can use it also to compare the original data sets in DoOR.
-
 
 ### comparing original data sets
 This time, with `x` and `y` we have to specify a whole data.frame, `by.x` and `by.y`  take the corresponding column names that will be plotted. If `x` is not specified both `by.x` and `by.y` will be taken from `x`. 
@@ -141,8 +147,7 @@ DoORplot_compareProfiles(x = resetSFR(response.matrix, "SFR"), by.x = "Or35a", b
 
 We see that the response profiles are very similar but not identical, which is expected as the ac3B neuron expresses other receptors in addition to Or35a.
 
-
-## DoORplot_acrossReceptors
+## Visualizing odorant responses across responding units with `DoORplot_acrossReceptors()`{#acrossReceptors}
 With `DoORplot_acrossReceptors()` we can visualize the responses that one or several odorants elicit across receptors / responding units.
 
 ```{r, fig.width = 6, fig.height = 6}
@@ -151,8 +156,7 @@ odors <-
 DoORplot_acrossReceptors(odors, tag = "Name", base_size = 8)
 ```
 
-
-## DoORplot_acrossOSNs
+## Visualizing odorant responses across OSNs with `DoORplot_acrossOSNs()`{#across_OSNs}
 `DoORplot_acrossOSNs()` is similar to `DoORplot_acrossReceptors()` but the responding units are sorted according to the sensory neuron they belong to. This sorting is controlled via `DoOR_mappings` from the `DoOR.data` package. There are 2 types of plot that `DoORplot_acrossOSNs()` can return. Type 2 directly resembles `DoORplot_acrossReceptors()`:
 
 ```{r, fig.width = 6, fig.height = 6}
