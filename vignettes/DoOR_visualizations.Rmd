@@ -69,7 +69,7 @@ DoORplot_tuningCurve(receptor = "receptor X", response.vector = c(1:100), base_s
 ```
 
 ### Odorants
-`DoORplot_tuningCurve()` can as well be used to visualize the ensemble of responding units a given odorant activates. Therefore we specify an odorant name instead of a response unit name:
+`DoORplot_tuningCurve()` can as well be used to visualize the ensemble of responding units that is activated by a given odorant. Therefore we specify an odorant name instead of a response unit name:
 ```{r}
 DoORplot_tuningCurve(odorant = "PGMYKACGEOXYJE-UHFFFAOYSA-N", base_size = 8)
 ```
