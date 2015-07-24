@@ -187,8 +187,10 @@ identifySensillum <- function(recording,
     
     plots[["ncol"]] <- 1
     
-    do.call(gridExtra::grid.arrange, plots)
-    
+    p <- do.call(gridExtra::arrangeGrob, plots)
+    grid::grid.newpage()
+    grid::grid.draw(p)
+
   } else {
     return(result)
   } 
