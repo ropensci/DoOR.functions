@@ -37,7 +37,7 @@
 #' plot(bp$backprojected$original.data, 
 #'      bp$backprojected$backprojected.data, 
 #'      xlab = "DoOR consensus response", 
-#'      ylab = "spikes [Hallem.2004.EN]"
+#'      ylab = "backprojected data [spikes, Hallem.2004.EN]"
 #' )
 #' 
 backProject <- function(template.data,

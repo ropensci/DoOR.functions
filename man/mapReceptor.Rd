@@ -2,30 +2,34 @@
 % Please edit documentation in R/mapReceptor.R
 \name{mapReceptor}
 \alias{mapReceptor}
-\title{Mapping the given receptor into response matrix}
+\title{mapReceptor}
 \usage{
-mapReceptor(da, by.column, Receptors, ResponseMatrix)
+mapReceptor(data, response_matrix = default.val("response.matrix"), nshow)
 }
 \arguments{
-\item{da}{data frame; odorant response data for a given receptor, e.g.
-Or22a.}
+\item{data}{data frame, containing two columns, one called "odorants" and one
+"responses" providing InChIKeys and odorant responses respectively.}
 
-\item{by.column}{character string; specifying the column in "da" that
-contains the response values.}
+\item{response_matrix}{output is a numeric vector that contains the Pearson
+Correlation Coefficient between given data and selected consensus data in}
 
-\item{Receptors}{character vector; containing the names of receptor that
-specify the consensus values in response matrix}
-
-\item{ResponseMatrix}{output is a numeric vector that contains the Pearson
-Correlation Coefficient between given data and selected consensus data in
-response matrix}
+\item{nshow}{numeric, if defined, only this number of results will be
+returned response matrix}
 }
 \description{
-Mapping the given receptor into response matrix by comparing their linear
-relationship (Pearson Correlation Coefficient).
+Identifying the source of unknown response data by correlating it agains all
+DoOR responding units.
+}
+\examples{
+loadData()
+  data <- data.frame(odorants  = Or22a$InChIKey,
+                     responses = Or22a$Hallem.2004.EN)
+  data <- na.omit(data)
+  mapReceptor(data = data)
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
+
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
-\keyword{data}
 

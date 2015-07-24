@@ -7,7 +7,8 @@
 identifySensillum(recording, response_matrix = default.val("response.matrix"),
   odor_data = default.val("odor"),
   DoOR_mappings = default.val("DoOR_mappings"), tag = "Name",
-  min.cor = 0.9, nshow = 10, ret = "plot", method = "cor", sub)
+  min.cor = 0.9, nshow = 10, method = "cor", sub, base_size = 12,
+  plot = TRUE)
 }
 \arguments{
 \item{recording}{data frame; a data frame with the following columns
@@ -31,19 +32,21 @@ sensillum}
 \item{nshow}{numeric; the number of plots to nshow, plot e.g. only the top 10
 matches}
 
-\item{ret}{character; wether to return the "plot" or the "dataframe" with the
-correlations/distances}
-
 \item{method}{character; the method for similarity calculations: correlation
 ("cor") or Euclidean distances ("dist")}
 
 \item{sub}{character; if you know the class of sensillum you were recording
 from you can restrict the search to this subset here ("ab", "ac", "at",
 "pb", "sac")}
+
+\item{base_size}{numeric, the base font size of the ggplot plots}
+
+\item{plot}{logical; if TRUE returns the plot, else returns the data frame with the
+correlations/distances}
 }
 \value{
 either a plot (gtable) with responses sorted by highest correlations
-  or lowest distances, or a "dataframe" containing all calculated
+  or lowest distances, or a data frame containing all calculated
   correlations or Euclidean distances
 }
 \description{

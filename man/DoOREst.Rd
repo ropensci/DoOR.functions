@@ -4,12 +4,12 @@
 \alias{DoOREst}
 \title{Estimate the missing entries in a response data}
 \usage{
-DoOREst(da, nodor, method = "PC")
+DoOREst(data, nodor, method = "PC")
 }
 \arguments{
-\item{da}{a data frame or matrix; contaning the consensus response values.}
+\item{data}{a data frame or matrix; contaning the consensus response values}
 
-\item{nodor}{a numeric value; specifying the number of the selected odors.}
+\item{nodor}{a numeric value; specifying the number of the selected odors}
 
 \item{method}{character string; specifying the method ("PC" (Pearson's
 coefficient) and "Knn" (k nearest neighbors)) for estimation, the default is
@@ -19,13 +19,16 @@ coefficient) and "Knn" (k nearest neighbors)) for estimation, the default is
 Estimate the missing entries in a response data
 }
 \details{
-A warp programe using Pearson Correlation or k-nearest neighbors
-estimate the missing entries in a response data.
+A wrapper programe for using Pearson Correlation or k-nearest neighbors to
+estimate the missing entries in a response matrix.
 }
 \examples{
+\dontrun{
 library(DoOR.data)
 data(response.matrix)
-# est_data <- DoOREst(da=response.matrix, nodor = 3)
+subset <- response.matrix[1:100, 11:30]
+est.data <- DoOREst(data = subset, nodor = 6)
+}
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

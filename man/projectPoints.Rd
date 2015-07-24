@@ -2,7 +2,7 @@
 % Please edit documentation in R/projectPoints.R
 \name{projectPoints}
 \alias{projectPoints}
-\title{projects data points onto the curve defined by the model function}
+\title{projectPoints}
 \usage{
 projectPoints(x, y, xylim, best.model, plot = default.val("plot"),
   points_cex = default.val("points.cex"), title = default.val("title"), ...)
@@ -29,20 +29,22 @@ symbols relative to the default size.}
 \item{\dots}{further graphical parameters}
 }
 \description{
+projects data points onto the curve defined by the model function
+}
+\details{
 For internal use in the merging process (see also \code{\link{modelRP}}). The
 model function is choosen by \code{\link{calModel}}.
 \code{\link{projectPoints}} then projects the data points from the datasets
 to be merged onto the curve defined by the model function. It computes the
 closest distance from a data point to a point on the curve by numerical
 optimisation.
-}
-\details{
-A list with two data frames "Double.Observations" and "Single.Observation" is
+
+A list with two data frames "double.observations" and "single.observations" is
 returned, which give the coordinates of double observations (defined as
 (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)).
 Both data frames contain seven columns: "ID" indicating the original position
 of data x and y; "x", "y" indicating the coordinate of observation; "X", "Y"
-indicating the coordinate of projected point on the functional line;
+indicating the coordinate of projected point on the function;
 "distance" indicating the distances between \code{(xmin, f(xmin))} and all
 points on the functional line; "NDR" indicating the normalized distances
 across all the distance values.
