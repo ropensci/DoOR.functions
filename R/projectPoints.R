@@ -7,7 +7,7 @@
 #' closest distance from a data point to a point on the curve by numerical 
 #' optimisation.
 #' 
-#' A list with two data frames "Double.Observations" and "Single.Observation" is
+#' A list with two data frames "double.observations" and "single.observations" is
 #' returned, which give the coordinates of double observations (defined as 
 #' (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)). 
 #' Both data frames contain seven columns: "ID" indicating the original position
@@ -291,13 +291,13 @@ projectPoints <- function(x, y, xylim, best.model,
       legend("topleft", c(paste("n=",dim(x_y)[1]), paste("MD=",round(best.model[[1]]$MD,6))),bty='n')
     }
     
-    return(list(Double.Observations = res3, Single.Observation = res4, MD = MD.value))
+    return(list(double.observations = res3, single.observations = res4, MD = MD.value))
     
   } # END if (plot == TRUE)
   
   else 
   {
-    return(list(Double.Observations=res3,Single.Observation=res4, MD = MD.value))
+    return(list(double.observations=res3,single.observations=res4, MD = MD.value))
   }
   
 }

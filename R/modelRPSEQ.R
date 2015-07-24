@@ -76,9 +76,9 @@ modelRPSEQ <-
       res 	  <- rep(NA, length = dim(pda)[1])
       
       # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
-      res[projected$Double.Observations$ID] <- projected$Double.Observations$NDR
-      if (is.data.frame(projected$Single.Observation)) {
-        res[projected$Single.Observation$ID] <- projected$Single.Observation$NDR
+      res[projected$double.observations$ID] <- projected$double.observations$NDR
+      if (is.data.frame(projected$single.observations)) {
+        res[projected$single.observations$ID] <- projected$single.observations$NDR
       }
       
       y <- res

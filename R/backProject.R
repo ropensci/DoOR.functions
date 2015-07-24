@@ -1,16 +1,17 @@
-#' project the model response values back to tested values
+#' backProject
 #' 
-#' project the model response values back to tested values
+#' project the model response values back into your scale of interest (spike, deltaF/F...)
 #' 
-#' backProject is used to project the model response values back
-#' to tested values.  The process of back projection is following serval steps:
-#' \itemize{ \item 1. normalize two data set in values from 0 to 1; \item 2.
-#' plot "bp.data" against "cons.data"; \item 3. choose the best fitting model
-#' with the lowest "MD" value; \item 4. project the consensus values from "x"
+#' The process of back projection is following serval steps:
+#' \itemize{ \item 1. rescale both data sets to [0,1]; 
+#'           \item 2. plot "bp.data" against "cons.data"; 
+#'           \item 3. choose the best fitting model with the lowest "MD" value; 
+#'           \item 4. project the consensus values from "x"
 #' onto fitted line, those projected Y coordinates are normalized back
-#' projected values; \item 5. estimate the parameters ("intercept" and "slope")
-#' between unnormalized data and normalized data using linear regression; \item
-#' 6. rescale all projected Y coordinates with the parameters.  }
+#' projected values; 
+#'           \item 5. estimate the parameters ("intercept" and "slope")
+#' between unnormalized data and normalized data using linear regression; 
+#'           \item 6. rescale all projected Y coordinates with the parameters.  }
 #' 
 #' @param cons.data a data frame; containing model response values.
 #' @param bp.data a data frame; containing the data will be back projected.
@@ -28,8 +29,7 @@
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @export
 #' 
-backProject <-
-  function(cons.data,bp.data,tag.odor,tag.cons.data,tag.bp.data) {
+backProject <- function(cons.data,bp.data,tag.odor,tag.cons.data,tag.bp.data) {
     
     con.data <- as.data.frame(cons.data)
     bp.data  <- as.data.frame(bp.data)
@@ -53,14 +53,14 @@ backProject <-
     calM		   <- calModel(x=xy[,1],y=xy[,2])
     projected 	   <- projectPoints(x=xy[,1],y=xy[,2],best.model=calM, plot=TRUE,title=TRUE, xlab=tag.cons.data, ylab=tag.bp.data)
     
-    projected_back     <- rbind(projected$Double.Observations[,c('ID','Y')],projected$Single.Observation[,c('ID','Y')])
+    projected_back     <- rbind(projected$double.observations[,c('ID','Y')],projected$single.observations[,c('ID','Y')])
     #projected_back normalised:
-    projected_back_NDR <- rbind(projected$Double.Observations[,c('ID','NDR')],projected$Single.Observation[,c('ID','NDR')])
+    projected_back_NDR <- rbind(projected$double.observations[,c('ID','NDR')],projected$single.observations[,c('ID','NDR')])
     
     
-    match_Double.Observations_ID <- projected$Double.Observations[, c('ID')] 		# find overlapping odors
-    normalized_bp_DO 	     <- projected$Double.Observations[, c('y')]			# Y-coordinates of normalized data (Double.Observations)
-    unnormalized_bp_DO 	     <- bp.data[match_Double.Observations_ID, tag.bp.data]	# Y-coordinates of unnormalized data (Double.Observations)
+    match_double.observations_ID <- projected$double.observations[, c('ID')] 		# find overlapping odors
+    normalized_bp_DO 	     <- projected$double.observations[, c('y')]			# Y-coordinates of normalized data (double.observations)
+    unnormalized_bp_DO 	     <- bp.data[match_double.observations_ID, tag.bp.data]	# Y-coordinates of unnormalized data (double.observations)
     
     
     

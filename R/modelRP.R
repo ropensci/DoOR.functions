@@ -131,8 +131,8 @@ modelRP <- function(da,
     # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
     # to integrate it into pda, change data type: list to vector
     merged_data                                   <- rep(NA, length = dim(pda)[1])
-    merged_data[projected$Double.Observations$ID] <- projected$Double.Observations$NDR
-    merged_data[projected$Single.Observation$ID]  <- projected$Single.Observation$NDR
+    merged_data[projected$double.observations$ID] <- projected$double.observations$NDR
+    merged_data[projected$single.observations$ID]  <- projected$single.observations$NDR
     
     #remove the merged studies from the data matrix pda
     rest_data <- colnames(pda)[-match(c(selected$selected.y,selected$selected.x),colnames(pda))]
@@ -163,8 +163,8 @@ modelRP <- function(da,
       
       # overwrite merged_data with new values 
       merged_data                                     <- rep(NA, length = dim(pda)[1])
-      merged_data[projected$Double.Observations$ID]   <- projected$Double.Observations$NDR
-      merged_data[projected$Single.Observation$ID]    <- projected$Single.Observation$NDR
+      merged_data[projected$double.observations$ID]   <- projected$double.observations$NDR
+      merged_data[projected$single.observations$ID]    <- projected$single.observations$NDR
       #remove the merged study from the data matrix pda
       rest_data <- rest_data[-match(selected.next$selected.x,rest_data)]
       ind <- ind - 1
