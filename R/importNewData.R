@@ -55,6 +55,9 @@ importNewData <- function(file.name,
     file.name <- gsub(".csv$", "", file.name)
   }
 
+  if(!("Name" %in% colnames(imported.data)) | !("InChIKey" %in% colnames(imported.data))) 
+    stop("'InChIKey' or 'Name' column missing, these two are mandatory!")
+  
   # check for already existing studies
   if (any(file.name %in% responseRange$study)) {
     existing <- which(file.name %in% responseRange$study)
@@ -113,22 +116,22 @@ importNewData <- function(file.name,
   }
 
   # update data frame "response range"
-  responseRange_new.file <- range(imported.data[,nv],na.rm=TRUE)
+  responseRange_new.file <- range(imported.data[,nv], na.rm=TRUE)
   responseRange_new      <- data.frame(study   = file.name,
                                        min 	  = responseRange_new.file[1],
                                        max  	  = responseRange_new.file[2],
-                                       n_odors = sum(apply(!is.na(imported.data[nv]),1,sum) > 0))# dim(imported.data)[1]) # changed as the old way also returned NAs
+                                       n_odors = sum(apply(!is.na(imported.data[nv]), 1, sum) > 0))# dim(imported.data)[1]) # changed as the old way also returned NAs
 
   responseRange <- rbind(responseRange, responseRange_new)
 
   # update data frame "odor" and data.format if new odor is available.
-  matchtoOdor <- match(imported.data[,ident],odor_data[,ident])
+  matchtoOdor <- match(imported.data[,ident], odor_data[,ident])
   whichNA     <- which(is.na(matchtoOdor))
 
   stats$updatedOdors <- length(na.omit(matchtoOdor))
   stats$newOdors     <- length(whichNA)
 
-  if (!identical(odor_data[1:5],dataFormat))
+  if (!identical(odor_data[1:5], dataFormat))
     stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.")
   if (is.na(whichNA[1])) {
     message("There were no new odors imported.")
@@ -136,12 +139,12 @@ importNewData <- function(file.name,
     ##########
     # add new odor identifiers to 'odor' and 'data.format' --------------------
     ##########
-    newOdor 	<- as.character(imported.data[whichNA,"Name"])
+    newOdor <- as.character(imported.data[whichNA, "Name"])
     message(paste(newOdor, " - is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
 
     dim_odor 	<- dim(odor_data)
 
-    odor_data[(dim_odor[1]+length(whichNA)),] 		<- NA
+    odor_data[(dim_odor[1]+length(whichNA)),] <- NA
 
     levels(odor_data$InChIKey) <- union(levels(odor_data$InChIKey),levels(imported.data$InChIKey))
     odor_data[(dim_odor[1]+(1:length(whichNA))),"InChIKey"]       <-   as.character(imported.data[whichNA,"InChIKey"])
