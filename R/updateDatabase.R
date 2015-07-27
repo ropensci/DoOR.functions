@@ -68,9 +68,9 @@ updateDatabase <- function(receptor,
     studies       <- names(da)[recordColumn]
     
     if(length(da) > default.val("num.charColumns")) {
-
+      
       if (missing(perm)) {
-        perm 	<- matrix(studies[permutations(length(studies))], ncol=length(studies)) 
+        perm <- matrix(studies[permutations(length(studies))], ncol=length(studies)) 
         message(paste("All possible permutations (", dim(perm)[1], ") have been calculated, now merging.", sep = ""))
       }
       
@@ -147,9 +147,9 @@ updateDatabase <- function(receptor,
   message(paste("response.matrix has been updated for",receptor))
   
   # update response.matrix.excluded
-    excluded.data$excluded <- as.character(excluded.data$excluded)
-    excluded.data[excluded.data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
-    assign("excluded.data", excluded.data, envir = .GlobalEnv)
-    message(paste("excluded.data has been updated for",receptor))
-
+  excluded.data$excluded <- as.character(excluded.data$excluded)
+  excluded.data[excluded.data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
+  assign("excluded.data", excluded.data, envir = .GlobalEnv)
+  message(paste("excluded.data has been updated for",receptor))
+  
 }
