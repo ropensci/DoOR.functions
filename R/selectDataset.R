@@ -27,7 +27,7 @@ selectDataset <- function(study,
   
   if(na.rm == T) {
     nonNA <- which(apply(!is.na(selected), 1, sum) > 0)
-    result <- selected.headers[nonNA,]
+    result <- result[nonNA,]
   }
   
   return(result)
