@@ -10,7 +10,7 @@ rebuildMetadata <- function(){
   
   rr <- data.frame()
   for(i in datasets) {
-    data.i <- selectDataset(study = i, na.rm = T)
+    data.i <- getDataset(study = i, na.rm = T)
     rec.i  <- colnames(data.i)[-c(1:default.val("num.charColumns"))]
     # update wgn
     wgn[rec.i, i] <- 1 

@@ -1,4 +1,4 @@
-#' selectDataset
+#' getDataset
 #' 
 #' aggregates original data from a given study
 #' 
@@ -14,8 +14,8 @@
 #' 
 #' @examples
 #' loadData()
-#' selectDataset("Hallem.2004.EN", na.rm = TRUE)
-selectDataset <- function(study,
+#' getDataset("Hallem.2004.EN", na.rm = TRUE)
+getDataset <- function(study,
                           na.rm = FALSE) {
   tmp <- load2list()
   selected <- sapply(tmp, "[[", study)
