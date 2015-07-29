@@ -28,6 +28,7 @@ mapReceptor <- function(data,
        stop("Please provide InChIKeys and responses in columns named 'odorants' and 'responses'.")
   
   data$odorants   <- as.character(data$odorants)
+  data            <- na.omit(data)
   res             <- data.frame()
   response_matrix <- response_matrix[match(data$odorants, rownames(response_matrix)), ]
   
