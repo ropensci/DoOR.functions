@@ -9,6 +9,7 @@
 #' @param response_matrix output is a numeric vector that contains the Pearson 
 #'   Correlation Coefficient between given data and selected consensus data in
 #' @param nshow numeric, if defined, only this number of results will be
+#' @param sub character, a subset of responding units
 #'   returned response matrix
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
@@ -21,10 +22,17 @@
 #'   mapReceptor(data = data)
 mapReceptor <- function(data, 
                         response_matrix = default.val("response.matrix"),
+                        sub,
                         nshow) {
+  if(!("odorants" %in% colnames(data)) | !("responses" %in% colnames(data)))
+       stop("Please provide InChIKeys and responses in columns named 'odorants' and 'responses'.")
+  
   data$odorants   <- as.character(data$odorants)
   res             <- data.frame()
-  response_matrix <- response_matrix[match(data$odorants, rownames(response_matrix)),]
+  response_matrix <- response_matrix[match(data$odorants, rownames(response_matrix)), ]
+  
+  if(!missing(sub)) 
+    response_matrix <- response_matrix[ ,match(sub, colnames(response_matrix))]
   
   # remove n < 3
   n <- which(apply(!is.na(response_matrix), 2, sum) < 3)

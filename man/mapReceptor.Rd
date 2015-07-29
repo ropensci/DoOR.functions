@@ -4,7 +4,8 @@
 \alias{mapReceptor}
 \title{mapReceptor}
 \usage{
-mapReceptor(data, response_matrix = default.val("response.matrix"), nshow)
+mapReceptor(data, response_matrix = default.val("response.matrix"), sub,
+  nshow)
 }
 \arguments{
 \item{data}{data frame, containing two columns, one called "odorants" and one
@@ -13,8 +14,10 @@ mapReceptor(data, response_matrix = default.val("response.matrix"), nshow)
 \item{response_matrix}{output is a numeric vector that contains the Pearson
 Correlation Coefficient between given data and selected consensus data in}
 
-\item{nshow}{numeric, if defined, only this number of results will be
+\item{sub}{character, a subset of responding units
 returned response matrix}
+
+\item{nshow}{numeric, if defined, only this number of results will be}
 }
 \description{
 Identifying the source of unknown response data by correlating it agains all
