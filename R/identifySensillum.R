@@ -104,9 +104,9 @@ identifySensillum <- function(recording,
   if (method == "dist") {
     # calc distances
     units  <- colnames(recording)[-1]
-    result <- rbind(t(recording[,-1]), t(data))
+    result <- rbind(t(recording[,-1,drop = FALSE]), t(data))
     result <- as.matrix(dist(result))
-    result <- result[(length(units)+1):nrow(result), 1:length(units)]
+    result <- result[(length(units)+1):nrow(result), 1:length(units),drop=FALSE]
     result <- data.frame(receptor  = rownames(result),
                          sensillum = DoOR_mappings$sensillum[match(rownames(result), DoOR_mappings$receptor)],
                          OSN = DoOR_mappings$OSN[match(rownames(result), DoOR_mappings$receptor)],
