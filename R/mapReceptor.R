@@ -11,6 +11,8 @@
 #' @param nshow numeric, if defined, only this number of results will be
 #' @param sub character, a subset of responding units
 #'   returned response matrix
+#' @param threshold.p numeric, a p-value threshold, only correlations below will be returned
+#' @param threshold.cor numeric, a correlation-coefficient threshold, only correlations above will be returned
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
@@ -23,6 +25,8 @@
 mapReceptor <- function(data, 
                         response_matrix = default.val("response.matrix"),
                         sub,
+                        threshold.p,
+                        threshold.cor,
                         nshow) {
   if(!("odorants" %in% colnames(data)) | !("responses" %in% colnames(data)))
        stop("Please provide InChIKeys and responses in columns named 'odorants' and 'responses'.")
@@ -49,6 +53,12 @@ mapReceptor <- function(data,
                        p.value         = unlist(sapply(result, "[","p.value")))
   
   result <- result[order(result$cor, decreasing = T),]
+  
+  if(!missing(threshold.p))
+    result <- result[which(result$p.value <= threshold.p),]
+  
+  if(!missing(threshold.cor))
+    result <- result[which(result$cor >= threshold.cor),]
   
   if(!missing(nshow))
     result <- result[1:nshow, ]
