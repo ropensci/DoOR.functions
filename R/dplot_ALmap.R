@@ -1,4 +1,4 @@
-#' DoORplot_ALmap
+#' dplot_ALmap
 #'
 #' Plot an antennal lobe map with color coded odorant responses.
 #'
@@ -33,20 +33,20 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @examples
 #' library(DoOR.data)
-#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
-#' DoORplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
+#' dplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
+#' dplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
 #'    color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #'
-#' DoORplot_ALmap(transID("123-92-2"), scalebar = FALSE) +
+#' dplot_ALmap(transID("123-92-2"), scalebar = FALSE) +
 #' ggplot2::theme(legend.position  = "bottom",
 #'       panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
 #' ggplot2::ggtitle("responses elicited by isopentyl acetate")
 #'
 #' \dontrun{
-#' p <- DoORplot_ALmap(transID("123-92-2"))
+#' p <- dplot_ALmap(transID("123-92-2"))
 #' ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
-DoORplot_ALmap <- function(InChIKey,
+dplot_ALmap <- function(InChIKey,
                            response_matrix = default.val("response.matrix"),
                            odor_data = default.val("odor"),
                            DoOR_mappings = default.val("DoOR_mappings"),

@@ -1,4 +1,4 @@
-#' DoORplot_tuningCurve
+#' dplot_tuningCurve
 #'
 #' plot a receptor or odorant tuning curve
 #'
@@ -28,17 +28,17 @@
 #' data(response.matrix)
 #' data(odor)
 #' 
-#' DoORplot_tuningCurve(odorant = odor$InChIKey[2])
-#' DoORplot_tuningCurve(receptor = "Or22a")
+#' dplot_tuningCurve(odorant = odor$InChIKey[2])
+#' dplot_tuningCurve(receptor = "Or22a")
 #'
 #' range <- range(resetSFR(response.matrix, "SFR"), na.rm = TRUE)
-#' DoORplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
+#' dplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
 #'
-#' DoORplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
+#' dplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
 #'
-#' DoORplot_tuningCurve(odorant = "odor X", response.vector = rnorm(200))
+#' dplot_tuningCurve(odorant = "odor X", response.vector = rnorm(200))
 #'
-DoORplot_tuningCurve <- function(receptor,
+dplot_tuningCurve <- function(receptor,
                                  odorant,
                                  response.vector,
                                  response_matrix = default.val("response.matrix"),
@@ -95,7 +95,7 @@ DoORplot_tuningCurve <- function(receptor,
       odor.main <- odorant
     if(missing(response.vector)) {
       if (!zero == "")
-        data <- apply(response_matrix, 2, function(x) resetSFR(x,x[zero]))
+        data <- apply(response_matrix, 2, function(x) resetSFR(x, x[zero]))
       data <- na.omit(data[odorant,])
     } else {
       data <- response.vector

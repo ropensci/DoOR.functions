@@ -1,4 +1,4 @@
-#' DoORplot_acrossOSNs
+#' dplot_acrossOSNs
 #' 
 #' plot the activation patterns of one or several odorants across OSNs
 #' 
@@ -31,11 +31,11 @@
 #' library(DoOR.data)
 #' odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), 
 #'                     from = "Name", to = "InChIKey")
-#' DoORplot_acrossOSNs(odorants)
-#' DoORplot_acrossOSNs(odorants, sub = c("ac", "at"))
-#' DoORplot_acrossOSNs(odorants, plot.type = 2)
+#' dplot_acrossOSNs(odorants)
+#' dplot_acrossOSNs(odorants, sub = c("ac", "at"))
+#' dplot_acrossOSNs(odorants, plot.type = 2)
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
-DoORplot_acrossOSNs <- function(odorants,
+dplot_acrossOSNs <- function(odorants,
                                 response_matrix = default.val("response.matrix"),
                                 odor_data = default.val("odor"),
                                 DoOR_mappings = default.val("DoOR_mappings"),

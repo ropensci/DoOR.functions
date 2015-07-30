@@ -1,4 +1,4 @@
-#' DoORplot_acrossReceptors
+#' dplot_acrossReceptors
 #'
 #' barplot of DoOR responses of a set of odorant across all responding units in DoOR
 #'
@@ -16,10 +16,10 @@
 #' @examples
 #' library(DoOR.data)
 #' data(odor)
-#' DoORplot_acrossReceptors(transID("123-92-2"), tag = "CAS")
-#' DoORplot_acrossReceptors(odor$InChIKey[4:10])
+#' dplot_acrossReceptors(transID("123-92-2"), tag = "CAS")
+#' dplot_acrossReceptors(odor$InChIKey[4:10])
 #'
-DoORplot_acrossReceptors <- function(odorant,
+dplot_acrossReceptors <- function(odorant,
                                      response_matrix = default.val("response.matrix"),
                                      odor_data = default.val("odor"),
                                      zero = default.val("zero"),

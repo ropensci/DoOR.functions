@@ -1,4 +1,4 @@
-#' DoORplot_responseProfile
+#' dplot_responseProfile
 #' 
 #' create a barplot of a DoOR response profile
 #' 
@@ -22,9 +22,9 @@
 #' @examples
 #' library(DoOR.data)
 #' data(response.matrix)
-#' DoORplot_responseProfile("Or22a", response.matrix)
-#' DoORplot_responseProfile("Or22a", response.matrix, tag = "Name")
-DoORplot_responseProfile <- function(receptor,
+#' dplot_responseProfile("Or22a", response.matrix)
+#' dplot_responseProfile("Or22a", response.matrix, tag = "Name")
+dplot_responseProfile <- function(receptor,
                                      response_matrix = default.val("response.matrix"),
                                      odor_data = default.val("odor"),
                                      tag = default.val("tag"),

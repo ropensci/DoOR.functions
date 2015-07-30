@@ -1,4 +1,4 @@
-#' DoORplot_responseMatrix
+#' dplot_responseMatrix
 #'
 #' plot DoOR responses as a point matrix
 #'
@@ -20,11 +20,11 @@
 #' library(DoOR.data)
 #' data(response.matrix)
 #' tmp <- resetSFR(response.matrix, "SFR")
-#' DoORplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
-#' DoORplot_responseMatrix(response.matrix[10:50,], tag = "Name",
+#' dplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
+#' dplot_responseMatrix(response.matrix[10:50,], tag = "Name",
 #'                         limits = range(response.matrix, na.rm = TRUE))
 #'
-DoORplot_responseMatrix <- function(data,
+dplot_responseMatrix <- function(data,
                                     odor_data = default.val("odor"),
                                     tag    = default.val("tag"),
                                     colors = default.val("colors"),

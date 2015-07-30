@@ -5,7 +5,7 @@
 \title{mapReceptor}
 \usage{
 mapReceptor(data, response_matrix = default.val("response.matrix"), sub,
-  threshold.p, threshold.r, nshow)
+  threshold.p, threshold.cor, nshow)
 }
 \arguments{
 \item{data}{data frame, containing two columns, one called "odorants" and one
@@ -19,9 +19,9 @@ returned response matrix}
 
 \item{threshold.p}{numeric, a p-value threshold, only correlations below will be returned}
 
-\item{nshow}{numeric, if defined, only this number of results will be}
-
 \item{threshold.cor}{numeric, a correlation-coefficient threshold, only correlations above will be returned}
+
+\item{nshow}{numeric, if defined, only this number of results will be}
 }
 \description{
 Identifying the source of unknown response data by correlating it agains all

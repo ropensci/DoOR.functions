@@ -20,12 +20,12 @@
 #' and compose them as a list.  \cr }
 #'
 #' Try some visualizations (e.g. producing the plots from the paper):
-#' \tabular{ll}{ \code{\link{DoORplot_ALmap}}: \tab response to a chemical mapped onto
-#' an image of the antennal lobe.\cr \code{\link{DoORplot_compareProfiles}}: \tab compare
-#' the results of two studies.  \cr \code{\link{DoORplot_responseMatrix}}: \tab Dot Plot of
-#' Odorant Responses Across Receptors. \cr \code{\link{DoORplot_responseProfile}}: \tab
+#' \tabular{ll}{ \code{\link{dplot_ALmap}}: \tab response to a chemical mapped onto
+#' an image of the antennal lobe.\cr \code{\link{dplot_compareProfiles}}: \tab compare
+#' the results of two studies.  \cr \code{\link{dplot_responseMatrix}}: \tab Dot Plot of
+#' Odorant Responses Across Receptors. \cr \code{\link{dplot_responseProfile}}: \tab
 #' bar plot: one receptor, all chemicals. \cr
-#' \code{\link{DoORplot_tuningCurve}}: \tab pyramid diagram depicting a receptor's
+#' \code{\link{dplot_tuningCurve}}: \tab pyramid diagram depicting a receptor's
 #' tuning breadth. \cr } Try some queries: \tabular{ll}{
 #' \code{\link{getResponses}}: \tab given a chemical, get original responses from
 #' all studies in the database.\cr \code{\link{getNormalizedResponses}}: \tab given a

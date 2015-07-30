@@ -15,9 +15,9 @@
 # by the red, blue, green and optionally alpha values in hexadecimal (after
 # rescaling to 0 ... 255), see \code{\link{rgb}}.
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-# @seealso \code{\link{rgb}}, \code{\link{colorRamp}}, \code{\link{DoORplot_ALmap}},
-# \code{\link{DoORplot_responseMatrix}}, \code{\link{DoORplot_responseProfile}},
-# \code{\link{DoORplot_compareReceptors}}
+# @seealso \code{\link{rgb}}, \code{\link{colorRamp}}, \code{\link{dplot_ALmap}},
+# \code{\link{dplot_responseMatrix}}, \code{\link{dplot_responseProfile}},
+# \code{\link{dplot_compareReceptors}}
 # @keywords color
 # @examples
 # 
