@@ -24,7 +24,11 @@
 #' @param sub character, if you know the class of sensillum you were recording 
 #'   from you can restrict the search to this subset here ("ab", "ac", "at", 
 #'   "pb", "sac")
-#' @param base_size numeric, the base font size of the ggplot plots 
+#' @param use character, the "use" option from the \code{cor} function, "all"
+#'   returns NA when pairs are incomplete, "na.or.complete" only uses complete
+#'   observations to calculate correlations; see \code{\link{cor}} for details
+#' @param base_size numeric, the base font size of the ggplot plots
+#'   
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #'   
 #' @return either a plot (gtable) with responses sorted by highest correlations 
@@ -54,7 +58,8 @@ identifySensillum <- function(recording,
                               method  = "cor",
                               sub,
                               base_size = 12,
-                              plot = TRUE) {
+                              plot = TRUE,
+                              use = "na.or.complete") {
   
   if(plot == TRUE) {
     if (!requireNamespace("ggplot2", quietly = TRUE))
@@ -84,7 +89,7 @@ identifySensillum <- function(recording,
     result$sensillum <- DoOR_mappings$sensillum[match(result$receptor, DoOR_mappings$receptor)]
     result$OSN <- DoOR_mappings$OSN[match(result$receptor, DoOR_mappings$receptor)]
     for(i in 1:length(units)) {
-      corx <- apply(data, 2, function(x) cor(x, recording[,units[i]]) )
+      corx <- apply(data, 2, function(x) cor(x, recording[,units[i]], use = use) )
       corx <- data.frame(receptor = names(corx), value = corx)
       colnames(corx)[2] <- units[i]
       result <- merge(result, corx)
@@ -96,6 +101,42 @@ identifySensillum <- function(recording,
     for(i in levels(cor.tmp$sensillum)) {
       tmp <- subset(cor.tmp, sensillum == i)
       if(all(apply(as.data.frame(tmp[,-c(1:3)]), 2 , function(x) any(na.omit(x) > min.cor)))) {
+        message(paste("found correlations above ", min.cor, " for all ",length(units), " units in: ", i, sep=""))
+      }
+    }
+  }
+  
+  if (method == "cor.test") {
+    # calulate correlations
+    units  <- colnames(recording)[-1]
+    result <- data.frame(receptor = colnames(data))
+    result$sensillum <- DoOR_mappings$sensillum[match(result$receptor, DoOR_mappings$receptor)]
+    result$OSN <- DoOR_mappings$OSN[match(result$receptor, DoOR_mappings$receptor)]
+    for(i in 1:length(units)) {
+      corx <- c()
+      px   <- c()
+      for(j in colnames(data)) {
+        tmp <- try(cor.test(data[,j], recording[,units[i]]), silent = TRUE)
+        if(class(tmp) == "try-error") {
+          corx <- c(corx, NA)
+          px   <- c(px,  NA)
+        } else {
+          corx <- c(corx, tmp$estimate)
+          px   <- c(px,  tmp$p.value)
+        }
+      }
+      corx <- data.frame(receptor = colnames(data), value = corx, p.value = px)
+      colnames(corx)[2] <- units[i]
+      colnames(corx)[3] <- paste0(units[i],".pval")
+      result <- merge(result, corx)
+    }
+    
+    # print results
+    
+    cor.tmp <- droplevels(subset(result, sensillum != ""))
+    for(i in levels(cor.tmp$sensillum)) {
+      tmp <- subset(cor.tmp, sensillum == i)
+      if(all(apply(as.data.frame(tmp[,-c(1:3,5)]), 2 , function(x) any(na.omit(x) > min.cor)))) {
         message(paste("found correlations above ", min.cor, " for all ",length(units), " units in: ", i, sep=""))
       }
     }
@@ -124,17 +165,28 @@ identifySensillum <- function(recording,
   if(plot == TRUE) {
     # plot data
     
-    data.melt <- DoORmelt(data)
+    data.melt <- DoOR.functions:::DoORmelt(data)
     plots <- list()
     for(i in 1:length(units)) {
-      if (method == "cor")
+      if (method %in% c("cor"))
         cor.tmp <- result[order(result[,units[i]], decreasing = TRUE),][1:nshow, c("receptor",units[i])]
+      if (method %in% c("cor.test")) {
+        cor.tmp <- result[order(result[,units[i]], decreasing = TRUE),][1:nshow, c("receptor",units[i],paste0(units[i],".pval"))]
+        colnames(cor.tmp)[3] <- "pval"
+      }
       if (method == "dist")
         cor.tmp <- result[order(result[,units[i]], decreasing = FALSE),][1:nshow, c("receptor",units[i])]
       
       colnames(cor.tmp)[2] <- "cor"
       cor.tmp$OSN    <- DoOR_mappings$OSN[match(cor.tmp$receptor, DoOR_mappings$receptor)]
-      cor.tmp$label  <- paste(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", method, ": ", round(cor.tmp$cor, 5), sep = "")
+      if(method == "cor.test"){
+        cor.tmp$label  <- paste0(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", 
+                                "cor: ", round(cor.tmp$cor, 3), 
+                                "; p: ", format(cor.tmp$pval, scientific = TRUE, digits = 2))
+      } else {
+        cor.tmp$label  <- paste(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", method, ": ", round(cor.tmp$cor, 3), sep = "")
+      }
+        
       data.tmp       <- droplevels(subset(data.melt, dataset %in% cor.tmp$receptor))
       data.tmp$label <- cor.tmp$label[match(data.tmp$dataset, cor.tmp$receptor)]
       data.tmp$label <- factor(data.tmp$label, levels = cor.tmp$label)
