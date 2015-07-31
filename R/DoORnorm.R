@@ -12,6 +12,8 @@
 #' DoORnorm(x)
 #' 
 DoORnorm <- function(x) {
+  if(all(is.na(x)))
+     return(x)
   x.max <- max(x, na.rm = TRUE)
   x.min <- min(x, na.rm = TRUE)
   if ((x.max - x.min) == 0) {
