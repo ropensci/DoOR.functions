@@ -5,7 +5,8 @@
 \title{Find normalised receptor responses}
 \usage{
 getNormalizedResponses(odors, zero = default.val("zero"),
-  response_matrix = default.val("response.matrix"))
+  response_matrix = default.val("response.matrix"), round = 3,
+  na.rm = FALSE)
 }
 \arguments{
 \item{odors}{character vector, one or more odors provided as InChIKey.}
@@ -16,6 +17,10 @@ getNormalizedResponses(odors, zero = default.val("zero"),
 \item{response_matrix}{a data frame, as e.g. "response.matrix" that is loaded
 by \code{\link{modelRP}}. It is also possible to create this frame manually
 using \code{\link{modelRP}}.}
+
+\item{round}{numeric, round to this amount of digits, set to NA if you do not want to round}
+
+\item{na.rm}{logical, remove NAs?}
 }
 \description{
 given a chemical, get normalised receptor responses from all studies in the

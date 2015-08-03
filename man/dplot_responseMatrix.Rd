@@ -5,8 +5,8 @@
 \title{dplot_responseMatrix}
 \usage{
 dplot_responseMatrix(data, odor_data = default.val("odor"),
-  tag = default.val("tag"), colors = default.val("colors"), bw = FALSE,
-  point = FALSE, limits, base_size = 12)
+  tag = default.val("tag"), colors = default.val("colors"), flip = FALSE,
+  fix = TRUE, bw = FALSE, point = FALSE, limits, base_size = 12)
 }
 \arguments{
 \item{data}{a subset of e.g. response.matrix}
@@ -17,6 +17,10 @@ dplot_responseMatrix(data, odor_data = default.val("odor"),
 
 \item{colors}{the colors to use if negative values are supplied (range of 5
 colors, 2 for negative values, 1 for 0 and 3 for positive values)}
+
+\item{flip}{logical, if TRUE the x and y axes will be flipped}
+
+\item{fix}{logical, whether to fix the ratio of the tiles when plotting as a heatmap}
 
 \item{bw}{logical, whether to plot b&w or colored}
 
