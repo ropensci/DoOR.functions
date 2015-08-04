@@ -8,7 +8,7 @@ identifySensillum(recording, response_matrix = default.val("response.matrix"),
   odor_data = default.val("odor"),
   DoOR_mappings = default.val("DoOR_mappings"), tag = "Name",
   min.cor = 0.9, nshow = 10, method = "cor", sub, base_size = 12,
-  plot = TRUE)
+  plot = TRUE, use = "na.or.complete")
 }
 \arguments{
 \item{recording}{data frame, a data frame with the following columns
@@ -43,6 +43,10 @@ from you can restrict the search to this subset here ("ab", "ac", "at",
 
 \item{plot}{logical, if TRUE returns the plot, else returns the data frame with the
 correlations/distances}
+
+\item{use}{character, the "use" option from the \code{cor} function, "all"
+returns NA when pairs are incomplete, "na.or.complete" only uses complete
+observations to calculate correlations; see \code{\link{cor}} for details}
 }
 \value{
 either a plot (gtable) with responses sorted by highest correlations
