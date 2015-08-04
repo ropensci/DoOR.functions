@@ -102,7 +102,8 @@ dplot_tuningCurve <- function(receptor,
     }
 
     data <- data.frame(receptors = 1:length(data), value = data)
-    data$receptors <- factor(data$receptors, levels = data$receptors[orderPyramid(data$value)])
+    if(nrow(data) > 1)
+      data$receptors <- factor(data$receptors, levels = data$receptors[orderPyramid(data$value)])
 
     plot <- ggplot2::ggplot(data) +
       ggplot2::geom_bar(ggplot2::aes(x = receptors, y = value), stat = "identity", position = "identity", width = 1, fill = fill.odorant) +
