@@ -41,9 +41,10 @@ mapReceptor <- function(data,
   
   # remove n < 3
   n <- which(apply(!is.na(response_matrix), 2, sum) < 3)
-  message(paste("skipped ", paste(names(response_matrix)[n], collapse = ", "), " as overlap (n) was < 3", sep=""))
-  
-  response_matrix <- response_matrix[ , -n]
+  if(length(n) > 0) {
+    message(paste("skipped ", paste(names(response_matrix)[n], collapse = ", "), " as overlap (n) was < 3", sep=""))
+    response_matrix <- response_matrix[ , -n]
+  }
   
   result <- apply(response_matrix, 2, function(x) cor.test(x, data$responses))
   
