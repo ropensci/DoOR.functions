@@ -4,3 +4,4 @@
 DESCRIPTION~
 DoOR.functions.Rproj
 .Rbuildignore
+inst/doc
