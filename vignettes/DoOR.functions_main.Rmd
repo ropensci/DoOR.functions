@@ -205,7 +205,7 @@ knitr::kable(head(responses))
 ```
 
 
-## `getNormalizedResponses()`{getNormalizedResponses}
+## `getNormalizedResponses()`{#getNormalizedResponses}
 `getNormalizedResponses()` gathers responses to the specified odorants from the response.matrix and resets the SFR _via_ `resetSFR()`:
 ```{r}
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")

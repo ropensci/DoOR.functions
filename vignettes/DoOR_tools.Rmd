@@ -1,6 +1,6 @@
 ---
 title: "DoOR analysis tools"
-author: "Vignette Author"
+author: "Daniel Münch"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
