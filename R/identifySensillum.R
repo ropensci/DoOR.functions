@@ -1,53 +1,53 @@
 #' identifySensillum
-#' 
-#' correlates the result from a SSR recording of several odorants against all 
+#'
+#' correlates the result from a SSR recording of several odorants against all
 #' DoOR response profiles
-#' 
-#' @param recording data frame, a data frame with the following columns 
-#'   "odorants" containing InChIKeys of the tested odorrant, and one column 
-#'   called "unit1" etc. for each unit, containing responses (or estimates) 
+#'
+#' @param recording data frame, a data frame with the following columns
+#'   "odorants" containing InChIKeys of the tested odorrant, and one column
+#'   called "unit1" etc. for each unit, containing responses (or estimates)
 #'   scaled between 0 and 1 (see examples)
 #' @param response_matrix DoOR response matrix, the data to compair against
 #' @param odor_data data frame, contains the odorant information.
 #' @param DoOR_mappings the data frame containing the mapping information
-#' @param tag character, the chemical identifier to use in plots, one of 
+#' @param tag character, the chemical identifier to use in plots, one of
 #'   \code{colnames(odor)}
-#' @param min.cor numeric, a minimum correlation value, the function will check 
-#'   wether there is a higher correlation for all units within a single 
+#' @param min.cor numeric, a minimum correlation value, the function will check
+#'   wether there is a higher correlation for all units within a single
 #'   sensillum
 #' @param nshow numeric, the number of plots to nshow, plot e.g. only the top 10
 #'   matches
 #' @param plot logical, if TRUE returns the plot, else returns the data frame with the
 #'   correlations/distances
-#' @param method character, the method for similarity calculations: correlation 
+#' @param method character, the method for similarity calculations: correlation
 #'   ("cor") or Euclidean distances ("dist")
-#' @param sub character, if you know the class of sensillum you were recording 
-#'   from you can restrict the search to this subset here ("ab", "ac", "at", 
+#' @param sub character, if you know the class of sensillum you were recording
+#'   from you can restrict the search to this subset here ("ab", "ac", "at",
 #'   "pb", "sac")
 #' @param use character, the "use" option from the \code{cor} function, "all"
 #'   returns NA when pairs are incomplete, "na.or.complete" only uses complete
 #'   observations to calculate correlations; see \code{\link{cor}} for details
 #' @param base_size numeric, the base font size of the ggplot plots
-#'   
+#'
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
-#'   
-#' @return either a plot (gtable) with responses sorted by highest correlations 
-#'   or lowest distances, or a data frame containing all calculated 
+#'
+#' @return either a plot (gtable) with responses sorted by highest correlations
+#'   or lowest distances, or a data frame containing all calculated
 #'   correlations or Euclidean distances
 #' @export
-#' 
+#'
 #' @examples
 #' library(DoOR.data)
 #' recording <- data.frame(
-#'    odorants = c(transID(c("BEDN", "ETAS"), "Code"), 
-#'    transID("carbon dioxide", "Name")), 
-#'    unit1 = c(.9,.1,.1), 
+#'    odorants = c(transID(c("BEDN", "ETAS"), "Code"),
+#'    transID("carbon dioxide", "Name")),
+#'    unit1 = c(.9,.1,.1),
 #'    unit2 = c(0, .1, 1)
 #' )
-#' 
+#'
 #' identifySensillum(recording)
 #' identifySensillum(recording, method = "dist", nshow = 5)
-#' 
+#'
 identifySensillum <- function(recording,
                               response_matrix = default.val("response.matrix"),
                               odor_data       = default.val("odor"),
@@ -60,7 +60,7 @@ identifySensillum <- function(recording,
                               base_size = 12,
                               plot = TRUE,
                               use = "na.or.complete") {
-  
+
   if(plot == TRUE) {
     if (!requireNamespace("ggplot2", quietly = TRUE))
       stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
@@ -69,19 +69,19 @@ identifySensillum <- function(recording,
     if (!requireNamespace("gridExtra", quietly = TRUE))
       stop("gridExtra is required for plotting, please install via install.packages('gridExtra')", call. = FALSE)
   }
-  
+
   recording$odorants  <- as.character(recording$odorants)
-  
+
   data <- response_matrix[recording$odorants,]
   if(is.na(nshow))
     nshow <- length(data)
-  
+
   if(!missing(sub)) {
     subset <- as.character(DoOR_mappings$receptor[grep(paste0("^", sub, collapse = "|"), DoOR_mappings$sensillum)])
     which(colnames(data) %in% subset)
     data <- data[,which(colnames(data) %in% subset)]
   }
-  
+
   if (method == "cor") {
     # calulate correlations
     units  <- colnames(recording)[-1]
@@ -94,9 +94,9 @@ identifySensillum <- function(recording,
       colnames(corx)[2] <- units[i]
       result <- merge(result, corx)
     }
-    
+
     # print results
-    
+
     cor.tmp <- droplevels(subset(result, sensillum != ""))
     for(i in levels(cor.tmp$sensillum)) {
       tmp <- subset(cor.tmp, sensillum == i)
@@ -105,7 +105,7 @@ identifySensillum <- function(recording,
       }
     }
   }
-  
+
   if (method == "cor.test") {
     # calulate correlations
     units  <- colnames(recording)[-1]
@@ -130,9 +130,9 @@ identifySensillum <- function(recording,
       colnames(corx)[3] <- paste0(units[i],".pval")
       result <- merge(result, corx)
     }
-    
+
     # print results
-    
+
     cor.tmp <- droplevels(subset(result, sensillum != ""))
     for(i in levels(cor.tmp$sensillum)) {
       tmp <- subset(cor.tmp, sensillum == i)
@@ -141,7 +141,7 @@ identifySensillum <- function(recording,
       }
     }
   }
-  
+
   if (method == "dist") {
     # calc distances
     units  <- colnames(recording)[-1]
@@ -153,19 +153,19 @@ identifySensillum <- function(recording,
                          OSN = DoOR_mappings$OSN[match(rownames(result), DoOR_mappings$receptor)],
                          result)
   }
-  
-  
+
+
   # plots
   # change odor identifier for plotting
   if(tag != "InChIKey") {
     recording$odorants <- odor_data[match(recording$odorants, odor_data$InChIKey), tag]
     rownames(data)     <- odor_data[match(rownames(data), odor_data$InChIKey), tag]
   }
-  
+
   if(plot == TRUE) {
     # plot data
-    
-    data.melt <- DoOR.functions:::DoORmelt(data)
+
+    data.melt <- DoORmelt(data)
     plots <- list()
     for(i in 1:length(units)) {
       if (method %in% c("cor"))
@@ -176,23 +176,23 @@ identifySensillum <- function(recording,
       }
       if (method == "dist")
         cor.tmp <- result[order(result[,units[i]], decreasing = FALSE),][1:nshow, c("receptor",units[i])]
-      
+
       colnames(cor.tmp)[2] <- "cor"
       cor.tmp$OSN    <- DoOR_mappings$OSN[match(cor.tmp$receptor, DoOR_mappings$receptor)]
       if(method == "cor.test"){
-        cor.tmp$label  <- paste0(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", 
-                                "cor: ", round(cor.tmp$cor, 3), 
+        cor.tmp$label  <- paste0(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n",
+                                "cor: ", round(cor.tmp$cor, 3),
                                 "; p: ", format(cor.tmp$pval, scientific = TRUE, digits = 2))
       } else {
         cor.tmp$label  <- paste(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n", method, ": ", round(cor.tmp$cor, 3), sep = "")
       }
-        
+
       data.tmp       <- droplevels(subset(data.melt, dataset %in% cor.tmp$receptor))
       data.tmp$label <- cor.tmp$label[match(data.tmp$dataset, cor.tmp$receptor)]
       data.tmp$label <- factor(data.tmp$label, levels = cor.tmp$label)
-      
-      
-      
+
+
+
       p <- ggplot2::ggplot(data.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
         ggplot2::geom_bar(position = "identity", stat = "identity", alpha = .6) +
         ggplot2::facet_wrap(~ label, nrow = 1) +
@@ -203,12 +203,12 @@ identifySensillum <- function(recording,
                        axis.title.x  = ggplot2::element_blank())
       assign(paste("p",i,sep="."),p)
     }
-    
+
     # plot recording
-    
+
     for(i in 1:length(units)) {
       rec.tmp <- data.frame(odorant = recording$odorants, value = recording[,units[i]], unit = paste0(units[i], "\n"))
-      
+
       r <- ggplot2::ggplot(rec.tmp, ggplot2::aes(x = odorant, y = value, fill = odorant, color = odorant)) +
         ggplot2::geom_bar(position = "identity", stat = "identity", alpha=.6) +
         ggplot2::theme_minimal(base_size = base_size) +
@@ -221,7 +221,7 @@ identifySensillum <- function(recording,
         ggplot2::geom_text(ggplot2::aes(y = .01, label = odorant), angle = 90, hjust = 0, vjust = .5, size = .3 * base_size, color = "black")
       assign(paste("r",i,sep="."),r)
     }
-    
+
     #build grobs
     for(i in 1:length(units)) {
       plots[[i]] <- gridExtra::arrangeGrob(grobs = list(
@@ -231,19 +231,19 @@ identifySensillum <- function(recording,
       left = units[i],
       nrow = 1, widths = c(.2,.8))
     }
-    
+
     if(method == "dist")
       plots[["top"]] <- paste(nshow, "lowest euclidean distances")
     if(method == "cor")
       plots[["top"]] <- paste(nshow, "highest correlations")
-    
+
     plots[["ncol"]] <- 1
-    
+
     p <- do.call(gridExtra::arrangeGrob, plots)
     grid::grid.newpage()
     grid::grid.draw(p)
 
   } else {
     return(result)
-  } 
+  }
 }
