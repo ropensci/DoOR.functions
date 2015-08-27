@@ -20,7 +20,7 @@
 #' library(DoOR.data)
 #' data(Or35a)
 #' x <- DoORnorm(Or35a[,6])
-#' y <- DoORnorm(Or35a[,8])
+#' y <- DoORnorm(Or35a[,9])
 #' calM_xy <- calModel(x, y, select.MD = default.val("select.MD"))
 #' 
 calModel <- function (x, y, select.MD = default.val("select.MD") ) {
