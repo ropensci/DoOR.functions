@@ -1,6 +1,6 @@
 #' privateOdorant
 #'
-#' return an odorant that activates the receptor of interes exclusively
+#' return an odorant that activates the receptor of interest exclusively
 #'
 #' @param receptor character, name of a DoOR responding unit (one of \code{ORs$Or})
 #' @param sensillum logical, restrict the search to the sensillum the receptor is expressed in?
