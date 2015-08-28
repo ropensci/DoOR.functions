@@ -27,7 +27,7 @@ CreateDatabase <- function(tag                = default.val("tag"),
                            overlapValues      = default.val("overlapValues"), 
                            ...) {
   
-  excluded.data   <- data.frame(OR = ORs$OR, excluded = NA) # reset/create excluded.data
+  excluded.data   <- data.frame(OR = get('ORs')$OR, excluded = NA) # reset/create excluded.data
   
   Or.list       <- load2list() 	# contains data for all receptors
   Or.Names      <- names(Or.list)
