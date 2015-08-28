@@ -67,10 +67,10 @@ Nissler \cr Shouwen Ma \cr
 Maintainer: Daniel Münch <daniel.muench@uni-konstanz.de>
 }
 \references{
-\url{http://neuro.uni-konstanz.de/DoOR/default.html}
+\url{http://neuro.uni-konstanz.de/DoOR}
 }
 \seealso{
-\code{\link[<pkg>:<pkg>-package]{<DoOR.data>}}
+\code{DoOR.data}
 }
 \keyword{package}
 
