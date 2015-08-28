@@ -111,7 +111,7 @@ dplot_responseMatrix <- function(data,
   }
   
   if (fix == TRUE)
-    plot <- plot + coord_fixed()
+    plot <- plot + ggplot2::coord_fixed()
   
   return(plot)
 }
