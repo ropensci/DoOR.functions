@@ -8,3 +8,6 @@ Find more information, precompiled R-packages and an interactive web-version of 
 
 ## Original Publication
 The original publication is freely available from  [http://chemse.oxfordjournals.org/content/35/7/551](http://chemse.oxfordjournals.org/content/35/7/551 "10.1093/chemse/bjq042")
+
+## DoOR 2.0 Manuscript
+A preprint of manuscript related to DoOR 2.0 can be found at bioRxiv: [http://biorxiv.org/content/early/2015/09/30/027920](http://biorxiv.org/content/early/2015/09/30/027920)
