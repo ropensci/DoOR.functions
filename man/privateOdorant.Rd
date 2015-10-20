@@ -28,7 +28,7 @@ privateOdorant(receptor, sensillum = FALSE,
 a data.frame containing odorants and the response in the receptor of interest as well as the maximum response of the remaining receptors and their difference
 }
 \description{
-return an odorant that activates the receptor of interes exclusively
+return an odorant that activates the receptor of interest exclusively
 }
 \examples{
 library(DoOR.data)
