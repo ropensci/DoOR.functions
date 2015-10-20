@@ -1,8 +1,8 @@
 Package: DoOR.functions
 Type: Package
 Title: Integrating heterogeneous odorant response data into a common response model:  A DoOR to the complete olfactome
-Version: 1.9.9
-Date: 2015-07-24
+Version: 2.0.0
+Date: 2015-10-20
 Author: C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler and Shouwen Ma
 Address: University of Konstanz, Fachbereich Biologie, D-78457 Konstanz, Germany
 URL: http://neuro.uni.kn/DoOR
