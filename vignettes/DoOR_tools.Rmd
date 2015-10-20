@@ -154,5 +154,5 @@ sparse(x = rm.SFRreset[,"Gr21a.Gr63a"], method = "lts")
 
 
 
-[^1]: Willmore, B., Tolhurst, D.J., 2001. Characterizing the sparseness of neural codes. Network 12, 255–270. doi:10.1080/net.12.3.255.270
-[^2]: Bhandawat, V., Olsen, S.R., Gouwens, N.W., Schlief, M.L., Wilson, R.I., 2007. Sensory processing in the Drosophila antennal lobe increases reliability and separability of ensemble odor representations. Nature neuroscience 10, 1474–82. doi:10.1038/nn1976
+[^1]: Willmore, B., Tolhurst, D.J., 2001. Characterizing the sparseness of neural codes. Network 12, 255–270. dx.doi.org/10.1080/net.12.3.255.270
+[^2]: Bhandawat, V., Olsen, S.R., Gouwens, N.W., Schlief, M.L., Wilson, R.I., 2007. Sensory processing in the Drosophila antennal lobe increases reliability and separability of ensemble odor representations. Nature neuroscience 10, 1474–82. dx.doi.org/10.1038/nn1976
