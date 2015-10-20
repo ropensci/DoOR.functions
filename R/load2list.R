@@ -13,7 +13,7 @@
 load2list <- function() {
   if(!exists("ORs"))
     stop("Load data first (loadData())")
-
+  
   lst <- list()
   for(x in ORs$OR) {
     lst[[x]] <- get(x)

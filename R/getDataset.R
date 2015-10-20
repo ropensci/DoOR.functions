@@ -15,8 +15,7 @@
 #' @examples
 #' loadData()
 #' getDataset("Hallem.2004.EN", na.rm = TRUE)
-getDataset <- function(study,
-                          na.rm = FALSE) {
+getDataset <- function(study, na.rm = FALSE) {
   tmp <- load2list()
   selected <- sapply(tmp, "[[", study)
   selected.length <- sapply(selected, function(x) length(x))

@@ -37,13 +37,12 @@
 # SMAX <- c(294,6.9)	# maximum recordings of all receptors from study "Hallem.2006.EN" and "Pelz.2006.ALEC50" respectively.
 # GN_values_ORx <- globalNorm(RMAX, SMAX, MV = mergedValues_ORx, name.Stud, weightGlobNorm = weight.globNorm, responseRange = response.range)
 # 
-globalNorm <-
-  function(RMAX, SMAX, MV, name.Stud, weightGlobNorm = default.val("weight.globNorm"), responseRange = default.val("response.range")) {
-    weight.frame 	 <- data.frame(weightGlobNorm[,name.Stud])  			  # take the data subset for weight that involves only given studies
-    weight_receptors <- apply(weight.frame,2,function(x) length(which(x==1))) # how many tested receptors in given studies
-    match_stud 	 <- match(name.Stud, responseRange[,"study"])
-    weight_odors 	 <- responseRange[match_stud, "n_odors"]
-    scale 		 <- ( sum(weight_receptors*(RMAX/SMAX),na.rm=TRUE) + sum(weight_odors*(RMAX/SMAX),na.rm=TRUE) )/(sum(weight_receptors,na.rm=TRUE)+ sum(weight_odors,na.rm=TRUE))
-    globalNorm 	 <- scale * MV
-    return(globalNorm)
-  }
+globalNorm <- function(RMAX, SMAX, MV, name.Stud, weightGlobNorm = default.val("weight.globNorm"), responseRange = default.val("response.range")) {
+  weight.frame <- data.frame(weightGlobNorm[,name.Stud])  			  # take the data subset for weight that involves only given studies
+  weight_receptors <- apply(weight.frame,2,function(x) length(which(x==1))) # how many tested receptors in given studies
+  match_stud   <- match(name.Stud, responseRange[,"study"])
+  weight_odors <- responseRange[match_stud, "n_odors"]
+  scale        <- ( sum(weight_receptors*(RMAX/SMAX),na.rm=TRUE) + sum(weight_odors*(RMAX/SMAX),na.rm=TRUE) )/(sum(weight_receptors,na.rm=TRUE)+ sum(weight_odors,na.rm=TRUE))
+  globalNorm   <- scale * MV
+  return(globalNorm)
+}
