@@ -5,7 +5,7 @@ Version: 2.0.0
 Date: 2015-10-20
 Authors@R: c(
     person("Daniel", "Münch", email = "daniel.muench@uni-konstanz.de", role = c("aut", "cre")),
-    person("Giovanni", "Galizia", email = "giovanni.galizia@uni-konstanz.de", role = "aut"), 
+    person("C. Giovanni", "Galizia", email = "giovanni.galizia@uni-konstanz.de", role = "aut"), 
     person("Shouwen", "Ma", role = "aut"),
     person("Martin", "Strauch", role = "aut"),
     person("Anja", "Nissler", role = "aut"))
