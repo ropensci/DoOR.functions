@@ -35,6 +35,7 @@
 #'   or lowest distances, or a data frame containing all calculated
 #'   correlations or Euclidean distances
 #' @export
+#' @import DoOR.data
 #'
 #' @examples
 #' library(DoOR.data)
