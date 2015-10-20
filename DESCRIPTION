@@ -1,19 +1,24 @@
 Package: DoOR.functions
 Type: Package
-Title: Integrating heterogeneous odorant response data into a common response model:  A DoOR to the complete olfactome
+Title: Integrating Heterogeneous Odorant Response Data into a Common Response Model: A DoOR to the Complete Olfactome
 Version: 2.0.0
 Date: 2015-10-20
-Author: C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler and Shouwen Ma
-Address: University of Konstanz, Fachbereich Biologie, D-78457 Konstanz, Germany
+Authors@R: c(
+    person("Daniel", "Münch", email = "daniel.muench@uni-konstanz.de", role = c("aut", "cre")),
+    person("Giovanni", "Galizia", email = "giovanni.galizia@uni-konstanz.de", role = "aut"), 
+    person("Shouwen", "Ma", role = "aut"),
+    person("Martin", "Strauch", role = "aut"),
+    person("Anja", "Nissler", role = "aut"))
 URL: http://neuro.uni.kn/DoOR
-Maintainer: Daniel Muench <daniel.muench@uni-konstanz.de>
+BugReports: https://github.com/Dahaniel/DoOR.data/issues
 Description: This is a function package providing functions to perform data manipulations and visualizations for DoOR.data. 
 License: GPL-3
 Encoding: UTF-8
 Imports:
   utils
 Depends: 
-  DoOR.data
+  DoOR.data,
+  R (>= 2.10)
 Suggests:
   ggplot2, 
   grid,
