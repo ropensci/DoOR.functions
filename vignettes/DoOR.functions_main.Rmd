@@ -95,7 +95,7 @@ Any of the following will be imported:
 See `?importNewData` for more details. We can e.g. import data also based on CAS or CID instead of InChIKey.
 
 #### Looking up InChIKeys
-If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/web/packages/webchem/) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
+If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/package=webchem) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
 
 
 ## Building the complete data base with `CreateDatabase()`{#CreateDatabase}
