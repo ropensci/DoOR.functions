@@ -36,6 +36,7 @@
 #'   correlations or Euclidean distances
 #' @export
 #' @import DoOR.data
+#' @importFrom stats cor na.omit dist cor.test
 #'
 #' @examples
 #' library(DoOR.data)

@@ -21,6 +21,7 @@
 #' @seealso \code{\link{projectPoints}},\code{\link{modelRP}}
 #' @keywords data
 #' @export
+#' @importFrom stats na.omit lm
 #' @examples
 #'
 #' library(DoOR.data)
@@ -45,14 +46,14 @@ selectModel <- function(candidate,
   len.cand 	    <- length(candidate)
   nam.data.cand <- colnames(data_candidate)
   seq.cand 	    <- match(candidate,nam.data.cand)
-  
-  
+
+
   if (merged == TRUE) {
     seq.i <- 1
   } else {
     seq.i <- 1:(len.cand - 1)
   }
-  
+
   for (i in seq.i) {
     if (merged == TRUE) {
       y <- merged_data
@@ -60,20 +61,20 @@ selectModel <- function(candidate,
     } else {
       y <- data_candidate[,i]
     }
-    
+
     for (j in (i + 1):len.cand) {
       # different data sets - map them
       x   <- data_candidate[,seq.cand[j]]
       x_y <- na.omit(cbind(x,y))
-      
+
       # skip if
       # if there are no overlapping data points (i.e. disjunct odor sets)
       # or if there are less than "overlapValues" (too few to map)
-      
+
       if (dim(x_y)[1] < overlapValues) {
         next
       }
-      
+
       # skip also if
       # slope between x and y is 0 (horizontal line) or NA (vertical line).
       if (is.na(lm(y ~ x)$coef[2]) | lm(y ~ x)$coef[2] == 0) {
@@ -83,11 +84,11 @@ selectModel <- function(candidate,
         suppressWarnings(calModel(
           x = x, y = y, select.MD = TRUE
         ))
-      
+
       # skip if no fit could be performed
       if(is.na(curr.model))
         next
-      
+
       # update best.model if a better fitting was found
       if (curr.model[[1]]$MD < best.model[[1]]$MD) {
         best.model <- curr.model
@@ -98,11 +99,11 @@ selectModel <- function(candidate,
           selected.y <- "merged_data"
         }
       }
-      
+
     } # END for (j in (i+1):len.cand)
   } # END for (i in seq.i)
-  
-  
+
+
   return(list(
     best.model = best.model, selected.x = selected.x, selected.y = selected.y
   ))

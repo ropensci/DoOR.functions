@@ -1,34 +1,35 @@
 #' Compare two response profiles
-#' 
-#' Orderdered bar plots for two studies, allowing for an easy comparison of the 
+#'
+#' Orderdered bar plots for two studies, allowing for an easy comparison of the
 #' two studies / response profiles'.
-#' 
-#' 
+#'
+#'
 #' @param x the input data frame the first response profile will be taken from
-#' @param y the input data frame the second response profile will be taken from 
+#' @param y the input data frame the second response profile will be taken from
 #'   (x will be taken if y is missing)
 #' @param by.x character string, specifying a column in x
 #' @param by.y character string, specifying a column in y
 #' @param base_size numeric, the base font size for the ggplot2 plot
-#' @param tag character, the chemical identifier that will be used as odorant 
+#' @param tag character, the chemical identifier that will be used as odorant
 #'   label.
-#'   
+#'
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
+#' @importFrom stats na.omit
 #' @examples
 #' library(DoOR.data)
 #' data(Or22a)
 #' data(response.range)
 #' data(response.matrix)
-#' 
-#' dplot_compareProfiles(x = Or22a, y = Or22a, 
-#'                          by.x = "Hallem.2006.EN", 
+#'
+#' dplot_compareProfiles(x = Or22a, y = Or22a,
+#'                          by.x = "Hallem.2006.EN",
 #'                          by.y = "Pelz.2006.AntEC50")
-#' 
-#' dplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)), 
-#'                          y = cbind(response.matrix, InChIKey = rownames(response.matrix)), 
+#'
+#' dplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)),
+#'                          y = cbind(response.matrix, InChIKey = rownames(response.matrix)),
 #'                          by.x = "Or22a", by.y = "Or10a")
-#' 
+#'
 dplot_compareProfiles <- function(x, y,
                                      by.x,
                                      by.y,

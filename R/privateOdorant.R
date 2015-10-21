@@ -12,6 +12,7 @@
 #'
 #' @return a data.frame containing odorants and the response in the receptor of interest as well as the maximum response of the remaining receptors and their difference
 #' @export
+#' @importFrom stats na.omits
 #'
 #' @examples
 #' library(DoOR.data)

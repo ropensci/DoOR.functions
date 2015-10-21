@@ -15,7 +15,7 @@
 # x <- rnorm(20)
 # y <- modelfunction_sigmoid(input = x, parms = c(Asym = 0.1, xmid = 0.2, scal = 0.3) )
 # plot(x,y)
-# 
+#' @importFrom stats SSlogis
 modelfunction_sigmoid <- function(input, parms) {
   return(SSlogis(input, Asym = parms["Asym"], xmid = parms["xmid"], scal = parms["scal"]))
 }

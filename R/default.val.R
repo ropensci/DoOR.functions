@@ -10,6 +10,7 @@
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
 #' @export
+#' @importFrom utils data
 #' @examples
 #'
 #' default.val(DoOR_default = "select.MD")

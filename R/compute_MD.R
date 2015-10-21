@@ -1,13 +1,13 @@
 # compute the mean distance
-# 
+#
 # compute the mean distance between observations and projected points on
 # fitted curve.
-# 
+#
 # This function is used to compute the mean distance between observations and
 # their cloest points on fitted curve. Output is list containing the mean
 # distance value $MD and a data frame $data showing the coordinates of
 # observations, projected points and the distances between them.
-# 
+#
 # @param x,y data vectors, in which to evaluate the parameters in given
 # formula.
 # @param range.X numeric vector, defining the range of x, where the model
@@ -17,7 +17,7 @@
 # @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 # @keywords math
 # @examples
-# 
+#
 # library(DoOR.data)
 # loadData()
 # x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
@@ -31,17 +31,18 @@
 # names(linear_parameters) <- c("Intercept", "Slope")
 # bottom.x 	<- as.vector(modelfunction_linear(range_y[1],linear_parameters) )
 # top.x    	<- as.vector(modelfunction_linear(range_y[2],linear_parameters) )
-# 
+#
 # range.X <- c(max(c(0, bottom.x, range_x[1])), min(c(1, top.x, range_x[2])))
 # MD <- compute_MD(x=x, y=y, range.X = range.X, parms = linear_parameters,fun = modelfunction_linear)
-# 
+#
+#' @importFrom stats na.omit lm optimize
 compute_MD <- function(x, y, range.X, parms, fun) {
-  
+
   x_y     <- na.omit(cbind(x, y))
   pp      <- numeric()
   interval.X  <- default.val("interval.X")
   for (i in 1:dim(x_y)[1]) {
-    w   <- x_y[i, ]          
+    w   <- x_y[i, ]
     ff2 <- function(x) {
       ry <- intervalFun(x, range.X = range.X, middleFun = fun, parms)
       return((w[1] - x)^2 + (w[2] - ry)^2)

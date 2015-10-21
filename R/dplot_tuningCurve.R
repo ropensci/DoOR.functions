@@ -22,12 +22,13 @@
 #'
 #' @return a ggplot object
 #' @export
+#' @importFrom stats na.omit
 #'
 #' @examples
 #' library(DoOR.data)
 #' data(response.matrix)
 #' data(odor)
-#' 
+#'
 #' dplot_tuningCurve(odorant = odor$InChIKey[2])
 #' dplot_tuningCurve(receptor = "Or22a")
 #'
