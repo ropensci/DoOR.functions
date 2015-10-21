@@ -11,7 +11,7 @@ Authors@R: c(
     person("Anja", "Nissler", role = "aut"))
 URL: http://neuro.uni.kn/DoOR
 BugReports: https://github.com/Dahaniel/DoOR.data/issues
-Description: This is a function package providing functions to perform data manipulations and visualizations for DoOR.data. 
+Description: This is a function package providing functions to perform data manipulations and visualizations for DoOR.data. See http://dx.doi.org/10.1093/chemse/bjq042 for the original publication and http://dx.doi.org/10.1101/027920 regarding version 2.0.
 License: GPL-3
 Encoding: UTF-8
 Imports:
