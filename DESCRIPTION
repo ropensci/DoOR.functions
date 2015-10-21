@@ -8,7 +8,8 @@ Authors@R: c(
     person("C. Giovanni", "Galizia", email = "giovanni.galizia@uni-konstanz.de", role = "aut"), 
     person("Shouwen", "Ma", role = "aut"),
     person("Martin", "Strauch", role = "aut"),
-    person("Anja", "Nissler", role = "aut"))
+    person("Anja", "Nissler", role = "aut"),
+    person("Wolf", "Huetteroth", role = "ctb"))
 URL: http://neuro.uni.kn/DoOR
 BugReports: https://github.com/Dahaniel/DoOR.data/issues
 Description: This is a function package providing functions to perform data manipulations and visualizations for DoOR.data. See http://dx.doi.org/10.1093/chemse/bjq042 for the original publication and http://dx.doi.org/10.1101/027920 regarding version 2.0.
