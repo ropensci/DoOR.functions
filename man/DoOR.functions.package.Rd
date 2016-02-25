@@ -12,7 +12,7 @@ Functions package providing manipulation and application of the DoOR.
 }
 \details{
 \tabular{ll}{ Package: \tab DoOR.functions\cr Type: \tab Package\cr Version:
-\tab 0.1-2\cr Date: \tab 2012-04-16\cr License: \tab GPL-2\cr LazyLoad: \tab
+\tab 2.0.0\cr Date: \tab 2016-01-25\cr License: \tab GPL-3\cr LazyLoad: \tab
 yes\cr }
 
 \bold{Type \code{help(package = DoOR.functions)} to see a complete list of
