@@ -67,3 +67,7 @@ knitr::kable(head(responses))
 counts <- countStudies()
 knitr::kable(counts[1:10,6:15])
 
+## ------------------------------------------------------------------------
+# exportData(".csv")                  	# export all data as .csv files
+# exportData(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
+

@@ -224,3 +224,8 @@ knitr::kable(counts[1:10,6:15])
 
 
 ## `exportData()`{#exportData}
+`exportData()` exports all or selected DoOR data objects in txt or csv format. 
+```{r}
+# exportData(".csv")                  	# export all data as .csv files
+# exportData(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
+```
