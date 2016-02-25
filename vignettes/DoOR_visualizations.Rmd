@@ -27,7 +27,6 @@ First we need to load packages and data:
 #load data
 library(DoOR.functions)
 library(DoOR.data)
-library(ggplot2)
 loadData()
 ```
 
