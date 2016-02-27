@@ -8,7 +8,7 @@ identifySensillum(recording, response_matrix = default.val("response.matrix"),
   odor_data = default.val("odor"),
   DoOR_mappings = default.val("DoOR_mappings"), tag = "Name",
   min.cor = 0.9, nshow = 10, method = "cor", sub, base_size = 12,
-  plot = TRUE, use = "na.or.complete")
+  plot = TRUE, use = "everything")
 }
 \arguments{
 \item{recording}{data frame, a data frame with the following columns

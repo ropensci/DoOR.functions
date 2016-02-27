@@ -61,7 +61,7 @@ identifySensillum <- function(recording,
                               sub,
                               base_size = 12,
                               plot = TRUE,
-                              use = "na.or.complete") {
+                              use = "everything") {
 
   if(plot == TRUE) {
     if (!requireNamespace("ggplot2", quietly = TRUE))
