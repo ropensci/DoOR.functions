@@ -21,8 +21,9 @@ install_github("dahaniel/DoOR.functions", ref="v2.0.0")
 install_github("dahaniel/DoOR.functions")
 ```
 
-## Original Publication
-The original publication is freely available from  [http://chemse.oxfordjournals.org/content/35/7/551](http://chemse.oxfordjournals.org/content/35/7/551 "10.1093/chemse/bjq042")
+## Publications
+DoOR was first published in 2010, the OpenAccess publication is available from
+[http://chemse.oxfordjournals.org/content/35/7/551](http://chemse.oxfordjournals.org/content/35/7/551 "10.1093/chemse/bjq042")
 
-## DoOR 2.0 Manuscript
-A preprint of manuscript related to DoOR 2.0 can be found at bioRxiv: [http://biorxiv.org/content/early/2015/09/30/027920](http://biorxiv.org/content/early/2015/09/30/027920)
+An OpenAccess publication regarding the comprehensive update to **DoOR version 2.0** is available from
+A preprint of manuscript related to DoOR 2.0 can be found at bioRxiv: [http://www.nature.com/articles/srep21841](http://www.nature.com/articles/srep21841)
