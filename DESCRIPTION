@@ -29,6 +29,7 @@ Suggests:
     grid,
     gridExtra (>= 2.0.0),
     knitr,
-    class
+    class, 
+    rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
