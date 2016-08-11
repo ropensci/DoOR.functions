@@ -97,7 +97,7 @@ default.val <- function(DoOR_default) {
   } # updateDatabase.R, modelRP.R, CreateDatabase.R
 
 
-  if (DoOR_default == "DoOR_mappings") {
+  if (DoOR_default == "DoOR.mappings") {
     if (!exists("DoOR.mappings")) {
       data(DoOR.mappings)
     }
