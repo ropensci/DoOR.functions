@@ -1,4 +1,4 @@
-#' countStudies
+#' count_studies
 #'
 #' returns a matrix indiating how many studies have recorded individual
 #' receptor-odorant combinations
@@ -9,6 +9,7 @@
 #' @param char.columns number of character columns in each receptor data.frame.
 #' @param ident odorant identifier to be used as rownames.
 #' @export
+#' @aliases countStudies, count_studies
 #'
 #' @return matrix
 #'
@@ -18,7 +19,7 @@
 #' count <- countStudies()
 #' image(count)
 #'
-countStudies <- function(ors = default.val("ORs"),
+count_studies <- function(ors = default.val("ORs"),
                          odor_data = default.val("odor"),
                          char.columns = default.val("num.charColumns"),
                          ident = default.val("ident")) {
