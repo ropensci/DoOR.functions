@@ -61,7 +61,7 @@ updateDatabase <- function(receptor,
   studies       <- names(da)[recordColumn]
   
   if (permutation == TRUE) {
-    da            <- filterData(da, overlapValues = overlapValues)
+    da            <- filter_data(da, overlapValues = overlapValues)
     excluded      <- as.character(da$excluded$study)
     da            <- da$data
     recordColumn  <- as.numeric( c((door_default_values("num.charColumns")+1):dim(da)[2]) )
@@ -138,7 +138,7 @@ updateDatabase <- function(receptor,
   mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
   Rmax         <- apply(as.matrix(da[,recordColumn]),2,function(x) max(range(x,na.rm=TRUE)))
   Smax         <- responseRange[mp_orx,"max"]
-  merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merge, name.Stud = name.Stud, responseRange = responseRange, weightGlobNorm = weightGlobNorm)
+  merged_data  <- global_norm(RMAX = Rmax,SMAX = Smax, MV = merge, name.Stud = name.Stud, responseRange = responseRange, weightGlobNorm = weightGlobNorm)
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merged_data)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix))
   response_matrix[matchInChIKey, receptor] <- merged_data

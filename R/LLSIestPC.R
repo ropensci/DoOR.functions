@@ -103,7 +103,7 @@ LLSIestPC <-
     if (dim(A)[1] == 1) { transp_A <- t(t(c(as.matrix(A)))) } # transpose from 1 x m to m x 1 matrix
     else { transp_A <- t(A) }
 
-    alfa <- t(b) %*% PseudoInverse(transp_A) %*% as.matrix(w)
+    alfa <- t(b) %*% pseudo_inverse(transp_A) %*% as.matrix(w)
 
     result <- list(estimation = alfa,
                    selected.receptors = selectReceptor,

@@ -22,8 +22,8 @@
 #' Try some visualizations (e.g. producing the plots from the paper):
 #' \tabular{ll}{ \code{\link{dplot_al_map}}: \tab response to a chemical mapped onto
 #' an image of the antennal lobe.\cr \code{\link{dplot_compare_profiles}}: \tab compare
-#' the results of two studies.  \cr \code{\link{dplot_responseMatrix}}: \tab Dot Plot of
-#' Odorant Responses Across Receptors. \cr \code{\link{dplot_responseProfile}}: \tab
+#' the results of two studies.  \cr \code{\link{dplot_response_matrix}}: \tab Dot Plot of
+#' Odorant Responses Across Receptors. \cr \code{\link{dplot_response_profile}}: \tab
 #' bar plot: one receptor, all chemicals. \cr
 #' \code{\link{dplot_tuningCurve}}: \tab pyramid diagram depicting a receptor's
 #' tuning breadth. \cr } Try some queries: \tabular{ll}{

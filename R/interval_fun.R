@@ -20,7 +20,7 @@
 # 
 # 
 # 
-intervalFun <-
+interval_fun <-
   function(x, range.X, middleFun, parms) {
     # if the values of input are small than the minimum of range.X, apply lowerFun, a linear function with a slope that equal 1.
     lowerFun <- function(x, parms) {

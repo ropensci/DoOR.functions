@@ -50,7 +50,7 @@ modelRP <- function(da,
     stop("Not a data frame. Stopped in modelRP.R")
   }
 
-  da <- filterData(da, overlapValues = overlapValues)
+  da <- filter_data(da, overlapValues = overlapValues)
   excluded <- as.character(da$excluded$study)
   da <- da$data
 
@@ -187,7 +187,7 @@ modelRP <- function(da,
     mp_orx       <- match(colnames(da)[nv], responseRange[,"study"])
     Rmax         <- apply(as.matrix(da[,nv]),2,function(x) max(range(x,na.rm=TRUE)))
     Smax         <- responseRange[mp_orx,"max"]
-    merged_data  <- globalNorm(RMAX = Rmax,SMAX = Smax, MV = merged_data,
+    merged_data  <- global_norm(RMAX = Rmax,SMAX = Smax, MV = merged_data,
                                name.Stud = name.Stud, weightGlobNorm = weightGlobNorm, responseRange = responseRange )
   }
 

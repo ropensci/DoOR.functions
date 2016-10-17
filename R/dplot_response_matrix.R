@@ -1,4 +1,4 @@
-#' dplot_responseMatrix
+#' dplot_response_matrix
 #'
 #' plot DoOR responses as a point matrix
 #'
@@ -18,15 +18,16 @@
 #' @return a dotplot if limits[1] >= 0  or a heatmap if limits[1] < 0
 #' @export
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases dplot_responseMatrix dplot_response_matrix
 #' @examples
 #' library(DoOR.data)
 #' data(response.matrix)
 #' tmp <- resetSFR(response.matrix, "SFR")
-#' dplot_responseMatrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
-#' dplot_responseMatrix(response.matrix[10:50,], tag = "Name",
+#' dplot_response_matrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
+#' dplot_response_matrix(response.matrix[10:50,], tag = "Name",
 #'                         limits = range(response.matrix, na.rm = TRUE))
 #'
-dplot_responseMatrix <- function(data,
+dplot_response_matrix <- function(data,
                                  odor_data = door_default_values("odor"),
                                  tag    = door_default_values("tag"),
                                  colors = door_default_values("colors"),
@@ -36,62 +37,62 @@ dplot_responseMatrix <- function(data,
                                  point  = FALSE,
                                  limits,
                                  base_size = 12) {
-  
+
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
   if (!requireNamespace("grid", quietly = TRUE))
     stop("grid is required for plotting, please install via install.packages('grid')", call. = FALSE)
-  
+
   data   <- as.data.frame(data)
-  
+
   # define limits and map colors of the colorscale
   if(missing(limits))
     limits <- range(data, na.rm=TRUE)
-  
+
   if(limits[1] < 0) {
     values <- door_norm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
   } else {
     values <- door_norm(c(0, limits[2]/3, limits[2]/1.5, limits[2]))
     colors <- colors[3:6]
   }
-  
+
   data   <- door_melt(data = data, na.rm = TRUE)
-  
+
   if(tag != "InChIKey")
     data$odorant <- odor_data[match(data$odorant, odor_data$InChIKey),tag]
-  
+
   if(bw == TRUE & point == FALSE) {
     bw <- FALSE
     message("Plotting black&white heatmaps does not work, ignoring 'bw = TRUE' ")
   }
-  
+
   if(bw == TRUE & point == TRUE) {
     bw <- FALSE
     message("Sorry, but we can't plot negative sized points, ignoring 'bw = FALSE'.")
   }
-  
+
   if(missing(point) & missing(bw) & limits[1] >= 0) {
     point <- TRUE
     bw    <- TRUE
     message("Only positive values, returning b&w point plot.")
   }
-  
+
   if(flip == TRUE) {
-    plot <- ggplot2::ggplot(data, ggplot2::aes(x = odorant, y = dataset)) 
+    plot <- ggplot2::ggplot(data, ggplot2::aes(x = odorant, y = dataset))
   } else {
-    plot <- ggplot2::ggplot(data, ggplot2::aes(y = odorant, x = dataset)) 
+    plot <- ggplot2::ggplot(data, ggplot2::aes(y = odorant, x = dataset))
   }
-  
-  
-  plot <- plot + 
+
+
+  plot <- plot +
     ggplot2::theme_minimal(base_size = base_size) +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0, vjust = .5))
-  
+
   if(bw == FALSE & point == FALSE)
     plot <- plot + ggplot2::scale_fill_gradientn(colours  = colors, space="rgb", values = values, limits  = limits)
   if(bw == FALSE & point == TRUE)
     plot <- plot + ggplot2::scale_color_gradientn(colours  = colors, space="rgb", values = values, limits  = limits)
-  
+
   if(point == FALSE) {
     plot <- plot + ggplot2::geom_tile(ggplot2::aes(fill = value))
   } else {
@@ -109,9 +110,9 @@ dplot_responseMatrix <- function(data,
       }
     }
   }
-  
+
   if (fix == TRUE)
     plot <- plot + ggplot2::coord_fixed()
-  
+
   return(plot)
 }

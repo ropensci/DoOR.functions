@@ -23,3 +23,5 @@ dplot_acrossOSNs <- dplot_across_osns
 dplot_acrossReceptors <- dplot_across_ru
 dplot_ALmap <- dplot_al_map
 dplot_compareProfiles <- dplot_compare_profiles
+dplot_responseMatrix <- dplot_response_matrix
+dplot_responseProfile <- dplot_response_profile

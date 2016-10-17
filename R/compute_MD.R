@@ -44,11 +44,11 @@ compute_MD <- function(x, y, range.X, parms, fun) {
   for (i in 1:dim(x_y)[1]) {
     w   <- x_y[i, ]
     ff2 <- function(x) {
-      ry <- intervalFun(x, range.X = range.X, middleFun = fun, parms)
+      ry <- interval_fun(x, range.X = range.X, middleFun = fun, parms)
       return((w[1] - x)^2 + (w[2] - ry)^2)
     }
     opt.x <- optimize(ff2, interval.X, tol = 1e-04)$minimum
-    opt.y <- intervalFun(opt.x, range.X, middleFun = fun, parms)
+    opt.y <- interval_fun(opt.x, range.X, middleFun = fun, parms)
     opt   <- c(opt.x, opt.y)
     pp    <- rbind(pp, opt,deparse.level = 0)
   }

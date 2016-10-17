@@ -113,7 +113,7 @@ projectPoints <- function(x, y, xylim, best.model,
     return(message('Data sets can not been fitted by any of optional models.'))
 
   #  define the range of frame for middle function. (e.g. range.X, range.Y)
-  range.Y <- sapply(range.X, function(x) intervalFun(x, range.X, middleFun = ff, parms))
+  range.Y <- sapply(range.X, function(x) interval_fun(x, range.X, middleFun = ff, parms))
 
 
   # project the double observation values onto the respective closest points on the curve (fitting function)
@@ -125,12 +125,12 @@ projectPoints <- function(x, y, xylim, best.model,
     w <- x_y[i,]
 
     ff2 <- function(x) {
-      ry <- intervalFun(x, range.X, middleFun = ff, parms)
+      ry <- interval_fun(x, range.X, middleFun = ff, parms)
       return((w[1] - x)^2 + (w[2] - ry)^2)
     }
 
     opt.x <- optimize(ff2, interval.X, tol = 0.001)$minimum
-    opt.y <- intervalFun(opt.x, range.X, middleFun = ff, parms)
+    opt.y <- interval_fun(opt.x, range.X, middleFun = ff, parms)
 
     opt <- c(opt.x, opt.y)
     projected_double_coord <- as.matrix(rbind(projected_double_coord, opt))
@@ -142,8 +142,8 @@ projectPoints <- function(x, y, xylim, best.model,
 
   Coor_X       <- as.matrix(Coor_x)
   Coor_Y       <- as.matrix(Coor_y)
-  Coor_X[,'y'] <- sapply(Coor_X[,'x'], function(x) intervalFun(x, range.X, middleFun = ff, parms))
-  Coor_Y[,'x'] <- sapply(Coor_Y[,'y'], function(x) intervalFun(x, range.X = range.Y, middleFun = ff_inverse, parms))
+  Coor_X[,'y'] <- sapply(Coor_X[,'x'], function(x) interval_fun(x, range.X, middleFun = ff, parms))
+  Coor_Y[,'x'] <- sapply(Coor_Y[,'y'], function(x) interval_fun(x, range.X = range.Y, middleFun = ff_inverse, parms))
 
   single_coord_xy <- rbind(Coor_x, Coor_y)
   single_coord_XY <- rbind(Coor_X, Coor_Y)
@@ -272,7 +272,7 @@ projectPoints <- function(x, y, xylim, best.model,
     intervalCurve     <- numeric()
     seq_intervalCurve <- seq(from = range.projected_all.X[1], to = range.projected_all.X[2], length = 100)
     for (i in 1:100) {
-      segm          <- intervalFun(seq_intervalCurve[i], range.X, middleFun = ff, parms)
+      segm          <- interval_fun(seq_intervalCurve[i], range.X, middleFun = ff, parms)
       intervalCurve <- c(intervalCurve, segm)
     }
 

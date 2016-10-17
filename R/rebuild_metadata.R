@@ -1,4 +1,4 @@
-rebuildMetadata <- function(){
+rebuild_metadata <- function(){
 
   # rebuild weight.globNorm
   tmp <- load2list()

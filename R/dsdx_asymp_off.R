@@ -16,10 +16,10 @@
 #
 # x <-  seq(0.1,1,length=20)
 # parms <- c(Asym = 0.2, lrc = 0.3, c0 = 0.4)
-# integrate(function(x) { dsdx_asympOff(input = x, parms = parms ) }, lower = 0, upper = 0.5)
+# integrate(function(x) { dsdx_asymp_off(input = x, parms = parms ) }, lower = 0, upper = 0.5)
 #
 #' @importFrom stats integrate
-dsdx_asympOff <- function(input, parms) {
+dsdx_asymp_off <- function(input, parms) {
   .value <- sqrt(1+(parms["Asym"] * (exp(-exp(parms["lrc"]) * (input - parms["c0"])) * exp(parms["lrc"])))^2)
   .value
 }

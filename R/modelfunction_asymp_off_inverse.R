@@ -13,10 +13,10 @@
 # @examples
 # 
 # x <- seq(0.1,1,length=20)
-# y <- modelfunction_asympOff_inverse(input = x, parms = c(Asym = 2, c0 = 0.2, lrc = 0.3) )
+# y <- modelfunction_asymp_off_inverse(input = x, parms = c(Asym = 2, c0 = 0.2, lrc = 0.3) )
 # plot(x,y)
 # 
-modelfunction_asympOff_inverse <- function(input, parms) {
+modelfunction_asymp_off_inverse <- function(input, parms) {
   subfun <- function(input) {
     exp1  <- 1 - (input / parms["Asym"])
     if (exp1[1] <= 0 | is.na(exp1[1])) { 

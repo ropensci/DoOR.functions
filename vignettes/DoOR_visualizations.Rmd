@@ -12,10 +12,10 @@ Apart from merging data and performing calculations on it, the `DoOR.functions` 
 
 ## Content
 * [Loading data](#loading)
-* [Visualizing odorants _vs_ responding units with `dplot_responseMatrix()`](#responseMatrix)
+* [Visualizing odorants _vs_ responding units with `dplot_response_matrix()`](#responseMatrix)
 * [Visualizing ensemble responses with `dplot_al_map()`](#ALmap)
 * [Visualizing tuning curves with `dplot_tuningCurve()`](#tuningCurve)
-* [Visualizing response profiles `dplot_responseProfile()`](#responseProile)
+* [Visualizing response profiles `dplot_response_profile()`](#responseProile)
 * [Comparing response profiles `dplot_compare_profiles()`](#compareProfiles)
 * [Visualizing odorant responses across responding units with `dplot_across_ru()`](#acrossReceptors)
 * [Visualizing odorant responses across OSNs with `dplot_across_osns()`](#across_OSNs)
@@ -30,16 +30,16 @@ library(DoOR.data)
 load_door_data()
 ```
 
-## Visualizing odorants _vs_ responding units with `dplot_responseMatrix()`{#responseMatrix}
-`dplot_responseMatrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `resetSFR(response.matrix, "SFR")`) it will be shown as color-coded heatmap.
+## Visualizing odorants _vs_ responding units with `dplot_response_matrix()`{#responseMatrix}
+`dplot_response_matrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `resetSFR(response.matrix, "SFR")`) it will be shown as color-coded heatmap.
 
 ```{r,fig.width=7.1, fig.height=4}
-dplot_responseMatrix(response.matrix[2:50,], tag = "Name", base_size = 8)
+dplot_response_matrix(response.matrix[2:50,], tag = "Name", base_size = 8)
 ```
 
 If the data contains negative values, a colored response matrix will be plotted:
 ```{r,fig.width=7.1, fig.height=4}
-dplot_responseMatrix(resetSFR(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
+dplot_response_matrix(resetSFR(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
 ```
 
 ## Visualizing ensemble responses with `dplot_al_map()`{#ALmap}
@@ -101,22 +101,22 @@ dplot_tuningCurve(odorant = transID("carbon dioxide", from = "Name"), base_size 
   theme(panel.background = element_rect(fill = "grey", color = "magenta"))
 ```
 
-## Visualizing response profiles `dplot_responseProfile()`{#responseProile}
-`dplot_responseProfile` creates a horizontal bar plot of the response profile of a given receptor. It displays the same data as `dplot_tuningCurve` but focusses on the odorant identity.
+## Visualizing response profiles `dplot_response_profile()`{#responseProile}
+`dplot_response_profile` creates a horizontal bar plot of the response profile of a given receptor. It displays the same data as `dplot_tuningCurve` but focusses on the odorant identity.
 
 Per default the response strength is displayed as bar height as well as color code:
 ```{r, fig.width=5, fig.height=6}
-dplot_responseProfile("Gr21a.Gr63a", tag = "Name", base_size = 8)
+dplot_response_profile("Gr21a.Gr63a", tag = "Name", base_size = 8)
 ```
 
 We can again omit to reset to SFR:
 ```{r, fig.width=5, fig.height=6}
-dplot_responseProfile("Gr21a.Gr63a", tag = "Name", base_size = 8, zero ="")
+dplot_response_profile("Gr21a.Gr63a", tag = "Name", base_size = 8, zero ="")
 ```
 
 And if we prefer monochrome data:
 ```{r, fig.width=5, fig.height=6}
-dplot_responseProfile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
+dplot_response_profile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
 ```
 
 ## Comparing response profiles `dplot_compare_profiles()`{#compareProfiles}

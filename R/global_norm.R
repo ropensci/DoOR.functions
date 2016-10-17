@@ -35,7 +35,7 @@
 # name.Stud <- c("Hallem.2006.EN", "Pelz.2006.ALEC50")
 # RMAX <- c(100, 4)		# maximum responses of receptor (ORx) from study "Hallem.2006.EN" and "Pelz.2006.ALEC50" respectively.
 # SMAX <- c(294,6.9)	# maximum recordings of all receptors from study "Hallem.2006.EN" and "Pelz.2006.ALEC50" respectively.
-# GN_values_ORx <- globalNorm(RMAX, SMAX, MV = mergedValues_ORx, name.Stud, weightGlobNorm = weight.globNorm, responseRange = response.range)
+# GN_values_ORx <- global_norm(RMAX, SMAX, MV = mergedValues_ORx, name.Stud, weightGlobNorm = weight.globNorm, responseRange = response.range)
 # 
 globalNorm <- function(RMAX, SMAX, MV, name.Stud, weightGlobNorm = door_default_values("weight.globNorm"), responseRange = door_default_values("response.range")) {
   weight.frame <- data.frame(weightGlobNorm[,name.Stud])  			  # take the data subset for weight that involves only given studies

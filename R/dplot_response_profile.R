@@ -1,4 +1,4 @@
-#' dplot_responseProfile
+#' dplot_response_profile
 #'
 #' create a barplot of a DoOR response profile
 #'
@@ -20,12 +20,13 @@
 #' @export
 #' @importFrom stats na.omit
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases dplot_responseProfile dplot_response_profile
 #' @examples
 #' library(DoOR.data)
 #' data(response.matrix)
-#' dplot_responseProfile("Or22a", response.matrix)
-#' dplot_responseProfile("Or22a", response.matrix, tag = "Name")
-dplot_responseProfile <- function(receptor,
+#' dplot_response_profile("Or22a", response.matrix)
+#' dplot_response_profile("Or22a", response.matrix, tag = "Name")
+dplot_response_profile <- function(receptor,
                                      response_matrix = door_default_values("response.matrix"),
                                      odor_data = door_default_values("odor"),
                                      tag = door_default_values("tag"),

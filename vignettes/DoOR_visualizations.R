@@ -5,10 +5,10 @@ library(DoOR.data)
 load_door_data()
 
 ## ----fig.width=7.1, fig.height=4-----------------------------------------
-dplot_responseMatrix(response.matrix[2:50,], tag = "Name", base_size = 8)
+dplot_response_matrix(response.matrix[2:50,], tag = "Name", base_size = 8)
 
 ## ----fig.width=7.1, fig.height=4-----------------------------------------
-dplot_responseMatrix(resetSFR(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
+dplot_response_matrix(resetSFR(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
 
 ## ---- fig.width=7.1------------------------------------------------------
 dplot_al_map("QSJXEFYPDANLFS-UHFFFAOYSA-N", base_size = 8)
@@ -44,13 +44,13 @@ dplot_tuningCurve(odorant = transID("carbon dioxide", from = "Name"), base_size 
   theme(panel.background = element_rect(fill = "grey", color = "magenta"))
 
 ## ---- fig.width=5, fig.height=6------------------------------------------
-dplot_responseProfile("Gr21a.Gr63a", tag = "Name", base_size = 8)
+dplot_response_profile("Gr21a.Gr63a", tag = "Name", base_size = 8)
 
 ## ---- fig.width=5, fig.height=6------------------------------------------
-dplot_responseProfile("Gr21a.Gr63a", tag = "Name", base_size = 8, zero ="")
+dplot_response_profile("Gr21a.Gr63a", tag = "Name", base_size = 8, zero ="")
 
 ## ---- fig.width=5, fig.height=6------------------------------------------
-dplot_responseProfile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
+dplot_response_profile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
 
 ## ------------------------------------------------------------------------
 dplot_compare_profiles(x = Or22a, y = Or22a, by.x = "Pelz.2006.AntEC50",

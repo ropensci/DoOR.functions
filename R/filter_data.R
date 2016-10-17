@@ -1,4 +1,4 @@
-# filterData
+# filter_data
 #
 # Filter DoOR datasets before merging (remove studies with few overlapping points or SD = 0). This function is used by updateDatabase to pre filter before performing all possible merges.
 #
@@ -10,9 +10,9 @@
 #
 # @examples
 # library(DoOR.data)
-# tmp <- filterData(Or42b)
+# tmp <- filter_data(Or42b)
 # tmp$excluded
-filterData <- function(data, overlapValues = door_default_values("overlapValues"), charColumns = door_default_values("num.charColumns")) {
+filter_data <- function(data, overlapValues = door_default_values("overlapValues"), charColumns = door_default_values("num.charColumns")) {
 
   recordColumn  <- as.numeric(c((charColumns + 1):dim(data)[2]) )
   studies       <- names(data)[recordColumn]

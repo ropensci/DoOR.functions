@@ -13,11 +13,11 @@
 # @examples
 # 
 # x  <- matrix(seq(1,2,length=4),nrow = 2, ncol = 2)
-# PI <- PseudoInverse(x)
+# PI <- pseudo_inverse(x)
 # x
 # x%*%PI%*%x
 # 
-PseudoInverse <-
+pseudo_inverse <-
 function(x) 
 
 # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma
