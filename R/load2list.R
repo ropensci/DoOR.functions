@@ -8,11 +8,11 @@
 #'
 #' @examples
 #' library(DoOR.data)
-#' loadData()
+#' load_door_data()
 #' lst <- load2list()
 load2list <- function() {
   if(!exists("ORs"))
-    stop("Load data first (loadData())")
+    stop("Load data first (load_door_data())")
   
   lst <- list()
   for(x in ORs$OR) {

@@ -1,7 +1,7 @@
 ## ---- results='hide'-----------------------------------------------------
 library(DoOR.data)
 library(DoOR.functions)
-loadData()
+load_door_data()
 
 ## ---- echo=FALSE---------------------------------------------------------
 tmp <- Or22a[c(1,3:5), c(3,6)]

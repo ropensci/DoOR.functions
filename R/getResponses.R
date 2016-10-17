@@ -15,7 +15,7 @@
 #' @examples
 #' 
 #' library(DoOR.data)
-#' loadData()
+#' load_door_data()
 #' responses <- getResponses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #' 
 getResponses <- function(odorant, 

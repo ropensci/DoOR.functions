@@ -28,7 +28,7 @@ Identifying the source of unknown response data by correlating it agains all
 DoOR responding units.
 }
 \examples{
-  loadData()
+  load_door_data()
   data <- data.frame(odorants  = Or22a$InChIKey,
                      responses = Or22a$Hallem.2004.EN)
   data <- na.omit(data)

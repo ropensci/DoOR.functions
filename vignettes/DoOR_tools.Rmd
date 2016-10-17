@@ -27,7 +27,7 @@ First we need to load packages and data:
 #load data
 library(DoOR.functions)
 library(DoOR.data)
-loadData()
+load_door_data()
 ```
 
 ## Identifying the sensillum we are recording from with `identifySensillum()` {#identifySensillum}

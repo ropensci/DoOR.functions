@@ -42,7 +42,7 @@ before use.
 \dontrun{
 library(DoOR.data)
 library(DoOR.functions)
-loadData()
+load_door_data()
 exportData(".txt", all.data = FALSE) 	# export odorant responses data only
 }
 }

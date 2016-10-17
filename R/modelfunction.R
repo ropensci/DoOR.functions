@@ -24,7 +24,7 @@
 # @examples
 #
 # library(DoOR.data)
-# loadData()
+# load_door_data()
 # x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
 # y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
 # MF_xy <- modelfunction(x=x,y=y)

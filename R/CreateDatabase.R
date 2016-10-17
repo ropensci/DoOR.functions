@@ -19,7 +19,7 @@
 #' @examples
 #' \dontrun{
 #' library(DoOR.data)
-#' loadData()
+#' load_door_data()
 #' mydatabase <- CreateDatabase()
 #' }
 CreateDatabase <- function(tag                = default.val("tag"), 

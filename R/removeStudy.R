@@ -16,7 +16,7 @@
 #' @export
 #' @examples
 #' library(DoOR.data)
-#' loadData()
+#' load_door_data()
 #' removeStudy('Bruyne.2001.WT')
 #'
 removeStudy <- function(study,

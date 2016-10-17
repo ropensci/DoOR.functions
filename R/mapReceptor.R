@@ -18,7 +18,7 @@
 #' @export
 #' @importFrom stats na.omit cor.test
 #' @examples
-#'   loadData()
+#'   load_door_data()
 #'   data <- data.frame(odorants  = Or22a$InChIKey,
 #'                      responses = Or22a$Hallem.2004.EN)
 #'   data <- na.omit(data)

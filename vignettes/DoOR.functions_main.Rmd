@@ -32,9 +32,9 @@ The first step after starting R is to attach both packages and to load the respo
 ```{r, results='hide'}
 library(DoOR.data)
 library(DoOR.functions)
-loadData()
+load_door_data()
 ```
-`loadData()` attaches the data from `DoOR.data`.
+`load_door_data()` attaches the data from `DoOR.data`.
 
 
 

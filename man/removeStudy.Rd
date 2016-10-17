@@ -28,7 +28,7 @@ during the import process (e.g. because you imported updated data).
 }
 \examples{
 library(DoOR.data)
-loadData()
+load_door_data()
 removeStudy('Bruyne.2001.WT')
 
 }

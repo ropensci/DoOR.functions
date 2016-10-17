@@ -2,7 +2,7 @@
 #load data
 library(DoOR.functions)
 library(DoOR.data)
-loadData()
+load_door_data()
 
 ## ----fig.width=7.1, fig.height=4-----------------------------------------
 dplot_responseMatrix(response.matrix[2:50,], tag = "Name", base_size = 8)

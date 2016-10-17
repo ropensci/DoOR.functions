@@ -23,7 +23,7 @@ First, load the DoOR packages, data and function package: \tabular{ll}{
 }
 
 then, load all datasets including the precomputed response matrix:
-\tabular{ll}{ \code{loadData}: \tab Load all data into current active
+\tabular{ll}{ \code{load_door_data}: \tab Load all data into current active
 environment (function comes with DoOR.data) . \cr } or, load all odorant reseponse data into a list:
 \tabular{ll}{ \code{\link{load2list}}: \tab Load odorant response data only
 and compose them as a list.  \cr }

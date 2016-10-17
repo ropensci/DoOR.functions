@@ -28,7 +28,7 @@ receptor-odorant combinations
 }
 \examples{
 library(DoOR.data)
-loadData()
+load_door_data()
 count <- countStudies()
 image(count)
 

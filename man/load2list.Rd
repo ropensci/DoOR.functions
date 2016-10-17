@@ -14,7 +14,7 @@ returns all original DoOR response data as a list
 }
 \examples{
 library(DoOR.data)
-loadData()
+load_door_data()
 lst <- load2list()
 }
 \author{

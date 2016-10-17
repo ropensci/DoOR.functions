@@ -21,7 +21,7 @@ returns a data frame containing all the odorant responses measured in
 aggregates original data from a given study
 }
 \examples{
-loadData()
+load_door_data()
 getDataset("Hallem.2004.EN", na.rm = TRUE)
 }
 \author{

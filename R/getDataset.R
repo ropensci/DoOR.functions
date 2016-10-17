@@ -13,7 +13,7 @@
 #' @export
 #' 
 #' @examples
-#' loadData()
+#' load_door_data()
 #' getDataset("Hallem.2004.EN", na.rm = TRUE)
 getDataset <- function(study, na.rm = FALSE) {
   tmp <- load2list()
