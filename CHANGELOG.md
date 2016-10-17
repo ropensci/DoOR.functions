@@ -6,12 +6,12 @@
 **Implemented enhancements:**
 
 - enable plotting in updateDatabase\(\) / modelRPSEQ\(\) [\#3](https://github.com/Dahaniel/DoOR.functions/issues/3)
-- calModel\(\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
+- calculate_model\(\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
 
 **Fixed bugs:**
 
 - updateDatabase\(\) calculates with wrong permutation [\#2](https://github.com/Dahaniel/DoOR.functions/issues/2)
-- calModel\\(\\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
+- calculate_model\\(\\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
 
 **Merged pull requests:**
 

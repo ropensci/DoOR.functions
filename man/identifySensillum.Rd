@@ -4,9 +4,10 @@
 \alias{identifySensillum}
 \title{identifySensillum}
 \usage{
-identifySensillum(recording, response_matrix = default.val("response.matrix"),
-  odor_data = default.val("odor"),
-  DoOR_mappings = default.val("DoOR_mappings"), tag = "Name",
+identifySensillum(recording,
+  response_matrix = door_default_values("response.matrix"),
+  odor_data = door_default_values("odor"),
+  DoOR_mappings = door_default_values("DoOR_mappings"), tag = "Name",
   min.cor = 0.9, nshow = 10, method = "cor", sub, base_size = 12,
   plot = TRUE, use = "everything")
 }

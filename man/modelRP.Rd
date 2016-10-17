@@ -4,12 +4,12 @@
 \alias{modelRP}
 \title{Generates a model response}
 \usage{
-modelRP(da, select.MDValue = default.val("select.MDValue"),
-  overlapValues = default.val("overlapValues"),
-  responseRange = default.val("response.range"),
-  weightGlobNorm = default.val("weight.globNorm"),
-  glob.normalization = default.val("glob.normalization"),
-  plot = default.val("plot"))
+modelRP(da, select.MDValue = door_default_values("select.MDValue"),
+  overlapValues = door_default_values("overlapValues"),
+  responseRange = door_default_values("response.range"),
+  weightGlobNorm = door_default_values("weight.globNorm"),
+  glob.normalization = door_default_values("glob.normalization"),
+  plot = door_default_values("plot"))
 }
 \arguments{
 \item{da}{data frame, a selected receptor containing measured responses from

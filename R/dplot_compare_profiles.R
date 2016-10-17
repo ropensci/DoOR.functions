@@ -14,6 +14,7 @@
 #'   label.
 #'
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases dplot_compareProfiles dplot_compare_profiles
 #' @export
 #' @importFrom stats na.omit
 #' @examples
@@ -22,15 +23,15 @@
 #' data(response.range)
 #' data(response.matrix)
 #'
-#' dplot_compareProfiles(x = Or22a, y = Or22a,
+#' dplot_compare_profiles(x = Or22a, y = Or22a,
 #'                          by.x = "Hallem.2006.EN",
 #'                          by.y = "Pelz.2006.AntEC50")
 #'
-#' dplot_compareProfiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)),
+#' dplot_compare_profiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)),
 #'                          y = cbind(response.matrix, InChIKey = rownames(response.matrix)),
 #'                          by.x = "Or22a", by.y = "Or10a")
 #'
-dplot_compareProfiles <- function(x, y,
+dplot_compare_profiles <- function(x, y,
                                      by.x,
                                      by.y,
                                      tag = "Name",
@@ -56,7 +57,7 @@ dplot_compareProfiles <- function(x, y,
   title_y <- paste("data_Y:", by.y)
   colnames(x)[which(colnames(x) == by.x)] <- title_x
   colnames(y)[which(colnames(y) == by.y)] <- title_y
-  comb_xy   <- combData(data1 = x, data2 = y, by.data2 = title_y, assigned.name = title_y, ident = "odorant")
+  comb_xy   <- combine_data(data1 = x, data2 = y, by.data2 = title_y, assigned.name = title_y, ident = "odorant")
   comb_xy   <- na.omit(comb_xy[ ,c("odorant", title_x, title_y)])
 
   if(tag != "InChIKey")
@@ -64,7 +65,7 @@ dplot_compareProfiles <- function(x, y,
 
   sorted_xy <- as.character(comb_xy[rev(order(comb_xy[ ,title_x])), "odorant"])
 
-  comb_xy <- DoORmelt(comb_xy, ident = "odorant", datasets = c(title_x, title_y), na.rm = TRUE)
+  comb_xy <- door_melt(comb_xy, ident = "odorant", datasets = c(title_x, title_y), na.rm = TRUE)
 
   comb_xy$odorant <- factor(comb_xy$odorant, levels = sorted_xy)
 

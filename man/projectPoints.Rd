@@ -4,8 +4,9 @@
 \alias{projectPoints}
 \title{projectPoints}
 \usage{
-projectPoints(x, y, xylim, best.model, plot = default.val("plot"),
-  points_cex = default.val("points.cex"), title = default.val("title"), ...)
+projectPoints(x, y, xylim, best.model, plot = door_default_values("plot"),
+  points_cex = door_default_values("points.cex"),
+  title = door_default_values("title"), ...)
 }
 \arguments{
 \item{x, y}{numeric vectors of data values, coordinate vectors of points to
@@ -33,7 +34,7 @@ projects data points onto the curve defined by the model function
 }
 \details{
 For internal use in the merging process (see also \code{\link{modelRP}}). The
-model function is choosen by \code{\link{calModel}}.
+model function is choosen by \code{\link{calculate_model}}.
 \code{\link{projectPoints}} then projects the data points from the datasets
 to be merged onto the curve defined by the model function. It computes the
 closest distance from a data point to a point on the curve by numerical
@@ -53,8 +54,8 @@ across all the distance values.
 
 library(DoOR.data)
 data(Or23a)
-x <- DoORnorm(Or23a[,'Hallem.2004.EN'])
-y <- DoORnorm(Or23a[,'Hallem.2006.EN'])
+x <- door_norm(Or23a[,'Hallem.2004.EN'])
+y <- door_norm(Or23a[,'Hallem.2006.EN'])
 projectPoints(x = x, y = y, plot = TRUE)
 
 }
@@ -62,7 +63,7 @@ projectPoints(x = x, y = y, plot = TRUE)
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
 \seealso{
-\code{\link{calModel}}, \code{\link{optimize}},
+\code{\link{calculate_model}}, \code{\link{optimize}},
   \code{\link{integrate}}
 }
 

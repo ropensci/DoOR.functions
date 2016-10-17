@@ -26,14 +26,14 @@
 #' dplot_responseProfile("Or22a", response.matrix)
 #' dplot_responseProfile("Or22a", response.matrix, tag = "Name")
 dplot_responseProfile <- function(receptor,
-                                     response_matrix = default.val("response.matrix"),
-                                     odor_data = default.val("odor"),
-                                     tag = default.val("tag"),
+                                     response_matrix = door_default_values("response.matrix"),
+                                     odor_data = door_default_values("odor"),
+                                     tag = door_default_values("tag"),
                                      colored = TRUE,
-                                     colors = default.val("colors"),
+                                     colors = door_default_values("colors"),
                                      limits,
-                                     zero = default.val("zero"),
-                                     scalebar = default.val("scalebar"),
+                                     zero = door_default_values("zero"),
+                                     scalebar = door_default_values("scalebar"),
                                      base_size = 12
 ) {
   if(zero != "")
@@ -43,9 +43,9 @@ dplot_responseProfile <- function(receptor,
     limits <- range(response_matrix, na.rm=TRUE)
 
   if(limits[1] < 0) {
-    values <- DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
+    values <- door_norm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
   } else {
-    values <- DoORnorm(c(0, limits[2]/3, limits[2]/1.5, limits[2]))
+    values <- door_norm(c(0, limits[2]/3, limits[2]/1.5, limits[2]))
     colors <- colors[3:6]
   }
 

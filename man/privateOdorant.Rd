@@ -5,9 +5,9 @@
 \title{privateOdorant}
 \usage{
 privateOdorant(receptor, sensillum = FALSE,
-  response_matrix = default.val("response.matrix"),
-  DoOR_mappings = default.val("DoOR_mappings"), zero = default.val("zero"),
-  nshow = 5, tag)
+  response_matrix = door_default_values("response.matrix"),
+  DoOR_mappings = door_default_values("DoOR_mappings"),
+  zero = door_default_values("zero"), nshow = 5, tag)
 }
 \arguments{
 \item{receptor}{character, name of a DoOR responding unit (one of \code{ORs$Or})}

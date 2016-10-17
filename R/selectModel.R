@@ -1,6 +1,6 @@
 #' compute the data pairwise and and selects a pair with the lowest "MD" value.
 #'
-#' compute the data pairwise using function \code{\link{calModel}} and selects
+#' compute the data pairwise using function \code{\link{calculate_model}} and selects
 #' a pair with the lowest "MD" value.
 #'
 #' This function is used in \code{\link{modelRP}} to select the first pair or
@@ -28,16 +28,16 @@
 #' data(ac3B)
 #' studies<-names(ac3B)[c(7:9)]
 #' data_candidate<-ac3B[,c(7:9)]
-#' Norm_data_candidate <-apply(data_candidate, 2, DoORnorm)
+#' Norm_data_candidate <-apply(data_candidate, 2, door_norm)
 #' selectModel(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
 #'
 selectModel <- function(candidate,
                         data_candidate,
                         merged_data,
-                        overlapValues = default.val("overlapValues"),
-                        merged = default.val("merged") ) {
+                        overlapValues = door_default_values("overlapValues"),
+                        merged = door_default_values("merged") ) {
   initial <- list(
-    model.name = "no.fitted.model", cal.parameters = NA, MD = default.val("select.MDValue")
+    model.name = "no.fitted.model", cal.parameters = NA, MD = door_default_values("select.MDValue")
   )
   curr.model    <- list(initial = initial)
   best.model    <- curr.model
@@ -81,7 +81,7 @@ selectModel <- function(candidate,
         next
       }
       curr.model <-
-        suppressWarnings(calModel(
+        suppressWarnings(calculate_model(
           x = x, y = y, select.MD = TRUE
         ))
 

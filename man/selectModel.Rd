@@ -5,8 +5,8 @@
 \title{compute the data pairwise and and selects a pair with the lowest "MD" value.}
 \usage{
 selectModel(candidate, data_candidate, merged_data,
-  overlapValues = default.val("overlapValues"),
-  merged = default.val("merged"))
+  overlapValues = door_default_values("overlapValues"),
+  merged = door_default_values("merged"))
 }
 \arguments{
 \item{candidate}{a character vector, contains the names of studies.}
@@ -24,7 +24,7 @@ merged_data and candidate data. If \code{FALSE}, calculate models between
 candidates.}
 }
 \description{
-compute the data pairwise using function \code{\link{calModel}} and selects
+compute the data pairwise using function \code{\link{calculate_model}} and selects
 a pair with the lowest "MD" value.
 }
 \details{
@@ -39,7 +39,7 @@ library(DoOR.data)
 data(ac3B)
 studies<-names(ac3B)[c(7:9)]
 data_candidate<-ac3B[,c(7:9)]
-Norm_data_candidate <-apply(data_candidate, 2, DoORnorm)
+Norm_data_candidate <-apply(data_candidate, 2, door_norm)
 selectModel(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
 
 }

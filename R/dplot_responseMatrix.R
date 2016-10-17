@@ -27,9 +27,9 @@
 #'                         limits = range(response.matrix, na.rm = TRUE))
 #'
 dplot_responseMatrix <- function(data,
-                                 odor_data = default.val("odor"),
-                                 tag    = default.val("tag"),
-                                 colors = default.val("colors"),
+                                 odor_data = door_default_values("odor"),
+                                 tag    = door_default_values("tag"),
+                                 colors = door_default_values("colors"),
                                  flip = FALSE,
                                  fix = TRUE,
                                  bw     = FALSE,
@@ -49,13 +49,13 @@ dplot_responseMatrix <- function(data,
     limits <- range(data, na.rm=TRUE)
   
   if(limits[1] < 0) {
-    values <- DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
+    values <- door_norm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2]))
   } else {
-    values <- DoORnorm(c(0, limits[2]/3, limits[2]/1.5, limits[2]))
+    values <- door_norm(c(0, limits[2]/3, limits[2]/1.5, limits[2]))
     colors <- colors[3:6]
   }
   
-  data   <- DoORmelt(data = data, na.rm = TRUE)
+  data   <- door_melt(data = data, na.rm = TRUE)
   
   if(tag != "InChIKey")
     data$odorant <- odor_data[match(data$odorant, odor_data$InChIKey),tag]

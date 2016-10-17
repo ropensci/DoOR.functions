@@ -67,7 +67,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#building">Modifying, building and updating DoOR</a>
 <ul>
 <li><a href="#importNewData">Importing new data with <code>importNewData()</code></a></li>
-<li><a href="#CreateDatabase">Building the complete data base with <code>CreateDatabase()</code></a></li>
+<li><a href="#create_door_database">Building the complete data base with <code>create_door_database()</code></a></li>
 <li><a href="#updateDatabase">Updating parts of the data base with <code>updateDatabase()</code></a></li>
 <li><a href="#model"><code>modelRP()</code> and <code>modelRPSEQ()</code></a></li>
 <li><a href="#removeStudy">Removing a study with <code>removeStudy()</code></a></li>
@@ -199,9 +199,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>If you do not know the InChIKeys of the odorants in your data set, we recommend using the <a href="https://cran.r-project.org/package=webchem"><code>webchem</code></a> package for automated lookup or doing it manually <em>via</em> <a href="http://cactus.nci.nih.gov/chemical/structure" class="uri">http://cactus.nci.nih.gov/chemical/structure</a> or any other chemical lookup service.</p>
 </div>
 </div>
-<div id="building-the-complete-data-base-with-createdatabase" class="section level2">
-<h2>Building the complete data base with <code id="CreateDatabase">CreateDatabase()</code></h2>
-<p>Once we imported new data we can use <code>CreateDatabase()</code> in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in <code>excluded.data</code>.</p>
+<div id="building-the-complete-data-base-with-create_door_database" class="section level2">
+<h2>Building the complete data base with <code id="create_door_database">create_door_database()</code></h2>
+<p>Once we imported new data we can use <code>create_door_database()</code> in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in <code>excluded.data</code>.</p>
 </div>
 <div id="updating-parts-of-the-data-base-with-updatedatabase" class="section level2">
 <h2>Updating parts of the data base with <code id="updateDatabase">updateDatabase()</code></h2>
@@ -530,12 +530,12 @@ knitr::<span class="kw">kable</span>(rm_sfrReset[<span class="dv">1</span>:<span
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">resetSFR</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">10</span>), <span class="dt">sfr =</span> <span class="dv">4</span>)</code></pre>
 <pre><code>##  [1] -3 -2 -1  0  1  2  3  4  5  6</code></pre>
 </div>
-<div id="default.val" class="section level2">
-<h2><code id="default.val">default.val()</code></h2>
-<p><code>default.val()</code> returns default values for several parameters used by the DoOR functions, e.g. the default odor identifier of the colors used in plots.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">default.val</span>(<span class="st">&quot;ident&quot;</span>)</code></pre>
+<div id="door_default_values" class="section level2">
+<h2><code id="door_default_values">door_default_values()</code></h2>
+<p><code>door_default_values()</code> returns default values for several parameters used by the DoOR functions, e.g. the default odor identifier of the colors used in plots.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">door_default_values</span>(<span class="st">&quot;ident&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;InChIKey&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">default.val</span>(<span class="st">&quot;colors&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">door_default_values</span>(<span class="st">&quot;colors&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;#0570b0&quot; &quot;#74a9cf&quot; &quot;#ffffff&quot; &quot;#fdcc8a&quot; &quot;#fc8d59&quot; &quot;#d7301f&quot;</code></pre>
 </div>
 <div id="getresponses" class="section level2">

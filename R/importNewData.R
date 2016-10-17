@@ -40,12 +40,12 @@
 #' }
 #'
 importNewData <- function(file.name,
-                          dataFormat = default.val("data.format"),
-                          odor_data  = default.val("odor"),
-                          weightGlobNorm = default.val("weight.globNorm"),
-                          responseRange  = default.val("response.range"),
-                          receptors = default.val("ORs"),
-                          ident     = default.val("ident"),
+                          dataFormat = door_default_values("data.format"),
+                          odor_data  = door_default_values("odor"),
+                          weightGlobNorm = door_default_values("weight.globNorm"),
+                          responseRange  = door_default_values("response.range"),
+                          receptors = door_default_values("ORs"),
+                          ident     = door_default_values("ident"),
                           round     = 3) {
   if (any(grep(".txt$", file.name))) {
     imported.data <- read.table(file.name)
@@ -249,7 +249,7 @@ importNewData <- function(file.name,
       stats$newReceptors <- stats$newReceptors + 1
 
     assign(column.name,
-           combData(data1 = target,
+           combine_data(data1 = target,
                     data2 = imported.data,
                     by.data2 = column.name,
                     assigned.name = paste(file.name, sep="")),

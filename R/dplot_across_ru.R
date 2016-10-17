@@ -1,4 +1,4 @@
-#' dplot_acrossReceptors
+#' dplot_across_ru
 #'
 #' barplot of DoOR responses of a set of odorant across all responding units in DoOR
 #'
@@ -13,16 +13,17 @@
 #' @return a ggplot object
 #' @export
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases dplot_acrossReceptors dplot_across_ru
 #' @examples
 #' library(DoOR.data)
 #' data(odor)
-#' dplot_acrossReceptors(transID("123-92-2"), tag = "CAS")
-#' dplot_acrossReceptors(odor$InChIKey[4:10])
+#' dplot_across_ru(transID("123-92-2"), tag = "CAS")
+#' dplot_across_ru(odor$InChIKey[4:10])
 #'
-dplot_acrossReceptors <- function(odorant,
-                                     response_matrix = default.val("response.matrix"),
-                                     odor_data = default.val("odor"),
-                                     zero = default.val("zero"),
+dplot_across_ru <- function(odorant,
+                                     response_matrix = door_default_values("response.matrix"),
+                                     odor_data = door_default_values("odor"),
+                                     zero = door_default_values("zero"),
                                      tag  = "Name",
                                      limits,
                                      base_size = 12) {
@@ -35,7 +36,7 @@ dplot_acrossReceptors <- function(odorant,
   odorant <- as.character(odorant)
 
   data <- response_matrix[odorant,]
-  data <- DoORmelt(as.data.frame(data), na.rm = TRUE)
+  data <- door_melt(as.data.frame(data), na.rm = TRUE)
 
   if(tag != "InChIKey")
     data$odorant <- odor_data[match(data$odorant, odor_data$InChIKey), tag]

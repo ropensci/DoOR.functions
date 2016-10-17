@@ -2,7 +2,7 @@ rebuildMetadata <- function(){
 
   # rebuild weight.globNorm
   tmp <- load2list()
-  datasets <- unlist(sapply(tmp, function(x) colnames(x)[-c(1:default.val("num.charColumns"))]))
+  datasets <- unlist(sapply(tmp, function(x) colnames(x)[-c(1:door_default_values("num.charColumns"))]))
   datasets <- sort(unique(datasets))
   wgn <- matrix(nrow = length(ORs$OR), ncol = length(datasets))
   row.names(wgn) <- ORs$OR
@@ -11,12 +11,12 @@ rebuildMetadata <- function(){
   rr <- data.frame()
   for(i in datasets) {
     data.i <- getDataset(study = i, na.rm = T)
-    rec.i  <- colnames(data.i)[-c(1:default.val("num.charColumns"))]
+    rec.i  <- colnames(data.i)[-c(1:door_default_values("num.charColumns"))]
     # update wgn
     wgn[rec.i, i] <- 1 
     
     # update range
-    range.i <- range(data.i[-c(1:default.val("num.charColumns"))], na.rm = TRUE)
+    range.i <- range(data.i[-c(1:door_default_values("num.charColumns"))], na.rm = TRUE)
     range.i <- data.frame(study = i, min = range.i[1], max = range.i[2], n_odors = nrow(data.i))
     rr <- rbind(rr, range.i)
   }

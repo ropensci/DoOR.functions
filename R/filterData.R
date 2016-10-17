@@ -12,7 +12,7 @@
 # library(DoOR.data)
 # tmp <- filterData(Or42b)
 # tmp$excluded
-filterData <- function(data, overlapValues = default.val("overlapValues"), charColumns = default.val("num.charColumns")) {
+filterData <- function(data, overlapValues = door_default_values("overlapValues"), charColumns = door_default_values("num.charColumns")) {
 
   recordColumn  <- as.numeric(c((charColumns + 1):dim(data)[2]) )
   studies       <- names(data)[recordColumn]

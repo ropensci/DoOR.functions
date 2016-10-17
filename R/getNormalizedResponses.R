@@ -12,7 +12,7 @@
 #'   using \code{\link{modelRP}}.
 #' @param round numeric, round to this amount of digits, set to NA if you do not want to round
 #' @param na.rm logical, remove NAs?
-#' @seealso \code{\link{modelRP}},\code{\link{CreateDatabase}}
+#' @seealso \code{\link{modelRP}},\code{\link{create_door_database}}
 #' @export
 #' @importFrom stats na.omit
 #' @keywords data
@@ -26,8 +26,8 @@
 #' result <- getNormalizedResponses(odors, response_matrix = response.matrix)
 #'
 getNormalizedResponses <- function(odors,
-                                   zero = default.val("zero"),
-                                   response_matrix = default.val("response.matrix"),
+                                   zero = door_default_values("zero"),
+                                   response_matrix = door_default_values("response.matrix"),
                                    round = 3,
                                    na.rm = FALSE) {
 

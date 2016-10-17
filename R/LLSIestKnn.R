@@ -35,7 +35,7 @@
 LLSIestKnn <-
   function(InChIKey,
            receptor,
-           response_matrix = default.val("response.matrix"),
+           response_matrix = door_default_values("response.matrix"),
            nodor = 3) {
 
     # part of the DoOR package: (c) 2009 C. Giovanni Galizia, Daniel Muench, Martin Strauch, Anja Nissler, Shouwen Ma

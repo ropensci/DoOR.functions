@@ -4,11 +4,12 @@
 \alias{exportData}
 \title{export data}
 \usage{
-exportData(file.format, directory, odorantReceptors = default.val("ORs"),
-  response_matrix = default.val("response.matrix"),
-  responseRange = default.val("response.range"),
-  unglobalNorm_RM = default.val("response.matrix_non.normalized"),
-  weightGlobNorm = default.val("weight.globNorm"), all.data = TRUE)
+exportData(file.format, directory,
+  odorantReceptors = door_default_values("ORs"),
+  response_matrix = door_default_values("response.matrix"),
+  responseRange = door_default_values("response.range"),
+  unglobalNorm_RM = door_default_values("response.matrix_non.normalized"),
+  weightGlobNorm = door_default_values("weight.globNorm"), all.data = TRUE)
 }
 \arguments{
 \item{file.format}{character string, the format of given file, either ".txt"

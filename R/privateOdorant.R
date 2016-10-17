@@ -21,9 +21,9 @@
 #'
 privateOdorant <- function(receptor,
                            sensillum = FALSE,
-                           response_matrix = default.val("response.matrix"),
-                           DoOR_mappings = default.val("DoOR_mappings"),
-                           zero = default.val("zero"),
+                           response_matrix = door_default_values("response.matrix"),
+                           DoOR_mappings = door_default_values("DoOR_mappings"),
+                           zero = door_default_values("zero"),
                            nshow = 5,
                            tag) {
   if(!zero == "")

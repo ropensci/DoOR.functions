@@ -20,8 +20,8 @@
 #
 # library(DoOR.data)
 # load_door_data()
-# x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
-# y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
+# x<-door_norm(Or23a[,'Hallem.2004.EN'])
+# y<-door_norm(Or23a[,'Hallem.2006.EN'])
 # comb.xy     <-  na.omit(cbind(x, y))
 # range_x     <-  range(comb.xy[,'x'])
 # range_y     <-  range(comb.xy[,'y'])
@@ -40,7 +40,7 @@ compute_MD <- function(x, y, range.X, parms, fun) {
 
   x_y     <- na.omit(cbind(x, y))
   pp      <- numeric()
-  interval.X  <- default.val("interval.X")
+  interval.X  <- door_default_values("interval.X")
   for (i in 1:dim(x_y)[1]) {
     w   <- x_y[i, ]
     ff2 <- function(x) {

@@ -1,4 +1,4 @@
-# DoORmelt
+# door_melt
 #
 # prepare odor response data for plotting via ggplot2
 #
@@ -13,10 +13,10 @@
 # library(DoOR.data)
 # data(Or22a)
 # data(response.matrix)
-# head(DoORmelt(Or22a, datasets = c("Hallem.2004.WT", "Pelz.2006.AntEC50")))
-# head(DoORmelt(response.matrix[1:100,], na.rm = TRUE))
+# head(door_melt(Or22a, datasets = c("Hallem.2004.WT", "Pelz.2006.AntEC50")))
+# head(door_melt(response.matrix[1:100,], na.rm = TRUE))
 #' @importFrom stats na.omit
-DoORmelt <- function(data, datasets, ident, na.rm = FALSE) {
+door_melt <- function(data, datasets, ident, na.rm = FALSE) {
   if(missing(datasets))
     datasets = colnames(data)
 

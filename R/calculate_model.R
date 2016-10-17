@@ -1,9 +1,9 @@
 #'' select the best model function
 #'
-#'\code{calModel} is used to return the best model function that represent the
+#'\code{calculate_model} is used to return the best model function that represent the
 #'relationship between responses from study x and y.
 #'
-#'\code{calModel} chooses the best model function from following: linear,
+#'\code{calculate_model} chooses the best model function from following: linear,
 #'exponential function, sigmoid, asymptotic model with x intercept, asympototic
 #'model with y intercept and their inverse versions. (If your are interested in
 #'these functions please check the sources at
@@ -14,17 +14,19 @@
 #'@param select.MD logical, if TRUE, only the best model function (in terms of
 #'  MD) will be returned.
 #'@author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#'@author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#'@aliases calModel calculate_model
 #'@export
 #' @importFrom stats na.omit
 #'
 #'@examples
 #' library(DoOR.data)
 #' data(Or35a)
-#' x <- DoORnorm(Or35a[,6])
-#' y <- DoORnorm(Or35a[,9])
-#' calM_xy <- calModel(x, y, select.MD = default.val("select.MD"))
+#' x <- door_norm(Or35a[,6])
+#' y <- door_norm(Or35a[,9])
+#' calM_xy <- calculate_model(x, y, select.MD = door_default_values("select.MD"))
 #'
-calModel <- function (x, y, select.MD = default.val("select.MD") ) {
+calculate_model <- function (x, y, select.MD = door_default_values("select.MD") ) {
 
   comb.xy     <-  na.omit(cbind(x, y))
   if (dim(comb.xy)[1]==0) { stop("There is no observation between x and y.") }

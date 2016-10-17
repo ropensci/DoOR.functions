@@ -5,13 +5,13 @@
 \title{update response matrix}
 \usage{
 updateDatabase(receptor, permutation = TRUE, perm,
-  response_matrix_nn = default.val("response.matrix_non.normalized"),
-  response_matrix = default.val("response.matrix"),
-  responseRange = default.val("response.range"),
-  weightGlobNorm = default.val("weight.globNorm"),
-  select.MDValue = default.val("select.MDValue"), strict = TRUE,
-  overlapValues = default.val("overlapValues"),
-  excluded.data = default.val("excluded.data"), plot = FALSE)
+  response_matrix_nn = door_default_values("response.matrix_non.normalized"),
+  response_matrix = door_default_values("response.matrix"),
+  responseRange = door_default_values("response.range"),
+  weightGlobNorm = door_default_values("weight.globNorm"),
+  select.MDValue = door_default_values("select.MDValue"), strict = TRUE,
+  overlapValues = door_default_values("overlapValues"),
+  excluded.data = door_default_values("excluded.data"), plot = FALSE)
 }
 \arguments{
 \item{receptor}{character string, name of given odorant receptor.}

@@ -4,8 +4,8 @@
 \alias{getNormalizedResponses}
 \title{Find normalised receptor responses}
 \usage{
-getNormalizedResponses(odors, zero = default.val("zero"),
-  response_matrix = default.val("response.matrix"), round = 3,
+getNormalizedResponses(odors, zero = door_default_values("zero"),
+  response_matrix = door_default_values("response.matrix"), round = 3,
   na.rm = FALSE)
 }
 \arguments{
@@ -37,7 +37,7 @@ result <- getNormalizedResponses(odors, response_matrix = response.matrix)
 
 }
 \seealso{
-\code{\link{modelRP}},\code{\link{CreateDatabase}}
+\code{\link{modelRP}},\code{\link{create_door_database}}
 }
 \keyword{data}
 

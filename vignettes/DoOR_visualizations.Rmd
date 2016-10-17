@@ -13,12 +13,12 @@ Apart from merging data and performing calculations on it, the `DoOR.functions` 
 ## Content
 * [Loading data](#loading)
 * [Visualizing odorants _vs_ responding units with `dplot_responseMatrix()`](#responseMatrix)
-* [Visualizing ensemble responses with `dplot_ALmap()`](#ALmap)
+* [Visualizing ensemble responses with `dplot_al_map()`](#ALmap)
 * [Visualizing tuning curves with `dplot_tuningCurve()`](#tuningCurve)
 * [Visualizing response profiles `dplot_responseProfile()`](#responseProile)
-* [Comparing response profiles `dplot_compareProfiles()`](#compareProfiles)
-* [Visualizing odorant responses across responding units with `dplot_acrossReceptors()`](#acrossReceptors)
-* [Visualizing odorant responses across OSNs with `dplot_acrossOSNs()`](#across_OSNs)
+* [Comparing response profiles `dplot_compare_profiles()`](#compareProfiles)
+* [Visualizing odorant responses across responding units with `dplot_across_ru()`](#acrossReceptors)
+* [Visualizing odorant responses across OSNs with `dplot_across_osns()`](#across_OSNs)
 
 
 ## Loading data{#loading}
@@ -42,19 +42,19 @@ If the data contains negative values, a colored response matrix will be plotted:
 dplot_responseMatrix(resetSFR(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
 ```
 
-## Visualizing ensemble responses with `dplot_ALmap()`{#ALmap}
-With `dplot_ALmap()` we can visualize the ensemble response a given odorant elicits across DoOR responding units (receptors, sensory neurons, glomeruli, ... ) as a hypothetical antennal lobe activation pattern.
+## Visualizing ensemble responses with `dplot_al_map()`{#ALmap}
+With `dplot_al_map()` we can visualize the ensemble response a given odorant elicits across DoOR responding units (receptors, sensory neurons, glomeruli, ... ) as a hypothetical antennal lobe activation pattern.
 ```{r, fig.width=7.1}
-dplot_ALmap("QSJXEFYPDANLFS-UHFFFAOYSA-N", base_size = 8)
+dplot_al_map("QSJXEFYPDANLFS-UHFFFAOYSA-N", base_size = 8)
 ```
 If we do not know the InChIKey of the substance we are interested in, we can use the `transID()` function for conversion. If we are interested in the expressed receptor rather than the glomerulus names:
 ```{r, fig.width=7.1, warning=FALSE}
-dplot_ALmap(transID("benzaldehyde", from = "Name"), tag = "receptor", main = "SMILES", base_size = 8)
+dplot_al_map(transID("benzaldehyde", from = "Name"), tag = "receptor", main = "SMILES", base_size = 8)
 ```
 
 If we prefer the plain activation pattern without annotations at all:
 ```{r, fig.width=7.1, fig.height=2}
-dplot_ALmap(transID("628-63-7", from = "CAS"), tag = "", main = "", legend = F, scalebar = F)
+dplot_al_map(transID("628-63-7", from = "CAS"), tag = "", main = "", legend = F, scalebar = F)
 ```
 
 ## Visualizing tuning curves with `dplot_tuningCurve()`{#tuningCurve}
@@ -119,15 +119,15 @@ And if we prefer monochrome data:
 dplot_responseProfile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
 ```
 
-## Comparing response profiles `dplot_compareProfiles()`{#compareProfiles}
-As the name indicates, with `dplot_compareProfiles()` we can plot two response profiles side by side for comparison. The syntax here differs from the previous plots as we can use it also to compare the original data sets in DoOR.
+## Comparing response profiles `dplot_compare_profiles()`{#compareProfiles}
+As the name indicates, with `dplot_compare_profiles()` we can plot two response profiles side by side for comparison. The syntax here differs from the previous plots as we can use it also to compare the original data sets in DoOR.
 
 
 ### Comparing original data sets
 This time, with `x` and `y` we have to specify a whole data.frame, `by.x` and `by.y`  take the corresponding column names that will be plotted. If `x` is not specified, both `by.x` and `by.y` will be taken from `x`.
 
 ```{r}
-dplot_compareProfiles(x = Or22a, y = Or22a, by.x = "Pelz.2006.AntEC50",
+dplot_compare_profiles(x = Or22a, y = Or22a, by.x = "Pelz.2006.AntEC50",
                          by.y = "Hallem.2004.EN", tag = "Name", base_size = 8)
 ```
 
@@ -136,49 +136,49 @@ We see that the measured Or22a sensory neuron responses in these two data sets a
 ### Comparing DoOR response profiles
 Next we compare two DoOR consensus response profiles, measurements of the misexpressed receptor Or35a and recordings from the ac3B sensory neuron that naturally expresses Or35a:
 ```{r, fig.width = 7.1}
-dplot_compareProfiles(x = response.matrix, by.x = "Or35a", by.y = "ac3B",
+dplot_compare_profiles(x = response.matrix, by.x = "Or35a", by.y = "ac3B",
                          tag = "Name", base_size = 8)
 ```
 
 or with "SFR" set to 0:
 ```{r, fig.width = 7.1}
-dplot_compareProfiles(x = resetSFR(response.matrix, "SFR"), by.x = "Or35a", by.y = "ac3B",
+dplot_compare_profiles(x = resetSFR(response.matrix, "SFR"), by.x = "Or35a", by.y = "ac3B",
                          tag = "Name", base_size = 8)
 ```
 
 We see that the response profiles are very similar but not identical, which is expected as the ac3B neuron expresses other receptors in addition to Or35a.
 
-## Visualizing odorant responses across responding units with `dplot_acrossReceptors()`{#acrossReceptors}
-With `dplot_acrossReceptors()` we can visualize the responses that one or several odorants elicit across receptors / responding units.
+## Visualizing odorant responses across responding units with `dplot_across_ru()`{#acrossReceptors}
+With `dplot_across_ru()` we can visualize the responses that one or several odorants elicit across receptors / responding units.
 
 ```{r, fig.width = 6, fig.height = 6}
 odors <-
   transID(c("pentyl acetate", "carbon dioxide", "2,3-butanedione"), from = "Name")
-dplot_acrossReceptors(odors, tag = "Name", base_size = 8)
+dplot_across_ru(odors, tag = "Name", base_size = 8)
 ```
 
 
-## Visualizing odorant responses across OSNs with `dplot_acrossOSNs()`{#across_OSNs}
-`dplot_acrossOSNs()` is similar to `dplot_acrossReceptors()` but the responding units are sorted according to the sensory neuron they belong to. This sorting is controlled via `DoOR_mappings` from the `DoOR.data` package. There are two types of plot that `dplot_acrossOSNs()` can return. Type 2 directly resembles `dplot_acrossReceptors()`:
+## Visualizing odorant responses across OSNs with `dplot_across_osns()`{#across_OSNs}
+`dplot_across_osns()` is similar to `dplot_across_ru()` but the responding units are sorted according to the sensory neuron they belong to. This sorting is controlled via `DoOR_mappings` from the `DoOR.data` package. There are two types of plot that `dplot_across_osns()` can return. Type 2 directly resembles `dplot_across_ru()`:
 
 
 ```{r, fig.width = 6, fig.height = 6}
-dplot_acrossOSNs(odors, base_size = 8, plot.type = 2)
+dplot_across_osns(odors, base_size = 8, plot.type = 2)
 ```
 
 In type 1 the data is split according to odorant X sensillum, the color is assigned to the corresponding neuron A-D or X-Z if the neuron's identity is unknown:
 ```{r, fig.width = 7.1, fig.height = 5}
-dplot_acrossOSNs(odors, base_size = 8, plot.type = 1)
+dplot_across_osns(odors, base_size = 8, plot.type = 1)
 ```
 
 As this plot gets pretty messy, we have the option to restrict plotting to certain subsets of sensilla. We can for example only plot the responses of antennal basiconic (ab) sensilla:
 
 ```{r, fig.width = 7.1, fig.height = 5}
-dplot_acrossOSNs(odors, base_size = 8, plot.type = 1, sub = "ab")
+dplot_across_osns(odors, base_size = 8, plot.type = 1, sub = "ab")
 ```
 
 Or we plot coeloconic and trichoid sensilla:
 
 ```{r, fig.width = 7.1, fig.height = 5}
-dplot_acrossOSNs(odors, base_size = 8, plot.type = 1, sub = c("ac", "at"))
+dplot_across_osns(odors, base_size = 8, plot.type = 1, sub = c("ac", "at"))
 ```

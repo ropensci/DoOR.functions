@@ -16,7 +16,7 @@
 #' transID("isopentyl acetate", "Name")
 #' transID("C(C(C)C)COC(=O)C", "SMILES", "Name")
 #' 
-transID <- function(x, from = "CAS", to = "InChIKey", odor_data = default.val("odor")) {
+transID <- function(x, from = "CAS", to = "InChIKey", odor_data = door_default_values("odor")) {
   result <- odor_data[match(x, odor_data[ , from]), to]
  if(length(result) == 0) {
     warning("No match, returning NA.")

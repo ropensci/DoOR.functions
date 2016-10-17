@@ -4,7 +4,7 @@
 \alias{getResponses}
 \title{Find receptor responses}
 \usage{
-getResponses(odorant, responseRange = default.val("response.range"),
+getResponses(odorant, responseRange = door_default_values("response.range"),
   Or.list = load2list())
 }
 \arguments{

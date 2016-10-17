@@ -9,7 +9,7 @@
 #' @param char.columns number of character columns in each receptor data.frame.
 #' @param ident odorant identifier to be used as rownames.
 #' @export
-#' @aliases countStudies, count_studies
+#' @aliases countStudies count_studies
 #'
 #' @return matrix
 #'
@@ -19,10 +19,10 @@
 #' count <- countStudies()
 #' image(count)
 #'
-count_studies <- function(ors = default.val("ORs"),
-                         odor_data = default.val("odor"),
-                         char.columns = default.val("num.charColumns"),
-                         ident = default.val("ident")) {
+count_studies <- function(ors = door_default_values("ORs"),
+                         odor_data = door_default_values("odor"),
+                         char.columns = door_default_values("num.charColumns"),
+                         ident = door_default_values("ident")) {
   counts <- matrix(nrow = dim(odor_data)[1], dimnames = c(odor_data[ident]))
   for (i in 1:length(ors$OR)) {
     or.name <- as.character(ors$OR[i])

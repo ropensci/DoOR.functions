@@ -48,8 +48,8 @@ knitr::kable(rm_sfrReset[1:10,6:15], digits = 2)
 resetSFR(x = c(1:10), sfr = 4)
 
 ## ------------------------------------------------------------------------
-default.val("ident")
-default.val("colors")
+door_default_values("ident")
+door_default_values("colors")
 
 ## ------------------------------------------------------------------------
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")

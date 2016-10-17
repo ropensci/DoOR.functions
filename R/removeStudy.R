@@ -20,9 +20,9 @@
 #' removeStudy('Bruyne.2001.WT')
 #'
 removeStudy <- function(study,
-                        receptors = default.val('ORs'),
-                        responseRange = default.val('response.range'),
-                        weightGlobNorm = default.val('weight.globNorm')) {
+                        receptors = door_default_values('ORs'),
+                        responseRange = door_default_values('response.range'),
+                        weightGlobNorm = door_default_values('weight.globNorm')) {
   if (length(study) > 1)
     stop('Please enter only 1 study at a time.')
 

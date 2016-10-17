@@ -16,7 +16,7 @@ The `DoOR.functions` package provides tools for the analysis of the data provide
 * [Identifying the sensillum we are recording from with `identifySensillum()`](#identifySensillum)
 * [Finding neuron-specific odorants with `privateOdorant()`](#privateOdorant)
 * [Mapping response data from an unknown source with `mapReceptor()`](#mapReceptor)
-* [Changing the response unit with `backProject()`](#backProject)
+* [Changing the response unit with `back_project()`](#back_project)
 * [Quantifying tuning curves with `sparse()`](#sparse)
 
 
@@ -117,22 +117,22 @@ This example was a bit circular as the tested data contributed to the consensus 
 
 
 
-## Changing the response unit (spikes, deltaF/F, ...) with `backProject()`{#backProject}
-The DoOR consensus data is normalized to values between 0 and 1. If we want to compare the DoOR data to one of our own recordings, it would be great to have the DoOR data in the same unit as our owne data (e.g. spikerate). This is what we can do with `backProject()`,  we can rescale the DoOR data to fit a given response template.
+## Changing the response unit (spikes, deltaF/F, ...) with `back_project()`{#back_project}
+The DoOR consensus data is normalized to values between 0 and 1. If we want to compare the DoOR data to one of our own recordings, it would be great to have the DoOR data in the same unit as our owne data (e.g. spikerate). This is what we can do with `back_project()`,  we can rescale the DoOR data to fit a given response template.
 
 As an example, let's take the data Hallem et al. recorded from Or22a _via_ calcium imaging and rescale the DoOR responses accordingly. The template has to have 2 columns named `odorants` and `responses`:
 ```{r, fig.width = 4.5, fig.height = 4.5}
 template <- data.frame(odorants  = Or22a$InChIKey, 
                        responses = Or22a$Hallem.2006.EN)
 
-bp <- backProject(template, responding.unit = "Or22a")
-plot(bp$backprojected$original.data, 
-     bp$backprojected$backprojected.data, 
+bp <- back_project(template, responding.unit = "Or22a")
+plot(bp$back_projected$original.data, 
+     bp$back_projected$back_projected.data, 
      xlab = "DoOR consensus response", 
-     ylab = "backprojected data [spikes, Hallem.2006.EN]"
+     ylab = "back_projected data [spikes, Hallem.2006.EN]"
 )
 
-head(bp$backprojected)
+head(bp$back_projected)
 
 ```
 All the yellow lines in the first plot represent odorant responses that were not available in the original data set but were projected onto the fitted function and rescaled to the units in "Hallem.2006.EN". The second plot shows the relationship between the rescaled data and the original consensus responses.

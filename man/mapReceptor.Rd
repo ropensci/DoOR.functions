@@ -4,8 +4,8 @@
 \alias{mapReceptor}
 \title{mapReceptor}
 \usage{
-mapReceptor(data, response_matrix = default.val("response.matrix"), sub,
-  threshold.p, threshold.cor, nshow)
+mapReceptor(data, response_matrix = door_default_values("response.matrix"),
+  sub, threshold.p, threshold.cor, nshow)
 }
 \arguments{
 \item{data}{data frame, containing two columns, one called "odorants" and one

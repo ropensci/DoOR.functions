@@ -3,7 +3,7 @@
 #' projects data points onto the curve defined by the model function
 #'
 #' For internal use in the merging process (see also \code{\link{modelRP}}). The
-#' model function is choosen by \code{\link{calModel}}.
+#' model function is choosen by \code{\link{calculate_model}}.
 #' \code{\link{projectPoints}} then projects the data points from the datasets
 #' to be merged onto the curve defined by the model function. It computes the
 #' closest distance from a data point to a point on the curve by numerical
@@ -33,7 +33,7 @@
 #'   \code{FALSE}.
 #' @param \dots further graphical parameters
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @seealso \code{\link{calModel}}, \code{\link{optimize}},
+#' @seealso \code{\link{calculate_model}}, \code{\link{optimize}},
 #'   \code{\link{integrate}}
 #' @export
 #' @importFrom stats na.omit
@@ -42,15 +42,15 @@
 #'
 #' library(DoOR.data)
 #' data(Or23a)
-#' x <- DoORnorm(Or23a[,'Hallem.2004.EN'])
-#' y <- DoORnorm(Or23a[,'Hallem.2006.EN'])
+#' x <- door_norm(Or23a[,'Hallem.2004.EN'])
+#' y <- door_norm(Or23a[,'Hallem.2006.EN'])
 #' projectPoints(x = x, y = y, plot = TRUE)
 #'
 #' @importFrom stats integrate optimize
 projectPoints <- function(x, y, xylim, best.model,
-                          plot = default.val("plot"),
-                          points_cex = default.val("points.cex"),
-                          title = default.val("title"),
+                          plot = door_default_values("plot"),
+                          points_cex = door_default_values("points.cex"),
+                          title = door_default_values("title"),
                           ...) {
   # subfunction:
 
@@ -65,9 +65,9 @@ projectPoints <- function(x, y, xylim, best.model,
 
 
 
-  # compute the chosen fitting function (see calModel.R)
+  # compute the chosen fitting function (see calculate_model.R)
   if (missing(best.model)) {
-    best.model <- calModel(x = x, y = y, select.MD = default.val("select.MD"))
+    best.model <- calculate_model(x = x, y = y, select.MD = door_default_values("select.MD"))
   }
 
   # find overlap between datasets
@@ -90,7 +90,7 @@ projectPoints <- function(x, y, xylim, best.model,
   range_x <- range(doubleCoor[,'x'])
   range_y <- range(doubleCoor[,'y'])
 
-  # construct the best fitting interval function, comprising the result of calModel() (stored in "best.model")
+  # construct the best fitting interval function, comprising the result of calculate_model() (stored in "best.model")
 
 
   # function.name : character, the name of chosen model
@@ -118,7 +118,7 @@ projectPoints <- function(x, y, xylim, best.model,
 
   # project the double observation values onto the respective closest points on the curve (fitting function)
   # this is done numerically with comp.projected.double.coord()
-  interval.X <- default.val("interval.X")   # determine the interval for searching.
+  interval.X <- door_default_values("interval.X")   # determine the interval for searching.
   projected_double_coord  <- numeric()
 
   for (i in 1:dim(x_y)[1]){
@@ -180,7 +180,7 @@ projectPoints <- function(x, y, xylim, best.model,
     }
 
     # decide whether we are in the linear regime or in the middle interval of the mixed (three-interval) fitting function
-    # if we are in the middle interval, choose the fitting function as returned by calModel()
+    # if we are in the middle interval, choose the fitting function as returned by calculate_model()
     # integrate to get the distance
     # ABOUT the RoundOff error during integrate. If integrating a nonlienar function from a value to Inf (or a value that bring the function infinite) , it will return a warning message 'roundoff                  error is detected in the extrapolation table'. To avoid that, the distance is calculated using linear function.
 

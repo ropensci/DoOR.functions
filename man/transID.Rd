@@ -4,7 +4,8 @@
 \alias{transID}
 \title{transID}
 \usage{
-transID(x, from = "CAS", to = "InChIKey", odor_data = default.val("odor"))
+transID(x, from = "CAS", to = "InChIKey",
+  odor_data = door_default_values("odor"))
 }
 \arguments{
 \item{x}{character vector, one or many chemical identifiers}

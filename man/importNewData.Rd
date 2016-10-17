@@ -4,11 +4,12 @@
 \alias{importNewData}
 \title{Import new data into DoOR}
 \usage{
-importNewData(file.name, dataFormat = default.val("data.format"),
-  odor_data = default.val("odor"),
-  weightGlobNorm = default.val("weight.globNorm"),
-  responseRange = default.val("response.range"),
-  receptors = default.val("ORs"), ident = default.val("ident"), round = 3)
+importNewData(file.name, dataFormat = door_default_values("data.format"),
+  odor_data = door_default_values("odor"),
+  weightGlobNorm = door_default_values("weight.globNorm"),
+  responseRange = door_default_values("response.range"),
+  receptors = door_default_values("ORs"),
+  ident = door_default_values("ident"), round = 3)
 }
 \arguments{
 \item{file.name}{character string, the name of given file that contains

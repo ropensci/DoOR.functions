@@ -1,4 +1,4 @@
-#' dplot_ALmap
+#' dplot_al_map
 #'
 #' Plot an antennal lobe map with color coded odorant responses.
 #'
@@ -31,31 +31,32 @@
 #' @export
 #' @return a ggplot2 object
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases dplot_ALmap dplot_al_map
 #' @examples
 #' library(DoOR.data)
-#' dplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
-#' dplot_ALmap("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
+#' dplot_al_map("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
+#' dplot_al_map("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
 #'    color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #'
-#' dplot_ALmap(transID("123-92-2"), scalebar = FALSE) +
+#' dplot_al_map(transID("123-92-2"), scalebar = FALSE) +
 #' ggplot2::theme(legend.position  = "bottom",
 #'       panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
 #' ggplot2::ggtitle("responses elicited by isopentyl acetate")
 #'
 #' \dontrun{
-#' p <- dplot_ALmap(transID("123-92-2"))
+#' p <- dplot_al_map(transID("123-92-2"))
 #' ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
-dplot_ALmap <- function(InChIKey,
-                           response_matrix = default.val("response.matrix"),
-                           odor_data = default.val("odor"),
-                           DoOR_mappings = default.val("DoOR_mappings"),
-                           zero = default.val("zero"),
-                           tag =  default.val("tag.ALmap"),
+dplot_al_map <- function(InChIKey,
+                           response_matrix = door_default_values("response.matrix"),
+                           odor_data = door_default_values("odor"),
+                           DoOR_mappings = door_default_values("DoOR_mappings"),
+                           zero = door_default_values("zero"),
+                           tag =  door_default_values("tag.ALmap"),
                            main = "Name",
-                           scalebar = default.val("scalebar"),
-                           AL.map = default.val("AL.map"),
-                           colors = default.val("colors"),
+                           scalebar = door_default_values("scalebar"),
+                           AL.map = door_default_values("AL.map"),
+                           colors = door_default_values("colors"),
                            legend = TRUE,
                            limits,
                            base_size = 12) {
@@ -88,7 +89,7 @@ dplot_ALmap <- function(InChIKey,
     ggplot2::geom_polygon(data = AL.map$bg.cutout,  ggplot2::aes(x = x, y = y, group = group), fill = "white", color = "white") +
     ggplot2::geom_polygon(data = AL.map$unmapped_not.olf, ggplot2::aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
     ggplot2::geom_polygon(ggplot2::aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") +
-    ggplot2::scale_fill_gradientn(na.value="grey65", colours = colors, space = "rgb", values = DoORnorm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
+    ggplot2::scale_fill_gradientn(na.value="grey65", colours = colors, space = "rgb", values = door_norm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
     ggplot2::coord_fixed() +
     ggplot2::theme_minimal(base_size = base_size) +
     ggplot2::ggtitle(main) +

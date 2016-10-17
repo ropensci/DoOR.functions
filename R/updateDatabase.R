@@ -47,27 +47,27 @@
 updateDatabase <- function(receptor, 
                            permutation = TRUE, 
                            perm, 
-                           response_matrix_nn = default.val("response.matrix_non.normalized"), 
-                           response_matrix    = default.val("response.matrix"), 
-                           responseRange      = default.val("response.range"), 
-                           weightGlobNorm     = default.val("weight.globNorm"),
-                           select.MDValue     = default.val("select.MDValue"), 
+                           response_matrix_nn = door_default_values("response.matrix_non.normalized"), 
+                           response_matrix    = door_default_values("response.matrix"), 
+                           responseRange      = door_default_values("response.range"), 
+                           weightGlobNorm     = door_default_values("weight.globNorm"),
+                           select.MDValue     = door_default_values("select.MDValue"), 
                            strict             = TRUE,
-                           overlapValues      = default.val("overlapValues"),
-                           excluded.data      = default.val("excluded.data"),
+                           overlapValues      = door_default_values("overlapValues"),
+                           excluded.data      = door_default_values("excluded.data"),
                            plot = FALSE) {	
   da            <- get(receptor)
-  recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
+  recordColumn  <- as.numeric( c((door_default_values("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
   
   if (permutation == TRUE) {
     da            <- filterData(da, overlapValues = overlapValues)
     excluded      <- as.character(da$excluded$study)
     da            <- da$data
-    recordColumn  <- as.numeric( c((default.val("num.charColumns")+1):dim(da)[2]) )
+    recordColumn  <- as.numeric( c((door_default_values("num.charColumns")+1):dim(da)[2]) )
     studies       <- names(da)[recordColumn]
     
-    if(length(da) > default.val("num.charColumns")) {
+    if(length(da) > door_default_values("num.charColumns")) {
       
       if (missing(perm)) {
         perm <- matrix(studies[permutations(length(studies))], ncol=length(studies)) 
@@ -83,7 +83,7 @@ updateDatabase <- function(receptor,
         if (inherits(merge.try, "try-error")) { 
           meanCorrel_merge.try <- NA 
         } else {
-          meanCorrel_merge.try <- mean(unlist(sapply(da[,recordColumn],function(x) calModel(merge.try, x)[[1]]["MD"])))
+          meanCorrel_merge.try <- mean(unlist(sapply(da[,recordColumn],function(x) calculate_model(merge.try, x)[[1]]["MD"])))
         }
         meanCorrel[i,] <- meanCorrel_merge.try
         

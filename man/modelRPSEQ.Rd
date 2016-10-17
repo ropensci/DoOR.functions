@@ -4,8 +4,8 @@
 \alias{modelRPSEQ}
 \title{modelRPSEQ}
 \usage{
-modelRPSEQ(data, SEQ, overlapValues = default.val("overlapValues"),
-  select.MDValue = default.val("select.MDValue"), strict = TRUE,
+modelRPSEQ(data, SEQ, overlapValues = door_default_values("overlapValues"),
+  select.MDValue = door_default_values("select.MDValue"), strict = TRUE,
   plot = FALSE)
 }
 \arguments{

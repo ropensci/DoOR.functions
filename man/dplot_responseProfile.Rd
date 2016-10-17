@@ -5,11 +5,11 @@
 \title{dplot_responseProfile}
 \usage{
 dplot_responseProfile(receptor,
-  response_matrix = default.val("response.matrix"),
-  odor_data = default.val("odor"), tag = default.val("tag"),
-  colored = TRUE, colors = default.val("colors"), limits,
-  zero = default.val("zero"), scalebar = default.val("scalebar"),
-  base_size = 12)
+  response_matrix = door_default_values("response.matrix"),
+  odor_data = door_default_values("odor"), tag = door_default_values("tag"),
+  colored = TRUE, colors = door_default_values("colors"), limits,
+  zero = door_default_values("zero"),
+  scalebar = door_default_values("scalebar"), base_size = 12)
 }
 \arguments{
 \item{receptor}{character, receptor name, any of colnames(response.matrix)}

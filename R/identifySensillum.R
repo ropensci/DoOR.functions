@@ -51,9 +51,9 @@
 #' identifySensillum(recording, method = "dist", nshow = 5)
 #'
 identifySensillum <- function(recording,
-                              response_matrix = default.val("response.matrix"),
-                              odor_data       = default.val("odor"),
-                              DoOR_mappings   = default.val("DoOR_mappings"),
+                              response_matrix = door_default_values("response.matrix"),
+                              odor_data       = door_default_values("odor"),
+                              DoOR_mappings   = door_default_values("DoOR_mappings"),
                               tag     = "Name",
                               min.cor = .9,
                               nshow   = 10,
@@ -167,7 +167,7 @@ identifySensillum <- function(recording,
   if(plot == TRUE) {
     # plot data
 
-    data.melt <- DoORmelt(data)
+    data.melt <- door_melt(data)
     plots <- list()
     for(i in 1:length(units)) {
       if (method %in% c("cor"))

@@ -20,8 +20,8 @@
 #' and compose them as a list.  \cr }
 #'
 #' Try some visualizations (e.g. producing the plots from the paper):
-#' \tabular{ll}{ \code{\link{dplot_ALmap}}: \tab response to a chemical mapped onto
-#' an image of the antennal lobe.\cr \code{\link{dplot_compareProfiles}}: \tab compare
+#' \tabular{ll}{ \code{\link{dplot_al_map}}: \tab response to a chemical mapped onto
+#' an image of the antennal lobe.\cr \code{\link{dplot_compare_profiles}}: \tab compare
 #' the results of two studies.  \cr \code{\link{dplot_responseMatrix}}: \tab Dot Plot of
 #' Odorant Responses Across Receptors. \cr \code{\link{dplot_responseProfile}}: \tab
 #' bar plot: one receptor, all chemicals. \cr
@@ -32,15 +32,15 @@
 #' chemical, get normalised responses from all studies in the database.\cr}
 #'
 #' In case you wish to create your own response model (e.g. because you want to
-#' include your own datasets): \tabular{ll}{ \code{\link{CreateDatabase}}: \tab
+#' include your own datasets): \tabular{ll}{ \code{\link{create_door_database}}: \tab
 #' compute the complete response model for all receptors in the database (calls
 #' \code{\link{modelRP}} for all receptors). \cr \code{\link{modelRP}}: \tab
 #' run the DoOR algorithm, that merges all measurements for one receptor. \cr }
 #'
-#' Estimate odorant responses: \tabular{ll}{ \code{\link{DoOREst}}: \tab
+#' Estimate odorant responses: \tabular{ll}{ \code{\link{estimate_missing_value}}: \tab
 #' estimate NA entries in a consensus response data. \cr }
 #' Project the model response values back to tested values: \tabular{ll}{
-#' \code{\link{backProject}}: \tab project the model response values back to
+#' \code{\link{back_project}}: \tab project the model response values back to
 #' tested values. \cr }
 #'
 #' Introduce new data into DoOR and update the supported data sets:

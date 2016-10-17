@@ -51,14 +51,14 @@ mapReceptor(data = data, nshow = 5)
 template <- data.frame(odorants  = Or22a$InChIKey, 
                        responses = Or22a$Hallem.2006.EN)
 
-bp <- backProject(template, responding.unit = "Or22a")
-plot(bp$backprojected$original.data, 
-     bp$backprojected$backprojected.data, 
+bp <- back_project(template, responding.unit = "Or22a")
+plot(bp$back_projected$original.data, 
+     bp$back_projected$back_projected.data, 
      xlab = "DoOR consensus response", 
-     ylab = "backprojected data [spikes, Hallem.2006.EN]"
+     ylab = "back_projected data [spikes, Hallem.2006.EN]"
 )
 
-head(bp$backprojected)
+head(bp$back_projected)
 
 
 ## ------------------------------------------------------------------------

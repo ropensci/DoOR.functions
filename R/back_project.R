@@ -1,4 +1,4 @@
-#' backProject
+#' back_project
 #'
 #' project the model response values back into your scale of interest (spike,
 #' deltaF/F...)
@@ -18,13 +18,14 @@
 #' @param response_matrix DoOR response mnatrix, the source data is picked from
 #'   here
 #'
-#' @return Output of backProject is a list containing a data frame with the
-#'   backprojected data, the original data, the data used as a template and the
+#' @return Output of back_project is a list containing a data frame with the
+#'   back_projected data, the original data, the data used as a template and the
 #'   data that resulted from fitting source and template (before rescaling to
 #'   the template scale). additionaly the parameters of the linear fit between
 #'   the source and template response scale is returned.
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @aliases back_project back_project
 #' @export
 #' @importFrom stats lm
 #' @importFrom graphics points
@@ -34,28 +35,28 @@
 #' data(response.matrix)
 #' template.data <- data.frame(odorants = Or22a$InChIKey,
 #'                             responses = Or22a$Hallem.2004.EN)
-#' bp <- backProject(template.data, "Or22a")
+#' bp <- back_project(template.data, "Or22a")
 #'
-#' plot(bp$backprojected$original.data,
-#'      bp$backprojected$backprojected.data,
+#' plot(bp$back_projected$original.data,
+#'      bp$back_projected$back_projected.data,
 #'      xlab = "DoOR consensus response",
-#'      ylab = "backprojected data [spikes, Hallem.2004.EN]"
+#'      ylab = "back_projected data [spikes, Hallem.2004.EN]"
 #' )
 #'
-backProject <- function(template.data,
+back_project <- function(template.data,
                         responding.unit,
-                        response_matrix = default.val("response.matrix")) {
+                        response_matrix = door_default_values("response.matrix")) {
 
   template.data$odorants <- as.character(template.data$odorants)
   source.data <- data.frame(odorants = rownames(response_matrix), cons.responses = response_matrix[,responding.unit], stringsAsFactors = F)
 
   # combine the data
   match.st <- match(source.data$odorants, template.data$odorants)
-  xy       <- cbind(DoORnorm(source.data$cons.responses),
-                    DoORnorm(template.data$responses[match.st]))
+  xy       <- cbind(door_norm(source.data$cons.responses),
+                    door_norm(template.data$responses[match.st]))
 
   # find the best fitting model and project all points along the fitted curve
-  best.model <- calModel(x = xy[,1], y = xy[,2])
+  best.model <- calculate_model(x = xy[,1], y = xy[,2])
   projected  <- projectPoints(x = xy[,1], y = xy[,2], best.model = best.model, plot = TRUE, title = TRUE, xlab = paste(responding.unit, "[consensus data]"), ylab = "template data")
 
   # extract the projected and the normalized projected data
@@ -75,9 +76,9 @@ backProject <- function(template.data,
   match.sp <- match(1:dim(source.data)[1], projected.back[,'ID'])
   projected.back_rescaled <- translate.parms[1] + translate.parms[2] * projected.back[match.sp,'Y']
 
-  back.projected <- list(backprojected =
+  back.projected <- list(back_projected =
                            data.frame(odorants           = source.data$odorants,
-                                      backprojected.data = projected.back_rescaled,
+                                      back_projected.data = projected.back_rescaled,
                                       original.data      = source.data$cons.responses,
                                       template.data      = template.data$responses[match.st],
                                       fitted.data        = projected.back_NDR[match.sp,"NDR"]),

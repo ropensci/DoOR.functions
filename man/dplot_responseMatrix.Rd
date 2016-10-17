@@ -4,9 +4,10 @@
 \alias{dplot_responseMatrix}
 \title{dplot_responseMatrix}
 \usage{
-dplot_responseMatrix(data, odor_data = default.val("odor"),
-  tag = default.val("tag"), colors = default.val("colors"), flip = FALSE,
-  fix = TRUE, bw = FALSE, point = FALSE, limits, base_size = 12)
+dplot_responseMatrix(data, odor_data = door_default_values("odor"),
+  tag = door_default_values("tag"), colors = door_default_values("colors"),
+  flip = FALSE, fix = TRUE, bw = FALSE, point = FALSE, limits,
+  base_size = 12)
 }
 \arguments{
 \item{data}{a subset of e.g. response.matrix}

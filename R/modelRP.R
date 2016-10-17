@@ -38,12 +38,12 @@
 #' RP.Or35a <- modelRP(Or35a, plot = TRUE)
 #'
 modelRP <- function(da,
-                    select.MDValue = default.val("select.MDValue"),
-                    overlapValues = default.val("overlapValues"),
-                    responseRange = default.val("response.range"),
-                    weightGlobNorm = default.val("weight.globNorm"),
-                    glob.normalization = default.val("glob.normalization"),
-                    plot = default.val("plot") ) {
+                    select.MDValue = door_default_values("select.MDValue"),
+                    overlapValues = door_default_values("overlapValues"),
+                    responseRange = door_default_values("response.range"),
+                    weightGlobNorm = door_default_values("weight.globNorm"),
+                    glob.normalization = door_default_values("glob.normalization"),
+                    plot = door_default_values("plot") ) {
 
   #safety check for input data format
   if (!is.data.frame(da)) {
@@ -58,8 +58,8 @@ modelRP <- function(da,
   # positions of columns that contain odor response vectors
   # should be columns 6...end (1..5 contain odor class, odor name, InChIKey, CID and CAS)
   #
-  if(length(da) > default.val("num.charColumns")) {
-    nv                 <- as.numeric(c((default.val("num.charColumns")+1):dim(da)[2]))
+  if(length(da) > door_default_values("num.charColumns")) {
+    nv                 <- as.numeric(c((door_default_values("num.charColumns")+1):dim(da)[2]))
     number_of_studies  <- length(nv)
   } else {
     number_of_studies  <- 0
@@ -77,7 +77,7 @@ modelRP <- function(da,
 
   # if there is only one study --> just normalise data and return
   if (number_of_studies == 1) {
-    pda 	    <- apply(as.data.frame(da[, nv]), 2, DoORnorm)	# pda : processing data
+    pda 	    <- apply(as.data.frame(da[, nv]), 2, door_norm)	# pda : processing data
     merged_data <- as.vector(pda)
     message("No merging performed as there is only one study in the dataset.")
     # merged_data thus corresponds to the only measured data set
@@ -100,9 +100,9 @@ modelRP <- function(da,
     # end plot
 
     # extract response data without information columns into pda
-    pda <- apply(as.data.frame(da[, nv]), 2, DoORnorm) # processing data
+    pda <- apply(as.data.frame(da[, nv]), 2, door_norm) # processing data
     # pda contains the columns (receptors) of the data matrix
-    # the function DoORnorm has normalized each to [0,1]
+    # the function door_norm has normalized each to [0,1]
 
     ###
     # --> start the merging process: find the first pair
@@ -146,7 +146,7 @@ modelRP <- function(da,
     # merge the remaining studies
     # always merge into the model response
     # while there are still studies to process: find the study to be merged next
-    # (again, use calModel() to try all studies and fitting functions --> MD values)
+    # (again, use calculate_model() to try all studies and fitting functions --> MD values)
 
     ind <- length(rest_data) # how many studies are left to merge
 

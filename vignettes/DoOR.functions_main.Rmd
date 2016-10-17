@@ -18,7 +18,7 @@ In this vignette we describe how to build, modify and update DoOR and introduce 
 * [loading DoOR](#loading)
 * [Modifying, building and updating DoOR](#building)
     * [Importing new data with `importNewData()`](#importNewData)
-    * [Building the complete data base with `CreateDatabase()`](#CreateDatabase)
+    * [Building the complete data base with `create_door_database()`](#create_door_database)
     * [Updating parts of the data base with `updateDatabase()`](#updateDatabase)
     * [`modelRP()` and `modelRPSEQ()`](#model)
     * [Removing a study with `removeStudy()`](#removeStudy)
@@ -98,8 +98,8 @@ See `?importNewData` for more details. We can e.g. import data also based on CAS
 If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/package=webchem) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
 
 
-## Building the complete data base with `CreateDatabase()`{#CreateDatabase}
-Once we imported new data we can use `CreateDatabase()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in `excluded.data`.
+## Building the complete data base with `create_door_database()`{#create_door_database}
+Once we imported new data we can use `create_door_database()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in `excluded.data`.
 
 
 ## Updating parts of the data base with `updateDatabase()`{#updateDatabase}
@@ -186,12 +186,12 @@ resetSFR(x = c(1:10), sfr = 4)
 ```
 
 
-## `default.val()`{#default.val}
-`default.val()` returns default values for several parameters used by the DoOR functions, e.g. the default odor identifier of the colors used in plots.
+## `door_default_values()`{#door_default_values}
+`door_default_values()` returns default values for several parameters used by the DoOR functions, e.g. the default odor identifier of the colors used in plots.
 
 ```{r}
-default.val("ident")
-default.val("colors")
+door_default_values("ident")
+door_default_values("colors")
 ```
 
 

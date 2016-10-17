@@ -25,8 +25,8 @@
 #
 # library(DoOR.data)
 # load_door_data()
-# x<-DoORnorm(Or23a[,'Hallem.2004.EN'])
-# y<-DoORnorm(Or23a[,'Hallem.2006.EN'])
+# x<-door_norm(Or23a[,'Hallem.2004.EN'])
+# y<-door_norm(Or23a[,'Hallem.2006.EN'])
 # MF_xy <- modelfunction(x=x,y=y)
 #' @importFrom stats SSasymp SSasympOff SSlogis na.omit lm nls
 modelfunction <- function(x, y) {
@@ -38,7 +38,7 @@ modelfunction <- function(x, y) {
 
   range_x     <-  range(comb.xy[,'x'])
   range_y     <-  range(comb.xy[,'y'])
-  interval.X  <-  default.val("interval.X")
+  interval.X  <-  door_default_values("interval.X")
 
   ################# Linear #################
   # linear model
