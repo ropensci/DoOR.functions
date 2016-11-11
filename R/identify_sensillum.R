@@ -1,4 +1,4 @@
-#' identifySensillum
+#' identify_sensillum
 #'
 #' correlates the result from a SSR recording of several odorants against all
 #' DoOR response profiles
@@ -30,8 +30,9 @@
 #' @param base_size numeric, the base font size of the ggplot plots
 #'
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases identifySensillum identify_sensillum
 #'
-#' @return either a plot (gtable) with responses sorted by highest correlations
+#' @return eithe& Carolin G.(†27)r a plot (gtable) with responses sorted by highest correlations
 #'   or lowest distances, or a data frame containing all calculated
 #'   correlations or Euclidean distances
 #' @export
@@ -47,10 +48,10 @@
 #'    unit2 = c(0, .1, 1)
 #' )
 #'
-#' identifySensillum(recording)
-#' identifySensillum(recording, method = "dist", nshow = 5)
+#' identify_sensillum(recording)
+#' identify_sensillum(recording, method = "dist", nshow = 5)
 #'
-identifySensillum <- function(recording,
+identify_sensillum <- function(recording,
                               response_matrix = door_default_values("response.matrix"),
                               odor_data       = door_default_values("odor"),
                               DoOR_mappings   = door_default_values("DoOR_mappings"),

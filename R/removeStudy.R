@@ -1,7 +1,7 @@
 #' Remove a study from DoOR
 #'
 #' Use this function to remove a study from the DoOR database.
-#' \code{importNewData.R} uses this function when it detects an existing study
+#' \code{import_new_data.R} uses this function when it detects an existing study
 #' during the import process (e.g. because you imported updated data).
 #' @param study a string containing the name of the study you want to remove
 #'   (e.g. 'Bruyne.2001.WT')
@@ -11,7 +11,7 @@
 #'   ranges of all studies (\code{response.range})
 #' @param weightGlobNorm the dataframe containing the info about the relative
 #'   weights between receptors (\code{weight.globNorm})
-#' @seealso \code{\link{importNewData}}
+#' @seealso \code{\link{import_new_data}}
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
 #' @examples

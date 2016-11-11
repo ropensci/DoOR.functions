@@ -17,7 +17,7 @@ In this vignette we describe how to build, modify and update DoOR and introduce 
 ## Content
 * [loading DoOR](#loading)
 * [Modifying, building and updating DoOR](#building)
-    * [Importing new data with `importNewData()`](#importNewData)
+    * [Importing new data with `import_new_data()`](#import_new_data)
     * [Building the complete data base with `create_door_database()`](#create_door_database)
     * [Updating parts of the data base with `updateDatabase()`](#updateDatabase)
     * [`modelRP()` and `modelRPSEQ()`](#model)
@@ -42,7 +42,7 @@ load_door_data()
 DoOR comes with all the original data sets as well as with a pre-computed version of the consensus matrix `response.matrix` where all data was integrated using the DoOR merging algorithms (see paper for details on how the algorithm works). The values in `response.matrix` are globally normalized with values scaled `[0,1]`. `response.matrix_non.normalized` is a version of the consensus data that is not globally normalized meaning that responses are scaled `[0,1]` within each _responding unit_ (receptor, sensory neuron, glomerulus...).
 
 
-## Importing new data with `importNewData()`{#importNewData}
+## Importing new data with `import_new_data()`{#import_new_data}
 It is easy to add new response data to DoOR, we only have to take care to provide it in the right format:
 
 * either a .csv or a .txt file with fields separated by colons or tabs (see `?read.table` for detailed specifications).
@@ -92,7 +92,7 @@ Any of the following will be imported:
 : e.g. "C(C(C)C)COC(=O)C" ([details](https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system))
 
 
-See `?importNewData` for more details. We can e.g. import data also based on CAS or CID instead of InChIKey.
+See `?import_new_data` for more details. We can e.g. import data also based on CAS or CID instead of InChIKey.
 
 #### Looking up InChIKeys
 If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/package=webchem) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
@@ -142,7 +142,7 @@ head(merge)
 
 
 ## Removing a study with `removeStudy()`{#removeStudy}
-`removeStudy()` will remove a data set from all DoOR data objects. If we import a data set that already exists with `importNewData()`, `removeStudy()` will automatically run before the data is imported.
+`removeStudy()` will remove a data set from all DoOR data objects. If we import a data set that already exists with `import_new_data()`, `removeStudy()` will automatically run before the data is imported.
 
 ```{r}
 removeStudy(study = "Hallem.2004.EN")
@@ -195,21 +195,21 @@ door_default_values("colors")
 ```
 
 
-## `getResponses()`{#getResponses}
-`getResponses()` returns the response values of one or several odorants across individual data sets.
+## `get_responses()`{#get_responses}
+`get_responses()` returns the response values of one or several odorants across individual data sets.
 ```{r}
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")
-responses <- getResponses(odorants)
+responses <- get_responses(odorants)
 responses <- na.omit(responses)
 knitr::kable(head(responses))
 ```
 
 
-## `getNormalizedResponses()`{#getNormalizedResponses}
-`getNormalizedResponses()` gathers responses to the specified odorants from the response.matrix and resets the SFR _via_ `resetSFR()`:
+## `get_normalized_responses()`{#get_normalized_responses}
+`get_normalized_responses()` gathers responses to the specified odorants from the response.matrix and resets the SFR _via_ `resetSFR()`:
 ```{r}
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")
-responses <- getNormalizedResponses(odorants)
+responses <- get_normalized_responses(odorants)
 responses <- na.omit(responses)
 knitr::kable(head(responses))
 ```
@@ -223,9 +223,9 @@ knitr::kable(counts[1:10,6:15])
 ```
 
 
-## `exportData()`{#exportData}
-`exportData()` exports all or selected DoOR data objects in txt or csv format. 
+## `export_door_data()`{#export_door_data}
+`export_door_data()` exports all or selected DoOR data objects in txt or csv format. 
 ```{r}
-# exportData(".csv")                  	# export all data as .csv files
-# exportData(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
+# export_door_data(".csv")                  	# export all data as .csv files
+# export_door_data(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
 ```

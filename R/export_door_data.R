@@ -18,6 +18,7 @@
 #' data "response.matrix", "response.range", "response.matrix_non.normalized",
 #' "response.matrix", "weight.globNorm" and "ORs".
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#' @aliases export_door_data exportData
 #' @export
 #' @importFrom utils write.csv write.table
 #' @keywords data
@@ -26,9 +27,9 @@
 #' library(DoOR.data)
 #' library(DoOR.functions)
 #' load_door_data()
-#' exportData(".txt", all.data = FALSE) 	# export odorant responses data only
+#' export_door_data(".txt", all.data = FALSE) 	# export odorant responses data only
 #' }
-exportData <-
+export_door_data <-
   function(file.format, directory,
            odorantReceptors = door_default_values("ORs"),
            response_matrix = door_default_values("response.matrix"),

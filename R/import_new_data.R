@@ -3,7 +3,7 @@
 #' Import or update new data and update \code{weight.globNorm},
 #' \code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
 #'
-#' \code{\link{importNewData}} is used to import new data into database. If the
+#' \code{\link{import_new_data}} is used to import new data into database. If the
 #' data contains a new receptor or ORN, then build a new data frame for this
 #' receptor or ORN. If the data contains a receptor that is already present in
 #' database, then merge the imported data into old data frame. The information
@@ -28,6 +28,7 @@
 #' @param round the number of digits the imported values are rounded to.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases importNewData import_new_data
 #' @export
 #' @importFrom stats na.omit
 #' @importFrom utils read.csv read.table
@@ -36,10 +37,10 @@
 #' \dontrun{
 #' import new data named "odorantResponses_Orx.txt" into database and update the support data.
 #' library(DoOR.data)
-#' importNewData(file.name = "odorantResponses_Orx.csv")
+#' import_new_data(file.name = "odorantResponses_Orx.csv")
 #' }
 #'
-importNewData <- function(file.name,
+import_new_data <- function(file.name,
                           dataFormat = door_default_values("data.format"),
                           odor_data  = door_default_values("odor"),
                           weightGlobNorm = door_default_values("weight.globNorm"),
@@ -275,4 +276,4 @@ importNewData <- function(file.name,
                 stats$importedReceptors - stats$newReceptors,'response profiles were updated,',stats$newReceptors,'new profiles were added to DoOR.\n',
                 stats$updatedOdors,'odorants were updated,',stats$newOdors,'new odorants were added to DoOR.'))
 
-} # END program "importNewData"
+} # END program "import_new_data"

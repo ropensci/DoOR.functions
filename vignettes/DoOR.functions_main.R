@@ -53,13 +53,13 @@ door_default_values("colors")
 
 ## ------------------------------------------------------------------------
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")
-responses <- getResponses(odorants)
+responses <- get_responses(odorants)
 responses <- na.omit(responses)
 knitr::kable(head(responses))
 
 ## ------------------------------------------------------------------------
 odorants  <- transID(c("carbon dioxide", "isopentyl acetate"), from = "Name")
-responses <- getNormalizedResponses(odorants)
+responses <- get_normalized_responses(odorants)
 responses <- na.omit(responses)
 knitr::kable(head(responses))
 
@@ -68,6 +68,6 @@ counts <- countStudies()
 knitr::kable(counts[1:10,6:15])
 
 ## ------------------------------------------------------------------------
-# exportData(".csv")                  	# export all data as .csv files
-# exportData(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
+# export_door_data(".csv")                  	# export all data as .csv files
+# export_door_data(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
 

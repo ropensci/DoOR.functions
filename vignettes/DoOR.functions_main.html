@@ -66,7 +66,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#loading">loading DoOR</a></li>
 <li><a href="#building">Modifying, building and updating DoOR</a>
 <ul>
-<li><a href="#importNewData">Importing new data with <code>importNewData()</code></a></li>
+<li><a href="#import_new_data">Importing new data with <code>import_new_data()</code></a></li>
 <li><a href="#create_door_database">Building the complete data base with <code>create_door_database()</code></a></li>
 <li><a href="#updateDatabase">Updating parts of the data base with <code>updateDatabase()</code></a></li>
 <li><a href="#model"><code>modelRP()</code> and <code>modelRPSEQ()</code></a></li>
@@ -87,8 +87,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="building" class="section level1">
 <h1>Modifying, building and updating DoOR</h1>
 <p>DoOR comes with all the original data sets as well as with a pre-computed version of the consensus matrix <code>response.matrix</code> where all data was integrated using the DoOR merging algorithms (see paper for details on how the algorithm works). The values in <code>response.matrix</code> are globally normalized with values scaled <code>[0,1]</code>. <code>response.matrix_non.normalized</code> is a version of the consensus data that is not globally normalized meaning that responses are scaled <code>[0,1]</code> within each <em>responding unit</em> (receptor, sensory neuron, glomerulus…).</p>
-<div id="importing-new-data-with-importnewdata" class="section level2">
-<h2>Importing new data with <code id="importNewData">importNewData()</code></h2>
+<div id="importing-new-data-with-import_new_data" class="section level2">
+<h2>Importing new data with <code id="import_new_data">import_new_data()</code></h2>
 <p>It is easy to add new response data to DoOR, we only have to take care to provide it in the right format:</p>
 <ul>
 <li>either a .csv or a .txt file with fields separated by colons or tabs (see <code>?read.table</code> for detailed specifications).</li>
@@ -193,7 +193,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><strong><code>CAS</code></strong> : e.g. “123-92-2” (<a href="https://en.wikipedia.org/wiki/CAS_Registry_Number">details</a>)</p>
 <p><strong><code>CID</code></strong> : e.g. “31276” (<a href="https://en.wikipedia.org/wiki/PubChem">details</a>)</p>
 <p><strong><code>SMILES</code></strong> : e.g. “C(C(C)C)COC(=O)C” (<a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">details</a>)</p>
-<p>See <code>?importNewData</code> for more details. We can e.g. import data also based on CAS or CID instead of InChIKey.</p>
+<p>See <code>?import_new_data</code> for more details. We can e.g. import data also based on CAS or CID instead of InChIKey.</p>
 <div id="looking-up-inchikeys" class="section level4">
 <h4>Looking up InChIKeys</h4>
 <p>If you do not know the InChIKeys of the odorants in your data set, we recommend using the <a href="https://cran.r-project.org/package=webchem"><code>webchem</code></a> package for automated lookup or doing it manually <em>via</em> <a href="http://cactus.nci.nih.gov/chemical/structure" class="uri">http://cactus.nci.nih.gov/chemical/structure</a> or any other chemical lookup service.</p>
@@ -318,7 +318,7 @@ merge &lt;-<span class="st"> </span><span class="kw">modelRPSEQ</span>(Or35a, <s
 </div>
 <div id="removing-a-study-with-removestudy" class="section level2">
 <h2>Removing a study with <code id="removeStudy">removeStudy()</code></h2>
-<p><code>removeStudy()</code> will remove a data set from all DoOR data objects. If we import a data set that already exists with <code>importNewData()</code>, <code>removeStudy()</code> will automatically run before the data is imported.</p>
+<p><code>removeStudy()</code> will remove a data set from all DoOR data objects. If we import a data set that already exists with <code>import_new_data()</code>, <code>removeStudy()</code> will automatically run before the data is imported.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">removeStudy</span>(<span class="dt">study =</span> <span class="st">&quot;Hallem.2004.EN&quot;</span>)</code></pre>
 <pre><code>## removed Hallem.2004.EN from Or2a .</code></pre>
 <pre><code>## removed Hallem.2004.EN from Or7a .</code></pre>
@@ -538,11 +538,11 @@ knitr::<span class="kw">kable</span>(rm_sfrReset[<span class="dv">1</span>:<span
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">door_default_values</span>(<span class="st">&quot;colors&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;#0570b0&quot; &quot;#74a9cf&quot; &quot;#ffffff&quot; &quot;#fdcc8a&quot; &quot;#fc8d59&quot; &quot;#d7301f&quot;</code></pre>
 </div>
-<div id="getresponses" class="section level2">
-<h2><code id="getResponses">getResponses()</code></h2>
-<p><code>getResponses()</code> returns the response values of one or several odorants across individual data sets.</p>
+<div id="get_responses" class="section level2">
+<h2><code id="get_responses">get_responses()</code></h2>
+<p><code>get_responses()</code> returns the response values of one or several odorants across individual data sets.</p>
 <pre class="sourceCode r"><code class="sourceCode r">odorants  &lt;-<span class="st"> </span><span class="kw">transID</span>(<span class="kw">c</span>(<span class="st">&quot;carbon dioxide&quot;</span>, <span class="st">&quot;isopentyl acetate&quot;</span>), <span class="dt">from =</span> <span class="st">&quot;Name&quot;</span>)
-responses &lt;-<span class="st"> </span><span class="kw">getResponses</span>(odorants)
+responses &lt;-<span class="st"> </span><span class="kw">get_responses</span>(odorants)
 responses &lt;-<span class="st"> </span><span class="kw">na.omit</span>(responses)
 knitr::<span class="kw">kable</span>(<span class="kw">head</span>(responses))</code></pre>
 <table>
@@ -601,11 +601,11 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(responses))</c
 </tbody>
 </table>
 </div>
-<div id="getnormalizedresponses" class="section level2">
-<h2><code id="getNormalizedResponses">getNormalizedResponses()</code></h2>
-<p><code>getNormalizedResponses()</code> gathers responses to the specified odorants from the response.matrix and resets the SFR <em>via</em> <code>resetSFR()</code>:</p>
+<div id="get_normalized_responses" class="section level2">
+<h2><code id="get_normalized_responses">get_normalized_responses()</code></h2>
+<p><code>get_normalized_responses()</code> gathers responses to the specified odorants from the response.matrix and resets the SFR <em>via</em> <code>resetSFR()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">odorants  &lt;-<span class="st"> </span><span class="kw">transID</span>(<span class="kw">c</span>(<span class="st">&quot;carbon dioxide&quot;</span>, <span class="st">&quot;isopentyl acetate&quot;</span>), <span class="dt">from =</span> <span class="st">&quot;Name&quot;</span>)
-responses &lt;-<span class="st"> </span><span class="kw">getNormalizedResponses</span>(odorants)
+responses &lt;-<span class="st"> </span><span class="kw">get_normalized_responses</span>(odorants)
 responses &lt;-<span class="st"> </span><span class="kw">na.omit</span>(responses)
 knitr::<span class="kw">kable</span>(<span class="kw">head</span>(responses))</code></pre>
 <table>
@@ -812,11 +812,11 @@ knitr::<span class="kw">kable</span>(counts[<span class="dv">1</span>:<span clas
 </tbody>
 </table>
 </div>
-<div id="exportdata" class="section level2">
-<h2><code id="exportData">exportData()</code></h2>
-<p><code>exportData()</code> exports all or selected DoOR data objects in txt or csv format.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># exportData(&quot;.csv&quot;)                    # export all data as .csv files</span>
-<span class="co"># exportData(&quot;.txt&quot;, all.data = FALSE)  # export odorant responses data only as .txt files</span></code></pre>
+<div id="export_door_data" class="section level2">
+<h2><code id="export_door_data">export_door_data()</code></h2>
+<p><code>export_door_data()</code> exports all or selected DoOR data objects in txt or csv format.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># export_door_data(&quot;.csv&quot;)                    # export all data as .csv files</span>
+<span class="co"># export_door_data(&quot;.txt&quot;, all.data = FALSE)  # export odorant responses data only as .txt files</span></code></pre>
 </div>
 </div>
 

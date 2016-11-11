@@ -36,8 +36,8 @@ Odorant Responses Across Receptors. \cr \code{\link{dplot_response_profile}}: \t
 bar plot: one receptor, all chemicals. \cr
 \code{\link{dplot_tuningCurve}}: \tab pyramid diagram depicting a receptor's
 tuning breadth. \cr } Try some queries: \tabular{ll}{
-\code{\link{getResponses}}: \tab given a chemical, get original responses from
-all studies in the database.\cr \code{\link{getNormalizedResponses}}: \tab given a
+\code{\link{get_responses}}: \tab given a chemical, get original responses from
+all studies in the database.\cr \code{\link{get_normalized_responses}}: \tab given a
 chemical, get normalised responses from all studies in the database.\cr}
 
 In case you wish to create your own response model (e.g. because you want to
@@ -53,7 +53,7 @@ Project the model response values back to tested values: \tabular{ll}{
 tested values. \cr }
 
 Introduce new data into DoOR and update the supported data sets:
-\tabular{ll}{ \code{\link{importNewData}}: \tab import new data into DoOR,
+\tabular{ll}{ \code{\link{import_new_data}}: \tab import new data into DoOR,
 and update the weight, response range and receptor names. \cr
 \code{\link{updateDatabase}}: \tab update response matrix by calculating new
 consensus response data for a given receptor. \cr }

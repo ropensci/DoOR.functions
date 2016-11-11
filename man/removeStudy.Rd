@@ -23,7 +23,7 @@ weights between receptors (\code{weight.globNorm})}
 }
 \description{
 Use this function to remove a study from the DoOR database.
-\code{importNewData.R} uses this function when it detects an existing study
+\code{import_new_data.R} uses this function when it detects an existing study
 during the import process (e.g. because you imported updated data).
 }
 \examples{
@@ -36,6 +36,6 @@ removeStudy('Bruyne.2001.WT')
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
 \seealso{
-\code{\link{importNewData}}
+\code{\link{import_new_data}}
 }
 

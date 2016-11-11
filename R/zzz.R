@@ -25,3 +25,8 @@ dplot_ALmap <- dplot_al_map
 dplot_compareProfiles <- dplot_compare_profiles
 dplot_responseMatrix <- dplot_response_matrix
 dplot_responseProfile <- dplot_response_profile
+exportData <- export_door_data
+getNormalizedResponses <- get_normalized_responses
+getResponses <- get_responses
+identifySensillum <- identify_sensillum
+importNewData <- import_new_data

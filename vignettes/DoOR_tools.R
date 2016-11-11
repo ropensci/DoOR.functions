@@ -13,23 +13,23 @@ recording <- data.frame(
 )
 
 ## ---- fig.width=7.1, fig.height=4.5--------------------------------------
-identifySensillum(recording, base_size = 8)
+identify_sensillum(recording, base_size = 8)
 
 ## ---- fig.width=7.1, fig.height=4.5, fig.show='hide'---------------------
-identifySensillum(recording, min.cor = .99)
+identify_sensillum(recording, min.cor = .99)
 
 ## ---- fig.width=7.1, fig.height=4.5--------------------------------------
-identifySensillum(recording, nshow = 5, base_size = 8)
+identify_sensillum(recording, nshow = 5, base_size = 8)
 
 ## ---- fig.width=7.1, fig.height=4.5--------------------------------------
-identifySensillum(recording, sub = "ab", nshow = 5, base_size = 8)
-identifySensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
+identify_sensillum(recording, sub = "ab", nshow = 5, base_size = 8)
+identify_sensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
 
 ## ---- fig.width=7.1, fig.height=4.5--------------------------------------
-identifySensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size = 8)
+identify_sensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size = 8)
 
 ## ------------------------------------------------------------------------
-sensillumX <- identifySensillum(recording, method = "dist", sub = "ab", plot = F)
+sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = F)
 head(sensillumX)
 
 ## ------------------------------------------------------------------------

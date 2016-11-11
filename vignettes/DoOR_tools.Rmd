@@ -13,7 +13,7 @@ The `DoOR.functions` package provides tools for the analysis of the data provide
 
 ## Content
 * [Loading data](#loading)
-* [Identifying the sensillum we are recording from with `identifySensillum()`](#identifySensillum)
+* [Identifying the sensillum we are recording from with `identify_sensillum()`](#identify_sensillum)
 * [Finding neuron-specific odorants with `privateOdorant()`](#privateOdorant)
 * [Mapping response data from an unknown source with `mapReceptor()`](#mapReceptor)
 * [Changing the response unit with `back_project()`](#back_project)
@@ -30,8 +30,8 @@ library(DoOR.data)
 load_door_data()
 ```
 
-## Identifying the sensillum we are recording from with `identifySensillum()` {#identifySensillum}
-Imagine we perform an electrophysiological recording from a _Drosophila_ sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`privateOdorant()`](#privateOdorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identifySensillum()`.
+## Identifying the sensillum we are recording from with `identify_sensillum()` {#identify_sensillum}
+Imagine we perform an electrophysiological recording from a _Drosophila_ sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`privateOdorant()`](#privateOdorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identify_sensillum()`.
 
 Let's make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxide) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called `odorants` with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron). 
 
@@ -47,35 +47,35 @@ Next we feed the recording to the function:
 
 ### using correlations
 ```{r, fig.width=7.1, fig.height=4.5}
-identifySensillum(recording, base_size = 8)
+identify_sensillum(recording, base_size = 8)
 ```
 Note that the function tells us that it found hits for all units in ab1 and ab5, meaning that e.g. within the four neurons housed in the ab1 sensillum both of our units had good matches. You can set this correlation threshold with `min.cor`. If we increase the threshold to 0.99 only ab1 is returned as a double match:
 
 ```{r, fig.width=7.1, fig.height=4.5, fig.show='hide'}
-identifySensillum(recording, min.cor = .99)
+identify_sensillum(recording, min.cor = .99)
 ```
 
 We can define the number of best hits that we want to get returned (the default is 10):
 ```{r, fig.width=7.1, fig.height=4.5}
-identifySensillum(recording, nshow = 5, base_size = 8)
+identify_sensillum(recording, nshow = 5, base_size = 8)
 ```
 And if we know e.g. that we are recording from a basiconic sensillum we can restrict the search to one or a few sensilla types:
 ```{r, fig.width=7.1, fig.height=4.5}
-identifySensillum(recording, sub = "ab", nshow = 5, base_size = 8)
-identifySensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
+identify_sensillum(recording, sub = "ab", nshow = 5, base_size = 8)
+identify_sensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
 ```
 
 ### using Euclidean distances
 Instead of correlations we can also use the Euclidean distance as a (dis)similarity measure:
 
 ```{r, fig.width=7.1, fig.height=4.5}
-identifySensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size = 8)
+identify_sensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size = 8)
 ```
 
 ### returning data instead of plots
 We can also return the correlation/distance data instead of the plot when setting `plot =FALSE`:
 ```{r}
-sensillumX <- identifySensillum(recording, method = "dist", sub = "ab", plot = F)
+sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = F)
 head(sensillumX)
 ```
 
@@ -106,7 +106,7 @@ Ethyl 2-methylbutanoate sounds like a good hit, it has the same difference to th
 
 
 ## Mapping response data from an unknown source with `mapReceptor()`{#mapReceptor}
-Similar to `identifySensillum()`, `mapReceptor()` correlates a response vector to all responding units of the existing DoOR consensus data. Let's grab a data set from Or22a and see where it ends up:
+Similar to `identify_sensillum()`, `mapReceptor()` correlates a response vector to all responding units of the existing DoOR consensus data. Let's grab a data set from Or22a and see where it ends up:
 ```{r}
 data <- data.frame(odorants  = Or22a$InChIKey, responses = Or22a$Hallem.2006.EN)
 data <- na.omit(data)

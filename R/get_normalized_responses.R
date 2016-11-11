@@ -16,6 +16,8 @@
 #' @export
 #' @importFrom stats na.omit
 #' @keywords data
+#' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
+#' @aliases getNormalizedResponses get_normalized_responses
 #' @examples
 #'
 #' library(DoOR.data)
@@ -23,9 +25,9 @@
 #'            "OBNCKNCVKJNDBV-UHFFFAOYSA-N",
 #'            "IKHGUXGNUITLKF-UHFFFAOYSA-N")
 #' data(response.matrix)
-#' result <- getNormalizedResponses(odors, response_matrix = response.matrix)
+#' result <- get_normalized_responses(odors, response_matrix = response.matrix)
 #'
-getNormalizedResponses <- function(odors,
+get_normalized_responses <- function(odors,
                                    zero = door_default_values("zero"),
                                    response_matrix = door_default_values("response.matrix"),
                                    round = 3,

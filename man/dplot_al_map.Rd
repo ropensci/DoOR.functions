@@ -86,6 +86,6 @@ Grabe, V., Strutz, A., Baschwitz, A., Hansson, B.S., Sachse, S.,
   melanogaster. J. Comp. Neurol. n/a–n/a. doi:10.1002/cne.23697
 }
 \seealso{
-\link{getNormalizedResponses}, \pkg{ggplot2}, \pkg{grid}
+\link{get_normalized_responses}, \pkg{ggplot2}, \pkg{grid}
 }
 

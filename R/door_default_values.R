@@ -27,7 +27,7 @@ door_default_values <- function(DoOR_default) {
 
   ## integer
   if (DoOR_default == "overlapValues") 	  { return(5) } # selectModel.R
-  if (DoOR_default == "num.charColumns") 	{ return(5) } # create_door_database.R, modelRP.R, importNewData.R, modelRPSEQ.R
+  if (DoOR_default == "num.charColumns") 	{ return(5) } # create_door_database.R, modelRP.R, import_new_data.R, modelRPSEQ.R
 
   ## logical
   if (DoOR_default == "glob.normalization") { return(TRUE) } # modelRP.R
@@ -42,10 +42,10 @@ door_default_values <- function(DoOR_default) {
   if (DoOR_default == "main") { return(NULL) } # dplot_al_map.R
 
   ## character
-  if (DoOR_default == "zero") 		    { return("SFR") } # getNormalizedResponses.R
+  if (DoOR_default == "zero") 		    { return("SFR") } # get_normalized_responses.R
   if (DoOR_default == "tag.ALmap") 	{ return("glomerulus") } # dplot_al_map.R
   if (DoOR_default == "tag") 		      { return("InChIKey") } # dplot_response_profile.R, dplot_compareReceptors.R, create_door_database.R
-  if (DoOR_default == "ident")        { return("InChIKey") } # importNewData.R
+  if (DoOR_default == "ident")        { return("InChIKey") } # import_new_data.R
   if (DoOR_default == "color.receptor") {return("#5A9BD4")}  # dplot_tuningCurveReceptor
   if (DoOR_default == "color.odorant")  {return("#7AC36A")}  # dplot_tuningCurveOdorant
 
@@ -67,7 +67,7 @@ door_default_values <- function(DoOR_default) {
       data(data.format)
     }
     return(data.format)
-  } # importNewData.R
+  } # import_new_data.R
 
   if (DoOR_default == "odor") {
     if (!exists("odor")) {
@@ -88,7 +88,7 @@ door_default_values <- function(DoOR_default) {
       data(weight.globNorm)
     }
     return(weight.globNorm)
-  } # exportData.R, importNewData.R, updateDatabase.R, modelRP.R
+  } # export_door_data.R, import_new_data.R, updateDatabase.R, modelRP.R
 
   if (DoOR_default == "excluded.data") {
     if (!exists("excluded.data")) {
@@ -110,27 +110,27 @@ door_default_values <- function(DoOR_default) {
       data(ORs)
     }
     return(ORs)
-  } # exportData.R, load_door_data.R, load2list.R, importNewData.R
+  } # export_door_data.R, load_door_data.R, load2list.R, import_new_data.R
 
   if (DoOR_default == "response.matrix") {
     if (!exists("response.matrix")) {
       data(response.matrix)
     }
     return(response.matrix)
-  } # exportData.R, getNormalizedResponses.R
+  } # export_door_data.R, get_normalized_responses.R
 
   if (DoOR_default == "response.range") {
     if (!exists("response.range")) {
       data(response.range)
     }
     return(response.range)
-  } # exportData.R, getResponses.R, importNewData.R, updateDatabase.R, modelRP.R
+  } # export_door_data.R, get_responses.R, import_new_data.R, updateDatabase.R, modelRP.R
 
   if (DoOR_default == "response.matrix_non.normalized") {
     if (!exists("response.matrix_non.normalized")) {
       data(response.matrix_non.normalized)
     }
     return(response.matrix_non.normalized)
-  } # exportData.R
+  } # export_door_data.R
 
 }
