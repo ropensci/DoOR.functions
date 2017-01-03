@@ -10,7 +10,7 @@
 #' (e.g. response range, how many receptors and odors were measured from given
 #' study) will be integrated into data \code{response.range}, \code{odor},
 #' \code{ORs} and \code{weight.globNorm}. If an existing study is imported,
-#' \code{\link{removeStudy}} will be run first in order to perform an update.
+#' \code{\link{remove_study}} will be run first in order to perform an update.
 #'
 #' @param file.name character string, the name of given file that contains
 #'   response values of one or more odorant receptors, either a .csv or .txt
@@ -65,7 +65,7 @@ import_new_data <- function(file.name,
     existing <- which(file.name %in% responseRange$study)
     existing <- file.name[existing]
     for(i in existing)
-      removeStudy(i)
+      remove_study(i)
 
     # get updated versions from .globalEnv
     responseRange <- response.range

@@ -30,7 +30,7 @@
 #'
 #' @examples
 #' library(DoOR.data)
-#' odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
+#' odorants <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
 #'                     from = "Name", to = "InChIKey")
 #' dplot_across_osns(odorants)
 #' dplot_across_osns(odorants, sub = c("ac", "at"))
@@ -50,7 +50,7 @@ dplot_across_osns <- function(odorants,
     stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
 
   if (!is.null(zero))
-    response_matrix <- as.data.frame(apply(response_matrix, 2, function(x) resetSFR(x,x[zero])))
+    response_matrix <- as.data.frame(apply(response_matrix, 2, function(x) reset_sfr(x,x[zero])))
 
   odorants <- as.character(odorants)
 

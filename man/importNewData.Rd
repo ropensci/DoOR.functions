@@ -46,7 +46,7 @@ database, then merge the imported data into old data frame. The information
 (e.g. response range, how many receptors and odors were measured from given
 study) will be integrated into data \code{response.range}, \code{odor},
 \code{ORs} and \code{weight.globNorm}. If an existing study is imported,
-\code{\link{removeStudy}} will be run first in order to perform an update.
+\code{\link{remove_study}} will be run first in order to perform an update.
 }
 \examples{
 \dontrun{

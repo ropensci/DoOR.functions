@@ -38,13 +38,13 @@
 #' dplot_al_map("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
 #'    color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #'
-#' dplot_al_map(transID("123-92-2"), scalebar = FALSE) +
+#' dplot_al_map(trans_id("123-92-2"), scalebar = FALSE) +
 #' ggplot2::theme(legend.position  = "bottom",
 #'       panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
 #' ggplot2::ggtitle("responses elicited by isopentyl acetate")
 #'
 #' \dontrun{
-#' p <- dplot_al_map(transID("123-92-2"))
+#' p <- dplot_al_map(trans_id("123-92-2"))
 #' ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
 dplot_al_map <- function(InChIKey,
@@ -66,7 +66,7 @@ dplot_al_map <- function(InChIKey,
     stop("grid is required for AL map plotting, please install via install.packages('grid')", call. = FALSE)
 
   if(missing(limits)) {
-    response.matrix.SFRreset <- apply(response_matrix, 2, function(x) resetSFR(x,x[zero]))
+    response.matrix.SFRreset <- apply(response_matrix, 2, function(x) reset_sfr(x,x[zero]))
     limits <- range(response.matrix.SFRreset, na.rm=TRUE)
   }
 

@@ -30,3 +30,14 @@ getNormalizedResponses <- get_normalized_responses
 getResponses <- get_responses
 identifySensillum <- identify_sensillum
 importNewData <- import_new_data
+privateOdorant <- private_odorant
+projectPoints <- project_points
+removeStudy <- remove_study
+resetSFR <- reset_sfr
+selectModel <- select_model
+transID <- trans_id
+modelRPSEQ <- model_response_seq
+modelRP <- model_response
+updateDatabase <- update_database
+updateOdorInfo <- update_odorinfo
+mapReceptor <- map_receptor

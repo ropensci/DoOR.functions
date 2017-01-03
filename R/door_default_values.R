@@ -19,24 +19,24 @@
 door_default_values <- function(DoOR_default) {
 
   ## real number
-  if (DoOR_default == "select.MDValue") 	{ return(0.1415) } # selectModel.R, modelRP.R, create_door_database.R, create_door_database.R
-  if (DoOR_default == "points.cex") 	    { return(1) } # projectPoints.R
-  if (DoOR_default == "cex.title") 	      { return(1) } # projectPoints.R
+  if (DoOR_default == "select.MDValue") 	{ return(0.1415) } # select_model.R, model_response.R, create_door_database.R, create_door_database.R
+  if (DoOR_default == "points.cex") 	    { return(1) } # project_points.R
+  if (DoOR_default == "cex.title") 	      { return(1) } # project_points.R
   if (DoOR_default == "dot.size") 	      { return(3) } # dplot_response_matrix.R
   if (DoOR_default == "cex.labels") 	    { return(1) } # dplot_response_matrix.R
 
   ## integer
-  if (DoOR_default == "overlapValues") 	  { return(5) } # selectModel.R
-  if (DoOR_default == "num.charColumns") 	{ return(5) } # create_door_database.R, modelRP.R, import_new_data.R, modelRPSEQ.R
+  if (DoOR_default == "overlapValues") 	  { return(5) } # select_model.R
+  if (DoOR_default == "num.charColumns") 	{ return(5) } # create_door_database.R, model_response.R, import_new_data.R, model_response_seq.R
 
   ## logical
-  if (DoOR_default == "glob.normalization") { return(TRUE) } # modelRP.R
-  if (DoOR_default == "merged") 	       	  { return(TRUE) } # selectModel.R
-  if (DoOR_default == "select.MD") 	        { return(TRUE) } # calculate_model.R, projectPoints.R
+  if (DoOR_default == "glob.normalization") { return(TRUE) } # model_response.R
+  if (DoOR_default == "merged") 	       	  { return(TRUE) } # select_model.R
+  if (DoOR_default == "select.MD") 	        { return(TRUE) } # calculate_model.R, project_points.R
   if (DoOR_default == "closest") 		        { return(TRUE) } # LLSIest.R
   if (DoOR_default == "scalebar")   	      { return(TRUE) } # dplot_al_map.R
-  if (DoOR_default == "title") 		          { return(FALSE) } # projectPoints.R
-  if (DoOR_default == "plot") 		          { return(FALSE) } # modelRP.R, projectPoints.R
+  if (DoOR_default == "title") 		          { return(FALSE) } # project_points.R
+  if (DoOR_default == "plot") 		          { return(FALSE) } # model_response.R, project_points.R
 
   ## default null
   if (DoOR_default == "main") { return(NULL) } # dplot_al_map.R
@@ -52,7 +52,7 @@ door_default_values <- function(DoOR_default) {
 
   ## character vector
   if (DoOR_default == "colors")   { return(c("#0570b0","#74a9cf","#ffffff","#fdcc8a","#fc8d59","#d7301f")) } # dplot_al_map.R, dplot_response_matrix.R, dplot_response_profile.R, dplot_compareReceptors.R
-  if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R, modelfunction.R, projectPoints.R
+  if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R, modelfunction.R, project_points.R
 
   ## data frame
   if (DoOR_default == "AL.map") {
@@ -88,14 +88,14 @@ door_default_values <- function(DoOR_default) {
       data(weight.globNorm)
     }
     return(weight.globNorm)
-  } # export_door_data.R, import_new_data.R, updateDatabase.R, modelRP.R
+  } # export_door_data.R, import_new_data.R, update_database.R, model_response.R
 
   if (DoOR_default == "excluded.data") {
     if (!exists("excluded.data")) {
       data(excluded.data)
     }
     return(excluded.data)
-  } # updateDatabase.R, modelRP.R, create_door_database.R
+  } # update_database.R, model_response.R, create_door_database.R
 
 
   if (DoOR_default == "DoOR.mappings") {
@@ -124,7 +124,7 @@ door_default_values <- function(DoOR_default) {
       data(response.range)
     }
     return(response.range)
-  } # export_door_data.R, get_responses.R, import_new_data.R, updateDatabase.R, modelRP.R
+  } # export_door_data.R, get_responses.R, import_new_data.R, update_database.R, model_response.R
 
   if (DoOR_default == "response.matrix_non.normalized") {
     if (!exists("response.matrix_non.normalized")) {

@@ -8,11 +8,11 @@
 #' @param zero InChIKey of background that should be set to zero. The default is
 #'   "SFR", i.e. the spontaneous firing rate.
 #' @param response_matrix a data frame, as e.g. "response.matrix" that is loaded
-#'   by \code{\link{modelRP}}. It is also possible to create this frame manually
-#'   using \code{\link{modelRP}}.
+#'   by \code{\link{model_response}}. It is also possible to create this frame manually
+#'   using \code{\link{model_response}}.
 #' @param round numeric, round to this amount of digits, set to NA if you do not want to round
 #' @param na.rm logical, remove NAs?
-#' @seealso \code{\link{modelRP}},\code{\link{create_door_database}}
+#' @seealso \code{\link{model_response}},\code{\link{create_door_database}}
 #' @export
 #' @importFrom stats na.omit
 #' @keywords data
@@ -33,7 +33,7 @@ get_normalized_responses <- function(odors,
                                    round = 3,
                                    na.rm = FALSE) {
 
-  response_matrix <- resetSFR(response_matrix, zero)
+  response_matrix <- reset_sfr(response_matrix, zero)
 
   mp  <- match(odors,rownames(response_matrix))
   if(any(is.na(mp))) {

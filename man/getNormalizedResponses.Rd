@@ -15,8 +15,8 @@ get_normalized_responses(odors, zero = door_default_values("zero"),
 "SFR", i.e. the spontaneous firing rate.}
 
 \item{response_matrix}{a data frame, as e.g. "response.matrix" that is loaded
-by \code{\link{modelRP}}. It is also possible to create this frame manually
-using \code{\link{modelRP}}.}
+by \code{\link{model_response}}. It is also possible to create this frame manually
+using \code{\link{model_response}}.}
 
 \item{round}{numeric, round to this amount of digits, set to NA if you do not want to round}
 
@@ -37,7 +37,7 @@ result <- get_normalized_responses(odors, response_matrix = response.matrix)
 
 }
 \seealso{
-\code{\link{modelRP}},\code{\link{create_door_database}}
+\code{\link{model_response}},\code{\link{create_door_database}}
 }
 \keyword{data}
 

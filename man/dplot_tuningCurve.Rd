@@ -53,7 +53,7 @@ data(odor)
 dplot_tuningCurve(odorant = odor$InChIKey[2])
 dplot_tuningCurve(receptor = "Or22a")
 
-range <- range(resetSFR(response.matrix, "SFR"), na.rm = TRUE)
+range <- range(reset_sfr(response.matrix, "SFR"), na.rm = TRUE)
 dplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
 
 dplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))

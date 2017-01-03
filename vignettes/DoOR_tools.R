@@ -6,8 +6,8 @@ load_door_data()
 
 ## ------------------------------------------------------------------------
 recording <- data.frame(
-  odorants = c(transID(c("BEDN", "ETAS"), "Code"), 
-               transID("carbon dioxide", "Name")), 
+  odorants = c(trans_id(c("BEDN", "ETAS"), "Code"), 
+               trans_id("carbon dioxide", "Name")), 
   unit1 = c(.9,.1,.1), 
   unit2 = c(0, .1, 1)
 )
@@ -33,19 +33,19 @@ sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = 
 head(sensillumX)
 
 ## ------------------------------------------------------------------------
-privateOdorant("Or22a")
+private_odorant("Or22a")
 
 ## ------------------------------------------------------------------------
-privateOdorant("Or22a", tag = "Name")
+private_odorant("Or22a", tag = "Name")
 
 ## ------------------------------------------------------------------------
-privateOdorant("Or22a", tag = "Name", sensillum = T)
+private_odorant("Or22a", tag = "Name", sensillum = T)
 
 ## ------------------------------------------------------------------------
 data <- data.frame(odorants  = Or22a$InChIKey, responses = Or22a$Hallem.2006.EN)
 data <- na.omit(data)
 head(data)
-mapReceptor(data = data, nshow = 5)
+map_receptor(data = data, nshow = 5)
 
 ## ---- fig.width = 4.5, fig.height = 4.5----------------------------------
 template <- data.frame(odorants  = Or22a$InChIKey, 
@@ -62,7 +62,7 @@ head(bp$back_projected)
 
 
 ## ------------------------------------------------------------------------
-rm.SFRreset <- resetSFR(response.matrix, "SFR")
+rm.SFRreset <- reset_sfr(response.matrix, "SFR")
 
 sparse(x = rm.SFRreset[,"Or69a"], method = "ltk")
 sparse(x = rm.SFRreset[,"Or69a"], method = "lts")

@@ -19,11 +19,11 @@ studies that do not align sufficiently well to the response model}
 \item{overlapValues}{numeric, a criterion using to refuse a data set that
 has not enough overlap value.}
 
-\item{...}{pass more parameters to \code{\link{modelRP}}}
+\item{...}{pass more parameters to \code{\link{model_response}}}
 }
 \description{
 computes the complete response model for all receptors in the database
-(calls \code{\link{modelRP}} for all receptors)
+(calls \code{\link{model_response}} for all receptors)
 }
 \examples{
 \dontrun{
@@ -38,7 +38,7 @@ Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
 \seealso{
-\code{\link{modelRP}}
+\code{\link{model_response}}
 }
 \keyword{data}
 
