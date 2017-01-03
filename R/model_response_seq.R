@@ -1,4 +1,4 @@
-#' modelRPSEQ
+#' model_response_seq
 #'
 #' generates a model response and merge data in given sequence
 #'
@@ -18,7 +18,7 @@
 #' @export
 #' @importFrom stats na.omit
 #' @importFrom graphics par points
-#' @details # modelRPSEQ.R: #################
+#' @details # model_response_seq.R: #################
 #'
 #' # merges studies in a given sequence (determined by the user or by exhaustive
 #' enumeration and choosing the optimal sequence)
@@ -32,6 +32,7 @@
 #' receptor in a specific order (the merging sequence)
 #'
 #' # output is a numeric vector: response values
+#' @aliases modelRPSEQ model_response_seq
 #'
 #' @examples
 #'
@@ -39,9 +40,9 @@
 #' data(Or35a)
 #' data(response.range)
 #' SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")
-#' selected.merg <- modelRPSEQ(Or35a, SEQ = SEQ, plot = TRUE)
+#' selected.merg <- model_response_seq(Or35a, SEQ = SEQ, plot = TRUE)
 #'
-modelRPSEQ <-
+model_response_seq <-
   function(data,
            SEQ,
            overlapValues  = door_default_values("overlapValues"),
@@ -70,14 +71,14 @@ modelRPSEQ <-
       if (dim(na.omit(cbind(x,y)))[1] < overlapValues)
         stop(paste("less than", overlapValues, "observations between two datasets"))
 
-      projected <- projectPoints(x, y, plot = plot, xlab = i, ylab = ylab, title = plot)
+      projected <- project_points(x, y, plot = plot, xlab = i, ylab = ylab, title = plot)
 
       if(strict == TRUE & projected$MD > select.MDValue)
         stop(paste("Mean distance between two studies above", select.MDValue))
 
       res 	  <- rep(NA, length = dim(pda)[1])
 
-      # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
+      # the output of project_points is a list with odor responses, either observed in both studies, or only in one study.
       res[projected$double.observations$ID] <- projected$double.observations$NDR
       if (is.data.frame(projected$single.observations)) {
         res[projected$single.observations$ID] <- projected$single.observations$NDR

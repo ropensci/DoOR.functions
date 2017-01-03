@@ -1,10 +1,10 @@
-#' projectPoints
+#' project_points
 #'
 #' projects data points onto the curve defined by the model function
 #'
-#' For internal use in the merging process (see also \code{\link{modelRP}}). The
+#' For internal use in the merging process (see also \code{\link{model_response}}). The
 #' model function is choosen by \code{\link{calculate_model}}.
-#' \code{\link{projectPoints}} then projects the data points from the datasets
+#' \code{\link{project_points}} then projects the data points from the datasets
 #' to be merged onto the curve defined by the model function. It computes the
 #' closest distance from a data point to a point on the curve by numerical
 #' optimisation.
@@ -38,16 +38,17 @@
 #' @export
 #' @importFrom stats na.omit
 #' @importFrom graphics legend lines points segments
+#' @aliases projectPoints project_points
 #' @examples
 #'
 #' library(DoOR.data)
 #' data(Or23a)
 #' x <- door_norm(Or23a[,'Hallem.2004.EN'])
 #' y <- door_norm(Or23a[,'Hallem.2006.EN'])
-#' projectPoints(x = x, y = y, plot = TRUE)
+#' project_points(x = x, y = y, plot = TRUE)
 #'
 #' @importFrom stats integrate optimize
-projectPoints <- function(x, y, xylim, best.model,
+project_points <- function(x, y, xylim, best.model,
                           plot = door_default_values("plot"),
                           points_cex = door_default_values("points.cex"),
                           title = door_default_values("title"),

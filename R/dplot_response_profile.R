@@ -38,7 +38,7 @@ dplot_response_profile <- function(receptor,
                                      base_size = 12
 ) {
   if(zero != "")
-    response_matrix <- resetSFR(response_matrix, zero)
+    response_matrix <- reset_sfr(response_matrix, zero)
 
   if(missing(limits))
     limits <- range(response_matrix, na.rm=TRUE)

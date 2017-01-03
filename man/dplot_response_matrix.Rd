@@ -42,7 +42,7 @@ plot DoOR responses as a point matrix
 \examples{
 library(DoOR.data)
 data(response.matrix)
-tmp <- resetSFR(response.matrix, "SFR")
+tmp <- reset_sfr(response.matrix, "SFR")
 dplot_response_matrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
 dplot_response_matrix(response.matrix[10:50,], tag = "Name",
                         limits = range(response.matrix, na.rm = TRUE))

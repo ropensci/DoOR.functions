@@ -16,7 +16,7 @@
 #' @examples
 #' library(DoOR.data)
 #' load_door_data()
-#' count <- countStudies()
+#' count <- count_studies()
 #' image(count)
 #'
 count_studies <- function(ors = door_default_values("ORs"),

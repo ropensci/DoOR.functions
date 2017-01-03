@@ -1,4 +1,4 @@
-#' privateOdorant
+#' private_odorant
 #'
 #' return an odorant that activates the receptor of interest exclusively
 #'
@@ -13,13 +13,14 @@
 #' @return a data.frame containing odorants and the response in the receptor of interest as well as the maximum response of the remaining receptors and their difference
 #' @export
 #' @importFrom stats na.omit
+#' @aliases privateOdorant private_odorant
 #'
 #' @examples
 #' library(DoOR.data)
-#' privateOdorant("Gr21a.Gr63a", tag = "Name")
-#' privateOdorant("Or22a", tag = "Name", sensillum = TRUE)
+#' private_odorant("Gr21a.Gr63a", tag = "Name")
+#' private_odorant("Or22a", tag = "Name", sensillum = TRUE)
 #'
-privateOdorant <- function(receptor,
+private_odorant <- function(receptor,
                            sensillum = FALSE,
                            response_matrix = door_default_values("response.matrix"),
                            DoOR_mappings = door_default_values("DoOR_mappings"),
@@ -27,7 +28,7 @@ privateOdorant <- function(receptor,
                            nshow = 5,
                            tag) {
   if(!zero == "")
-    response_matrix <- resetSFR(response_matrix, zero)
+    response_matrix <- reset_sfr(response_matrix, zero)
 
   if(sensillum == TRUE) {
     sensillum <- as.character(DoOR_mappings$sensillum[which(DoOR_mappings$receptor == receptor)])
@@ -48,7 +49,7 @@ privateOdorant <- function(receptor,
   colnames(tmp)[1] <- receptor
 
   if(!missing(tag))
-    rownames(tmp) <- transID(rownames(tmp), "InChIKey", tag)
+    rownames(tmp) <- trans_id(rownames(tmp), "InChIKey", tag)
 
   tmp <- tmp[order(tmp$diff, decreasing = TRUE), ][c(1:nshow), ]
 

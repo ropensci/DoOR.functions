@@ -34,7 +34,7 @@
 #' In case you wish to create your own response model (e.g. because you want to
 #' include your own datasets): \tabular{ll}{ \code{\link{create_door_database}}: \tab
 #' compute the complete response model for all receptors in the database (calls
-#' \code{\link{modelRP}} for all receptors). \cr \code{\link{modelRP}}: \tab
+#' \code{\link{model_response}} for all receptors). \cr \code{\link{model_response}}: \tab
 #' run the DoOR algorithm, that merges all measurements for one receptor. \cr }
 #'
 #' Estimate odorant responses: \tabular{ll}{ \code{\link{estimate_missing_value}}: \tab
@@ -46,7 +46,7 @@
 #' Introduce new data into DoOR and update the supported data sets:
 #' \tabular{ll}{ \code{\link{import_new_data}}: \tab import new data into DoOR,
 #' and update the weight, response range and receptor names. \cr
-#' \code{\link{updateDatabase}}: \tab update response matrix by calculating new
+#' \code{\link{update_database}}: \tab update response matrix by calculating new
 #' consensus response data for a given receptor. \cr }
 #'
 #' See the Vignettes and the help pages for more documentation.

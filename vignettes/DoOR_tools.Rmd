@@ -14,8 +14,8 @@ The `DoOR.functions` package provides tools for the analysis of the data provide
 ## Content
 * [Loading data](#loading)
 * [Identifying the sensillum we are recording from with `identify_sensillum()`](#identify_sensillum)
-* [Finding neuron-specific odorants with `privateOdorant()`](#privateOdorant)
-* [Mapping response data from an unknown source with `mapReceptor()`](#mapReceptor)
+* [Finding neuron-specific odorants with `private_odorant()`](#private_odorant)
+* [Mapping response data from an unknown source with `map_receptor()`](#map_receptor)
 * [Changing the response unit with `back_project()`](#back_project)
 * [Quantifying tuning curves with `sparse()`](#sparse)
 
@@ -31,14 +31,14 @@ load_door_data()
 ```
 
 ## Identifying the sensillum we are recording from with `identify_sensillum()` {#identify_sensillum}
-Imagine we perform an electrophysiological recording from a _Drosophila_ sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`privateOdorant()`](#privateOdorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identify_sensillum()`.
+Imagine we perform an electrophysiological recording from a _Drosophila_ sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`private_odorant()`](#private_odorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identify_sensillum()`.
 
 Let's make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxide) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called `odorants` with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron). 
 
 ```{r}
 recording <- data.frame(
-  odorants = c(transID(c("BEDN", "ETAS"), "Code"), 
-               transID("carbon dioxide", "Name")), 
+  odorants = c(trans_id(c("BEDN", "ETAS"), "Code"), 
+               trans_id("carbon dioxide", "Name")), 
   unit1 = c(.9,.1,.1), 
   unit2 = c(0, .1, 1)
 )
@@ -83,35 +83,35 @@ So apparently our fake recording came from the ab1 sensillum, which was admitted
 
 
 
-## Finding neuron-specific odorants with `privateOdorant()` {#privateOdorant}
-There may be several cases where we might be interested in so called _private odorants_, odorants that specifically activate a given receptor or sensory neuron. Maybe we are looking for diagnostic odorants for sensillum identification or we want to activate a specific neuronal pathway, `privateOdorant()` returns candidate odorants for that task.
+## Finding neuron-specific odorants with `private_odorant()` {#private_odorant}
+There may be several cases where we might be interested in so called _private odorants_, odorants that specifically activate a given receptor or sensory neuron. Maybe we are looking for diagnostic odorants for sensillum identification or we want to activate a specific neuronal pathway, `private_odorant()` returns candidate odorants for that task.
 
 Let's say we want to specifically activate Or22a neurons:
 ```{r}
-privateOdorant("Or22a")
+private_odorant("Or22a")
 ```
 
 We might want to return the odorant names instead of InChiKeys:
 ```{r}
-privateOdorant("Or22a", tag = "Name")
+private_odorant("Or22a", tag = "Name")
 ```
 So according to the function sec-amyl acetate would be a good candidate. It activates Or22a at 0.4 (DoOR response, max is 1) while the maximum activation in all other tested responding units (receptors, neurons, glomeruli) is 0.016, a difference of 0.40. Sounds good, but it was tested only in 4 other responding units, so I would rather go for ethyl hexanoate with about the same difference but being tested in 29 other responding units.
 
 We can also restrict the search to the sensillum the responding units of interest is related to:
 ```{r}
-privateOdorant("Or22a", tag = "Name", sensillum = T)
+private_odorant("Or22a", tag = "Name", sensillum = T)
 ```
 Ethyl 2-methylbutanoate sounds like a good hit, it has the same difference to the other units as ethyl hexanoate but hardly elicits a response at all from the other neuron. The n of 1 is fine as there are only 2 neurons housed in the ab3 sensillum.
 
 
 
-## Mapping response data from an unknown source with `mapReceptor()`{#mapReceptor}
-Similar to `identify_sensillum()`, `mapReceptor()` correlates a response vector to all responding units of the existing DoOR consensus data. Let's grab a data set from Or22a and see where it ends up:
+## Mapping response data from an unknown source with `map_receptor()`{#map_receptor}
+Similar to `identify_sensillum()`, `map_receptor()` correlates a response vector to all responding units of the existing DoOR consensus data. Let's grab a data set from Or22a and see where it ends up:
 ```{r}
 data <- data.frame(odorants  = Or22a$InChIKey, responses = Or22a$Hallem.2006.EN)
 data <- na.omit(data)
 head(data)
-mapReceptor(data = data, nshow = 5)
+map_receptor(data = data, nshow = 5)
 ```
 This example was a bit circular as the tested data contributed to the consensus data...
 
@@ -142,7 +142,7 @@ All the yellow lines in the first plot represent odorant responses that were not
 The width of a tuning curve, i.e. for example to how many odorants a receptor shows strong responses, can be quantified using different sparseness measures. We implemented kurtosis[^1] and sparseness[^2] in `sparse()`. A high kurtosis or sparseness value indicates a narrow tuning curve (see also `dplot_tuningCurve()` in the [DoOR visualization vignette](DoOR_visualizations.html#tuningCurve)). While kurtosis is able to deal with negative values, sparseness can't and thus all values need to be be transformed to absolute values first. Sparseness scales between 0 and 1, kurtosis between -∞ and ∞, a kurtisis of 0 corresponds to the Gaussian distribution.
 
 ```{r}
-rm.SFRreset <- resetSFR(response.matrix, "SFR")
+rm.SFRreset <- reset_sfr(response.matrix, "SFR")
 
 sparse(x = rm.SFRreset[,"Or69a"], method = "ltk")
 sparse(x = rm.SFRreset[,"Or69a"], method = "lts")

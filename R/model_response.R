@@ -5,8 +5,8 @@
 #'
 #' Merging a data is processed by following: \enumerate{ \item Normalize all
 #' response data in value [0,1].  \item Compute the correlation between studies
-#' and selected the best pair using \code{\link{selectModel}}.  \item Merge the
-#' first pair using function \code{\link{projectPoints}}.  \item Add other
+#' and selected the best pair using \code{\link{select_model}}.  \item Merge the
+#' first pair using function \code{\link{project_points}}.  \item Add other
 #' datasets if the correlation between the growing model response and the new
 #' dataset is below the correlation threshold (select.MDValue). Datasets
 #' excluded based on this criterion will be appended in a separate list.  }
@@ -26,6 +26,7 @@
 #' \code{FALSE}.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @keywords data
+#' @aliases modelRP model_response
 #' @export
 #' @importFrom stats na.omit
 #' @importFrom graphics par points
@@ -35,9 +36,9 @@
 #' data(Or35a)
 #' data(weight.globNorm)
 #' data(response.range)
-#' RP.Or35a <- modelRP(Or35a, plot = TRUE)
+#' RP.Or35a <- model_response(Or35a, plot = TRUE)
 #'
-modelRP <- function(da,
+model_response <- function(da,
                     select.MDValue = door_default_values("select.MDValue"),
                     overlapValues = door_default_values("overlapValues"),
                     responseRange = door_default_values("response.range"),
@@ -47,7 +48,7 @@ modelRP <- function(da,
 
   #safety check for input data format
   if (!is.data.frame(da)) {
-    stop("Not a data frame. Stopped in modelRP.R")
+    stop("Not a data frame. Stopped in model_response.R")
   }
 
   da <- filter_data(da, overlapValues = overlapValues)
@@ -109,7 +110,7 @@ modelRP <- function(da,
 
     candidate.studies <- colnames(pda)
     # candidate.studies contains a list of all studies in this receptor
-    selected <- selectModel(candidate = candidate.studies, merged_data = NULL, overlapValues, data_candidate = pda, merged = FALSE )
+    selected <- select_model(candidate = candidate.studies, merged_data = NULL, overlapValues, data_candidate = pda, merged = FALSE )
     # selected contains the pair of studies with the best match
     # including all parameters for the best match
 
@@ -130,11 +131,11 @@ modelRP <- function(da,
 
     # merge these two datasets to one model response.
     # done by projecting response values onto the chosen function (and, if plot==TRUE, also plot this)
-    # use the function (best.model) found with selectModel above
+    # use the function (best.model) found with select_model above
 
-    projected <- projectPoints(x = pda[,selected$selected.x], y = pda[,selected$selected.y], best.model = selected$best.model, xlab = selected$selected.x,    ylab = selected$selected.y, plot = plot, title = plot)
+    projected <- project_points(x = pda[,selected$selected.x], y = pda[,selected$selected.y], best.model = selected$best.model, xlab = selected$selected.x,    ylab = selected$selected.y, plot = plot, title = plot)
 
-    # the output of projectPoints is a list with odor responses, either observed in both studies, or only in one study.
+    # the output of project_points is a list with odor responses, either observed in both studies, or only in one study.
     # to integrate it into pda, change data type: list to vector
     merged_data                                   <- rep(NA, length = dim(pda)[1])
     merged_data[projected$double.observations$ID] <- projected$double.observations$NDR
@@ -152,7 +153,7 @@ modelRP <- function(da,
 
     while (ind > 0) {
       # find the best match
-      selected.next <- selectModel(candidate = rest_data, data_candidate = pda, overlapValues, merged_data = merged_data, merged = TRUE )
+      selected.next <- select_model(candidate = rest_data, data_candidate = pda, overlapValues, merged_data = merged_data, merged = TRUE )
       # if a threshold for the MD is given, stop when no study reaches this threshold criterion any more
       if ( (names(selected.next$best.model) == "initial") | (names(selected.next$best.model) == "no.fitted.model") | (selected.next$best.model[[1]]$MD > select.MDValue) )	{
         excluded  <- c(excluded, rest_data)
@@ -163,9 +164,9 @@ modelRP <- function(da,
 
       # best match has been found, now merge it into the model response "merged_data"
       # done by projecting response values onto the chosen function (and, if plot==TRUE, also plot this)
-      # use the function (best.model) found with selectModel above
+      # use the function (best.model) found with select_model above
 
-      projected <- projectPoints(x = pda[,selected.next$selected.x], y = merged_data, best.model = selected.next$best.model, xlab = selected.next$selected.x,    ylab = selected.next$selected.y,    plot = plot, title = plot)
+      projected <- project_points(x = pda[,selected.next$selected.x], y = merged_data, best.model = selected.next$best.model, xlab = selected.next$selected.x,    ylab = selected.next$selected.y,    plot = plot, title = plot)
 
       # overwrite merged_data with new values
       merged_data                                     <- rep(NA, length = dim(pda)[1])

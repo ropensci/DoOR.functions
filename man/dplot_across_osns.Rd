@@ -52,7 +52,7 @@ DoOR response profiles will be selected and ordered according to the
 }
 \examples{
 library(DoOR.data)
-odorants <- transID(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
+odorants <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
                     from = "Name", to = "InChIKey")
 dplot_across_osns(odorants)
 dplot_across_osns(odorants, sub = c("ac", "at"))

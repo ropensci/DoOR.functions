@@ -17,7 +17,7 @@
 #' @examples
 #' library(DoOR.data)
 #' data(odor)
-#' dplot_across_ru(transID("123-92-2"), tag = "CAS")
+#' dplot_across_ru(trans_id("123-92-2"), tag = "CAS")
 #' dplot_across_ru(odor$InChIKey[4:10])
 #'
 dplot_across_ru <- function(odorant,
@@ -31,7 +31,7 @@ dplot_across_ru <- function(odorant,
     stop("ggplot2 is required for plotting, please install via install.packages('ggplot2')", call. = FALSE)
 
   if (!is.null(zero))
-    response_matrix <- as.data.frame(apply(response_matrix, 2, function(x) resetSFR(x,x[zero])))
+    response_matrix <- as.data.frame(apply(response_matrix, 2, function(x) reset_sfr(x,x[zero])))
 
   odorant <- as.character(odorant)
 

@@ -64,8 +64,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li><a href="#loading">Loading data</a></li>
 <li><a href="#identify_sensillum">Identifying the sensillum we are recording from with <code>identify_sensillum()</code></a></li>
-<li><a href="#privateOdorant">Finding neuron-specific odorants with <code>privateOdorant()</code></a></li>
-<li><a href="#mapReceptor">Mapping response data from an unknown source with <code>mapReceptor()</code></a></li>
+<li><a href="#private_odorant">Finding neuron-specific odorants with <code>private_odorant()</code></a></li>
+<li><a href="#map_receptor">Mapping response data from an unknown source with <code>map_receptor()</code></a></li>
 <li><a href="#back_project">Changing the response unit with <code>back_project()</code></a></li>
 <li><a href="#sparse">Quantifying tuning curves with <code>sparse()</code></a></li>
 </ul>
@@ -80,11 +80,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div id="identifying-the-sensillum-we-are-recording-from-with-identify_sensillum" class="section level2">
 <h2>Identifying the sensillum we are recording from with <code id="identify_sensillum">identify_sensillum()</code></h2>
-<p>Imagine we perform an electrophysiological recording from a <em>Drosophila</em> sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using <a href="#privateOdorant"><code>privateOdorant()</code></a>) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to <code>identify_sensillum()</code>.</p>
+<p>Imagine we perform an electrophysiological recording from a <em>Drosophila</em> sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using <a href="#private_odorant"><code>private_odorant()</code></a>) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to <code>identify_sensillum()</code>.</p>
 <p>Let’s make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxide) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called <code>odorants</code> with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron).</p>
 <pre class="sourceCode r"><code class="sourceCode r">recording &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">odorants =</span> <span class="kw">c</span>(<span class="kw">transID</span>(<span class="kw">c</span>(<span class="st">&quot;BEDN&quot;</span>, <span class="st">&quot;ETAS&quot;</span>), <span class="st">&quot;Code&quot;</span>), 
-               <span class="kw">transID</span>(<span class="st">&quot;carbon dioxide&quot;</span>, <span class="st">&quot;Name&quot;</span>)), 
+  <span class="dt">odorants =</span> <span class="kw">c</span>(<span class="kw">trans_id</span>(<span class="kw">c</span>(<span class="st">&quot;BEDN&quot;</span>, <span class="st">&quot;ETAS&quot;</span>), <span class="st">&quot;Code&quot;</span>), 
+               <span class="kw">trans_id</span>(<span class="st">&quot;carbon dioxide&quot;</span>, <span class="st">&quot;Name&quot;</span>)), 
   <span class="dt">unit1 =</span> <span class="kw">c</span>(.<span class="dv">9</span>,.<span class="dv">1</span>,.<span class="dv">1</span>), 
   <span class="dt">unit2 =</span> <span class="kw">c</span>(<span class="dv">0</span>, .<span class="dv">1</span>, <span class="dv">1</span>)
 )</code></pre>
@@ -128,10 +128,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 </div>
 <div id="finding-neuron-specific-odorants-with-privateodorant" class="section level2">
-<h2>Finding neuron-specific odorants with <code id="privateOdorant">privateOdorant()</code></h2>
-<p>There may be several cases where we might be interested in so called <em>private odorants</em>, odorants that specifically activate a given receptor or sensory neuron. Maybe we are looking for diagnostic odorants for sensillum identification or we want to activate a specific neuronal pathway, <code>privateOdorant()</code> returns candidate odorants for that task.</p>
+<h2>Finding neuron-specific odorants with <code id="private_odorant">private_odorant()</code></h2>
+<p>There may be several cases where we might be interested in so called <em>private odorants</em>, odorants that specifically activate a given receptor or sensory neuron. Maybe we are looking for diagnostic odorants for sensillum identification or we want to activate a specific neuronal pathway, <code>private_odorant()</code> returns candidate odorants for that task.</p>
 <p>Let’s say we want to specifically activate Or22a neurons:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">privateOdorant</span>(<span class="st">&quot;Or22a&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">private_odorant</span>(<span class="st">&quot;Or22a&quot;</span>)</code></pre>
 <pre><code>##                                  Or22a   max.others  n difference
 ## GQKZRWSUJHVIPE-UHFFFAOYSA-N 0.43570150 -0.001626778  4  0.4373283
 ## SHZIWNPUGXLXDT-UHFFFAOYSA-N 0.78193674  0.417131636 29  0.3648051
@@ -139,7 +139,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 ## HCRBXQFHJMCTLF-UHFFFAOYSA-N 0.53683628  0.368857494 20  0.1679788
 ## SMQUZDBALVYZAC-UHFFFAOYSA-N 0.07433042 -0.075854326  1  0.1501847</code></pre>
 <p>We might want to return the odorant names instead of InChiKeys:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">privateOdorant</span>(<span class="st">&quot;Or22a&quot;</span>, <span class="dt">tag =</span> <span class="st">&quot;Name&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">private_odorant</span>(<span class="st">&quot;Or22a&quot;</span>, <span class="dt">tag =</span> <span class="st">&quot;Name&quot;</span>)</code></pre>
 <pre><code>##                              Or22a   max.others  n difference
 ## sec-amyl acetate        0.43570150 -0.001626778  4  0.4373283
 ## ethyl hexanoate         0.78193674  0.417131636 29  0.3648051
@@ -148,7 +148,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 ## salicyl aldehyde        0.07433042 -0.075854326  1  0.1501847</code></pre>
 <p>So according to the function sec-amyl acetate would be a good candidate. It activates Or22a at 0.4 (DoOR response, max is 1) while the maximum activation in all other tested responding units (receptors, neurons, glomeruli) is 0.016, a difference of 0.40. Sounds good, but it was tested only in 4 other responding units, so I would rather go for ethyl hexanoate with about the same difference but being tested in 29 other responding units.</p>
 <p>We can also restrict the search to the sensillum the responding units of interest is related to:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">privateOdorant</span>(<span class="st">&quot;Or22a&quot;</span>, <span class="dt">tag =</span> <span class="st">&quot;Name&quot;</span>, <span class="dt">sensillum =</span> T)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">private_odorant</span>(<span class="st">&quot;Or22a&quot;</span>, <span class="dt">tag =</span> <span class="st">&quot;Name&quot;</span>, <span class="dt">sensillum =</span> T)</code></pre>
 <pre><code>## 
 ## &gt;&gt; Checking only against the ab3 sensillum (Or22a, Or22b, Or85b) &lt;&lt;</code></pre>
 <pre><code>##                             Or22a max.others n difference
@@ -160,8 +160,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Ethyl 2-methylbutanoate sounds like a good hit, it has the same difference to the other units as ethyl hexanoate but hardly elicits a response at all from the other neuron. The n of 1 is fine as there are only 2 neurons housed in the ab3 sensillum.</p>
 </div>
 <div id="mapping-response-data-from-an-unknown-source-with-mapreceptor" class="section level2">
-<h2>Mapping response data from an unknown source with <code id="mapReceptor">mapReceptor()</code></h2>
-<p>Similar to <code>identify_sensillum()</code>, <code>mapReceptor()</code> correlates a response vector to all responding units of the existing DoOR consensus data. Let’s grab a data set from Or22a and see where it ends up:</p>
+<h2>Mapping response data from an unknown source with <code id="map_receptor">map_receptor()</code></h2>
+<p>Similar to <code>identify_sensillum()</code>, <code>map_receptor()</code> correlates a response vector to all responding units of the existing DoOR consensus data. Let’s grab a data set from Or22a and see where it ends up:</p>
 <pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">odorants  =</span> Or22a$InChIKey, <span class="dt">responses =</span> Or22a$Hallem<span class="fl">.2006</span>.EN)
 data &lt;-<span class="st"> </span><span class="kw">na.omit</span>(data)
 <span class="kw">head</span>(data)</code></pre>
@@ -172,7 +172,7 @@ data &lt;-<span class="st"> </span><span class="kw">na.omit</span>(data)
 ## 5  VHRGRCVQAFMJIZ-UHFFFAOYSA-N        17
 ## 11 YEJRWHAVMIAJKC-UHFFFAOYSA-N        47
 ## 12 JBFHTYHTHYHCDJ-UHFFFAOYSA-N       144</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mapReceptor</span>(<span class="dt">data =</span> data, <span class="dt">nshow =</span> <span class="dv">5</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_receptor</span>(<span class="dt">data =</span> data, <span class="dt">nshow =</span> <span class="dv">5</span>)</code></pre>
 <pre><code>## skipped Or22c, Or24a, Or67d, pb2A as overlap (n) was &lt; 3</code></pre>
 <pre><code>##       responding.unit   n       cor      p.value
 ## Or22a           Or22a 111 0.9658036 0.000000e+00
@@ -217,7 +217,7 @@ bp &lt;-<span class="st"> </span><span class="kw">back_project</span>(template, 
 <div id="quantifying-tuning-curves-with-sparse" class="section level2">
 <h2>Quantifying tuning curves with <code id="sparse">sparse()</code></h2>
 <p>The width of a tuning curve, i.e. for example to how many odorants a receptor shows strong responses, can be quantified using different sparseness measures. We implemented kurtosis<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and sparseness<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> in <code>sparse()</code>. A high kurtosis or sparseness value indicates a narrow tuning curve (see also <code>dplot_tuningCurve()</code> in the <a href="DoOR_visualizations.html#tuningCurve">DoOR visualization vignette</a>). While kurtosis is able to deal with negative values, sparseness can’t and thus all values need to be be transformed to absolute values first. Sparseness scales between 0 and 1, kurtosis between -∞ and ∞, a kurtisis of 0 corresponds to the Gaussian distribution.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rm.SFRreset &lt;-<span class="st"> </span><span class="kw">resetSFR</span>(response.matrix, <span class="st">&quot;SFR&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">rm.SFRreset &lt;-<span class="st"> </span><span class="kw">reset_sfr</span>(response.matrix, <span class="st">&quot;SFR&quot;</span>)
 
 <span class="kw">sparse</span>(<span class="dt">x =</span> rm.SFRreset[,<span class="st">&quot;Or69a&quot;</span>], <span class="dt">method =</span> <span class="st">&quot;ltk&quot;</span>)</code></pre>
 <pre><code>## [1] -0.2615938</code></pre>

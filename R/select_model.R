@@ -3,10 +3,10 @@
 #' compute the data pairwise using function \code{\link{calculate_model}} and selects
 #' a pair with the lowest "MD" value.
 #'
-#' This function is used in \code{\link{modelRP}} to select the first pair or
+#' This function is used in \code{\link{model_response}} to select the first pair or
 #' next data set for merging. The output is a list containing "selected.x" and
 #' "selected.y" that specify which data plots against another, and "best.model"
-#' that is used in function \code{\link{projectPoints}}.
+#' that is used in function \code{\link{project_points}}.
 #'
 #' @param candidate a character vector, contains the names of studies.
 #' @param data_candidate a data frame, odorant response data that only contains
@@ -18,10 +18,11 @@
 #' merged_data and candidate data. If \code{FALSE}, calculate models between
 #' candidates.
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-#' @seealso \code{\link{projectPoints}},\code{\link{modelRP}}
+#' @seealso \code{\link{project_points}},\code{\link{model_response}}
 #' @keywords data
 #' @export
 #' @importFrom stats na.omit lm
+#' @aliases selectModel select_model
 #' @examples
 #'
 #' library(DoOR.data)
@@ -29,9 +30,9 @@
 #' studies<-names(ac3B)[c(7:9)]
 #' data_candidate<-ac3B[,c(7:9)]
 #' Norm_data_candidate <-apply(data_candidate, 2, door_norm)
-#' selectModel(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
+#' select_model(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
 #'
-selectModel <- function(candidate,
+select_model <- function(candidate,
                         data_candidate,
                         merged_data,
                         overlapValues = door_default_values("overlapValues"),

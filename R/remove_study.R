@@ -13,13 +13,14 @@
 #'   weights between receptors (\code{weight.globNorm})
 #' @seealso \code{\link{import_new_data}}
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
+#' @aliases removeStudy remove_study
 #' @export
 #' @examples
 #' library(DoOR.data)
 #' load_door_data()
-#' removeStudy('Bruyne.2001.WT')
+#' remove_study('Bruyne.2001.WT')
 #'
-removeStudy <- function(study,
+remove_study <- function(study,
                         receptors = door_default_values('ORs'),
                         responseRange = door_default_values('response.range'),
                         weightGlobNorm = door_default_values('weight.globNorm')) {

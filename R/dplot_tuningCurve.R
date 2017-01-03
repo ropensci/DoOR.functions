@@ -32,7 +32,7 @@
 #' dplot_tuningCurve(odorant = odor$InChIKey[2])
 #' dplot_tuningCurve(receptor = "Or22a")
 #'
-#' range <- range(resetSFR(response.matrix, "SFR"), na.rm = TRUE)
+#' range <- range(reset_sfr(response.matrix, "SFR"), na.rm = TRUE)
 #' dplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
 #'
 #' dplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
@@ -66,7 +66,7 @@ dplot_tuningCurve <- function(receptor,
 
     if(missing(response.vector)) {
       if (!zero == "") {
-        data <- na.omit(resetSFR(response_matrix[ ,receptor], response_matrix[zero, receptor]))
+        data <- na.omit(reset_sfr(response_matrix[ ,receptor], response_matrix[zero, receptor]))
       } else {
         data <- na.omit(response_matrix[ ,receptor])
       }
@@ -96,7 +96,7 @@ dplot_tuningCurve <- function(receptor,
       odor.main <- odorant
     if(missing(response.vector)) {
       if (!zero == "")
-        data <- apply(response_matrix, 2, function(x) resetSFR(x, x[zero]))
+        data <- apply(response_matrix, 2, function(x) reset_sfr(x, x[zero]))
       data <- na.omit(data[odorant,])
     } else {
       data <- response.vector

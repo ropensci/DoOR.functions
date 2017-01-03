@@ -35,7 +35,7 @@ barplot of DoOR responses of a set of odorant across all responding units in DoO
 \examples{
 library(DoOR.data)
 data(odor)
-dplot_across_ru(transID("123-92-2"), tag = "CAS")
+dplot_across_ru(trans_id("123-92-2"), tag = "CAS")
 dplot_across_ru(odor$InChIKey[4:10])
 
 }

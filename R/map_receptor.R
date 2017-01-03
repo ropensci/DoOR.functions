@@ -1,4 +1,4 @@
-#' mapReceptor
+#' map_receptor
 #'
 #' Identifying the source of unknown response data by correlating it agains all
 #' DoOR responding units.
@@ -17,13 +17,14 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
 #' @importFrom stats na.omit cor.test
+#' @aliases mapReceptor map_receptor 
 #' @examples
 #'   load_door_data()
 #'   data <- data.frame(odorants  = Or22a$InChIKey,
 #'                      responses = Or22a$Hallem.2004.EN)
 #'   data <- na.omit(data)
-#'   mapReceptor(data = data)
-mapReceptor <- function(data,
+#'   map_receptor(data = data)
+map_receptor <- function(data,
                         response_matrix = door_default_values("response.matrix"),
                         sub,
                         threshold.p,

@@ -1,7 +1,7 @@
 #' Compose a Response Matrix of All Odor Receptors
 #'
 #' computes the complete response model for all receptors in the database
-#' (calls \code{\link{modelRP}} for all receptors)
+#' (calls \code{\link{model_response}} for all receptors)
 #'
 #'
 #' @param tag character string, format for rownames, possibilities: "InChIKey",
@@ -10,8 +10,8 @@
 #'   studies that do not align sufficiently well to the response model
 #' @param overlapValues numeric, a criterion using to refuse a data set that
 #' has not enough overlap value.
-#' @param ... pass more parameters to \code{\link{modelRP}}
-#' @seealso \code{\link{modelRP}}
+#' @param ... pass more parameters to \code{\link{model_response}}
+#' @seealso \code{\link{model_response}}
 #' @keywords data
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
@@ -54,7 +54,7 @@ create_door_database <- function(tag                = door_default_values("tag")
       print(paste(i, "is a empty data frame."))
       frame_data[, i] <- NA
     } else {
-      merged <- modelRP(da, select.MDValue, overlapValues, glob.normalization = TRUE, ...)
+      merged <- model_response(da, select.MDValue, overlapValues, glob.normalization = TRUE, ...)
       merged.responses   <- merged$model.response[,"merged_data"]
       excluded           <- merged$excluded.data
       merged.odors       <- as.vector(merged$model.response[,tag])

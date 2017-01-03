@@ -61,7 +61,7 @@ dplot_compare_profiles <- function(x, y,
   comb_xy   <- na.omit(comb_xy[ ,c("odorant", title_x, title_y)])
 
   if(tag != "InChIKey")
-    comb_xy$odorant <- transID(comb_xy$odorant, from = "InChIKey", to = tag)
+    comb_xy$odorant <- trans_id(comb_xy$odorant, from = "InChIKey", to = tag)
 
   sorted_xy <- as.character(comb_xy[rev(order(comb_xy[ ,title_x])), "odorant"])
 

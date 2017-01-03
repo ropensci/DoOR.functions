@@ -57,7 +57,7 @@ back_project <- function(template.data,
 
   # find the best fitting model and project all points along the fitted curve
   best.model <- calculate_model(x = xy[,1], y = xy[,2])
-  projected  <- projectPoints(x = xy[,1], y = xy[,2], best.model = best.model, plot = TRUE, title = TRUE, xlab = paste(responding.unit, "[consensus data]"), ylab = "template data")
+  projected  <- project_points(x = xy[,1], y = xy[,2], best.model = best.model, plot = TRUE, title = TRUE, xlab = paste(responding.unit, "[consensus data]"), ylab = "template data")
 
   # extract the projected and the normalized projected data
   projected.back     <- rbind(projected$double.observations[,c('ID','Y')], projected$single.observations[,c('ID','Y')])

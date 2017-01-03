@@ -31,7 +31,7 @@ load_door_data()
 ```
 
 ## Visualizing odorants _vs_ responding units with `dplot_response_matrix()`{#responseMatrix}
-`dplot_response_matrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `resetSFR(response.matrix, "SFR")`) it will be shown as color-coded heatmap.
+`dplot_response_matrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `reset_sfr(response.matrix, "SFR")`) it will be shown as color-coded heatmap.
 
 ```{r,fig.width=7.1, fig.height=4}
 dplot_response_matrix(response.matrix[2:50,], tag = "Name", base_size = 8)
@@ -39,7 +39,7 @@ dplot_response_matrix(response.matrix[2:50,], tag = "Name", base_size = 8)
 
 If the data contains negative values, a colored response matrix will be plotted:
 ```{r,fig.width=7.1, fig.height=4}
-dplot_response_matrix(resetSFR(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
+dplot_response_matrix(reset_sfr(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
 ```
 
 ## Visualizing ensemble responses with `dplot_al_map()`{#ALmap}
@@ -47,14 +47,14 @@ With `dplot_al_map()` we can visualize the ensemble response a given odorant eli
 ```{r, fig.width=7.1}
 dplot_al_map("QSJXEFYPDANLFS-UHFFFAOYSA-N", base_size = 8)
 ```
-If we do not know the InChIKey of the substance we are interested in, we can use the `transID()` function for conversion. If we are interested in the expressed receptor rather than the glomerulus names:
+If we do not know the InChIKey of the substance we are interested in, we can use the `trans_id()` function for conversion. If we are interested in the expressed receptor rather than the glomerulus names:
 ```{r, fig.width=7.1, warning=FALSE}
-dplot_al_map(transID("benzaldehyde", from = "Name"), tag = "receptor", main = "SMILES", base_size = 8)
+dplot_al_map(trans_id("benzaldehyde", from = "Name"), tag = "receptor", main = "SMILES", base_size = 8)
 ```
 
 If we prefer the plain activation pattern without annotations at all:
 ```{r, fig.width=7.1, fig.height=2}
-dplot_al_map(transID("628-63-7", from = "CAS"), tag = "", main = "", legend = F, scalebar = F)
+dplot_al_map(trans_id("628-63-7", from = "CAS"), tag = "", main = "", legend = F, scalebar = F)
 ```
 
 ## Visualizing tuning curves with `dplot_tuningCurve()`{#tuningCurve}
@@ -62,7 +62,7 @@ dplot_al_map(transID("628-63-7", from = "CAS"), tag = "", main = "", legend = F,
 
 The set of odorants a given responding unit is responsive to can be described as its tuning curve. With `dplot_tuningCurve()` we can easily display such a tuning curve together with its kurtosis. Kurtosis is a measure of the shape of the tuning curve, i.e. whether a responding unit is narrowly tuned to a few odorants (high kurtosis), or whether it responds to many odorants (low kurtosis). The gaussian distribution has a kurtosis of 0.
 
-If we only specify the receptor/response unit name, the data is taken from `response.matrix` and `dplot_tuningCurve()` uses `resetSFR()` to reset spontaneous firing rate (or any other specified odorant) to zero before plotting.
+If we only specify the receptor/response unit name, the data is taken from `response.matrix` and `dplot_tuningCurve()` uses `reset_sfr()` to reset spontaneous firing rate (or any other specified odorant) to zero before plotting.
 ```{r}
 dplot_tuningCurve(receptor = "Or22a", base_size = 8)
 ```
@@ -91,13 +91,13 @@ dplot_tuningCurve(odorant = "CURLTUGMZLYLDI-UHFFFAOYSA-N", odor.main = "InChI", 
 
 And finally we can control the color of the bars:
 ```{r}
-dplot_tuningCurve(odorant = transID("carbon dioxide", from = "Name"), fill.odorant = "#FF0000", base_size = 8)
+dplot_tuningCurve(odorant = trans_id("carbon dioxide", from = "Name"), fill.odorant = "#FF0000", base_size = 8)
 ```
 
 As mentioned, all of these plots are generated with the ggplot2 package which allows to override theming:
 ```{r}
 library(ggplot2)
-dplot_tuningCurve(odorant = transID("carbon dioxide", from = "Name"), base_size = 8) +
+dplot_tuningCurve(odorant = trans_id("carbon dioxide", from = "Name"), base_size = 8) +
   theme(panel.background = element_rect(fill = "grey", color = "magenta"))
 ```
 
@@ -142,7 +142,7 @@ dplot_compare_profiles(x = response.matrix, by.x = "Or35a", by.y = "ac3B",
 
 or with "SFR" set to 0:
 ```{r, fig.width = 7.1}
-dplot_compare_profiles(x = resetSFR(response.matrix, "SFR"), by.x = "Or35a", by.y = "ac3B",
+dplot_compare_profiles(x = reset_sfr(response.matrix, "SFR"), by.x = "Or35a", by.y = "ac3B",
                          tag = "Name", base_size = 8)
 ```
 
@@ -153,7 +153,7 @@ With `dplot_across_ru()` we can visualize the responses that one or several odor
 
 ```{r, fig.width = 6, fig.height = 6}
 odors <-
-  transID(c("pentyl acetate", "carbon dioxide", "2,3-butanedione"), from = "Name")
+  trans_id(c("pentyl acetate", "carbon dioxide", "2,3-butanedione"), from = "Name")
 dplot_across_ru(odors, tag = "Name", base_size = 8)
 ```
 

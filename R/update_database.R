@@ -1,39 +1,39 @@
 #' update response matrix
-#' 
-#' update the globally \code{response matrix} and the unglobally normalized 
-#' response matrix \code{response.matrix_non.normalized} by introducing new 
+#'
+#' update the globally \code{response matrix} and the unglobally normalized
+#' response matrix \code{response.matrix_non.normalized} by introducing new
 #' consensus response data of given receptor.
-#' 
-#' The merging sequence could be arranged by the routine process (using 
-#' \code{\link{modelRP}} or taking the optimized sequence that is chosen from 
+#'
+#' The merging sequence could be arranged by the routine process (using
+#' \code{\link{model_response}} or taking the optimized sequence that is chosen from
 #' permutations. The mean correlation between merged responses and each original
-#' recording will be computed for each permutation, the optimozed sequence is 
+#' recording will be computed for each permutation, the optimozed sequence is
 #' with the highest correlation.
-#' 
+#'
 #' @param receptor character string, name of given odorant receptor.
 #' @param permutation logical, if TRUE, the sequence is chosen from permutation,
 #'   if FALSE, sequence is chosen by the routine process.
-#' @param perm a matrix with one sequence of study names per row, if empty, all 
+#' @param perm a matrix with one sequence of study names per row, if empty, all
 #'   possible permutations of study names will be provided.
-#' @param response_matrix_nn data frame, response data that has not been 
+#' @param response_matrix_nn data frame, response data that has not been
 #'   globally normalized.
 #' @param response_matrix data frame, globally normalized response data.
 #' @param responseRange data frame, response range of studies.
 #' @param weightGlobNorm data frame, weight matrix for global normalization.
 #' @param overlapValues minimum overlap between studies to perfom a merge
-#' @param select.MDValue the minimum mean distance between studies to perfom a 
+#' @param select.MDValue the minimum mean distance between studies to perfom a
 #'   merge (used if permutation == FALSE or if permutation == TRUE AND strict ==
 #'   TRUE)
 #' @param excluded.data the data frame that contains the list of excluded data
 #'   sets.
 #' @param plot logical
-#' @param strict logical, if TRUE merging a permutation will be stopped once a 
-#'   single merge has a mean distance above select.MDValue (only valid if 
+#' @param strict logical, if TRUE merging a permutation will be stopped once a
+#'   single merge has a mean distance above select.MDValue (only valid if
 #'   permutation == TRUE)
-#'   
+#'
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @author Shouwen Ma <\email{daniel.muench@@uni-konstanz.de}>
-#' @seealso \code{\link{modelRP}},\code{\link{modelRPSEQ}}
+#' @seealso \code{\link{model_response}},\code{\link{model_response_seq}}
 #' @keywords data
 #' @export
 #' @examples
@@ -42,81 +42,81 @@
 #' load_door_data()
 #' # update the entry "Or67b" of data "response.matrix" and
 #' # "response.matrix_non.normalized" with permutations.
-#'  updateDatabase(receptor="Or67b", permutation = TRUE)
+#'  update_database(receptor="Or67b", permutation = TRUE)
 #' }
-updateDatabase <- function(receptor, 
-                           permutation = TRUE, 
-                           perm, 
-                           response_matrix_nn = door_default_values("response.matrix_non.normalized"), 
-                           response_matrix    = door_default_values("response.matrix"), 
-                           responseRange      = door_default_values("response.range"), 
+update_database <- function(receptor,
+                           permutation = TRUE,
+                           perm,
+                           response_matrix_nn = door_default_values("response.matrix_non.normalized"),
+                           response_matrix    = door_default_values("response.matrix"),
+                           responseRange      = door_default_values("response.range"),
                            weightGlobNorm     = door_default_values("weight.globNorm"),
-                           select.MDValue     = door_default_values("select.MDValue"), 
+                           select.MDValue     = door_default_values("select.MDValue"),
                            strict             = TRUE,
                            overlapValues      = door_default_values("overlapValues"),
                            excluded.data      = door_default_values("excluded.data"),
-                           plot = FALSE) {	
+                           plot = FALSE) {
   da            <- get(receptor)
   recordColumn  <- as.numeric( c((door_default_values("num.charColumns")+1):dim(da)[2]) )
   studies       <- names(da)[recordColumn]
-  
+
   if (permutation == TRUE) {
     da            <- filter_data(da, overlapValues = overlapValues)
     excluded      <- as.character(da$excluded$study)
     da            <- da$data
     recordColumn  <- as.numeric( c((door_default_values("num.charColumns")+1):dim(da)[2]) )
     studies       <- names(da)[recordColumn]
-    
+
     if(length(da) > door_default_values("num.charColumns")) {
-      
+
       if (missing(perm)) {
-        perm <- matrix(studies[permutations(length(studies))], ncol=length(studies)) 
+        perm <- matrix(studies[permutations(length(studies))], ncol=length(studies))
         message(paste("All possible permutations (", dim(perm)[1], ") have been calculated, now merging.", sep = ""))
       }
-      
-      
+
+
       # compute the mean correlation between merged responses and original response.
       meanCorrel <- matrix(NA,nrow=dim(perm)[1])
-      
+
       for (i in 1:dim(perm)[1]) {
-        merge.try <- try(modelRPSEQ(data=da, SEQ=perm[i,], overlapValues = overlapValues, select.MDValue = select.MDValue, strict = strict, plot = plot),silent = TRUE)
-        if (inherits(merge.try, "try-error")) { 
-          meanCorrel_merge.try <- NA 
+        merge.try <- try(model_response_seq(data=da, SEQ=perm[i,], overlapValues = overlapValues, select.MDValue = select.MDValue, strict = strict, plot = plot),silent = TRUE)
+        if (inherits(merge.try, "try-error")) {
+          meanCorrel_merge.try <- NA
         } else {
           meanCorrel_merge.try <- mean(unlist(sapply(da[,recordColumn],function(x) calculate_model(merge.try, x)[[1]]["MD"])))
         }
         meanCorrel[i,] <- meanCorrel_merge.try
-        
+
         message(paste("[",i,"/",dim(perm)[1],"] ",paste(perm[i,], collapse = ", "), " ------ Mean distance: ", round(meanCorrel_merge.try, 4), sep = ""))
       }
-      
-      if (all(is.na(meanCorrel))) 
+
+      if (all(is.na(meanCorrel)))
         stop("No good sequence found")
-      
+
       message("--------------------------------------------------------")
-      
+
       perm_MC <- data.frame(perm,meanCorrel) 	# data frame, the last column contains the mean correlation values.
-      
+
       # find and show the sequence with the lowest MD
       min.MD  <- which.min(meanCorrel)
       perm     <- perm[min.MD[1],]
-      
+
       message(paste("The optimized sequence with the lowest mean MD", round(meanCorrel[min.MD], 4), "is:"))
       message(paste(perm, collapse = " -> "))
-      
+
       # merge response data with the optimized sequence.
-      merge <- modelRPSEQ(data = da, SEQ = perm, overlapValues = overlapValues, plot = plot)
+      merge <- model_response_seq(data = da, SEQ = perm, overlapValues = overlapValues, plot = plot)
     } else {
       merge <- rep(NA, dim(da)[1])
       message("No data left to merge, returning NAs")
     }
-    
+
   } else { # END if (permutation == TRUE)
-    merge <- modelRP(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)
+    merge <- model_response(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)
     excluded <- merge$excluded.data
     merge <- merge$model.response[,"merged_data"]
   }
-  
+
   # update  response.matrix_non.normalized
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merge)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix_nn))
@@ -132,7 +132,7 @@ updateDatabase <- function(receptor,
   response_matrix_nn[matchInChIKey, receptor] <- merge
   assign("response.matrix_non.normalized", response_matrix_nn, envir = .GlobalEnv)
   message(paste("response.matrix_non.normalized has been updated for",receptor))
-  
+
   # update response.matrix
   name.Stud    <- colnames(da)[recordColumn]
   mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
@@ -142,14 +142,14 @@ updateDatabase <- function(receptor,
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merged_data)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix))
   response_matrix[matchInChIKey, receptor] <- merged_data
-  
+
   assign("response.matrix", response_matrix, envir = .GlobalEnv)
   message(paste("response.matrix has been updated for",receptor))
-  
+
   # update response.matrix.excluded
   excluded.data$excluded <- as.character(excluded.data$excluded)
   excluded.data[excluded.data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
   assign("excluded.data", excluded.data, envir = .GlobalEnv)
   message(paste("excluded.data has been updated for",receptor))
-  
+
 }
