@@ -3,7 +3,6 @@
 #' Identifying the source of unknown response data by correlating it agains all
 #' DoOR responding units.
 #'
-#'
 #' @param data data frame, containing two columns, one called "odorants" and one
 #'   "responses" providing InChIKeys and odorant responses respectively.
 #' @param response_matrix output is a numeric vector that contains the Pearson

@@ -52,13 +52,8 @@ response matrix \code{response.matrix_non.normalized} by introducing new
 consensus response data of given receptor.
 }
 \details{
-<<<<<<< HEAD:man/update_database.Rd
 The merging sequence could be arranged by the routine process (using
 \code{\link{model_response}} or taking the optimized sequence that is chosen from
-=======
-The merging sequence could be arranged by the routine process (using 
-\code{\link{model_response}} or taking the optimized sequence that is chosen from 
->>>>>>> 9d73a9bc3fe04986e1b96d7d4c8b786026637987:man/updateDatabase.Rd
 permutations. The mean correlation between merged responses and each original
 recording will be computed for each permutation, the optimozed sequence is
 with the highest correlation.
