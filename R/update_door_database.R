@@ -42,9 +42,9 @@
 #' load_door_data()
 #' # update the entry "Or67b" of data "door_response_matrix" and
 #' # "door_response_matrix_non_normalized" with permutations.
-#'  update_database(receptor="Or67b", permutation = TRUE)
+#'  update_door_database(receptor="Or67b", permutation = TRUE)
 #' }
-update_database <- function(receptor,
+update_door_database <- function(receptor,
                            permutation = TRUE,
                            perm,
                            response_matrix_nn = door_default_values("door_response_matrix_non_normalized"),

@@ -38,6 +38,6 @@ selectModel <- select_model
 transID <- trans_id
 modelRPSEQ <- model_response_seq
 modelRP <- model_response
-updateDatabase <- update_database
+updateDatabase <- update_door_database
 updateOdorInfo <- update_odorinfo
 mapReceptor <- map_receptor

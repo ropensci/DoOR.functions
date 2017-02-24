@@ -68,7 +68,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li><a href="#import_new_data">Importing new data with <code>import_new_data()</code></a></li>
 <li><a href="#create_door_database">Building the complete data base with <code>create_door_database()</code></a></li>
-<li><a href="#update_database">Updating parts of the data base with <code>update_database()</code></a></li>
+<li><a href="#update_door_database">Updating parts of the data base with <code>update_door_database()</code></a></li>
 <li><a href="#model"><code>model_response()</code> and <code>model_response_seq()</code></a></li>
 <li><a href="#remove_study">Removing a study with <code>remove_study()</code></a></li>
 <li><a href="#update_odorinfo">Updating the odor information with <code>update_odorinfo()</code></a></li>
@@ -204,12 +204,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Once we imported new data we can use <code>create_door_database()</code> in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in <code>door_excluded_data</code>.</p>
 </div>
 <div id="updating-parts-of-the-data-base-with-updatedatabase" class="section level2">
-<h2>Updating parts of the data base with <code id="update_database">update_database()</code></h2>
-<p>If we imported new data only for a few receptors, we can update the data base with <code>update_database()</code>. There are two ways to update the data base:</p>
+<h2>Updating parts of the data base with <code id="update_door_database">update_door_database()</code></h2>
+<p>If we imported new data only for a few receptors, we can update the data base with <code>update_door_database()</code>. There are two ways to update the data base:</p>
 <div id="using-the-heuristic-approach" class="section level3">
 <h3>Using the heuristic approach</h3>
 <p>This is the faster way to perform a merge of all data sets. All possible binary combinations of data sets will be merged using 10 different fitting functions on the odorants that were measured in both data sets. The two data sets yielding the “best merge” (i.e. lowest mean deviations of points from the fitted function) will be merged. The process of pairwise merges will be repeated with the “merged_data” against the remaining data sets until all of them are included:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update_database</span>(<span class="st">&quot;Or92a&quot;</span>, <span class="dt">permutation =</span> F, <span class="dt">plot =</span> T)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update_door_database</span>(<span class="st">&quot;Or92a&quot;</span>, <span class="dt">permutation =</span> F, <span class="dt">plot =</span> T)</code></pre>
 <pre><code>## door_response_matrix_non_normalized has been updated for Or92a</code></pre>
 <pre><code>## door_response_matrix has been updated for Or92a</code></pre>
 <pre><code>## door_excluded_data has been updated for Or92a</code></pre>
@@ -219,7 +219,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3>Trying all permutations</h3>
 <p>The more exhaustive way to update the data base is to test all possible sequences of data set merges, calculating the mean deviations from all original data sets and selecting the merge that produces the lowest mean deviations. This approach works well for responding units that contain a low number of recorded data sets. For responding units containing 5 data sets we have to calculate merges for 120 different sequences. With 6 it is already 720 sequences and with 10 data sets we have to test &gt; 3.6 million different sequences.</p>
 <p>While this can be done <em>via</em> parallel computing, this is nothing you should try on your home PC. For the pre-computed response matrices we performed matches using the permutation approach for all responding units that contained a maximum of 10 different data sets on a computing cluster. For DoOR 2.0 these are all responding units except Or22a.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update_database</span>(<span class="st">&quot;Or67a&quot;</span>, <span class="dt">permutation =</span> T, <span class="dt">plot =</span> F)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update_door_database</span>(<span class="st">&quot;Or67a&quot;</span>, <span class="dt">permutation =</span> T, <span class="dt">plot =</span> F)</code></pre>
 <pre><code>## All possible permutations (6) have been calculated, now merging.</code></pre>
 <pre><code>## [1/6] Hallem.2006.EN, Gabler.2013.AL, Hallem.2004.EN ------ Mean distance: 0.0593</code></pre>
 <pre><code>## [2/6] Hallem.2006.EN, Hallem.2004.EN, Gabler.2013.AL ------ Mean distance: 0.1826</code></pre>
@@ -237,7 +237,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div id="modelrp-and-modelrpseq" class="section level2">
 <h2><code>model_response()</code> and <code id="model">model_response_seq()</code></h2>
-<p><code>update_database()</code> and <code>createDatabse()</code> call <code>model_response()</code> and <code>model_response_seq()</code> to perform the merges and update the different DoOR objects. If we only want to perform a merge we can call them both directly.</p>
+<p><code>update_door_database()</code> and <code>createDatabse()</code> call <code>model_response()</code> and <code>model_response_seq()</code> to perform the merges and update the different DoOR objects. If we only want to perform a merge we can call them both directly.</p>
 <div id="merging-using-the-heuristic-with-modelrp" class="section level3">
 <h3>Merging using the heuristic with <code>model_response()</code></h3>
 <p><code>model_response()</code> returns a list containing the merged data, the names of the excluded data sets (if any) and the names of the included data sets (if any were excluded).</p>
@@ -308,7 +308,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(merge$model.re
 </div>
 <div id="merging-in-a-specific-sequence-with-modelrpseq" class="section level3">
 <h3>Merging in a specific sequence with <code>model_response_seq()</code></h3>
-<p><code>update_database()</code> with <code>permutation = TRUE</code> calls <code>model_response_seq()</code>. Like <code>model_response()</code> we can also call model_response_seq directly:</p>
+<p><code>update_door_database()</code> with <code>permutation = TRUE</code> calls <code>model_response_seq()</code>. Like <code>model_response()</code> we can also call model_response_seq directly:</p>
 <pre class="sourceCode r"><code class="sourceCode r">SEQ &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Hallem.2006.EN&quot;</span>,<span class="st">&quot;Kreher.2008.EN&quot;</span>,<span class="st">&quot;Hallem.2006.EN&quot;</span>)
 merge &lt;-<span class="st"> </span><span class="kw">model_response_seq</span>(Or35a, <span class="dt">SEQ =</span> SEQ, <span class="dt">plot =</span> <span class="ot">TRUE</span>)
 <span class="kw">head</span>(merge)</code></pre>

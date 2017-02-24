@@ -88,14 +88,14 @@ door_default_values <- function(DoOR_default) {
       data(door_global_normalization_weights)
     }
     return(door_global_normalization_weights)
-  } # export_door_data.R, import_new_data.R, update_database.R, model_response.R
+  } # export_door_data.R, import_new_data.R, update_door_database.R, model_response.R
 
   if (DoOR_default == "door_excluded_data") {
     if (!exists("door_excluded_data")) {
       data(door_excluded_data)
     }
     return(door_excluded_data)
-  } # update_database.R, model_response.R, create_door_database.R
+  } # update_door_database.R, model_response.R, create_door_database.R
 
 
   if (DoOR_default == "door_mappings") {
@@ -124,7 +124,7 @@ door_default_values <- function(DoOR_default) {
       data(door_response_range)
     }
     return(door_response_range)
-  } # export_door_data.R, get_responses.R, import_new_data.R, update_database.R, model_response.R
+  } # export_door_data.R, get_responses.R, import_new_data.R, update_door_database.R, model_response.R
 
   if (DoOR_default == "door_response_matrix_non_normalized") {
     if (!exists("door_response_matrix_non_normalized")) {

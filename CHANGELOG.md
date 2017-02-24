@@ -5,12 +5,12 @@
 
 **Implemented enhancements:**
 
-- enable plotting in update_database\(\) / model_response_seq\(\) [\#3](https://github.com/Dahaniel/DoOR.functions/issues/3)
+- enable plotting in update_door_database\(\) / model_response_seq\(\) [\#3](https://github.com/Dahaniel/DoOR.functions/issues/3)
 - calculate_model\(\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
 
 **Fixed bugs:**
 
-- update_database\(\) calculates with wrong permutation [\#2](https://github.com/Dahaniel/DoOR.functions/issues/2)
+- update_door_database\(\) calculates with wrong permutation [\#2](https://github.com/Dahaniel/DoOR.functions/issues/2)
 - calculate_model\\(\\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
 
 **Merged pull requests:**

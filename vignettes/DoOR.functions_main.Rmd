@@ -19,7 +19,7 @@ In this vignette we describe how to build, modify and update DoOR and introduce 
 * [Modifying, building and updating DoOR](#building)
     * [Importing new data with `import_new_data()`](#import_new_data)
     * [Building the complete data base with `create_door_database()`](#create_door_database)
-    * [Updating parts of the data base with `update_database()`](#update_database)
+    * [Updating parts of the data base with `update_door_database()`](#update_door_database)
     * [`model_response()` and `model_response_seq()`](#model)
     * [Removing a study with `remove_study()`](#remove_study)
     * [Updating the odor information with `update_odorinfo()`](#update_odorinfo)
@@ -102,14 +102,14 @@ If you do not know the InChIKeys of the odorants in your data set, we recommend 
 Once we imported new data we can use `create_door_database()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in `door_excluded_data`.
 
 
-## Updating parts of the data base with `update_database()`{#update_database}
-If we imported new data only for a few receptors, we can update the data base with `update_database()`. There are two ways to update the data base:
+## Updating parts of the data base with `update_door_database()`{#update_door_database}
+If we imported new data only for a few receptors, we can update the data base with `update_door_database()`. There are two ways to update the data base:
 
 ### Using the heuristic approach
 This is the faster way to perform a merge of all data sets. All possible binary combinations of data sets will be merged using 10 different fitting functions on the odorants that were measured in both data sets. The two data sets yielding the "best merge" (i.e. lowest mean deviations of points from the fitted function) will be merged. The process of pairwise merges will be repeated with the "merged_data" against the remaining data sets until all of them are included:
 
 ```{r, fig.width = 7.1, fig.height = 5.5}
-update_database("Or92a", permutation = F, plot = T)
+update_door_database("Or92a", permutation = F, plot = T)
 ```
 
 ### Trying all permutations
@@ -118,12 +118,12 @@ The more exhaustive way to update the data base is to test all possible sequence
 While this can be done _via_ parallel computing, this is nothing you should try on your home PC. For the pre-computed response matrices we performed matches using the permutation approach for all responding units that contained a maximum of 10 different data sets on a computing cluster. For DoOR 2.0 these are all responding units except Or22a.
 
 ```{r, fig.width = 7.1, fig.height = 5.5}
-update_database("Or67a", permutation = T, plot = F)
+update_door_database("Or67a", permutation = T, plot = F)
 ```
 
 
 ## `model_response()` and `model_response_seq()`{#model}
-`update_database()` and `createDatabse()` call `model_response()` and `model_response_seq()` to perform the merges and update the different DoOR objects. If we only want to perform a merge we can call them both directly.
+`update_door_database()` and `createDatabse()` call `model_response()` and `model_response_seq()` to perform the merges and update the different DoOR objects. If we only want to perform a merge we can call them both directly.
 
 ### Merging using the heuristic with `model_response()`
 `model_response()` returns a list containing the merged data, the names of the excluded data sets (if any) and the names of the included data sets (if any were excluded).
@@ -133,7 +133,7 @@ knitr::kable(head(merge$model.response))
 ```
 
 ### Merging in a specific sequence with `model_response_seq()`
-`update_database()` with `permutation = TRUE` calls `model_response_seq()`. Like `model_response()` we can also call model_response_seq directly:
+`update_door_database()` with `permutation = TRUE` calls `model_response_seq()`. Like `model_response()` we can also call model_response_seq directly:
 ```{r, fig.width=5, fig.height=5.5}
 SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")
 merge <- model_response_seq(Or35a, SEQ = SEQ, plot = TRUE)

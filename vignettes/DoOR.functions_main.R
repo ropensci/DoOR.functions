@@ -14,10 +14,10 @@ colnames(tmp)[6] <- "Or22a"
 knitr::kable(tmp)
 
 ## ---- fig.width = 7.1, fig.height = 5.5----------------------------------
-update_database("Or92a", permutation = F, plot = T)
+update_door_database("Or92a", permutation = F, plot = T)
 
 ## ---- fig.width = 7.1, fig.height = 5.5----------------------------------
-update_database("Or67a", permutation = T, plot = F)
+update_door_database("Or67a", permutation = T, plot = F)
 
 ## ---- fig.width = 7.1, fig.height = 5.5----------------------------------
 merge <- model_response(Or67a, plot = F)

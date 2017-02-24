@@ -46,7 +46,7 @@
 #' Introduce new data into DoOR and update the supported data sets:
 #' \tabular{ll}{ \code{\link{import_new_data}}: \tab import new data into DoOR,
 #' and update the weight, response range and receptor names. \cr
-#' \code{\link{update_database}}: \tab update response matrix by calculating new
+#' \code{\link{update_door_database}}: \tab update response matrix by calculating new
 #' consensus response data for a given receptor. \cr }
 #'
 #' See the Vignettes and the help pages for more documentation.
