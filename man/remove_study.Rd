@@ -7,7 +7,7 @@
 \usage{
 remove_study(study, receptors = door_default_values("ORs"),
   responseRange = door_default_values("door_response_range"),
-  weightGlobNorm = door_default_values("weight.globNorm"))
+  weightGlobNorm = door_default_values("door_global_normalization_weights"))
 }
 \arguments{
 \item{study}{a string containing the name of the study you want to remove
@@ -20,7 +20,7 @@ receptors exidting in DoOR.}
 ranges of all studies (\code{door_response_range})}
 
 \item{weightGlobNorm}{the dataframe containing the info about the relative
-weights between receptors (\code{weight.globNorm})}
+weights between receptors (\code{door_global_normalization_weights})}
 }
 \description{
 Use this function to remove a study from the DoOR database.

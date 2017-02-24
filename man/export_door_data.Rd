@@ -10,7 +10,7 @@ export_door_data(file.format, directory,
   response_matrix = door_default_values("response.matrix"),
   responseRange = door_default_values("door_response_range"),
   unglobalNorm_RM = door_default_values("response.matrix_non.normalized"),
-  weightGlobNorm = door_default_values("weight.globNorm"), all.data = TRUE)
+  weightGlobNorm = door_default_values("door_global_normalization_weights"), all.data = TRUE)
 }
 \arguments{
 \item{file.format}{character string, the format of given file, either ".txt"
@@ -31,7 +31,7 @@ missing, the exported data are saved in current working directory.}
 
 \item{all.data}{logical, if TRUE, export odorant response data and supported
 data "response.matrix", "door_response_range", "response.matrix_non.normalized",
-"response.matrix", "weight.globNorm" and "ORs".}
+"response.matrix", "door_global_normalization_weights" and "ORs".}
 }
 \description{
 export odor response data and supported data

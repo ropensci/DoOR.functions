@@ -10,7 +10,7 @@
 #' @param responseRange the dataframe containing the info about the response
 #'   ranges of all studies (\code{door_response_range})
 #' @param weightGlobNorm the dataframe containing the info about the relative
-#'   weights between receptors (\code{weight.globNorm})
+#'   weights between receptors (\code{door_global_normalization_weights})
 #' @seealso \code{\link{import_new_data}}
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @aliases removeStudy remove_study
@@ -23,7 +23,7 @@
 remove_study <- function(study,
                         receptors = door_default_values('ORs'),
                         responseRange = door_default_values('door_response_range'),
-                        weightGlobNorm = door_default_values('weight.globNorm')) {
+                        weightGlobNorm = door_default_values('door_global_normalization_weights')) {
   if (length(study) > 1)
     stop('Please enter only 1 study at a time.')
 
@@ -46,9 +46,9 @@ remove_study <- function(study,
 
   if(study %in% names(weightGlobNorm)) {
     weightGlobNorm <- weightGlobNorm[, - which(colnames(weightGlobNorm) == study)]
-    assign('weight.globNorm', weightGlobNorm, envir = .GlobalEnv)
-    message(paste('removed',study,'from \'weight.globNorm\''))
+    assign('door_global_normalization_weights', weightGlobNorm, envir = .GlobalEnv)
+    message(paste('removed',study,'from \'door_global_normalization_weights\''))
   } else {
-    warning(paste(study, 'not found in \'weight.globNorm\''))
+    warning(paste(study, 'not found in \'door_global_normalization_weights\''))
   }
 }

@@ -1,6 +1,6 @@
 rebuild_metadata <- function(){
 
-  # rebuild weight.globNorm
+  # rebuild door_global_normalization_weights
   tmp <- load2list()
   datasets <- unlist(sapply(tmp, function(x) colnames(x)[-c(1:door_default_values("num.charColumns"))]))
   datasets <- sort(unique(datasets))
@@ -22,11 +22,11 @@ rebuild_metadata <- function(){
   }
 
   wgn <- as.data.frame(wgn)
-  assign("weight.globNorm", wgn, envir = .GlobalEnv)
+  assign("door_global_normalization_weights", wgn, envir = .GlobalEnv)
 
   assign("door_response_range", rr, envir = .GlobalEnv)
 
-  message("Rebuilt weight.globNorm and door_response_range!")
+  message("Rebuilt door_global_normalization_weights and door_response_range!")
 
   # rebuild door_response_range
 

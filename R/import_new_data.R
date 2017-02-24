@@ -1,6 +1,6 @@
 #' Import new data into DoOR
 #'
-#' Import or update new data and update \code{weight.globNorm},
+#' Import or update new data and update \code{door_global_normalization_weights},
 #' \code{door_response_range}, \code{odor}, \code{ORs} and receptor data frames.
 #'
 #' \code{\link{import_new_data}} is used to import new data into database. If the
@@ -9,7 +9,7 @@
 #' database, then merge the imported data into old data frame. The information
 #' (e.g. response range, how many receptors and odors were measured from given
 #' study) will be integrated into data \code{door_response_range}, \code{odor},
-#' \code{ORs} and \code{weight.globNorm}. If an existing study is imported,
+#' \code{ORs} and \code{door_global_normalization_weights}. If an existing study is imported,
 #' \code{\link{remove_study}} will be run first in order to perform an update.
 #'
 #' @param file.name character string, the name of given file that contains
@@ -43,7 +43,7 @@
 import_new_data <- function(file.name,
                           dataFormat = door_default_values("door_data_format"),
                           odor_data  = door_default_values("odor"),
-                          weightGlobNorm = door_default_values("weight.globNorm"),
+                          weightGlobNorm = door_default_values("door_global_normalization_weights"),
                           responseRange  = door_default_values("door_response_range"),
                           receptors = door_default_values("ORs"),
                           ident     = door_default_values("ident"),
@@ -69,7 +69,7 @@ import_new_data <- function(file.name,
 
     # get updated versions from .globalEnv
     responseRange <- door_response_range
-    weightGlobNorm <- weight.globNorm
+    weightGlobNorm <- door_global_normalization_weights
     warning(paste('The following studies were already existing and were removed prior to integrating the new data:\n', paste(existing, collapse = ', ')))
   }
 
@@ -99,7 +99,7 @@ import_new_data <- function(file.name,
     imported.data[nv] <- round(imported.data[nv],round)
   }
 
-  # update data matrix "weight.globNorm"
+  # update data matrix "door_global_normalization_weights"
   dim_weightGlobNorm <- dim(weightGlobNorm)
   weightGlobNorm[,dim_weightGlobNorm[2]+1] <- NA
   colnames(weightGlobNorm)[dim_weightGlobNorm[2]+1] <- file.name
@@ -114,7 +114,7 @@ import_new_data <- function(file.name,
     seqlastRows 		<- ((dim_weightGlobNorm[1]+1):lastRow)
     weightGlobNorm[seqlastRows,dim_weightGlobNorm[2]] <- NA
     rownames(weightGlobNorm)[seqlastRows] <- newReceptor
-    message(paste(newReceptor, "has been added into 'weight.globNorm'.", collapse = '\n'))
+    message(paste(newReceptor, "has been added into 'door_global_normalization_weights'.", collapse = '\n'))
   }
 
   # update data frame "response range"
@@ -257,7 +257,7 @@ import_new_data <- function(file.name,
            envir = .GlobalEnv)
     message(paste(column.name,"has been imported."))
 
-    # update weight.globNorm
+    # update door_global_normalization_weights
     dim_weightGlobNorm 	<- dim(weightGlobNorm)
     match_receptor 		  <- match(column.name, rownames(weightGlobNorm))
     weightGlobNorm[match_receptor,dim_weightGlobNorm[2]] <- 1
@@ -265,7 +265,7 @@ import_new_data <- function(file.name,
 
   # return the updates back to working enviroment
   assign("door_data_format", dataFormat, envir = .GlobalEnv)
-  assign("weight.globNorm", weightGlobNorm, envir = .GlobalEnv)
+  assign("door_global_normalization_weights", weightGlobNorm, envir = .GlobalEnv)
   assign("door_response_range", responseRange, envir = .GlobalEnv)
   assign("ORs", receptors, envir = .GlobalEnv)
   assign("odor", odor_data, envir = .GlobalEnv)

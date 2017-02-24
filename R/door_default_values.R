@@ -83,11 +83,11 @@ door_default_values <- function(DoOR_default) {
     return(odor.dist)
   } # dplot_al_map.R
 
-  if (DoOR_default == "weight.globNorm") {
-    if (!exists("weight.globNorm")) {
-      data(weight.globNorm)
+  if (DoOR_default == "door_global_normalization_weights") {
+    if (!exists("door_global_normalization_weights")) {
+      data(door_global_normalization_weights)
     }
-    return(weight.globNorm)
+    return(door_global_normalization_weights)
   } # export_door_data.R, import_new_data.R, update_database.R, model_response.R
 
   if (DoOR_default == "door_excluded_data") {
