@@ -31,7 +31,7 @@ load_door_data()
 ```
 
 ## Visualizing odorants _vs_ responding units with `dplot_response_matrix()`{#responseMatrix}
-`dplot_response_matrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `response.matrix_non.normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `reset_sfr(response.matrix, "SFR")`) it will be shown as color-coded heatmap.
+`dplot_response_matrix()` visualizes the DoOR consensus response matrix either as a point matrix with the size of the points relating to the response strength, or as a heatmap, relating color to response strength. The default plot that is used depends on the data we enter: positive values only (like from `response.matrix` or `door_response_matrix_non_normalized`) which are scaled `[0,1]` will by default be plotted as a point-matrix. If we provide data that contains negative values (e.g. data with the spontaneous firing rate set to 0 via `reset_sfr(response.matrix, "SFR")`) it will be shown as color-coded heatmap.
 
 ```{r,fig.width=7.1, fig.height=4}
 dplot_response_matrix(response.matrix[2:50,], tag = "Name", base_size = 8)

@@ -1,7 +1,7 @@
 #' update response matrix
 #'
 #' update the globally \code{response matrix} and the unglobally normalized
-#' response matrix \code{response.matrix_non.normalized} by introducing new
+#' response matrix \code{door_response_matrix_non_normalized} by introducing new
 #' consensus response data of given receptor.
 #'
 #' The merging sequence could be arranged by the routine process (using
@@ -41,13 +41,13 @@
 #' library(DoOR.data)
 #' load_door_data()
 #' # update the entry "Or67b" of data "response.matrix" and
-#' # "response.matrix_non.normalized" with permutations.
+#' # "door_response_matrix_non_normalized" with permutations.
 #'  update_database(receptor="Or67b", permutation = TRUE)
 #' }
 update_database <- function(receptor,
                            permutation = TRUE,
                            perm,
-                           response_matrix_nn = door_default_values("response.matrix_non.normalized"),
+                           response_matrix_nn = door_default_values("door_response_matrix_non_normalized"),
                            response_matrix    = door_default_values("response.matrix"),
                            responseRange      = door_default_values("door_response_range"),
                            weightGlobNorm     = door_default_values("door_global_normalization_weights"),
@@ -117,7 +117,7 @@ update_database <- function(receptor,
     merge <- merge$model.response[,"merged_data"]
   }
 
-  # update  response.matrix_non.normalized
+  # update  door_response_matrix_non_normalized
   merged_data_withInChIKey <- data.frame(InChIKey = da$InChIKey, merged_data = merge)
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix_nn))
   findNA_InChIKey <- which(is.na(matchInChIKey))
@@ -130,8 +130,8 @@ update_database <- function(receptor,
     matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix_nn))
   }
   response_matrix_nn[matchInChIKey, receptor] <- merge
-  assign("response.matrix_non.normalized", response_matrix_nn, envir = .GlobalEnv)
-  message(paste("response.matrix_non.normalized has been updated for",receptor))
+  assign("door_response_matrix_non_normalized", response_matrix_nn, envir = .GlobalEnv)
+  message(paste("door_response_matrix_non_normalized has been updated for",receptor))
 
   # update response.matrix
   name.Stud    <- colnames(da)[recordColumn]

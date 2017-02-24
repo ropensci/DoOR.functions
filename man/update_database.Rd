@@ -5,7 +5,7 @@
 \title{update response matrix}
 \usage{
 update_database(receptor, permutation = TRUE, perm,
-  response_matrix_nn = door_default_values("response.matrix_non.normalized"),
+  response_matrix_nn = door_default_values("door_response_matrix_non_normalized"),
   response_matrix = door_default_values("response.matrix"),
   responseRange = door_default_values("door_response_range"),
   weightGlobNorm = door_default_values("door_global_normalization_weights"),
@@ -48,7 +48,7 @@ sets.}
 }
 \description{
 update the globally \code{response matrix} and the unglobally normalized
-response matrix \code{response.matrix_non.normalized} by introducing new
+response matrix \code{door_response_matrix_non_normalized} by introducing new
 consensus response data of given receptor.
 }
 \details{
@@ -63,7 +63,7 @@ with the highest correlation.
 library(DoOR.data)
 load_door_data()
 # update the entry "Or67b" of data "response.matrix" and
-# "response.matrix_non.normalized" with permutations.
+# "door_response_matrix_non_normalized" with permutations.
  update_database(receptor="Or67b", permutation = TRUE)
 }
 }

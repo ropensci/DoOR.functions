@@ -20,7 +20,7 @@ dplot_al_map(InChIKey,
 \item{InChIKey}{InChIKey specifying the odorant to plot}
 
 \item{response_matrix}{the input data (e.g. response.matrix or
-response.matrix_non.normalized)}
+door_response_matrix_non_normalized)}
 
 \item{odor_data}{data frame, contains the odorant information.}
 

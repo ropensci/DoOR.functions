@@ -9,7 +9,7 @@ export_door_data(file.format, directory,
   odorantReceptors = door_default_values("ORs"),
   response_matrix = door_default_values("response.matrix"),
   responseRange = door_default_values("door_response_range"),
-  unglobalNorm_RM = door_default_values("response.matrix_non.normalized"),
+  unglobalNorm_RM = door_default_values("door_response_matrix_non_normalized"),
   weightGlobNorm = door_default_values("door_global_normalization_weights"), all.data = TRUE)
 }
 \arguments{
@@ -30,7 +30,7 @@ missing, the exported data are saved in current working directory.}
 \item{weightGlobNorm}{data frame, weight matrix for global normalizazion}
 
 \item{all.data}{logical, if TRUE, export odorant response data and supported
-data "response.matrix", "door_response_range", "response.matrix_non.normalized",
+data "response.matrix", "door_response_range", "door_response_matrix_non_normalized",
 "response.matrix", "door_global_normalization_weights" and "ORs".}
 }
 \description{

@@ -72,8 +72,8 @@ create_door_database <- function(tag                = door_default_values("tag")
   assign("response.matrix", frame_data, envir = .GlobalEnv)
   message("response.matrix has been created")
 
-  assign("response.matrix_non.normalized", frame_data_nn, envir = .GlobalEnv)
-  message("response.matrix_non.normalized has been created")
+  assign("door_response_matrix_non_normalized", frame_data_nn, envir = .GlobalEnv)
+  message("door_response_matrix_non_normalized has been created")
 
   assign("door_excluded_data", door_excluded_data, envir = .GlobalEnv)
   message("door_excluded_data has been created")

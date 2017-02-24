@@ -126,11 +126,11 @@ door_default_values <- function(DoOR_default) {
     return(door_response_range)
   } # export_door_data.R, get_responses.R, import_new_data.R, update_database.R, model_response.R
 
-  if (DoOR_default == "response.matrix_non.normalized") {
-    if (!exists("response.matrix_non.normalized")) {
-      data(response.matrix_non.normalized)
+  if (DoOR_default == "door_response_matrix_non_normalized") {
+    if (!exists("door_response_matrix_non_normalized")) {
+      data(door_response_matrix_non_normalized)
     }
-    return(response.matrix_non.normalized)
+    return(door_response_matrix_non_normalized)
   } # export_door_data.R
 
 }

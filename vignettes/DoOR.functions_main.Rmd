@@ -39,7 +39,7 @@ load_door_data()
 
 
 # Modifying, building and updating DoOR{#building}
-DoOR comes with all the original data sets as well as with a pre-computed version of the consensus matrix `response.matrix` where all data was integrated using the DoOR merging algorithms (see paper for details on how the algorithm works). The values in `response.matrix` are globally normalized with values scaled `[0,1]`. `response.matrix_non.normalized` is a version of the consensus data that is not globally normalized meaning that responses are scaled `[0,1]` within each _responding unit_ (receptor, sensory neuron, glomerulus...).
+DoOR comes with all the original data sets as well as with a pre-computed version of the consensus matrix `response.matrix` where all data was integrated using the DoOR merging algorithms (see paper for details on how the algorithm works). The values in `response.matrix` are globally normalized with values scaled `[0,1]`. `door_response_matrix_non_normalized` is a version of the consensus data that is not globally normalized meaning that responses are scaled `[0,1]` within each _responding unit_ (receptor, sensory neuron, glomerulus...).
 
 
 ## Importing new data with `import_new_data()`{#import_new_data}

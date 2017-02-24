@@ -4,7 +4,7 @@
 #'
 #' @param InChIKey InChIKey specifying the odorant to plot
 #' @param response_matrix the input data (e.g. response.matrix or
-#'   response.matrix_non.normalized)
+#'   door_response_matrix_non_normalized)
 #' @param odor_data data frame, contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
 #' @param tag the labels to plot on top of the glomeruli (one of the following
