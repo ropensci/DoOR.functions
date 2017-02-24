@@ -5,7 +5,7 @@
 \alias{import_new_data}
 \title{Import new data into DoOR}
 \usage{
-import_new_data(file.name, dataFormat = door_default_values("data.format"),
+import_new_data(file.name, dataFormat = door_default_values("door_data_format"),
   odor_data = door_default_values("odor"),
   weightGlobNorm = door_default_values("weight.globNorm"),
   responseRange = door_default_values("response.range"),

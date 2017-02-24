@@ -62,11 +62,11 @@ door_default_values <- function(DoOR_default) {
     return(door_AL_map)
   } # dplot_al_map.R
 
-  if (DoOR_default == "data.format") {
-    if (!exists("data.format")) {
-      data(data.format)
+  if (DoOR_default == "door_data_format") {
+    if (!exists("door_data_format")) {
+      data(door_data_format)
     }
-    return(data.format)
+    return(door_data_format)
   } # import_new_data.R
 
   if (DoOR_default == "odor") {

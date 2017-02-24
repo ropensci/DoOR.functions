@@ -41,7 +41,7 @@
 #' }
 #'
 import_new_data <- function(file.name,
-                          dataFormat = door_default_values("data.format"),
+                          dataFormat = door_default_values("door_data_format"),
                           odor_data  = door_default_values("odor"),
                           weightGlobNorm = door_default_values("weight.globNorm"),
                           responseRange  = door_default_values("response.range"),
@@ -126,7 +126,7 @@ import_new_data <- function(file.name,
 
   responseRange <- rbind(responseRange, responseRange_new)
 
-  # update data frame "odor" and data.format if new odor is available.
+  # update data frame "odor" and door_data_format if new odor is available.
   matchtoOdor <- match(imported.data[,ident], odor_data[,ident])
   whichNA     <- which(is.na(matchtoOdor))
 
@@ -134,15 +134,15 @@ import_new_data <- function(file.name,
   stats$newOdors     <- length(whichNA)
 
   if (!identical(odor_data[1:5], dataFormat))
-    stop("The odorant lists of data 'odor' and 'data.format' are not identical. Please check them again.")
+    stop("The odorant lists of data 'odor' and 'door_data_format' are not identical. Please check them again.")
   if (is.na(whichNA[1])) {
     message("There were no new odors imported.")
   } else {
     ##########
-    # add new odor identifiers to 'odor' and 'data.format' --------------------
+    # add new odor identifiers to 'odor' and 'door_data_format' --------------------
     ##########
     newOdor <- as.character(imported.data[whichNA, "Name"])
-    message(paste(newOdor, " - is a new odor. Data frames 'odor' and 'data.format' will be updated.", collapse='\n'))
+    message(paste(newOdor, " - is a new odor. Data frames 'odor' and 'door_data_format' will be updated.", collapse='\n'))
 
     dim_odor 	<- dim(odor_data)
 
@@ -264,7 +264,7 @@ import_new_data <- function(file.name,
   } # END for (i in 1:n)
 
   # return the updates back to working enviroment
-  assign("data.format", dataFormat, envir = .GlobalEnv)
+  assign("door_data_format", dataFormat, envir = .GlobalEnv)
   assign("weight.globNorm", weightGlobNorm, envir = .GlobalEnv)
   assign("response.range", responseRange, envir = .GlobalEnv)
   assign("ORs", receptors, envir = .GlobalEnv)

@@ -21,5 +21,5 @@ update_odorinfo <- function() {
     }
     assign(i, tmp, envir = .GlobalEnv)
   }
-  assign('data.format', odor[1:5], envir = .GlobalEnv)
+  assign('door_data_format', odor[1:5], envir = .GlobalEnv)
 }
