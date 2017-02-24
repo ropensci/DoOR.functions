@@ -62,7 +62,7 @@ head(bp$back_projected)
 
 
 ## ------------------------------------------------------------------------
-rm.SFRreset <- reset_sfr(response.matrix, "SFR")
+rm.SFRreset <- reset_sfr(door_response_matrix, "SFR")
 
 sparse(x = rm.SFRreset[,"Or69a"], method = "ltk")
 sparse(x = rm.SFRreset[,"Or69a"], method = "lts")

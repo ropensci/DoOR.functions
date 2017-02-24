@@ -15,8 +15,8 @@
 #' @param unglobalNorm_RM data matrix, an unnormalized responses matrix
 #' @param weightGlobNorm data frame, weight matrix for global normalizazion
 #' @param all.data logical, if TRUE, export odorant response data and supported
-#' data "response.matrix", "door_response_range", "door_response_matrix_non_normalized",
-#' "response.matrix", "door_global_normalization_weights" and "ORs".
+#' data "door_response_matrix", "door_response_range", "door_response_matrix_non_normalized",
+#' "door_response_matrix", "door_global_normalization_weights" and "ORs".
 #' @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
 #' @aliases export_door_data exportData
 #' @export
@@ -32,7 +32,7 @@
 export_door_data <-
   function(file.format, directory,
            odorantReceptors = door_default_values("ORs"),
-           response_matrix = door_default_values("response.matrix"),
+           response_matrix = door_default_values("door_response_matrix"),
            responseRange = door_default_values("door_response_range"),
            unglobalNorm_RM = door_default_values("door_response_matrix_non_normalized"),
            weightGlobNorm = door_default_values("door_global_normalization_weights"),
@@ -51,17 +51,17 @@ export_door_data <-
 
       if (file.format == ".txt")
       {
-        write.table(response_matrix, paste("response.matrix",file.format,sep="") )
+        write.table(response_matrix, paste("door_response_matrix",file.format,sep="") )
         write.table(responseRange, paste("door_response_range",file.format,sep="") )
         write.table(unglobalNorm_RM, paste("door_response_matrix_non_normalized",file.format,sep="") )
         write.table(weightGlobNorm, paste("door_global_normalization_weights",file.format,sep="") )
         write.table(odorantReceptors, paste("ORs",file.format,sep="") )
       }
       if (file.format == ".csv") {
-        write.csv(response_matrix, paste("response.matrix",file.format,sep="") )
+        write.csv(response_matrix, paste("door_response_matrix",file.format,sep="") )
         write.csv(responseRange, paste("door_response_range",file.format,sep="") )
         write.csv(unglobalNorm_RM, paste("door_response_matrix_non_normalized",file.format,sep="") )
-        write.csv(response_matrix, paste("response.matrix",file.format,sep="") )
+        write.csv(response_matrix, paste("door_response_matrix",file.format,sep="") )
         write.csv(weightGlobNorm, paste("door_global_normalization_weights",file.format,sep="") )
         write.csv(odorantReceptors, paste("ORs",file.format,sep="") )
       }

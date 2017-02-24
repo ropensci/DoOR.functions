@@ -6,7 +6,7 @@
 \title{Find normalised receptor responses}
 \usage{
 get_normalized_responses(odors, zero = door_default_values("zero"),
-  response_matrix = door_default_values("response.matrix"), round = 3,
+  response_matrix = door_default_values("door_response_matrix"), round = 3,
   na.rm = FALSE)
 }
 \arguments{
@@ -15,7 +15,7 @@ get_normalized_responses(odors, zero = door_default_values("zero"),
 \item{zero}{InChIKey of background that should be set to zero. The default is
 "SFR", i.e. the spontaneous firing rate.}
 
-\item{response_matrix}{a data frame, as e.g. "response.matrix" that is loaded
+\item{response_matrix}{a data frame, as e.g. "door_response_matrix" that is loaded
 by \code{\link{model_response}}. It is also possible to create this frame manually
 using \code{\link{model_response}}.}
 
@@ -33,8 +33,8 @@ library(DoOR.data)
 odors <- c("MLFHJEHSLIIPHL-UHFFFAOYSA-N",
            "OBNCKNCVKJNDBV-UHFFFAOYSA-N",
            "IKHGUXGNUITLKF-UHFFFAOYSA-N")
-data(response.matrix)
-result <- get_normalized_responses(odors, response_matrix = response.matrix)
+data(door_response_matrix)
+result <- get_normalized_responses(odors, response_matrix = door_response_matrix)
 
 }
 \author{

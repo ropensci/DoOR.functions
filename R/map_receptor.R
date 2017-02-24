@@ -24,7 +24,7 @@
 #'   data <- na.omit(data)
 #'   map_receptor(data = data)
 map_receptor <- function(data,
-                        response_matrix = door_default_values("response.matrix"),
+                        response_matrix = door_default_values("door_response_matrix"),
                         sub,
                         threshold.p,
                         threshold.cor,

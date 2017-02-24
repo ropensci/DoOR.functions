@@ -5,7 +5,7 @@
 #' @param receptor character, a receptor name (one of ORS$OR)
 #' @param odorant character, an odorant name (InChIKey)
 #' @param response.vector numerical vector, a vector with responses, if empty
-#'   this is taken from response.matrix
+#'   this is taken from door_response_matrix
 #' @param response_matrix DoOR response matrix, response vector will be taken
 #'   from here, not needed if response.vector is given
 #' @param odor_data data frame, contains the odorant information.
@@ -26,13 +26,13 @@
 #'
 #' @examples
 #' library(DoOR.data)
-#' data(response.matrix)
+#' data(door_response_matrix)
 #' data(odor)
 #'
 #' dplot_tuningCurve(odorant = odor$InChIKey[2])
 #' dplot_tuningCurve(receptor = "Or22a")
 #'
-#' range <- range(reset_sfr(response.matrix, "SFR"), na.rm = TRUE)
+#' range <- range(reset_sfr(door_response_matrix, "SFR"), na.rm = TRUE)
 #' dplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
 #'
 #' dplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
@@ -42,7 +42,7 @@
 dplot_tuningCurve <- function(receptor,
                                  odorant,
                                  response.vector,
-                                 response_matrix = door_default_values("response.matrix"),
+                                 response_matrix = door_default_values("door_response_matrix"),
                                  odor_data = door_default_values("odor"),
                                  zero = door_default_values("zero"),
                                  fill.receptor = door_default_values("color.receptor"),

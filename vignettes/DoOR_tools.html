@@ -217,7 +217,7 @@ bp &lt;-<span class="st"> </span><span class="kw">back_project</span>(template, 
 <div id="quantifying-tuning-curves-with-sparse" class="section level2">
 <h2>Quantifying tuning curves with <code id="sparse">sparse()</code></h2>
 <p>The width of a tuning curve, i.e. for example to how many odorants a receptor shows strong responses, can be quantified using different sparseness measures. We implemented kurtosis<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and sparseness<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> in <code>sparse()</code>. A high kurtosis or sparseness value indicates a narrow tuning curve (see also <code>dplot_tuningCurve()</code> in the <a href="DoOR_visualizations.html#tuningCurve">DoOR visualization vignette</a>). While kurtosis is able to deal with negative values, sparseness can’t and thus all values need to be be transformed to absolute values first. Sparseness scales between 0 and 1, kurtosis between -∞ and ∞, a kurtisis of 0 corresponds to the Gaussian distribution.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rm.SFRreset &lt;-<span class="st"> </span><span class="kw">reset_sfr</span>(response.matrix, <span class="st">&quot;SFR&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">rm.SFRreset &lt;-<span class="st"> </span><span class="kw">reset_sfr</span>(door_response_matrix, <span class="st">&quot;SFR&quot;</span>)
 
 <span class="kw">sparse</span>(<span class="dt">x =</span> rm.SFRreset[,<span class="st">&quot;Or69a&quot;</span>], <span class="dt">method =</span> <span class="st">&quot;ltk&quot;</span>)</code></pre>
 <pre><code>## [1] -0.2615938</code></pre>

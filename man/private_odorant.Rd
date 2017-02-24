@@ -6,7 +6,7 @@
 \title{private_odorant}
 \usage{
 private_odorant(receptor, sensillum = FALSE,
-  response_matrix = door_default_values("response.matrix"),
+  response_matrix = door_default_values("door_response_matrix"),
   DoOR_mappings = door_default_values("DoOR_mappings"),
   zero = door_default_values("zero"), nshow = 5, tag)
 }

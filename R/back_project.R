@@ -32,7 +32,7 @@
 #'
 #' @examples
 #' data(Or22a)
-#' data(response.matrix)
+#' data(door_response_matrix)
 #' template.data <- data.frame(odorants = Or22a$InChIKey,
 #'                             responses = Or22a$Hallem.2004.EN)
 #' bp <- back_project(template.data, "Or22a")
@@ -45,7 +45,7 @@
 #'
 back_project <- function(template.data,
                         responding.unit,
-                        response_matrix = door_default_values("response.matrix")) {
+                        response_matrix = door_default_values("door_response_matrix")) {
 
   template.data$odorants <- as.character(template.data$odorants)
   source.data <- data.frame(odorants = rownames(response_matrix), cons.responses = response_matrix[,responding.unit], stringsAsFactors = F)

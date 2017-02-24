@@ -21,14 +21,14 @@
 #' library(DoOR.data)
 #' data(Or22a)
 #' data(door_response_range)
-#' data(response.matrix)
+#' data(door_response_matrix)
 #'
 #' dplot_compare_profiles(x = Or22a, y = Or22a,
 #'                          by.x = "Hallem.2006.EN",
 #'                          by.y = "Pelz.2006.AntEC50")
 #'
-#' dplot_compare_profiles(x = cbind(response.matrix, InChIKey = rownames(response.matrix)),
-#'                          y = cbind(response.matrix, InChIKey = rownames(response.matrix)),
+#' dplot_compare_profiles(x = cbind(door_response_matrix, InChIKey = rownames(door_response_matrix)),
+#'                          y = cbind(door_response_matrix, InChIKey = rownames(door_response_matrix)),
 #'                          by.x = "Or22a", by.y = "Or10a")
 #'
 dplot_compare_profiles <- function(x, y,

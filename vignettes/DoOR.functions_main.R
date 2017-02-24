@@ -41,7 +41,7 @@ trans_id(odorants, from = "Name", to = "InChI")
 
 
 ## ------------------------------------------------------------------------
-rm_sfrReset <- reset_sfr(x = response.matrix, sfr = "SFR")
+rm_sfrReset <- reset_sfr(x = door_response_matrix, sfr = "SFR")
 knitr::kable(rm_sfrReset[1:10,6:15], digits = 2)
 
 ## ------------------------------------------------------------------------

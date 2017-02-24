@@ -3,7 +3,7 @@
 #' Plot an antennal lobe map with color coded odorant responses.
 #'
 #' @param InChIKey InChIKey specifying the odorant to plot
-#' @param response_matrix the input data (e.g. response.matrix or
+#' @param response_matrix the input data (e.g. door_response_matrix or
 #'   door_response_matrix_non_normalized)
 #' @param odor_data data frame, contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
@@ -48,7 +48,7 @@
 #' ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)
 #' }
 dplot_al_map <- function(InChIKey,
-                           response_matrix = door_default_values("response.matrix"),
+                           response_matrix = door_default_values("door_response_matrix"),
                            odor_data = door_default_values("odor"),
                            DoOR_mappings = door_default_values("DoOR_mappings"),
                            zero = door_default_values("zero"),
@@ -66,8 +66,8 @@ dplot_al_map <- function(InChIKey,
     stop("grid is required for AL map plotting, please install via install.packages('grid')", call. = FALSE)
 
   if(missing(limits)) {
-    response.matrix.SFRreset <- apply(response_matrix, 2, function(x) reset_sfr(x,x[zero]))
-    limits <- range(response.matrix.SFRreset, na.rm=TRUE)
+    door_response_matrix_SFRreset <- apply(response_matrix, 2, function(x) reset_sfr(x,x[zero]))
+    limits <- range(door_response_matrix_SFRreset, na.rm=TRUE)
   }
 
   response.data <- get_normalized_responses(InChIKey, zero = zero, response_matrix = response_matrix)

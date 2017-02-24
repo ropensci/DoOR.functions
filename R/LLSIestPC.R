@@ -35,7 +35,7 @@
 LLSIestPC <-
   function(InChIKey,
            receptor,
-           response_matrix = door_default_values("response.matrix"),
+           response_matrix = door_default_values("door_response_matrix"),
            nodor = 3) {
 
     ### subfunction

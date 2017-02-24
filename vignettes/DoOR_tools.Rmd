@@ -142,7 +142,7 @@ All the yellow lines in the first plot represent odorant responses that were not
 The width of a tuning curve, i.e. for example to how many odorants a receptor shows strong responses, can be quantified using different sparseness measures. We implemented kurtosis[^1] and sparseness[^2] in `sparse()`. A high kurtosis or sparseness value indicates a narrow tuning curve (see also `dplot_tuningCurve()` in the [DoOR visualization vignette](DoOR_visualizations.html#tuningCurve)). While kurtosis is able to deal with negative values, sparseness can't and thus all values need to be be transformed to absolute values first. Sparseness scales between 0 and 1, kurtosis between -∞ and ∞, a kurtisis of 0 corresponds to the Gaussian distribution.
 
 ```{r}
-rm.SFRreset <- reset_sfr(response.matrix, "SFR")
+rm.SFRreset <- reset_sfr(door_response_matrix, "SFR")
 
 sparse(x = rm.SFRreset[,"Or69a"], method = "ltk")
 sparse(x = rm.SFRreset[,"Or69a"], method = "lts")

@@ -21,7 +21,7 @@
 #' dplot_across_ru(odor$InChIKey[4:10])
 #'
 dplot_across_ru <- function(odorant,
-                                     response_matrix = door_default_values("response.matrix"),
+                                     response_matrix = door_default_values("door_response_matrix"),
                                      odor_data = door_default_values("odor"),
                                      zero = door_default_values("zero"),
                                      tag  = "Name",

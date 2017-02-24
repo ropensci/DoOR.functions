@@ -6,16 +6,16 @@
 \title{dplot_response_profile}
 \usage{
 dplot_response_profile(receptor,
-  response_matrix = door_default_values("response.matrix"),
+  response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"), tag = door_default_values("tag"),
   colored = TRUE, colors = door_default_values("colors"), limits,
   zero = door_default_values("zero"),
   scalebar = door_default_values("scalebar"), base_size = 12)
 }
 \arguments{
-\item{receptor}{character, receptor name, any of colnames(response.matrix)}
+\item{receptor}{character, receptor name, any of colnames(door_response_matrix)}
 
-\item{response_matrix}{a DoOR response.matrix}
+\item{response_matrix}{a DoOR door_response_matrix}
 
 \item{odor_data}{data frame, contains the odorant information.}
 
@@ -44,9 +44,9 @@ create a barplot of a DoOR response profile
 }
 \examples{
 library(DoOR.data)
-data(response.matrix)
-dplot_response_profile("Or22a", response.matrix)
-dplot_response_profile("Or22a", response.matrix, tag = "Name")
+data(door_response_matrix)
+dplot_response_profile("Or22a", door_response_matrix)
+dplot_response_profile("Or22a", door_response_matrix, tag = "Name")
 }
 \author{
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>

@@ -5,7 +5,7 @@
 \alias{map_receptor}
 \title{map_receptor}
 \usage{
-map_receptor(data, response_matrix = door_default_values("response.matrix"),
+map_receptor(data, response_matrix = door_default_values("door_response_matrix"),
   sub, threshold.p, threshold.cor, nshow)
 }
 \arguments{

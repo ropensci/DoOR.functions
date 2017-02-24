@@ -12,8 +12,8 @@
 #' @examples
 #'
 #' library(DoOR.data)
-#' data(response.matrix)
-#' response.matrix.SFRreset <- reset_sfr(response.matrix, "SFR")
+#' data(door_response_matrix)
+#' door_response_matrix_SFRreset <- reset_sfr(door_response_matrix, "SFR")
 #'
 reset_sfr <- function(x, sfr) {
   if(is.numeric(x)) {

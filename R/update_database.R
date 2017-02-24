@@ -40,7 +40,7 @@
 #' \dontrun{
 #' library(DoOR.data)
 #' load_door_data()
-#' # update the entry "Or67b" of data "response.matrix" and
+#' # update the entry "Or67b" of data "door_response_matrix" and
 #' # "door_response_matrix_non_normalized" with permutations.
 #'  update_database(receptor="Or67b", permutation = TRUE)
 #' }
@@ -48,7 +48,7 @@ update_database <- function(receptor,
                            permutation = TRUE,
                            perm,
                            response_matrix_nn = door_default_values("door_response_matrix_non_normalized"),
-                           response_matrix    = door_default_values("response.matrix"),
+                           response_matrix    = door_default_values("door_response_matrix"),
                            responseRange      = door_default_values("door_response_range"),
                            weightGlobNorm     = door_default_values("door_global_normalization_weights"),
                            select.MDValue     = door_default_values("select.MDValue"),
@@ -133,7 +133,7 @@ update_database <- function(receptor,
   assign("door_response_matrix_non_normalized", response_matrix_nn, envir = .GlobalEnv)
   message(paste("door_response_matrix_non_normalized has been updated for",receptor))
 
-  # update response.matrix
+  # update door_response_matrix
   name.Stud    <- colnames(da)[recordColumn]
   mp_orx       <- match(colnames(da)[recordColumn], responseRange[,"study"])
   Rmax         <- apply(as.matrix(da[,recordColumn]),2,function(x) max(range(x,na.rm=TRUE)))
@@ -143,10 +143,10 @@ update_database <- function(receptor,
   matchInChIKey <- match(merged_data_withInChIKey$InChIKey,rownames(response_matrix))
   response_matrix[matchInChIKey, receptor] <- merged_data
 
-  assign("response.matrix", response_matrix, envir = .GlobalEnv)
-  message(paste("response.matrix has been updated for",receptor))
+  assign("door_response_matrix", response_matrix, envir = .GlobalEnv)
+  message(paste("door_response_matrix has been updated for",receptor))
 
-  # update response.matrix.excluded
+  # update door_response_matrix.excluded
   door_excluded_data$excluded <- as.character(door_excluded_data$excluded)
   door_excluded_data[door_excluded_data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
   assign("door_excluded_data", door_excluded_data, envir = .GlobalEnv)

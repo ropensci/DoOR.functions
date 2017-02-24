@@ -6,7 +6,7 @@
 \title{dplot_al_map}
 \usage{
 dplot_al_map(InChIKey,
-  response_matrix = door_default_values("response.matrix"),
+  response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
   DoOR_mappings = door_default_values("DoOR_mappings"),
   zero = door_default_values("zero"),
@@ -19,7 +19,7 @@ dplot_al_map(InChIKey,
 \arguments{
 \item{InChIKey}{InChIKey specifying the odorant to plot}
 
-\item{response_matrix}{the input data (e.g. response.matrix or
+\item{response_matrix}{the input data (e.g. door_response_matrix or
 door_response_matrix_non_normalized)}
 
 \item{odor_data}{data frame, contains the odorant information.}

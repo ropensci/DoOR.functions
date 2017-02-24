@@ -2,7 +2,7 @@
 #
 # prepare odor response data for plotting via ggplot2
 #
-# @param data data frame containing either subsets of response.matrix or identifier and data columns (e.g. Or22a)
+# @param data data frame containing either subsets of door_response_matrix or identifier and data columns (e.g. Or22a)
 # @param ident chemical identifier, if empty rownames of data will be used
 # @param datasets column names of data sets to use, important when using response data (e.g. Or22a), if empty all columns will be used
 # @param na.rm should NAs be removed
@@ -12,9 +12,9 @@
 # @examples
 # library(DoOR.data)
 # data(Or22a)
-# data(response.matrix)
+# data(door_response_matrix)
 # head(door_melt(Or22a, datasets = c("Hallem.2004.WT", "Pelz.2006.AntEC50")))
-# head(door_melt(response.matrix[1:100,], na.rm = TRUE))
+# head(door_melt(door_response_matrix[1:100,], na.rm = TRUE))
 #' @importFrom stats na.omit
 door_melt <- function(data, datasets, ident, na.rm = FALSE) {
   if(missing(datasets))

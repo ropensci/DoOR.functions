@@ -2,7 +2,7 @@
 #'
 #' plot DoOR responses as a point matrix
 #'
-#' @param data a subset of e.g. response.matrix
+#' @param data a subset of e.g. door_response_matrix
 #' @param odor_data data frame, contains the odorant information.
 #' @param tag the chemical identfier to plot (one of colnames(odor))
 #' @param colors the colors to use if negative values are supplied (range of 5
@@ -21,11 +21,11 @@
 #' @aliases dplot_responseMatrix dplot_response_matrix
 #' @examples
 #' library(DoOR.data)
-#' data(response.matrix)
-#' tmp <- reset_sfr(response.matrix, "SFR")
+#' data(door_response_matrix)
+#' tmp <- reset_sfr(door_response_matrix, "SFR")
 #' dplot_response_matrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
-#' dplot_response_matrix(response.matrix[10:50,], tag = "Name",
-#'                         limits = range(response.matrix, na.rm = TRUE))
+#' dplot_response_matrix(door_response_matrix[10:50,], tag = "Name",
+#'                         limits = range(door_response_matrix, na.rm = TRUE))
 #'
 dplot_response_matrix <- function(data,
                                  odor_data = door_default_values("odor"),

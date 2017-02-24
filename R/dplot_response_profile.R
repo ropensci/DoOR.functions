@@ -2,9 +2,9 @@
 #'
 #' create a barplot of a DoOR response profile
 #'
-#' @param response_matrix a DoOR response.matrix
+#' @param response_matrix a DoOR door_response_matrix
 #' @param odor_data data frame, contains the odorant information.
-#' @param receptor character, receptor name, any of colnames(response.matrix)
+#' @param receptor character, receptor name, any of colnames(door_response_matrix)
 #' @param tag character, chemical identifier for annotation
 #' @param colored logical, color code the bars according to the response value?
 #' @param colors character vector, a vector of 5 colors (2 for values < 0, 1
@@ -23,11 +23,11 @@
 #' @aliases dplot_responseProfile dplot_response_profile
 #' @examples
 #' library(DoOR.data)
-#' data(response.matrix)
-#' dplot_response_profile("Or22a", response.matrix)
-#' dplot_response_profile("Or22a", response.matrix, tag = "Name")
+#' data(door_response_matrix)
+#' dplot_response_profile("Or22a", door_response_matrix)
+#' dplot_response_profile("Or22a", door_response_matrix, tag = "Name")
 dplot_response_profile <- function(receptor,
-                                     response_matrix = door_default_values("response.matrix"),
+                                     response_matrix = door_default_values("door_response_matrix"),
                                      odor_data = door_default_values("odor"),
                                      tag = door_default_values("tag"),
                                      colored = TRUE,

@@ -112,11 +112,11 @@ door_default_values <- function(DoOR_default) {
     return(ORs)
   } # export_door_data.R, load_door_data.R, load2list.R, import_new_data.R
 
-  if (DoOR_default == "response.matrix") {
-    if (!exists("response.matrix")) {
-      data(response.matrix)
+  if (DoOR_default == "door_response_matrix") {
+    if (!exists("door_response_matrix")) {
+      data(door_response_matrix)
     }
-    return(response.matrix)
+    return(door_response_matrix)
   } # export_door_data.R, get_normalized_responses.R
 
   if (DoOR_default == "door_response_range") {

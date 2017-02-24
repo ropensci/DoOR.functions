@@ -11,7 +11,7 @@ dplot_response_matrix(data, odor_data = door_default_values("odor"),
   base_size = 12)
 }
 \arguments{
-\item{data}{a subset of e.g. response.matrix}
+\item{data}{a subset of e.g. door_response_matrix}
 
 \item{odor_data}{data frame, contains the odorant information.}
 
@@ -41,11 +41,11 @@ plot DoOR responses as a point matrix
 }
 \examples{
 library(DoOR.data)
-data(response.matrix)
-tmp <- reset_sfr(response.matrix, "SFR")
+data(door_response_matrix)
+tmp <- reset_sfr(door_response_matrix, "SFR")
 dplot_response_matrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
-dplot_response_matrix(response.matrix[10:50,], tag = "Name",
-                        limits = range(response.matrix, na.rm = TRUE))
+dplot_response_matrix(door_response_matrix[10:50,], tag = "Name",
+                        limits = range(door_response_matrix, na.rm = TRUE))
 
 }
 \author{

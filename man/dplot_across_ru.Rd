@@ -6,7 +6,7 @@
 \title{dplot_across_ru}
 \usage{
 dplot_across_ru(odorant,
-  response_matrix = door_default_values("response.matrix"),
+  response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
   zero = door_default_values("zero"), tag = "Name", limits,
   base_size = 12)

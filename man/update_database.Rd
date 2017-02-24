@@ -6,7 +6,7 @@
 \usage{
 update_database(receptor, permutation = TRUE, perm,
   response_matrix_nn = door_default_values("door_response_matrix_non_normalized"),
-  response_matrix = door_default_values("response.matrix"),
+  response_matrix = door_default_values("door_response_matrix"),
   responseRange = door_default_values("door_response_range"),
   weightGlobNorm = door_default_values("door_global_normalization_weights"),
   select.MDValue = door_default_values("select.MDValue"), strict = TRUE,
@@ -62,7 +62,7 @@ with the highest correlation.
 \dontrun{
 library(DoOR.data)
 load_door_data()
-# update the entry "Or67b" of data "response.matrix" and
+# update the entry "Or67b" of data "door_response_matrix" and
 # "door_response_matrix_non_normalized" with permutations.
  update_database(receptor="Or67b", permutation = TRUE)
 }

@@ -21,8 +21,8 @@ Performs a simple subtraction of the SFR value.
 \examples{
 
 library(DoOR.data)
-data(response.matrix)
-response.matrix.SFRreset <- reset_sfr(response.matrix, "SFR")
+data(door_response_matrix)
+door_response_matrix_SFRreset <- reset_sfr(door_response_matrix, "SFR")
 
 }
 \author{

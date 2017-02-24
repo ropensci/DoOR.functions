@@ -60,7 +60,7 @@ create_door_database <- function(tag                = door_default_values("tag")
       merged.odors       <- as.vector(merged$model.response[,tag])
       match_odorsTOframe <- match(merged.odors, rownames(frame_data))
       frame_data[match_odorsTOframe, i] <- merged.responses
-      # update response.matrix.excluded
+      # update door_response_matrix.excluded
       if (length(excluded > 0))
         door_excluded_data[door_excluded_data$OR == i, "excluded"] <- paste(excluded, collapse = ", ")
 
@@ -69,8 +69,8 @@ create_door_database <- function(tag                = door_default_values("tag")
   }
   frame_data_nn <- apply(frame_data, 2, door_norm)
 
-  assign("response.matrix", frame_data, envir = .GlobalEnv)
-  message("response.matrix has been created")
+  assign("door_response_matrix", frame_data, envir = .GlobalEnv)
+  message("door_response_matrix has been created")
 
   assign("door_response_matrix_non_normalized", frame_data_nn, envir = .GlobalEnv)
   message("door_response_matrix_non_normalized has been created")

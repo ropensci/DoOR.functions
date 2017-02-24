@@ -5,7 +5,7 @@
 \title{back_project}
 \usage{
 back_project(template.data, responding.unit,
-  response_matrix = door_default_values("response.matrix"))
+  response_matrix = door_default_values("door_response_matrix"))
 }
 \arguments{
 \item{template.data}{data frame, the data that provides the scale to
@@ -39,7 +39,7 @@ via a linear fit.  }
 }
 \examples{
 data(Or22a)
-data(response.matrix)
+data(door_response_matrix)
 template.data <- data.frame(odorants = Or22a$InChIKey,
                             responses = Or22a$Hallem.2004.EN)
 bp <- back_project(template.data, "Or22a")

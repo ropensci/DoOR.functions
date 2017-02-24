@@ -20,8 +20,8 @@
 #' @examples
 #' \dontrun{
 #' library(DoOR.data)
-#' data(response.matrix)
-#' subset <- response.matrix[1:100, 11:30]
+#' data(door_response_matrix)
+#' subset <- door_response_matrix[1:100, 11:30]
 #' est.data <- estimate_missing_value(data = subset, nodor = 6)
 #' }
 estimate_missing_value <-

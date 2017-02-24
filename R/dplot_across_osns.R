@@ -37,7 +37,7 @@
 #' dplot_across_osns(odorants, plot.type = 2)
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 dplot_across_osns <- function(odorants,
-                                response_matrix = door_default_values("response.matrix"),
+                                response_matrix = door_default_values("door_response_matrix"),
                                 odor_data = door_default_values("odor"),
                                 DoOR_mappings = door_default_values("DoOR_mappings"),
                                 zero = door_default_values("zero"),

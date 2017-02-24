@@ -5,10 +5,10 @@ library(DoOR.data)
 load_door_data()
 
 ## ----fig.width=7.1, fig.height=4-----------------------------------------
-dplot_response_matrix(response.matrix[2:50,], tag = "Name", base_size = 8)
+dplot_response_matrix(door_response_matrix[2:50,], tag = "Name", base_size = 8)
 
 ## ----fig.width=7.1, fig.height=4-----------------------------------------
-dplot_response_matrix(reset_sfr(response.matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
+dplot_response_matrix(reset_sfr(door_response_matrix, "SFR")[2:50,], tag = "Name", base_size = 8)
 
 ## ---- fig.width=7.1------------------------------------------------------
 dplot_al_map("QSJXEFYPDANLFS-UHFFFAOYSA-N", base_size = 8)
@@ -57,11 +57,11 @@ dplot_compare_profiles(x = Or22a, y = Or22a, by.x = "Pelz.2006.AntEC50",
                          by.y = "Hallem.2004.EN", tag = "Name", base_size = 8)
 
 ## ---- fig.width = 7.1----------------------------------------------------
-dplot_compare_profiles(x = response.matrix, by.x = "Or35a", by.y = "ac3B",
+dplot_compare_profiles(x = door_response_matrix, by.x = "Or35a", by.y = "ac3B",
                          tag = "Name", base_size = 8)
 
 ## ---- fig.width = 7.1----------------------------------------------------
-dplot_compare_profiles(x = reset_sfr(response.matrix, "SFR"), by.x = "Or35a", by.y = "ac3B",
+dplot_compare_profiles(x = reset_sfr(door_response_matrix, "SFR"), by.x = "Or35a", by.y = "ac3B",
                          tag = "Name", base_size = 8)
 
 ## ---- fig.width = 6, fig.height = 6--------------------------------------
