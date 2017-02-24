@@ -49,7 +49,7 @@ receptor in a specific order (the merging sequence)
 
 library(DoOR.data)
 data(Or35a)
-data(response.range)
+data(door_response_range)
 SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")
 selected.merg <- model_response_seq(Or35a, SEQ = SEQ, plot = TRUE)
 

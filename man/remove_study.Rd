@@ -6,7 +6,7 @@
 \title{Remove a study from DoOR}
 \usage{
 remove_study(study, receptors = door_default_values("ORs"),
-  responseRange = door_default_values("response.range"),
+  responseRange = door_default_values("door_response_range"),
   weightGlobNorm = door_default_values("weight.globNorm"))
 }
 \arguments{
@@ -17,7 +17,7 @@ remove_study(study, receptors = door_default_values("ORs"),
 receptors exidting in DoOR.}
 
 \item{responseRange}{the dataframe containing the info about the response
-ranges of all studies (\code{response.range})}
+ranges of all studies (\code{door_response_range})}
 
 \item{weightGlobNorm}{the dataframe containing the info about the relative
 weights between receptors (\code{weight.globNorm})}

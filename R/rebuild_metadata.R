@@ -24,11 +24,11 @@ rebuild_metadata <- function(){
   wgn <- as.data.frame(wgn)
   assign("weight.globNorm", wgn, envir = .GlobalEnv)
 
-  assign("response.range", rr, envir = .GlobalEnv)
+  assign("door_response_range", rr, envir = .GlobalEnv)
 
-  message("Rebuilt weight.globNorm and response.range!")
+  message("Rebuilt weight.globNorm and door_response_range!")
 
-  # rebuild response.range
+  # rebuild door_response_range
 
 
 }

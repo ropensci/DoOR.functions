@@ -8,7 +8,7 @@
 import_new_data(file.name, dataFormat = door_default_values("door_data_format"),
   odor_data = door_default_values("odor"),
   weightGlobNorm = door_default_values("weight.globNorm"),
-  responseRange = door_default_values("response.range"),
+  responseRange = door_default_values("door_response_range"),
   receptors = door_default_values("ORs"),
   ident = door_default_values("ident"), round = 3)
 }
@@ -37,7 +37,7 @@ expression.}
 }
 \description{
 Import or update new data and update \code{weight.globNorm},
-\code{response.range}, \code{odor}, \code{ORs} and receptor data frames.
+\code{door_response_range}, \code{odor}, \code{ORs} and receptor data frames.
 }
 \details{
 \code{\link{import_new_data}} is used to import new data into database. If the
@@ -45,7 +45,7 @@ data contains a new receptor or ORN, then build a new data frame for this
 receptor or ORN. If the data contains a receptor that is already present in
 database, then merge the imported data into old data frame. The information
 (e.g. response range, how many receptors and odors were measured from given
-study) will be integrated into data \code{response.range}, \code{odor},
+study) will be integrated into data \code{door_response_range}, \code{odor},
 \code{ORs} and \code{weight.globNorm}. If an existing study is imported,
 \code{\link{remove_study}} will be run first in order to perform an update.
 }

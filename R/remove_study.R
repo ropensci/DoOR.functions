@@ -8,7 +8,7 @@
 #' @param receptors a vector of all the receptors to be checked. Defaults to all
 #'   receptors exidting in DoOR.
 #' @param responseRange the dataframe containing the info about the response
-#'   ranges of all studies (\code{response.range})
+#'   ranges of all studies (\code{door_response_range})
 #' @param weightGlobNorm the dataframe containing the info about the relative
 #'   weights between receptors (\code{weight.globNorm})
 #' @seealso \code{\link{import_new_data}}
@@ -22,7 +22,7 @@
 #'
 remove_study <- function(study,
                         receptors = door_default_values('ORs'),
-                        responseRange = door_default_values('response.range'),
+                        responseRange = door_default_values('door_response_range'),
                         weightGlobNorm = door_default_values('weight.globNorm')) {
   if (length(study) > 1)
     stop('Please enter only 1 study at a time.')
@@ -38,10 +38,10 @@ remove_study <- function(study,
   }
   if(study %in% responseRange$study) {
     responseRange <- responseRange[- which(responseRange$study == study),]
-    assign('response.range', responseRange, envir = .GlobalEnv)
-    message(paste('removed',study,'from \'response.range\''))
+    assign('door_response_range', responseRange, envir = .GlobalEnv)
+    message(paste('removed',study,'from \'door_response_range\''))
   } else {
-    warning(paste(study, 'not found in \'response.range\''))
+    warning(paste(study, 'not found in \'door_response_range\''))
   }
 
   if(study %in% names(weightGlobNorm)) {

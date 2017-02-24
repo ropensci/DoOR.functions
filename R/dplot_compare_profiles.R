@@ -20,7 +20,7 @@
 #' @examples
 #' library(DoOR.data)
 #' data(Or22a)
-#' data(response.range)
+#' data(door_response_range)
 #' data(response.matrix)
 #'
 #' dplot_compare_profiles(x = Or22a, y = Or22a,

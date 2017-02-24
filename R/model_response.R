@@ -35,13 +35,13 @@
 #' library(DoOR.data)
 #' data(Or35a)
 #' data(weight.globNorm)
-#' data(response.range)
+#' data(door_response_range)
 #' RP.Or35a <- model_response(Or35a, plot = TRUE)
 #'
 model_response <- function(da,
                     select.MDValue = door_default_values("select.MDValue"),
                     overlapValues = door_default_values("overlapValues"),
-                    responseRange = door_default_values("response.range"),
+                    responseRange = door_default_values("door_response_range"),
                     weightGlobNorm = door_default_values("weight.globNorm"),
                     glob.normalization = door_default_values("glob.normalization"),
                     plot = door_default_values("plot") ) {
