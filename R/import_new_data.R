@@ -185,7 +185,7 @@ import_new_data <- function(file.name,
   }
 
   ##########
-  # if there is a new receptor or ORN update data frame "ORs", NOTE: the AL projection pattern (DoOR.mappings) should be added manually
+  # if there is a new receptor or ORN update data frame "ORs", NOTE: the AL projection pattern (door_mappings) should be added manually
   ##########
 
   match_receptor <- match(receptor_file, receptors[,"OR"])

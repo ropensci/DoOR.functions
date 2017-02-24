@@ -98,11 +98,11 @@ door_default_values <- function(DoOR_default) {
   } # update_database.R, model_response.R, create_door_database.R
 
 
-  if (DoOR_default == "DoOR.mappings") {
-    if (!exists("DoOR.mappings")) {
-      data(DoOR.mappings)
+  if (DoOR_default == "door_mappings") {
+    if (!exists("door_mappings")) {
+      data(door_mappings)
     }
-    return(DoOR.mappings)
+    return(door_mappings)
   } # dplot_al_map.R
 
   if (DoOR_default == "ORs") {
