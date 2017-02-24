@@ -99,7 +99,7 @@ If you do not know the InChIKeys of the odorants in your data set, we recommend 
 
 
 ## Building the complete data base with `create_door_database()`{#create_door_database}
-Once we imported new data we can use `create_door_database()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in `excluded.data`.
+Once we imported new data we can use `create_door_database()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in `door_excluded_data`.
 
 
 ## Updating parts of the data base with `update_database()`{#update_database}

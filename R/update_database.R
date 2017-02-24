@@ -24,7 +24,7 @@
 #' @param select.MDValue the minimum mean distance between studies to perfom a
 #'   merge (used if permutation == FALSE or if permutation == TRUE AND strict ==
 #'   TRUE)
-#' @param excluded.data the data frame that contains the list of excluded data
+#' @param door_excluded_data the data frame that contains the list of excluded data
 #'   sets.
 #' @param plot logical
 #' @param strict logical, if TRUE merging a permutation will be stopped once a
@@ -54,7 +54,7 @@ update_database <- function(receptor,
                            select.MDValue     = door_default_values("select.MDValue"),
                            strict             = TRUE,
                            overlapValues      = door_default_values("overlapValues"),
-                           excluded.data      = door_default_values("excluded.data"),
+                           door_excluded_data      = door_default_values("door_excluded_data"),
                            plot = FALSE) {
   da            <- get(receptor)
   recordColumn  <- as.numeric( c((door_default_values("num.charColumns")+1):dim(da)[2]) )
@@ -113,7 +113,7 @@ update_database <- function(receptor,
 
   } else { # END if (permutation == TRUE)
     merge <- model_response(da, glob.normalization = FALSE, select.MDValue = select.MDValue, overlapValues = overlapValues, plot = plot)
-    excluded <- merge$excluded.data
+    excluded <- merge$door_excluded_data
     merge <- merge$model.response[,"merged_data"]
   }
 
@@ -147,9 +147,9 @@ update_database <- function(receptor,
   message(paste("response.matrix has been updated for",receptor))
 
   # update response.matrix.excluded
-  excluded.data$excluded <- as.character(excluded.data$excluded)
-  excluded.data[excluded.data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
-  assign("excluded.data", excluded.data, envir = .GlobalEnv)
-  message(paste("excluded.data has been updated for",receptor))
+  door_excluded_data$excluded <- as.character(door_excluded_data$excluded)
+  door_excluded_data[door_excluded_data$OR == receptor, "excluded"] <- paste(excluded, collapse = ", ")
+  assign("door_excluded_data", door_excluded_data, envir = .GlobalEnv)
+  message(paste("door_excluded_data has been updated for",receptor))
 
 }

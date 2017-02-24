@@ -119,13 +119,13 @@ model_response <- function(da,
       excluded <- candidate.studies
       merged_data <- rep(NA,nrow(da))
       resd <- cbind(da[, c("Class", "Name", "InChIKey", "CID", "CAS")], merged_data)
-      return(list(source.data = character(), model.response = resd, excluded.data = excluded))
+      return(list(source.data = character(), model.response = resd, door_excluded_data = excluded))
     } else if (selected[[1]][[1]]$MD >= select.MDValue) {
       message("Can not find any fitted model with MD value under given threshold criterion.")
       excluded <- candidate.studies
       merged_data <- rep(NA,nrow(da))
       resd <- cbind(da[, c("Class", "Name", "InChIKey", "CID", "CAS")], merged_data)
-      return(list(source.data = character(), model.response = resd, excluded.data = excluded))
+      return(list(source.data = character(), model.response = resd, door_excluded_data = excluded))
     }
 
 
@@ -195,5 +195,5 @@ model_response <- function(da,
   resd <- cbind(da[, c("Class", "Name", "InChIKey", "CID", "CAS")], merged_data)
   source.data = colnames(da)[nv][-na.omit(match(excluded,colnames(da)[nv]))]
 
-  return(list(source.data = source.data, model.response = resd, excluded.data = excluded))
+  return(list(source.data = source.data, model.response = resd, door_excluded_data = excluded))
 }

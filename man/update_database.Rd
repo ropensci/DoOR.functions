@@ -11,7 +11,7 @@ update_database(receptor, permutation = TRUE, perm,
   weightGlobNorm = door_default_values("weight.globNorm"),
   select.MDValue = door_default_values("select.MDValue"), strict = TRUE,
   overlapValues = door_default_values("overlapValues"),
-  excluded.data = door_default_values("excluded.data"), plot = FALSE)
+  door_excluded_data = door_default_values("door_excluded_data"), plot = FALSE)
 }
 \arguments{
 \item{receptor}{character string, name of given odorant receptor.}
@@ -41,7 +41,7 @@ permutation == TRUE)}
 
 \item{overlapValues}{minimum overlap between studies to perfom a merge}
 
-\item{excluded.data}{the data frame that contains the list of excluded data
+\item{door_excluded_data}{the data frame that contains the list of excluded data
 sets.}
 
 \item{plot}{logical}

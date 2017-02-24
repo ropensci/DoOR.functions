@@ -90,11 +90,11 @@ door_default_values <- function(DoOR_default) {
     return(weight.globNorm)
   } # export_door_data.R, import_new_data.R, update_database.R, model_response.R
 
-  if (DoOR_default == "excluded.data") {
-    if (!exists("excluded.data")) {
-      data(excluded.data)
+  if (DoOR_default == "door_excluded_data") {
+    if (!exists("door_excluded_data")) {
+      data(door_excluded_data)
     }
-    return(excluded.data)
+    return(door_excluded_data)
   } # update_database.R, model_response.R, create_door_database.R
 
 

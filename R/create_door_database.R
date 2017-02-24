@@ -28,7 +28,7 @@ create_door_database <- function(tag                = door_default_values("tag")
                            overlapValues      = door_default_values("overlapValues"),
                            ...) {
 
-  excluded.data   <- data.frame(OR = get('ORs')$OR, excluded = NA) # reset/create excluded.data
+  door_excluded_data   <- data.frame(OR = get('ORs')$OR, excluded = NA) # reset/create door_excluded_data
 
   Or.list       <- load2list() 	# contains data for all receptors
   Or.Names      <- names(Or.list)
@@ -56,13 +56,13 @@ create_door_database <- function(tag                = door_default_values("tag")
     } else {
       merged <- model_response(da, select.MDValue, overlapValues, glob.normalization = TRUE, ...)
       merged.responses   <- merged$model.response[,"merged_data"]
-      excluded           <- merged$excluded.data
+      excluded           <- merged$door_excluded_data
       merged.odors       <- as.vector(merged$model.response[,tag])
       match_odorsTOframe <- match(merged.odors, rownames(frame_data))
       frame_data[match_odorsTOframe, i] <- merged.responses
       # update response.matrix.excluded
       if (length(excluded > 0))
-        excluded.data[excluded.data$OR == i, "excluded"] <- paste(excluded, collapse = ", ")
+        door_excluded_data[door_excluded_data$OR == i, "excluded"] <- paste(excluded, collapse = ", ")
 
       print(paste(i, "has been merged."))
     }
@@ -75,6 +75,6 @@ create_door_database <- function(tag                = door_default_values("tag")
   assign("response.matrix_non.normalized", frame_data_nn, envir = .GlobalEnv)
   message("response.matrix_non.normalized has been created")
 
-  assign("excluded.data", excluded.data, envir = .GlobalEnv)
-  message("excluded.data has been created")
+  assign("door_excluded_data", door_excluded_data, envir = .GlobalEnv)
+  message("door_excluded_data has been created")
 }
