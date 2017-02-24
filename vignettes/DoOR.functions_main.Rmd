@@ -22,7 +22,7 @@ In this vignette we describe how to build, modify and update DoOR and introduce 
     * [Updating parts of the data base with `update_door_database()`](#update_door_database)
     * [`model_response()` and `model_response_seq()`](#model)
     * [Removing a study with `remove_study()`](#remove_study)
-    * [Updating the odor information with `update_odorinfo()`](#update_odorinfo)
+    * [Updating the odor information with `update_door_odorinfo()`](#update_door_odorinfo)
 * [Helper functions](#helper)
 
 
@@ -149,8 +149,8 @@ remove_study(study = "Hallem.2004.EN")
 ```
 
 
-## Updating the odor information with `update_odorinfo()`{#update_odorinfo}
-If we edit the general odor information in `DoOR.data::odor` we need to update all other DoOR objects with the new information. `update_odorinfo()` overwrites the first 5 columns of the DoOR responding units data frames (e.g. `Or22a`), it does not add or remove lines!
+## Updating the odor information with `update_door_odorinfo()`{#update_door_odorinfo}
+If we edit the general odor information in `DoOR.data::odor` we need to update all other DoOR objects with the new information. `update_door_odorinfo()` overwrites the first 5 columns of the DoOR responding units data frames (e.g. `Or22a`), it does not add or remove lines!
 
 
 

@@ -39,5 +39,5 @@ transID <- trans_id
 modelRPSEQ <- model_response_seq
 modelRP <- model_response
 updateDatabase <- update_door_database
-updateOdorInfo <- update_odorinfo
+updateOdorInfo <- update_door_odorinfo
 mapReceptor <- map_receptor

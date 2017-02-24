@@ -71,7 +71,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#update_door_database">Updating parts of the data base with <code>update_door_database()</code></a></li>
 <li><a href="#model"><code>model_response()</code> and <code>model_response_seq()</code></a></li>
 <li><a href="#remove_study">Removing a study with <code>remove_study()</code></a></li>
-<li><a href="#update_odorinfo">Updating the odor information with <code>update_odorinfo()</code></a></li>
+<li><a href="#update_door_odorinfo">Updating the odor information with <code>update_door_odorinfo()</code></a></li>
 </ul></li>
 <li><a href="#helper">Helper functions</a></li>
 </ul>
@@ -348,8 +348,8 @@ merge &lt;-<span class="st"> </span><span class="kw">model_response_seq</span>(O
 <pre><code>## removed Hallem.2004.EN from 'door_global_normalization_weights'</code></pre>
 </div>
 <div id="updating-the-odor-information-with-updateodorinfo" class="section level2">
-<h2>Updating the odor information with <code id="update_odorinfo">update_odorinfo()</code></h2>
-<p>If we edit the general odor information in <code>DoOR.data::odor</code> we need to update all other DoOR objects with the new information. <code>update_odorinfo()</code> overwrites the first 5 columns of the DoOR responding units data frames (e.g. <code>Or22a</code>), it does not add or remove lines!</p>
+<h2>Updating the odor information with <code id="update_door_odorinfo">update_door_odorinfo()</code></h2>
+<p>If we edit the general odor information in <code>DoOR.data::odor</code> we need to update all other DoOR objects with the new information. <code>update_door_odorinfo()</code> overwrites the first 5 columns of the DoOR responding units data frames (e.g. <code>Or22a</code>), it does not add or remove lines!</p>
 </div>
 </div>
 <div id="helper" class="section level1">
