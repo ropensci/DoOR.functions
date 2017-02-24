@@ -12,7 +12,7 @@ dplot_al_map(InChIKey,
   zero = door_default_values("zero"),
   tag = door_default_values("tag.ALmap"), main = "Name",
   scalebar = door_default_values("scalebar"),
-  AL.map = door_default_values("AL.map"),
+  door_AL_map = door_default_values("door_AL_map"),
   colors = door_default_values("colors"), legend = TRUE, limits,
   base_size = 12)
 }
@@ -36,7 +36,7 @@ or "co.receptor")}
 
 \item{scalebar}{whether or not to add a scalebar}
 
-\item{AL.map}{a list containing the AL model}
+\item{door_AL_map}{a list containing the AL model}
 
 \item{colors}{a vector containing 6 color values (2 for values below 0, 1 0
 value and 3 steps between 0 and 1)}

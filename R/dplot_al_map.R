@@ -17,7 +17,7 @@
 #'   value and 3 steps between 0 and 1)
 #' @param limits the limits for the color scale, if empty the range of the
 #'   response matrix is taken (after setting ``zero`` to 0)
-#' @param AL.map a list containing the AL model
+#' @param door_AL_map a list containing the AL model
 #' @param legend logical, plot a legend?
 #' @param base_size numeric, the base font size for the ggplot plot
 #' @details Normalized, color coded odor responses across receptors are mapped
@@ -55,7 +55,7 @@ dplot_al_map <- function(InChIKey,
                            tag =  door_default_values("tag.ALmap"),
                            main = "Name",
                            scalebar = door_default_values("scalebar"),
-                           AL.map = door_default_values("AL.map"),
+                           door_AL_map = door_default_values("door_AL_map"),
                            colors = door_default_values("colors"),
                            legend = TRUE,
                            limits,
@@ -72,11 +72,11 @@ dplot_al_map <- function(InChIKey,
 
   response.data <- get_normalized_responses(InChIKey, zero = zero, response_matrix = response_matrix)
 
-  plotdata <- AL.map[["glomeruli"]]
+  plotdata <- door_AL_map[["glomeruli"]]
   plotdata$receptor <- DoOR_mappings$receptor[match(plotdata$glomerulus, DoOR_mappings$code)] # match mapped glomeruli and extract receptor names
   plotdata$response <- response.data$Response[match(plotdata$receptor, response.data$ORs)] # pick responses from response.data
 
-  labels <- AL.map$labels
+  labels <- door_AL_map$labels
   labels <- cbind(labels,DoOR_mappings[match(labels$glomerulus, DoOR_mappings$code),c("receptor", "sensillum", "OSN", "co.receptor", "Ors")])
 
 
@@ -85,9 +85,9 @@ dplot_al_map <- function(InChIKey,
 
 
   p <- ggplot2::ggplot(data = plotdata) +
-    ggplot2::geom_polygon(data = AL.map$background, ggplot2::aes(x = x, y = y, group = group), fill = "grey80", color = "grey80") +
-    ggplot2::geom_polygon(data = AL.map$bg.cutout,  ggplot2::aes(x = x, y = y, group = group), fill = "white", color = "white") +
-    ggplot2::geom_polygon(data = AL.map$unmapped_not.olf, ggplot2::aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
+    ggplot2::geom_polygon(data = door_AL_map$background, ggplot2::aes(x = x, y = y, group = group), fill = "grey80", color = "grey80") +
+    ggplot2::geom_polygon(data = door_AL_map$bg.cutout,  ggplot2::aes(x = x, y = y, group = group), fill = "white", color = "white") +
+    ggplot2::geom_polygon(data = door_AL_map$unmapped_not.olf, ggplot2::aes(x = x, y = y, group = glomerulus), fill = "grey45", color = "grey75") +
     ggplot2::geom_polygon(ggplot2::aes(x = x, y = y, fill=response, group = glomerulus), color = "grey75") +
     ggplot2::scale_fill_gradientn(na.value="grey65", colours = colors, space = "rgb", values = door_norm(c(limits[1], limits[1]/2, 0, limits[2]/3, limits[2]/1.5, limits[2])),limits=limits) +
     ggplot2::coord_fixed() +

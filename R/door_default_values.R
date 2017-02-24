@@ -55,11 +55,11 @@ door_default_values <- function(DoOR_default) {
   if (DoOR_default == "interval.X") 	{ return(c(-1,2)) } # compute_MD.R, modelfunction.R, project_points.R
 
   ## data frame
-  if (DoOR_default == "AL.map") {
-    if (!exists("AL.map")) {
-      data(AL.map)
+  if (DoOR_default == "door_AL_map") {
+    if (!exists("door_AL_map")) {
+      data(door_AL_map)
     }
-    return(AL.map)
+    return(door_AL_map)
   } # dplot_al_map.R
 
   if (DoOR_default == "data.format") {
