@@ -14,7 +14,10 @@ door_norm(x)
 \code{door_norm} is used to normalize the data in values from 0 to 1.
 }
 \examples{
+# create example data
 x <- rnorm(10)
+
+# run door_norm on it
 door_norm(x)
 
 }

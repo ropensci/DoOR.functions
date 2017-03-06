@@ -47,12 +47,14 @@ dataset is below the correlation threshold (select.MDValue). Datasets
 excluded based on this criterion will be appended in a separate list.  }
 }
 \examples{
-
+# load data
 library(DoOR.data)
 data(Or35a)
 data(door_global_normalization_weights)
 data(door_response_range)
-RP.Or35a <- model_response(Or35a, plot = TRUE)
+
+# merge all existing data sets for Or35a into a consensus model response
+model_response_Or35a <- model_response(Or35a, plot = TRUE)
 
 }
 \author{

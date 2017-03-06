@@ -24,9 +24,16 @@ character vector of translated chemical identifiers
 Translate chemical identifiers from one to the other.
 }
 \examples{
+# load data
 library(DoOR.data)
+
+# transform CAS to InChIKey
 trans_id("123-92-2")
+
+# transform Name to InChIKey
 trans_id("isopentyl acetate", "Name")
+
+# transform SMILE to InChIKey
 trans_id("C(C(C)C)COC(=O)C", "SMILES", "Name")
 
 }

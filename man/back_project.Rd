@@ -38,10 +38,15 @@ responses \item 4. rescale all responses to the scale of the original data
 via a linear fit.  }
 }
 \examples{
+# load some data sets
 data(Or22a)
 data(door_response_matrix)
+
+# create example data we are going to back project
 template.data <- data.frame(odorants = Or22a$InChIKey,
                             responses = Or22a$Hallem.2004.EN)
+                            
+# run back_project and plot the results                             
 bp <- back_project(template.data, "Or22a")
 
 plot(bp$back_projected$original.data,

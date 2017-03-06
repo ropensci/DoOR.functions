@@ -22,14 +22,18 @@ has not enough overlap value.}
 \item{...}{pass more parameters to \code{\link{model_response}}}
 }
 \description{
-computes the complete response model for all receptors in the database
-(calls \code{\link{model_response}} for all receptors)
+computes the complete response model for all receptors in the database (calls
+\code{\link{model_response}} for all receptors). Overwrites response_matrix,
+door_response_matrix_non_normalized and door_excluded_data.
 }
 \examples{
 \dontrun{
+# load DoOR data
 library(DoOR.data)
 load_door_data()
-mydatabase <- create_door_database()
+
+# create a new consensus matrix
+create_door_database()
 }
 }
 \author{

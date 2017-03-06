@@ -28,10 +28,14 @@ returns a matrix indiating how many studies have recorded individual
 receptor-odorant combinations
 }
 \examples{
+# load some data
 library(DoOR.data)
 load_door_data()
+
+#run count studies and plot the result
 count <- count_studies()
 image(count)
+head(count)
 
 }
 

@@ -19,9 +19,11 @@ A function for reseting SFR to zero
 Performs a simple subtraction of the SFR value.
 }
 \examples{
-
+# load data
 library(DoOR.data)
 data(door_response_matrix)
+
+# create a response matrix with the SFR reset to 0
 door_response_matrix_SFRreset <- reset_sfr(door_response_matrix, "SFR")
 
 }

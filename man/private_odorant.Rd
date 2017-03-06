@@ -32,8 +32,13 @@ a data.frame containing odorants and the response in the receptor of interest as
 return an odorant that activates the receptor of interest exclusively
 }
 \examples{
+# load data
 library(DoOR.data)
+
+# find a private odorant for Gr21a.Gr63a (the carbon dioxide receptor)
 private_odorant("Gr21a.Gr63a", tag = "Name")
+
+# now find an odorant that within the ab3 sensillum specifically activates Or22a
 private_odorant("Or22a", tag = "Name", sensillum = TRUE)
 
 }

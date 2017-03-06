@@ -19,7 +19,7 @@ There are six categories for default value. real number, integer, logical,
 NULL, character string and character vector.
 }
 \examples{
-
+# extract DoOR default values
 door_default_values(DoOR_default = "select.MD")
 
 }

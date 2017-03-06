@@ -51,11 +51,19 @@ DoOR response profiles will be selected and ordered according to the
   to which OSN is controlled via the "code.OSN" column in \code{DoORmapings}.
 }
 \examples{
+# load DoOR data & functions
 library(DoOR.data)
+library(DoOR.functions)
+
+# pick example odorants by name ans transform their ID to InChIKey
 odorants <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
                     from = "Name", to = "InChIKey")
+ 
+# plot                                      
 dplot_across_osns(odorants)
+# plot only across ac and at sensillae
 dplot_across_osns(odorants, sub = c("ac", "at"))
+# plot across sensory neurons
 dplot_across_osns(odorants, plot.type = 2)
 }
 \author{

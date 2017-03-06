@@ -52,11 +52,16 @@ points on the functional line, "NDR" indicating the normalized distances
 across all the distance values.
 }
 \examples{
-
+# load data
 library(DoOR.data)
 data(Or23a)
+
+# normalize two example data sets
 x <- door_norm(Or23a[,'Hallem.2004.EN'])
 y <- door_norm(Or23a[,'Hallem.2006.EN'])
+
+# find the best fitting function and project the remaining points (measured only in one of the
+data sets) onto the fit.
 project_points(x = x, y = y, plot = TRUE)
 
 }

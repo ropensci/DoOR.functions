@@ -30,11 +30,16 @@ Identifying the source of unknown response data by correlating it agains all
 DoOR responding units.
 }
 \examples{
-  load_door_data()
-  data <- data.frame(odorants  = Or22a$InChIKey,
-                     responses = Or22a$Hallem.2004.EN)
-  data <- na.omit(data)
-  map_receptor(data = data)
+# load data
+load_door_data()
+
+# pick example data
+data <- data.frame(odorants  = Or22a$InChIKey,
+                   responses = Or22a$Hallem.2004.EN)
+data <- na.omit(data)
+
+# find the corresponding receptor / responding unit
+map_receptor(data = data)
 }
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>

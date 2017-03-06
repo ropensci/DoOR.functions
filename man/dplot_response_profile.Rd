@@ -43,9 +43,14 @@ ggplot2 plot
 create a barplot of a DoOR response profile
 }
 \examples{
+# load data
 library(DoOR.data)
 data(door_response_matrix)
+
+# plot with default parameters
 dplot_response_profile("Or22a", door_response_matrix)
+
+# plot wit odorant names
 dplot_response_profile("Or22a", door_response_matrix, tag = "Name")
 }
 \author{

@@ -25,10 +25,14 @@ these functions please check the sources at
 https://github.com/Dahaniel/DoOR.functions)
 }
 \examples{
+# load a data set 
 library(DoOR.data)
 data(Or35a)
+
+# pick 2 data sets for Or35a and rescale the data [0,1]
 x <- door_norm(Or35a[,6])
 y <- door_norm(Or35a[,9])
+# run calculate_model
 calM_xy <- calculate_model(x, y, select.MD = door_default_values("select.MD"))
 
 }

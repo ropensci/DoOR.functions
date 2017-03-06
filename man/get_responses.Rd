@@ -26,9 +26,11 @@ output is a data frame containing response values of given odor across
 receptors from all available studies.
 }
 \examples{
-
+# load data
 library(DoOR.data)
 load_door_data()
+
+# get raw responses for odorant MLFHJEHSLIIPHL-UHFFFAOYSA-N
 responses <- get_responses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 
 }

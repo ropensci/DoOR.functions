@@ -9,7 +9,19 @@ update_door_odorinfo()
 }
 \description{
 Update the DoOR odor data with info from \code{odor}. For the function to
-work, all DoOR data has to be loaded.
+work, all DoOR data has to be loaded to the current environment.
+}
+\examples{
+# modify odor
+odor[1,1] <- "acid"
+
+# run 
+update_door_odorinfo()
+
+# check that data sets have been updated
+head(Or22a)
+
+
 }
 \author{
 Daniel Münch, \email{daniel@muench.bio}

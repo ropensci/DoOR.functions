@@ -46,18 +46,23 @@ a ggplot object
 plot a receptor or odorant tuning curve
 }
 \examples{
+# load data
 library(DoOR.data)
 data(door_response_matrix)
 data(odor)
 
+# plot a tuning curve for an odorant
 dplot_tuningCurve(odorant = odor$InChIKey[2])
+# or for a receptor
 dplot_tuningCurve(receptor = "Or22a")
 
+# adjust the plotting range
 range <- range(reset_sfr(door_response_matrix, "SFR"), na.rm = TRUE)
 dplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
 
-dplot_tuningCurve(receptor = "OrX", response.vector = c(1:100))
-
+# plot with manual input data as receptor tuning curve
+dplot_tuningCurve(receptor = "receptor X", response.vector = c(1:100))
+# or as odor tuning curve
 dplot_tuningCurve(odorant = "odor X", response.vector = rnorm(200))
 
 }

@@ -43,10 +43,13 @@ before use.
 }
 \examples{
 \dontrun{
+# load data
 library(DoOR.data)
 library(DoOR.functions)
 load_door_data()
-export_door_data(".txt", all.data = FALSE) 	# export odorant responses data only
+
+# export odorant response data only
+export_door_data(".txt", all.data = FALSE) 	
 }
 }
 \author{

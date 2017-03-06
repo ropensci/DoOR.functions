@@ -33,8 +33,12 @@ a ggplot object
 barplot of DoOR responses of a set of odorant across all responding units in DoOR
 }
 \examples{
+# load data
 library(DoOR.data)
+library(DoOR.functions)
 data(odor)
+
+# plot activation pattern of one or several odorants
 dplot_across_ru(trans_id("123-92-2"), tag = "CAS")
 dplot_across_ru(odor$InChIKey[4:10])
 

@@ -60,7 +60,10 @@ correlates the result from a SSR recording of several odorants against all
 DoOR response profiles
 }
 \examples{
+# load data
 library(DoOR.data)
+
+# create an example recording
 recording <- data.frame(
    odorants = c(trans_id(c("BEDN", "ETAS"), "Code"),
    trans_id("carbon dioxide", "Name")),
@@ -68,6 +71,7 @@ recording <- data.frame(
    unit2 = c(0, .1, 1)
 )
 
+# run the identification
 identify_sensillum(recording)
 identify_sensillum(recording, method = "dist", nshow = 5)
 
