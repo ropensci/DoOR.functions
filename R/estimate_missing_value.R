@@ -19,9 +19,14 @@
 #' @keywords math
 #' @examples
 #' \dontrun{
+#' # load data
 #' library(DoOR.data)
 #' data(door_response_matrix)
+#' 
+#' # pick an example subset
 #' subset <- door_response_matrix[1:100, 11:30]
+#' 
+#' # estimate missing values
 #' est.data <- estimate_missing_value(data = subset, nodor = 6)
 #' }
 estimate_missing_value <-

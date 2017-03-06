@@ -40,7 +40,10 @@
 #' @importFrom stats cor na.omit dist cor.test
 #'
 #' @examples
+#' # load data
 #' library(DoOR.data)
+#' 
+#' # create an example recording
 #' recording <- data.frame(
 #'    odorants = c(trans_id(c("BEDN", "ETAS"), "Code"),
 #'    trans_id("carbon dioxide", "Name")),
@@ -48,6 +51,7 @@
 #'    unit2 = c(0, .1, 1)
 #' )
 #'
+#' # run the identification
 #' identify_sensillum(recording)
 #' identify_sensillum(recording, method = "dist", nshow = 5)
 #'

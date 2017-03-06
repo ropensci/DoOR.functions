@@ -12,9 +12,16 @@
 #' @aliases transID trans_id
 #'
 #' @examples
+#' # load data
 #' library(DoOR.data)
+#' 
+#' # transform CAS to InChIKey
 #' trans_id("123-92-2")
+#' 
+#' # transform Name to InChIKey
 #' trans_id("isopentyl acetate", "Name")
+#' 
+#' # transform SMILE to InChIKey
 #' trans_id("C(C(C)C)COC(=O)C", "SMILES", "Name")
 #'
 trans_id <- function(x, from = "CAS", to = "InChIKey", odor_data = door_default_values("odor")) {

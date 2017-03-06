@@ -20,10 +20,17 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @aliases dplot_responseMatrix dplot_response_matrix
 #' @examples
+#' # load data
 #' library(DoOR.data)
 #' data(door_response_matrix)
+#' 
+#' # reset the spontaneous firing rate to 0
 #' tmp <- reset_sfr(door_response_matrix, "SFR")
+#' 
+#' # plot heatmap / coloured tiles
 #' dplot_response_matrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
+#' 
+#' # plot dotplot
 #' dplot_response_matrix(door_response_matrix[10:50,], tag = "Name",
 #'                         limits = range(door_response_matrix, na.rm = TRUE))
 #'

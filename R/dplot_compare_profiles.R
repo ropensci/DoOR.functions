@@ -18,15 +18,19 @@
 #' @export
 #' @importFrom stats na.omit
 #' @examples
+#' # load data
 #' library(DoOR.data)
+#' library(DoOR.functions)
 #' data(Or22a)
 #' data(door_response_range)
 #' data(door_response_matrix)
 #'
+#' # compare the Hallem and the Pelz data set for Or22a
 #' dplot_compare_profiles(x = Or22a, y = Or22a,
 #'                          by.x = "Hallem.2006.EN",
 #'                          by.y = "Pelz.2006.AntEC50")
 #'
+#' # comparedata from two different sensory neurons and add odorant labels
 #' dplot_compare_profiles(x = cbind(door_response_matrix, InChIKey = rownames(door_response_matrix)),
 #'                          y = cbind(door_response_matrix, InChIKey = rownames(door_response_matrix)),
 #'                          by.x = "Or22a", by.y = "Or10a")

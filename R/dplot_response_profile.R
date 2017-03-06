@@ -22,20 +22,25 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @aliases dplot_responseProfile dplot_response_profile
 #' @examples
+#' # load data
 #' library(DoOR.data)
 #' data(door_response_matrix)
+#' 
+#' # plot with default parameters
 #' dplot_response_profile("Or22a", door_response_matrix)
+#' 
+#' # plot wit odorant names
 #' dplot_response_profile("Or22a", door_response_matrix, tag = "Name")
 dplot_response_profile <- function(receptor,
-                                     response_matrix = door_default_values("door_response_matrix"),
-                                     odor_data = door_default_values("odor"),
-                                     tag = door_default_values("tag"),
-                                     colored = TRUE,
-                                     colors = door_default_values("colors"),
-                                     limits,
-                                     zero = door_default_values("zero"),
-                                     scalebar = door_default_values("scalebar"),
-                                     base_size = 12
+                                   response_matrix = door_default_values("door_response_matrix"),
+                                   odor_data = door_default_values("odor"),
+                                   tag = door_default_values("tag"),
+                                   colored = TRUE,
+                                   colors = door_default_values("colors"),
+                                   limits,
+                                   zero = door_default_values("zero"),
+                                   scalebar = door_default_values("scalebar"),
+                                   base_size = 12
 ) {
   if(zero != "")
     response_matrix <- reset_sfr(response_matrix, zero)

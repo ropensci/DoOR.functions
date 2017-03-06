@@ -18,11 +18,16 @@
 #' @importFrom stats na.omit cor.test
 #' @aliases mapReceptor map_receptor 
 #' @examples
-#'   load_door_data()
-#'   data <- data.frame(odorants  = Or22a$InChIKey,
-#'                      responses = Or22a$Hallem.2004.EN)
-#'   data <- na.omit(data)
-#'   map_receptor(data = data)
+#' # load data
+#' load_door_data()
+#' 
+#' # pick example data
+#' data <- data.frame(odorants  = Or22a$InChIKey,
+#'                    responses = Or22a$Hallem.2004.EN)
+#' data <- na.omit(data)
+#' 
+#' # find the corresponding receptor / responding unit
+#' map_receptor(data = data)
 map_receptor <- function(data,
                         response_matrix = door_default_values("door_response_matrix"),
                         sub,

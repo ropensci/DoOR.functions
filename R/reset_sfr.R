@@ -10,9 +10,11 @@
 #' @aliases resetSFR reset_sfr
 #' @export
 #' @examples
-#'
+#' # load data
 #' library(DoOR.data)
 #' data(door_response_matrix)
+#' 
+#' # create a response matrix with the SFR reset to 0
 #' door_response_matrix_SFRreset <- reset_sfr(door_response_matrix, "SFR")
 #'
 reset_sfr <- function(x, sfr) {

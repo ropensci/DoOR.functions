@@ -15,9 +15,11 @@
 #' @export
 #' @keywords data
 #' @examples
-#'
+#' # load data
 #' library(DoOR.data)
 #' load_door_data()
+#' 
+#' # get raw responses for odorant MLFHJEHSLIIPHL-UHFFFAOYSA-N
 #' responses <- get_responses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #'
 get_responses <- function(odorant,

@@ -16,8 +16,13 @@
 #' @aliases privateOdorant private_odorant
 #'
 #' @examples
+#' # load data
 #' library(DoOR.data)
+#' 
+#' # find a private odorant for Gr21a.Gr63a (the carbon dioxide receptor)
 #' private_odorant("Gr21a.Gr63a", tag = "Name")
+#' 
+#' # now find an odorant that within the ab3 sensillum specifically activates Or22a
 #' private_odorant("Or22a", tag = "Name", sensillum = TRUE)
 #'
 private_odorant <- function(receptor,

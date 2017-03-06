@@ -24,13 +24,19 @@
 #' @importFrom stats na.omit lm
 #' @aliases selectModel select_model
 #' @examples
-#'
+#' # load data
 #' library(DoOR.data)
 #' data(ac3B)
-#' studies<-names(ac3B)[c(7:9)]
-#' data_candidate<-ac3B[,c(7:9)]
-#' Norm_data_candidate <-apply(data_candidate, 2, door_norm)
-#' select_model(candidate = studies, data_candidate = Norm_data_candidate, merged = FALSE)
+#' 
+#' # split into data and header
+#' studies <- names(ac3B)[c(7:8)]
+#' data_candidate <- ac3B[,c(7:8)]
+#' 
+#' # rescale data
+#' norm_data_candidate <- apply(data_candidate, 2, door_norm)
+#' 
+#' # find the best fitting model
+#' select_model(candidate = studies, data_candidate = norm_data_candidate, merged = FALSE)
 #'
 select_model <- function(candidate,
                         data_candidate,

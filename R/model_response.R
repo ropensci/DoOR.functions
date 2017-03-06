@@ -31,12 +31,14 @@
 #' @importFrom stats na.omit
 #' @importFrom graphics par points
 #' @examples
-#'
+#' # load data
 #' library(DoOR.data)
 #' data(Or35a)
 #' data(door_global_normalization_weights)
 #' data(door_response_range)
-#' RP.Or35a <- model_response(Or35a, plot = TRUE)
+#' 
+#' # merge all existing data sets for Or35a into a consensus model response
+#' model_response_Or35a <- model_response(Or35a, plot = TRUE)
 #'
 model_response <- function(da,
                     select.MDValue = door_default_values("select.MDValue"),

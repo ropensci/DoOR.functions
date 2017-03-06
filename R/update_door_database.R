@@ -38,6 +38,7 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' # load data
 #' library(DoOR.data)
 #' load_door_data()
 #' # update the entry "Or67b" of data "door_response_matrix" and

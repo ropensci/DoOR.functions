@@ -33,16 +33,24 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @aliases dplot_ALmap dplot_al_map
 #' @examples
+#' # load data
 #' library(DoOR.data)
+#' libraray(DoOR.functions)
+#' 
+#' # map responses on antennal lobe scheme
 #' dplot_al_map("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)
+#' 
+#' # change colors
 #' dplot_al_map("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
 #'    color = c("magenta", "pink", "white", "yellow", "orange", "red"))
 #'
+#' # pass some ggplot2 theming parameters
 #' dplot_al_map(trans_id("123-92-2"), scalebar = FALSE) +
 #' ggplot2::theme(legend.position  = "bottom",
 #'       panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
 #' ggplot2::ggtitle("responses elicited by isopentyl acetate")
 #'
+#' # export as pdf
 #' \dontrun{
 #' p <- dplot_al_map(trans_id("123-92-2"))
 #' ggplot2::ggsave("AL.response.pdf", p, width = 6, height = 2, scale = 2)

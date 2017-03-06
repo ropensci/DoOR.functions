@@ -7,8 +7,11 @@
 #' @export
 #'
 #' @examples
+#' # load DoOR.data
 #' library(DoOR.data)
 #' load_door_data()
+#' 
+#' # write the data into a list
 #' lst <- load2list()
 load2list <- function() {
   if(!exists("ORs"))

@@ -35,12 +35,16 @@
 #' @aliases modelRPSEQ model_response_seq
 #'
 #' @examples
-#'
+#' # load data
 #' library(DoOR.data)
 #' data(Or35a)
 #' data(door_response_range)
+#' 
+#' # specify a sequence of merging
 #' SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")
-#' selected.merg <- model_response_seq(Or35a, SEQ = SEQ, plot = TRUE)
+#' 
+#' # perform the merging
+#' selected_merg <- model_response_seq(Or35a, SEQ = SEQ, plot = TRUE)
 #'
 model_response_seq <-
   function(data,

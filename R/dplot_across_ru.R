@@ -15,8 +15,12 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @aliases dplot_acrossReceptors dplot_across_ru
 #' @examples
+#' # load data
 #' library(DoOR.data)
+#' library(DoOR.functions)
 #' data(odor)
+#' 
+#' # plot activation pattern of one or several odorants
 #' dplot_across_ru(trans_id("123-92-2"), tag = "CAS")
 #' dplot_across_ru(odor$InChIKey[4:10])
 #'

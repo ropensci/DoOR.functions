@@ -16,8 +16,11 @@
 #' @aliases removeStudy remove_study
 #' @export
 #' @examples
+#' # load data
 #' library(DoOR.data)
 #' load_door_data()
+#' 
+#' # remove Bruyne.2001.WT from DoOR
 #' remove_study('Bruyne.2001.WT')
 #'
 remove_study <- function(study,

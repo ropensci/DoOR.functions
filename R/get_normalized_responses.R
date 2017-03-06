@@ -19,12 +19,16 @@
 #' @author Daniel Münch \email{daniel.muench@@uni-konstanz.de}
 #' @aliases getNormalizedResponses get_normalized_responses
 #' @examples
-#'
+#' # load data
 #' library(DoOR.data)
+#' data(door_response_matrix)
+#' 
+#' # define a list of odorants
 #' odors <- c("MLFHJEHSLIIPHL-UHFFFAOYSA-N",
 #'            "OBNCKNCVKJNDBV-UHFFFAOYSA-N",
 #'            "IKHGUXGNUITLKF-UHFFFAOYSA-N")
-#' data(door_response_matrix)
+#' 
+#' # get the normalized responses for these odorants
 #' result <- get_normalized_responses(odors, response_matrix = door_response_matrix)
 #'
 get_normalized_responses <- function(odors,
