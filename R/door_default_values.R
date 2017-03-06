@@ -13,7 +13,7 @@
 #' @export
 #' @importFrom utils data
 #' @examples
-#'
+#' # extract DoOR default values
 #' door_default_values(DoOR_default = "select.MD")
 #'
 door_default_values <- function(DoOR_default) {

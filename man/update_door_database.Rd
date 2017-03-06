@@ -11,7 +11,8 @@ update_door_database(receptor, permutation = TRUE, perm,
   weightGlobNorm = door_default_values("door_global_normalization_weights"),
   select.MDValue = door_default_values("select.MDValue"), strict = TRUE,
   overlapValues = door_default_values("overlapValues"),
-  door_excluded_data = door_default_values("door_excluded_data"), plot = FALSE)
+  door_excluded_data = door_default_values("door_excluded_data"),
+  plot = FALSE)
 }
 \arguments{
 \item{receptor}{character string, name of given odorant receptor.}

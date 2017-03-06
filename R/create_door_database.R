@@ -1,7 +1,8 @@
 #' Compose a Response Matrix of All Odor Receptors
 #'
-#' computes the complete response model for all receptors in the database
-#' (calls \code{\link{model_response}} for all receptors)
+#' computes the complete response model for all receptors in the database (calls
+#' \code{\link{model_response}} for all receptors). Overwrites response_matrix,
+#' door_response_matrix_non_normalized and door_excluded_data.
 #'
 #'
 #' @param tag character string, format for rownames, possibilities: "InChIKey",
@@ -19,14 +20,17 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' # load DoOR data
 #' library(DoOR.data)
 #' load_door_data()
-#' mydatabase <- create_door_database()
+#' 
+#' # create a new consensus matrix
+#' create_door_database()
 #' }
 create_door_database <- function(tag                = door_default_values("tag"),
-                           select.MDValue     = door_default_values("select.MDValue"),
-                           overlapValues      = door_default_values("overlapValues"),
-                           ...) {
+                                 select.MDValue     = door_default_values("select.MDValue"),
+                                 overlapValues      = door_default_values("overlapValues"),
+                                 ...) {
 
   door_excluded_data   <- data.frame(OR = get('ORs')$OR, excluded = NA) # reset/create door_excluded_data
 

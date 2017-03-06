@@ -19,20 +19,20 @@
 door_melt <- function(data, datasets, ident, na.rm = FALSE) {
   if(missing(datasets))
     datasets = colnames(data)
-
+  
   if(missing(ident)) {
     data$odorant <- rownames(data)
     ident <- "odorant"
   }
-
+  
   result <- data.frame()
   for (i in 1:length(datasets)) {
     tmp <- data.frame(odorant = data[,ident], dataset = datasets[i], value = data[,datasets[i]])
     result <- rbind(result, tmp)
   }
-
+  
   if(na.rm == TRUE)
     result <- na.omit(result)
-
+  
   return(result)
 }

@@ -10,7 +10,10 @@
 #' @keywords math
 #' @export
 #' @examples
+#' # create example data
 #' x <- rnorm(10)
+#' 
+#' # run door_norm on it
 #' door_norm(x)
 #'
 door_norm <- function(x) {

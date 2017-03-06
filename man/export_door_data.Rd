@@ -10,7 +10,8 @@ export_door_data(file.format, directory,
   response_matrix = door_default_values("door_response_matrix"),
   responseRange = door_default_values("door_response_range"),
   unglobalNorm_RM = door_default_values("door_response_matrix_non_normalized"),
-  weightGlobNorm = door_default_values("door_global_normalization_weights"), all.data = TRUE)
+  weightGlobNorm = door_default_values("door_global_normalization_weights"),
+  all.data = TRUE)
 }
 \arguments{
 \item{file.format}{character string, the format of given file, either ".txt"

@@ -15,7 +15,7 @@
 #' @param sub character vector, specify one or several classes of sensilla the
 #'   plot should be restricted to. One or several of: "ab" "ac", "at", "ai",
 #'   "pb", "sacI", "sacII"
-#' @param DoOR_mappings data frame, containing the mappings of response profiles
+#' @param door_mappings data frame, containing the mappings of response profiles
 #'   to morphological structures.
 #'
 #' @details DoOR response profiles will be selected and ordered according to the
@@ -29,17 +29,25 @@
 #' @export
 #'
 #' @examples
+#' # load DoOR data & functions
 #' library(DoOR.data)
+#' library(DoOR.functions)
+#' 
+#' # pick example odorants by name ans transform their ID to InChIKey
 #' odorants <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
 #'                     from = "Name", to = "InChIKey")
+#'  
+#' # plot                                      
 #' dplot_across_osns(odorants)
+#' # plot only across ac and at sensillae
 #' dplot_across_osns(odorants, sub = c("ac", "at"))
+#' # plot across sensory neurons
 #' dplot_across_osns(odorants, plot.type = 2)
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 dplot_across_osns <- function(odorants,
                                 response_matrix = door_default_values("door_response_matrix"),
                                 odor_data = door_default_values("odor"),
-                                DoOR_mappings = door_default_values("DoOR_mappings"),
+                                door_mappings = door_default_values("door_mappings"),
                                 zero = door_default_values("zero"),
                                 tag  = "Name",
                                 sub,
@@ -60,8 +68,8 @@ dplot_across_osns <- function(odorants,
   if(tag != "InChIKey")
     data$odorant <- odor_data[match(data$odorant, odor_data$InChIKey), tag]
 
-  data$sensillum <- DoOR_mappings[match(data$dataset, DoOR_mappings$receptor), "sensillum"]
-  data$OSN       <- DoOR_mappings[match(data$dataset, DoOR_mappings$receptor), "code.OSN"]
+  data$sensillum <- door_mappings[match(data$dataset, door_mappings$receptor), "sensillum"]
+  data$OSN       <- door_mappings[match(data$dataset, door_mappings$receptor), "code.OSN"]
   data           <- subset(data, sensillum != "")
   data$OSN       <- gsub("ab|ac|at|ai|pb|sacI|sacII|[0-9]", "", data$OSN)
   data           <- subset(data, !is.na(OSN))

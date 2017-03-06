@@ -159,7 +159,7 @@ dplot_across_ru(odors, tag = "Name", base_size = 8)
 
 
 ## Visualizing odorant responses across OSNs with `dplot_across_osns()`{#across_OSNs}
-`dplot_across_osns()` is similar to `dplot_across_ru()` but the responding units are sorted according to the sensory neuron they belong to. This sorting is controlled via `DoOR_mappings` from the `DoOR.data` package. There are two types of plot that `dplot_across_osns()` can return. Type 2 directly resembles `dplot_across_ru()`:
+`dplot_across_osns()` is similar to `dplot_across_ru()` but the responding units are sorted according to the sensory neuron they belong to. This sorting is controlled via `door_mappings` from the `DoOR.data` package. There are two types of plot that `dplot_across_osns()` can return. Type 2 directly resembles `dplot_across_ru()`:
 
 
 ```{r, fig.width = 6, fig.height = 6}

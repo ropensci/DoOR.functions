@@ -14,10 +14,14 @@
 #' @return matrix
 #'
 #' @examples
+#' # load some data
 #' library(DoOR.data)
 #' load_door_data()
+#' 
+#' #run count studies and plot the result
 #' count <- count_studies()
 #' image(count)
+#' head(count)
 #'
 count_studies <- function(ors = door_default_values("ORs"),
                          odor_data = door_default_values("odor"),

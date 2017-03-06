@@ -9,7 +9,7 @@
 #'   scaled between 0 and 1 (see examples)
 #' @param response_matrix DoOR response matrix, the data to compair against
 #' @param odor_data data frame, contains the odorant information.
-#' @param DoOR_mappings the data frame containing the mapping information
+#' @param door_mappings the data frame containing the mapping information
 #' @param tag character, the chemical identifier to use in plots, one of
 #'   \code{colnames(odor)}
 #' @param min.cor numeric, a minimum correlation value, the function will check
@@ -54,7 +54,7 @@
 identify_sensillum <- function(recording,
                               response_matrix = door_default_values("door_response_matrix"),
                               odor_data       = door_default_values("odor"),
-                              DoOR_mappings   = door_default_values("DoOR_mappings"),
+                              door_mappings   = door_default_values("door_mappings"),
                               tag     = "Name",
                               min.cor = .9,
                               nshow   = 10,
@@ -80,7 +80,7 @@ identify_sensillum <- function(recording,
     nshow <- length(data)
 
   if(!missing(sub)) {
-    subset <- as.character(DoOR_mappings$receptor[grep(paste0("^", sub, collapse = "|"), DoOR_mappings$sensillum)])
+    subset <- as.character(door_mappings$receptor[grep(paste0("^", sub, collapse = "|"), door_mappings$sensillum)])
     which(colnames(data) %in% subset)
     data <- data[,which(colnames(data) %in% subset)]
   }
@@ -89,8 +89,8 @@ identify_sensillum <- function(recording,
     # calulate correlations
     units  <- colnames(recording)[-1]
     result <- data.frame(receptor = colnames(data))
-    result$sensillum <- DoOR_mappings$sensillum[match(result$receptor, DoOR_mappings$receptor)]
-    result$OSN <- DoOR_mappings$OSN[match(result$receptor, DoOR_mappings$receptor)]
+    result$sensillum <- door_mappings$sensillum[match(result$receptor, door_mappings$receptor)]
+    result$OSN <- door_mappings$OSN[match(result$receptor, door_mappings$receptor)]
     for(i in 1:length(units)) {
       corx <- apply(data, 2, function(x) cor(x, recording[,units[i]], use = use) )
       corx <- data.frame(receptor = names(corx), value = corx)
@@ -113,8 +113,8 @@ identify_sensillum <- function(recording,
     # calulate correlations
     units  <- colnames(recording)[-1]
     result <- data.frame(receptor = colnames(data))
-    result$sensillum <- DoOR_mappings$sensillum[match(result$receptor, DoOR_mappings$receptor)]
-    result$OSN <- DoOR_mappings$OSN[match(result$receptor, DoOR_mappings$receptor)]
+    result$sensillum <- door_mappings$sensillum[match(result$receptor, door_mappings$receptor)]
+    result$OSN <- door_mappings$OSN[match(result$receptor, door_mappings$receptor)]
     for(i in 1:length(units)) {
       corx <- c()
       px   <- c()
@@ -152,8 +152,8 @@ identify_sensillum <- function(recording,
     result <- as.matrix(dist(result))
     result <- result[(length(units)+1):nrow(result), 1:length(units),drop=FALSE]
     result <- data.frame(receptor  = rownames(result),
-                         sensillum = DoOR_mappings$sensillum[match(rownames(result), DoOR_mappings$receptor)],
-                         OSN = DoOR_mappings$OSN[match(rownames(result), DoOR_mappings$receptor)],
+                         sensillum = door_mappings$sensillum[match(rownames(result), door_mappings$receptor)],
+                         OSN = door_mappings$OSN[match(rownames(result), door_mappings$receptor)],
                          result)
   }
 
@@ -181,7 +181,7 @@ identify_sensillum <- function(recording,
         cor.tmp <- result[order(result[,units[i]], decreasing = FALSE),][1:nshow, c("receptor",units[i])]
 
       colnames(cor.tmp)[2] <- "cor"
-      cor.tmp$OSN    <- DoOR_mappings$OSN[match(cor.tmp$receptor, DoOR_mappings$receptor)]
+      cor.tmp$OSN    <- door_mappings$OSN[match(cor.tmp$receptor, door_mappings$receptor)]
       if(method == "cor.test"){
         cor.tmp$label  <- paste0(cor.tmp$OSN, " (",cor.tmp$receptor,")", "\n",
                                 "cor: ", round(cor.tmp$cor, 3),

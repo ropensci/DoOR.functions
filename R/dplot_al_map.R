@@ -8,11 +8,11 @@
 #' @param odor_data data frame, contains the odorant information.
 #' @param zero the odorant to set to zero (defaults to "SFR")
 #' @param tag the labels to plot on top of the glomeruli (one of the following
-#'   \code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
+#'   \code{door_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
 #'   or "co.receptor")
 #' @param main the title, one column of \code{odor}, defaults to "Name"
 #' @param scalebar whether or not to add a scalebar
-#' @param DoOR_mappings the data frame containing the mapping information
+#' @param door_mappings the data frame containing the mapping information
 #' @param colors a vector containing 6 color values (2 for values below 0, 1 0
 #'   value and 3 steps between 0 and 1)
 #' @param limits the limits for the color scale, if empty the range of the
@@ -50,7 +50,7 @@
 dplot_al_map <- function(InChIKey,
                            response_matrix = door_default_values("door_response_matrix"),
                            odor_data = door_default_values("odor"),
-                           DoOR_mappings = door_default_values("DoOR_mappings"),
+                           door_mappings = door_default_values("door_mappings"),
                            zero = door_default_values("zero"),
                            tag =  door_default_values("tag.ALmap"),
                            main = "Name",
@@ -73,11 +73,11 @@ dplot_al_map <- function(InChIKey,
   response.data <- get_normalized_responses(InChIKey, zero = zero, response_matrix = response_matrix)
 
   plotdata <- door_AL_map[["glomeruli"]]
-  plotdata$receptor <- DoOR_mappings$receptor[match(plotdata$glomerulus, DoOR_mappings$code)] # match mapped glomeruli and extract receptor names
+  plotdata$receptor <- door_mappings$receptor[match(plotdata$glomerulus, door_mappings$code)] # match mapped glomeruli and extract receptor names
   plotdata$response <- response.data$Response[match(plotdata$receptor, response.data$ORs)] # pick responses from response.data
 
   labels <- door_AL_map$labels
-  labels <- cbind(labels,DoOR_mappings[match(labels$glomerulus, DoOR_mappings$code),c("receptor", "sensillum", "OSN", "co.receptor", "Ors")])
+  labels <- cbind(labels,door_mappings[match(labels$glomerulus, door_mappings$code),c("receptor", "sensillum", "OSN", "co.receptor", "Ors")])
 
 
   main <- odor_data[match(InChIKey, odor$InChIKey), main]

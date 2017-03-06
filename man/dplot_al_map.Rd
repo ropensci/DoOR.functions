@@ -8,7 +8,7 @@
 dplot_al_map(InChIKey,
   response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
-  DoOR_mappings = door_default_values("DoOR_mappings"),
+  door_mappings = door_default_values("door_mappings"),
   zero = door_default_values("zero"),
   tag = door_default_values("tag.ALmap"), main = "Name",
   scalebar = door_default_values("scalebar"),
@@ -24,12 +24,12 @@ door_response_matrix_non_normalized)}
 
 \item{odor_data}{data frame, contains the odorant information.}
 
-\item{DoOR_mappings}{the data frame containing the mapping information}
+\item{door_mappings}{the data frame containing the mapping information}
 
 \item{zero}{the odorant to set to zero (defaults to "SFR")}
 
 \item{tag}{the labels to plot on top of the glomeruli (one of the following
-\code{DoOR_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
+\code{door_mappings} columns: "receptor", "sensillum", "ORN", "glomerulus"
 or "co.receptor")}
 
 \item{main}{the title, one column of \code{odor}, defaults to "Name"}

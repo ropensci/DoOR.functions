@@ -8,7 +8,7 @@
 dplot_across_osns(odorants,
   response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
-  DoOR_mappings = door_default_values("DoOR_mappings"),
+  door_mappings = door_default_values("door_mappings"),
   zero = door_default_values("zero"), tag = "Name", sub, plot.type = 1,
   base_size = 12)
 }
@@ -19,7 +19,7 @@ dplot_across_osns(odorants,
 
 \item{odor_data}{data frame, contains the odorant information.}
 
-\item{DoOR_mappings}{data frame, containing the mappings of response profiles
+\item{door_mappings}{data frame, containing the mappings of response profiles
 to morphological structures.}
 
 \item{zero}{character, InChIKey of the odorant that should be set to 0 (e.g.

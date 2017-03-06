@@ -7,7 +7,7 @@
 \usage{
 private_odorant(receptor, sensillum = FALSE,
   response_matrix = door_default_values("door_response_matrix"),
-  DoOR_mappings = door_default_values("DoOR_mappings"),
+  door_mappings = door_default_values("door_mappings"),
   zero = door_default_values("zero"), nshow = 5, tag)
 }
 \arguments{
@@ -17,7 +17,7 @@ private_odorant(receptor, sensillum = FALSE,
 
 \item{response_matrix}{DoOR response matrix, the input data to perform the search on}
 
-\item{DoOR_mappings}{the data frame containing the mapping information}
+\item{door_mappings}{the data frame containing the mapping information}
 
 \item{zero}{character, an odorant that should be set to 0}
 
