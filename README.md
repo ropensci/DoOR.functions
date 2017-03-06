@@ -15,8 +15,8 @@ Either download a packaged version or install _via_ `devtools`:
 install.packages("devtools")
 library(devtools)
 
-# install DoOR.functions 2.0.0
-install_github("dahaniel/DoOR.functions", ref="v2.0.0")
+# install DoOR.functions 2.0.1
+install_github("dahaniel/DoOR.functions", ref="v2.0.1")
 
 # or install the latest version available on Github
 install_github("dahaniel/DoOR.functions")

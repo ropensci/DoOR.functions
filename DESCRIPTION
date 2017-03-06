@@ -2,8 +2,8 @@ Package: DoOR.functions
 Type: Package
 Title: Integrating Heterogeneous Odorant Response Data into a Common Response
     Model: A DoOR to the Complete Olfactome
-Version: 2.0.0
-Date: 2016-02-25
+Version: 2.0.1
+Date: 2017-03-06
 Authors@R: c(
     person("Daniel", "Münch", email = "daniel.muench@uni-konstanz.de", role = c("aut", "cre")),
     person("C. Giovanni", "Galizia", email = "giovanni.galizia@uni-konstanz.de", role = "aut"), 
@@ -20,9 +20,9 @@ Encoding: UTF-8
 Imports:
     utils
 Depends:
-    DoOR.data (>= 2.0.0),
+    DoOR.data (>= 2.0.1),
     R (>= 3.2.0)
-Remotes: Dahaniel/DoOR.data@v2.0.0
+Remotes: Dahaniel/DoOR.data@v2.0.1
 Suggests:
     ggplot2,
     grid,
