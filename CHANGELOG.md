@@ -1,17 +1,32 @@
 # Change Log
 
+## [2.0.1](https://github.com/Dahaniel/DoOR.functions/tree/2.0.1) (2017-03-06)
+[Full Changelog](https://github.com/Dahaniel/DoOR.functions/compare/v2.0.0...2.0.1)
+
+**Implemented enhancements:**
+
+- in identifySensillum.R set default value of "use" to "everything" [\#5](https://github.com/Dahaniel/DoOR.functions/issues/5)
+
+**Closed issues:**
+
+- comment examples [\#12](https://github.com/Dahaniel/DoOR.functions/issues/12)
+- inform about new function names upon package loading [\#11](https://github.com/Dahaniel/DoOR.functions/issues/11)
+- rename `loadData` to `load\_door\_data\(\)` to be more descriptive [\#10](https://github.com/Dahaniel/DoOR.functions/issues/10)
+- move all urls to url field in DESCRIPTION [\#9](https://github.com/Dahaniel/DoOR.functions/issues/9)
+- change function names to snake\_case [\#7](https://github.com/Dahaniel/DoOR.functions/issues/7)
+
 ## [v2.0.0](https://github.com/Dahaniel/DoOR.functions/tree/v2.0.0) (2016-02-25)
 [Full Changelog](https://github.com/Dahaniel/DoOR.functions/compare/v1.0.2...v2.0.0)
 
 **Implemented enhancements:**
 
-- enable plotting in update_door_database\(\) / model_response_seq\(\) [\#3](https://github.com/Dahaniel/DoOR.functions/issues/3)
-- calculate_model\(\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
+- enable plotting in updateDatabase\(\) / modelRPSEQ\(\) [\#3](https://github.com/Dahaniel/DoOR.functions/issues/3)
+- calModel\(\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
 
 **Fixed bugs:**
 
-- update_door_database\(\) calculates with wrong permutation [\#2](https://github.com/Dahaniel/DoOR.functions/issues/2)
-- calculate_model\\(\\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
+- updateDatabase\(\) calculates with wrong permutation [\#2](https://github.com/Dahaniel/DoOR.functions/issues/2)
+- calModel\\(\\) fails for studies containing only 0s [\#1](https://github.com/Dahaniel/DoOR.functions/issues/1)
 
 **Merged pull requests:**
 
