@@ -35,7 +35,7 @@
 #' @examples
 #' # load data
 #' library(DoOR.data)
-#' libraray(DoOR.functions)
+#' library(DoOR.functions)
 #' 
 #' # map responses on antennal lobe scheme
 #' dplot_al_map("MLFHJEHSLIIPHL-UHFFFAOYSA-N", scalebar = FALSE)

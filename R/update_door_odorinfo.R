@@ -7,6 +7,8 @@
 #' @aliases updateOdorInfo update_door_odorinfo
 #' @export
 #' @examples 
+#' # load data
+#' load_door_data(nointeraction = TRUE)  
 #' # modify odor
 #' odor[1,1] <- "acid"
 #' 

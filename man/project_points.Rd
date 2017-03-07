@@ -60,8 +60,8 @@ data(Or23a)
 x <- door_norm(Or23a[,'Hallem.2004.EN'])
 y <- door_norm(Or23a[,'Hallem.2006.EN'])
 
-# find the best fitting function and project the remaining points (measured only in one of the
-data sets) onto the fit.
+# find the best fitting function and project the remaining points (measured
+# only in one of the data sets) onto the fit.
 project_points(x = x, y = y, plot = TRUE)
 
 }

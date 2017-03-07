@@ -12,6 +12,8 @@ Update the DoOR odor data with info from \code{odor}. For the function to
 work, all DoOR data has to be loaded to the current environment.
 }
 \examples{
+# load data
+load_door_data(nointeraction = TRUE)  
 # modify odor
 odor[1,1] <- "acid"
 
