@@ -16,16 +16,16 @@
 #' @author Daniel Münch <\email{daniel.muench@@uni-konstanz.de}>
 #' @export
 #' @importFrom stats na.omit cor.test
-#' @aliases mapReceptor map_receptor 
+#' @aliases mapReceptor map_receptor
 #' @examples
 #' # load data
-#' load_door_data()
-#' 
+#' load_door_data(nointeraction = TRUE)
+#'
 #' # pick example data
 #' data <- data.frame(odorants  = Or22a$InChIKey,
 #'                    responses = Or22a$Hallem.2004.EN)
 #' data <- na.omit(data)
-#' 
+#'
 #' # find the corresponding receptor / responding unit
 #' map_receptor(data = data)
 map_receptor <- function(data,

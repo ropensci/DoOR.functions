@@ -2,7 +2,7 @@
 #load data
 library(DoOR.functions)
 library(DoOR.data)
-load_door_data()
+load_door_data(nointeraction = TRUE)
 
 ## ------------------------------------------------------------------------
 recording <- data.frame(

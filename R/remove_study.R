@@ -18,8 +18,8 @@
 #' @examples
 #' # load data
 #' library(DoOR.data)
-#' load_door_data()
-#' 
+#' load_door_data(nointeraction = TRUE)
+#'
 #' # remove Bruyne.2001.WT from DoOR
 #' remove_study('Bruyne.2001.WT')
 #'

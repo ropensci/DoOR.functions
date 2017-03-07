@@ -16,8 +16,8 @@
 #' @examples
 #' # load data
 #' library(DoOR.data)
-#' load_door_data()
-#' 
+#' load_door_data(nointeraction = TRUE)
+#'
 #' # get all recordings from the Hallem.2004.EN data set
 #' get_dataset("Hallem.2004.EN", na.rm = TRUE)
 get_dataset <- function(study, na.rm = FALSE) {

@@ -31,7 +31,7 @@ DoOR responding units.
 }
 \examples{
 # load data
-load_door_data()
+load_door_data(nointeraction = TRUE)
 
 # pick example data
 data <- data.frame(odorants  = Or22a$InChIKey,

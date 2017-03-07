@@ -15,7 +15,7 @@ returns all original DoOR response data as a list
 \examples{
 # load DoOR.data
 library(DoOR.data)
-load_door_data()
+load_door_data(nointeraction = TRUE)
 
 # write the data into a list
 lst <- load2list()

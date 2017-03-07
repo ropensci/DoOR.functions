@@ -27,7 +27,7 @@ First we need to load packages and data:
 #load data
 library(DoOR.functions)
 library(DoOR.data)
-load_door_data()
+load_door_data(nointeraction = TRUE)
 ```
 
 ## Visualizing odorants _vs_ responding units with `dplot_response_matrix()`{#responseMatrix}

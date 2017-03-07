@@ -28,7 +28,7 @@ receptors from all available studies.
 \examples{
 # load data
 library(DoOR.data)
-load_door_data()
+load_door_data(nointeraction = TRUE)
 
 # get raw responses for odorant MLFHJEHSLIIPHL-UHFFFAOYSA-N
 responses <- get_responses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')

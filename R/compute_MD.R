@@ -19,7 +19,7 @@
 # @examples
 #
 # library(DoOR.data)
-# load_door_data()
+# load_door_data(nointeraction = TRUE)
 # x<-door_norm(Or23a[,'Hallem.2004.EN'])
 # y<-door_norm(Or23a[,'Hallem.2006.EN'])
 # comb.xy     <-  na.omit(cbind(x, y))

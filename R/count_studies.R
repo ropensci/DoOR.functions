@@ -16,8 +16,8 @@
 #' @examples
 #' # load some data
 #' library(DoOR.data)
-#' load_door_data()
-#' 
+#' load_door_data(nointeraction = TRUE)
+#'
 #' #run count studies and plot the result
 #' count <- count_studies()
 #' image(count)
