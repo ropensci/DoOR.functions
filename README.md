@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.46555.svg)](http://dx.doi.org/10.5281/zenodo.46555)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.375617.svg)](http://dx.doi.org/10.5281/zenodo.375617)
 [![Travis-CI Build Status](https://travis-ci.org/Dahaniel/DoOR.functions.svg?branch=master)](https://travis-ci.org/Dahaniel/DoOR.functions)
 DoOR.functions
 ==============
