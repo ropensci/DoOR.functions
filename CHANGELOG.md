@@ -1,7 +1,7 @@
 # Change Log
 
-## [2.0.1](https://github.com/Dahaniel/DoOR.functions/tree/2.0.1) (2017-03-06)
-[Full Changelog](https://github.com/Dahaniel/DoOR.functions/compare/v2.0.0...2.0.1)
+## [v2.0.1](https://github.com/Dahaniel/DoOR.functions/tree/v2.0.1) (2017-03-07)
+[Full Changelog](https://github.com/Dahaniel/DoOR.functions/compare/v2.0.0...v2.0.1)
 
 **Implemented enhancements:**
 
