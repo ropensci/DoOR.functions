@@ -5,7 +5,7 @@ Title: Integrating Heterogeneous Odorant Response Data into a Common Response
 Version: 2.0.1
 Date: 2017-03-07
 Authors@R: c(
-    person("Daniel", "MÃ¼nch", email = "daniel.muench@uni-konstanz.de", role = c("aut", "cre")),
+    person("Daniel", "Münch", email = "daniel.muench@uni-konstanz.de", role = c("aut", "cre")),
     person("C. Giovanni", "Galizia", email = "giovanni.galizia@uni-konstanz.de", role = "aut"), 
     person("Shouwen", "Ma", role = "aut"),
     person("Martin", "Strauch", role = "aut"),
@@ -29,6 +29,7 @@ Suggests:
     gridExtra (>= 2.0.0),
     knitr,
     class, 
-    rmarkdown
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
