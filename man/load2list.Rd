@@ -23,4 +23,3 @@ lst <- load2list()
 \author{
 Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
-

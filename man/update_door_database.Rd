@@ -69,13 +69,12 @@ load_door_data()
  update_door_database(receptor="Or67b", permutation = TRUE)
 }
 }
+\seealso{
+\code{\link{model_response}},\code{\link{model_response_seq}}
+}
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 
 Shouwen Ma <\email{daniel.muench@uni-konstanz.de}>
 }
-\seealso{
-\code{\link{model_response}},\code{\link{model_response_seq}}
-}
 \keyword{data}
-

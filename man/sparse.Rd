@@ -20,9 +20,6 @@ Tolhurst, 2001) or as lifetime sparseness (LTS, Bhandawat et al., 2007).
 LTS scales between \[0,1\] while LTK is not restricted. LTS only
   takes positive values.
 }
-\author{
-Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
-}
 \references{
 Bhandawat, V., Olsen, S.R., Gouwens, N.W., Schlief, M.L., Wilson,
   R.I., 2007. Sensory processing in the Drosophila antennal lobe increases
@@ -32,6 +29,8 @@ Bhandawat, V., Olsen, S.R., Gouwens, N.W., Schlief, M.L., Wilson,
 Willmore, B., Tolhurst, D.J., 2001. Characterizing the sparseness
   of neural codes. Network 12, 255–270. doi:10.1080/net.12.3.255.270
 }
+\author{
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
+}
 \keyword{kurtosis}
 \keyword{sparseness,}
-

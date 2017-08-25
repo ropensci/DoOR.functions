@@ -2,9 +2,9 @@
 % Please edit documentation in R/DoOR.functions-package.R
 \docType{package}
 \name{DoOR.functions.package}
-\alias{DoOR.function}
-\alias{DoOR.functions}
 \alias{DoOR.functions.package}
+\alias{DoOR.functions}
+\alias{DoOR.function}
 \alias{DoOR.functions.package-package}
 \title{DoOR Functions}
 \description{
@@ -60,17 +60,16 @@ consensus response data for a given receptor. \cr }
 
 See the Vignettes and the help pages for more documentation.
 }
-\author{
-C. Giovanni Galizia \cr Daniel Muench \cr Martin Strauch \cr Anja
-Nissler \cr Shouwen Ma \cr
-
-Maintainer: Daniel Münch <daniel.muench@uni-konstanz.de>
-}
 \references{
 \url{http://neuro.uni-konstanz.de/DoOR}
 }
 \seealso{
 \code{DoOR.data}
 }
-\keyword{package}
+\author{
+C. Giovanni Galizia \cr Daniel Muench \cr Martin Strauch \cr Anja
+Nissler \cr Shouwen Ma \cr
 
+Maintainer: Daniel Münch <daniel.muench@uni-konstanz.de>
+}
+\keyword{package}

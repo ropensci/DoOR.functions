@@ -61,4 +61,3 @@ Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 }
-
