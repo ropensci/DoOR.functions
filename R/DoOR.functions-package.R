@@ -62,3 +62,31 @@
 #' @references \url{http://neuro.uni-konstanz.de/DoOR}
 #' @keywords package
 NULL
+
+## quiets concerns of R CMD check re: the .'s that appear in pipelines
+if(getRversion() >= "2.15.1")  utils::globalVariables(c(".",
+                                                        "dataset",
+                                                        "door_AL_map",
+                                                        "door_data_format",
+                                                        "door_excluded_data",
+                                                        "door_global_normalization_weights",
+                                                        "door_mappings",
+                                                        "door_response_matrix",
+                                                        "door_response_matrix_non_normalized",
+                                                        "door_response_range",
+                                                        "glomerulus",
+                                                        "group",
+                                                        "n",
+                                                        "odor.dist",
+                                                        "odorant",
+                                                        "odorants",
+                                                        "odor",
+                                                        "ORs",
+                                                        "OSN",
+                                                        "receptors",
+                                                        "response",
+                                                        "sensillum",
+                                                        "value",
+                                                        "values",
+                                                        "x"
+                                                        ))
