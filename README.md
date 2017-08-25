@@ -1,7 +1,7 @@
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.375617.svg)](http://dx.doi.org/10.5281/zenodo.375617)
-[![Travis-CI Build Status](https://travis-ci.org/Dahaniel/DoOR.functions.svg?branch=master)](https://travis-ci.org/Dahaniel/DoOR.functions)
 DoOR.functions
 ==============
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.375617.svg)](http://dx.doi.org/10.5281/zenodo.375617)
+[![Travis-CI Build Status](https://travis-ci.org/Dahaniel/DoOR.functions.svg?branch=master)](https://travis-ci.org/Dahaniel/DoOR.functions)
 
 R package containing the functions used to build the Database of Odor Responses. The corresponding data package can be found at [https://github.com/Dahaniel/DoOR.data](https://github.com/Dahaniel/DoOR.data).
 
