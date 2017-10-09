@@ -14,10 +14,10 @@ colnames(tmp)[6] <- "Or22a"
 knitr::kable(tmp)
 
 ## ---- fig.width = 7.1, fig.height = 5.5----------------------------------
-update_door_database("Or92a", permutation = F, plot = T)
+update_door_database("Or92a", permutation = F, plot = TRUE)
 
 ## ---- fig.width = 7.1, fig.height = 5.5----------------------------------
-update_door_database("Or67a", permutation = T, plot = F)
+update_door_database("Or67a", permutation = TRUE, plot = F)
 
 ## ---- fig.width = 7.1, fig.height = 5.5----------------------------------
 merge <- model_response(Or67a, plot = F)
@@ -70,4 +70,3 @@ knitr::kable(counts[1:10,6:15])
 ## ------------------------------------------------------------------------
 # export_door_data(".csv")                  	# export all data as .csv files
 # export_door_data(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
-

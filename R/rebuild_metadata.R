@@ -10,7 +10,7 @@ rebuild_metadata <- function(){
 
   rr <- data.frame()
   for(i in datasets) {
-    data.i <- get_dataset(study = i, na.rm = T)
+    data.i <- get_dataset(study = i, na.rm = TRUE)
     rec.i  <- colnames(data.i)[-c(1:door_default_values("num.charColumns"))]
     # update wgn
     wgn[rec.i, i] <- 1

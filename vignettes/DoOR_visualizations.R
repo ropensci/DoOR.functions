@@ -1,4 +1,4 @@
-## ---- echo = T, message = TRUE, results='hide'---------------------------
+## ---- echo = TRUE, message = TRUE, results='hide'---------------------------
 #load data
 library(DoOR.functions)
 library(DoOR.data)
@@ -80,4 +80,3 @@ dplot_across_osns(odors, base_size = 8, plot.type = 1, sub = "ab")
 
 ## ---- fig.width = 7.1, fig.height = 5------------------------------------
 dplot_across_osns(odors, base_size = 8, plot.type = 1, sub = c("ac", "at"))
-

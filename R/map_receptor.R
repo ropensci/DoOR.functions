@@ -59,7 +59,7 @@ map_receptor <- function(data,
                        cor             = unlist(sapply(result, "[","estimate")),
                        p.value         = unlist(sapply(result, "[","p.value")))
 
-  result <- result[order(result$cor, decreasing = T),]
+  result <- result[order(result$cor, decreasing = TRUE),]
 
   if(!missing(threshold.p))
     result <- result[which(result$p.value <= threshold.p),]

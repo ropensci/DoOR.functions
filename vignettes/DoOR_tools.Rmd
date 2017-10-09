@@ -23,7 +23,7 @@ The `DoOR.functions` package provides tools for the analysis of the data provide
 
 ## Loading data{#loading}
 First we need to load packages and data:
-```{r, echo = T, message = TRUE, results='hide'}
+```{r, echo = TRUE, message = TRUE, results='hide'}
 #load data
 library(DoOR.functions)
 library(DoOR.data)
@@ -33,13 +33,13 @@ load_door_data(nointeraction = TRUE)
 ## Identifying the sensillum we are recording from with `identify_sensillum()` {#identify_sensillum}
 Imagine we perform an electrophysiological recording from a _Drosophila_ sensillum (single sensillum recording, SSR) and we are not sure what sensillum we are recording from. In order to identify the sensillum we used several diagnostic odorants (maybe selected using [`private_odorant()`](#private_odorant)) and got responses from the different sensory neurons the sensillum houses. We can now pass our recorded data to `identify_sensillum()`.
 
-Let's make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxide) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called `odorants` with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron). 
+Let's make up some simple fake data. We pretend to have recorded with three odorants (2,3-butanedione, ethanoic acid and carbon dioxide) and we could separate the responses of two units. Unit1 responded strongly to 2,3-butanedione only, unit2 only responded to carbon dioxide. We create a data.frame that contains a column called `odorants` with the InChIKeys of our test odorants, and one column for each unit (name the colnames as you like, e.g. unit1-n or Aneuro if you are sure about the neuron).
 
 ```{r}
 recording <- data.frame(
-  odorants = c(trans_id(c("BEDN", "ETAS"), "Code"), 
-               trans_id("carbon dioxide", "Name")), 
-  unit1 = c(.9,.1,.1), 
+  odorants = c(trans_id(c("BEDN", "ETAS"), "Code"),
+               trans_id("carbon dioxide", "Name")),
+  unit1 = c(.9,.1,.1),
   unit2 = c(0, .1, 1)
 )
 ```
@@ -122,13 +122,13 @@ The DoOR consensus data is normalized to values between 0 and 1. If we want to c
 
 As an example, let's take the data Hallem et al. recorded from Or22a _via_ calcium imaging and rescale the DoOR responses accordingly. The template has to have 2 columns named `odorants` and `responses`:
 ```{r, fig.width = 4.5, fig.height = 4.5}
-template <- data.frame(odorants  = Or22a$InChIKey, 
+template <- data.frame(odorants  = Or22a$InChIKey,
                        responses = Or22a$Hallem.2006.EN)
 
 bp <- back_project(template, responding.unit = "Or22a")
-plot(bp$back_projected$original.data, 
-     bp$back_projected$back_projected.data, 
-     xlab = "DoOR consensus response", 
+plot(bp$back_projected$original.data,
+     bp$back_projected$back_projected.data,
+     xlab = "DoOR consensus response",
      ylab = "back_projected data [spikes, Hallem.2006.EN]"
 )
 
