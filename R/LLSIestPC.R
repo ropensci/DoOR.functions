@@ -37,77 +37,112 @@ LLSIestPC <-
            receptor,
            response_matrix = door_default_values("door_response_matrix"),
            nodor = 3) {
-
-    ### subfunction
-    ## Find "k" nearest neighbors to "target" in the "candicate", utilizing function cor.test().
+    ### subfunction Find "k" nearest neighbors to "target" in the "candicate",
+    ##utilizing function cor.test().
     nearest <- function (target, candicate, k) {
       N <- nrow(candicate)
-      if (missing(k)) { k <- N }
-      if (N < k) {
-        message(paste0("The number of available odors is smaller than the minimum (",k,"), so that only available odors will be selected."))
+      if (missing(k)) {
         k <- N
       }
-      # absolute values of Pearson correlation coefficients between target and candicates
-      absCorr 	<- abs(apply(candicate,1,function(x) cor.test(target,x)$estimate))
+      if (N < k) {
+        message(
+          paste0(
+            "The number of available odors is smaller than the minimum (",
+            k,
+            "), so that only available odors will be selected."
+          )
+        )
+        k <- N
+      }
+      # absolute values of Pearson correlation coefficients between target and
+      # candicates
+      absCorr 	<-
+        abs(apply(candicate, 1, function(x)
+          cor.test(target, x)$estimate))
       sorted_absCorr 	<- sort(absCorr, decreasing = TRUE)
-
+      
       return(sorted_absCorr[1:k])
     }
-
-
-    available <- function(x) { length(which(!is.na(x))) }
-
+    
+    
+    available <- function(x) {
+      length(which(!is.na(x)))
+    }
+    
     ## main program starts here
-
-    # first: subtract the non-NA vectors (b, w) and matrix A to complete the linear combination
+    
+    # first: subtract the non-NA vectors (b, w) and matrix A to complete the
+    # linear combination
     #	[alfa 	w]
     #	[b    	A]
-    # where "alfa" is the unknown odorant response, "w" is a vector of odorant responses of target odor, "b" is a vector of odorant responses of target receptor, after completing "b" and "w", the matrix "A" is formed.
-
+    # where "alfa" is the unknown odorant response, "w" is a vector of odorant
+    # responses of target odor, "b" is a vector of odorant responses of target
+    # receptor, after completing "b" and "w", the matrix "A" is formed.
+    
     response_matrix 		<- as.data.frame(response_matrix)
     # localize the target receptor and odor in sorted response matrix
-    whereTargetReceptor 	<- match(receptor,colnames(response_matrix))
-    whereTargetodor 	<- match(InChIKey,rownames(response_matrix))
-
-    # non-NA vectors (b ("candicateOdors") and w ("candicateReceptors") ) as candicates
-    candicateReceptors 	<- which(!is.na(response_matrix[whereTargetodor,]))
-    Name_candicateReceptors <- colnames(response_matrix)[candicateReceptors]
-    candicateOdors 		<- which(!is.na(response_matrix[,whereTargetReceptor]))
-    Name_candicateOdors 	<- rownames(response_matrix)[candicateOdors]
-
-
+    whereTargetReceptor 	<-
+      match(receptor, colnames(response_matrix))
+    whereTargetodor 	<- match(InChIKey, rownames(response_matrix))
+    
+    # non-NA vectors (b ("candicateOdors") and w ("candicateReceptors") ) as
+    # candicates
+    candicateReceptors 	<-
+      which(!is.na(response_matrix[whereTargetodor, ]))
+    Name_candicateReceptors <-
+      colnames(response_matrix)[candicateReceptors]
+    candicateOdors 		<-
+      which(!is.na(response_matrix[, whereTargetReceptor]))
+    Name_candicateOdors 	<-
+      rownames(response_matrix)[candicateOdors]
+    
+    
     # omit the columns and rows that contain NA
-
-    candi_A <- na.omit( response_matrix[candicateOdors, candicateReceptors])
-
+    
+    candi_A <-
+      na.omit(response_matrix[candicateOdors, candicateReceptors])
+    
     # detect the posistions of selected odors and receptors
-    matchOdor <- match( rownames(candi_A),rownames(response_matrix) )
-    matchReceptor <- match( colnames(candi_A), colnames(response_matrix) )
-
+    matchOdor <-
+      match(rownames(candi_A), rownames(response_matrix))
+    matchReceptor <-
+      match(colnames(candi_A), colnames(response_matrix))
+    
     # vector "w"
-    w <- c( as.matrix( response_matrix[InChIKey, matchReceptor] ) )
-    selectReceptor <- names(response_matrix[InChIKey, matchReceptor])
-
+    w <- c(as.matrix(response_matrix[InChIKey, matchReceptor]))
+    selectReceptor <-
+      names(response_matrix[InChIKey, matchReceptor])
+    
     # find neighbors
-    kNeighbors <- nearest(target = w, candicate = candi_A, k = nodor)
-
+    kNeighbors <-
+      nearest(target = w,
+              candicate = candi_A,
+              k = nodor)
+    
     selectedOdor <- names(kNeighbors)
-
+    
     # matrix "A"
-    A <- candi_A[selectedOdor,]
-
+    A <- candi_A[selectedOdor, ]
+    
     # vector "b"
     b <- response_matrix[selectedOdor, receptor]
-
+    
     # transpose matrix A
-    if (dim(A)[1] == 1) { transp_A <- t(t(c(as.matrix(A)))) } # transpose from 1 x m to m x 1 matrix
-    else { transp_A <- t(A) }
-
+    if (dim(A)[1] == 1) {
+      transp_A <-
+        t(t(c(as.matrix(A))))
+    } # transpose from 1 x m to m x 1 matrix
+    else {
+      transp_A <- t(A)
+    }
+    
     alfa <- t(b) %*% pseudo_inverse(transp_A) %*% as.matrix(w)
-
-    result <- list(estimation = alfa,
-                   selected.receptors = selectReceptor,
-                   selected.odors = kNeighbors)
-
+    
+    result <- list(
+      estimation = alfa,
+      selected.receptors = selectReceptor,
+      selected.odors = kNeighbors
+    )
+    
     return(result)
   }

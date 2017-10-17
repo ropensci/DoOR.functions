@@ -13,7 +13,8 @@
 # @examples
 # 
 # x <- seq(0.1,1,length=20)
-# y <- modelfunction_sigmoid_inverse(input = x, parms = c(Asym = 2, xmid = 0.2, scal = 0.3) )
+# y <- modelfunction_sigmoid_inverse(input = x, parms = c(Asym = 2, xmid = 0.2, 
+#                                                         scal = 0.3) )
 # plot(x,y)
 # 
 modelfunction_sigmoid_inverse <- function(input, parms) {

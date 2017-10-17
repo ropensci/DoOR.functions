@@ -29,7 +29,7 @@ get_dataset <- function(study, na.rm = FALSE) {
   selected <- as.data.frame(selected[selected.pos])
   result <- cbind(door_data_format, selected)
 
-  if(na.rm == T) {
+  if(na.rm == TRUE) {
     nonNA <- which(apply(!is.na(selected), 1, sum) > 0)
     result <- result[nonNA,]
   }

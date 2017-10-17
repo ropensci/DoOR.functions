@@ -11,7 +11,8 @@
 #
 # x <-  seq(0.1,1,length=20)
 # parms <- c(a = 0.2, b = 0.3, c = 0.4)
-# integrate(function(x) { dsdx_exp(input = x, parms = parms ) }, lower = 0, upper = 0.5)
+# integrate(function(x) { dsdx_exp(input = x, parms = parms ) }, lower = 0, 
+# upper = 0.5)
 #
 #' @importFrom stats integrate
 dsdx_exp <- function(input, parms) {

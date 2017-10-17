@@ -15,10 +15,14 @@
 #
 # x <-  seq(0.1,1,length=20)
 # parms <- c(Asym = 0.1, lrc = 0.2, R0 = 0.3)
-# integrate(function(x) { dsdx_asymp(input = x, parms = parms ) }, lower = 0, upper = 0.5)
+# integrate(function(x) { dsdx_asymp(input = x, parms = parms ) }, lower = 0, 
+# upper = 0.5)
 #
 #' @importFrom stats integrate
 dsdx_asymp <- function(input, parms) {
-  .value <- sqrt(1+(-((parms["R0"] - parms["Asym"]) * (exp(-exp(parms["lrc"]) * input) * exp(parms["lrc"]))))^2)
+  .value <-
+    sqrt(1 + (-((parms["R0"] - parms["Asym"]) * (
+      exp(-exp(parms["lrc"]) * input) * exp(parms["lrc"])
+    ))) ^ 2)
   .value
 }

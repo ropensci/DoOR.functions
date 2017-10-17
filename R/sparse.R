@@ -31,7 +31,9 @@ sparse <- function(x, method = 'ltk') {
   }
 
   if (method == 'lts') {
-    if (min(x) < 0) stop('Negative values supplied, LTS can only work with positive values. Try to normalize or use type = "ltk"')
+    if (min(x) < 0) stop('Negative values supplied, LTS can only work with 
+                          positive values. Try to normalize or use 
+                          type = "ltk"')
     #S <-  (1 - (sum(abs(x)/n)^2 / sum(x^2/n))) # Tollhurst Equation 4
     S <- 1/(1-1/n) * (1 - (sum(x/n)^2 / sum(x^2/n))) # Bhandawat
   }

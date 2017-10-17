@@ -1,21 +1,20 @@
-# compute the mean distance
+#compute the mean distance
 #
-# compute the mean distance between observations and projected points on
-# fitted curve.
+#compute the mean distance between observations and projected points on fitted 
+#curve.
 #
-# This function is used to compute the mean distance between observations and
-# their cloest points on fitted curve. Output is list containing the mean
-# distance value $MD and a data frame $data showing the coordinates of
-# observations, projected points and the distances between them.
+#This function is used to compute the mean distance between observations and 
+#their cloest points on fitted curve. Output is list containing the mean 
+#distance value $MD and a data frame $data showing the coordinates of 
+#observations, projected points and the distances between them.
 #
-# @param x,y data vectors, in which to evaluate the parameters in given
-# formula.
-# @param range.X numeric vector, defining the range of x, where the model
-# function will be applied.
-# @param parms parameters of model function.
-# @param fun model function
-# @author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
-# @keywords math
+#@param x,y data vectors, in which to evaluate the parameters in given formula.
+#@param range.X numeric vector, defining the range of x, where the model 
+#  function will be applied.
+#@param parms parameters of model function.
+#@param fun model function
+#@author Shouwen Ma <\email{shouwen.ma@@uni-konstanz.de}>
+#@keywords math
 # @examples
 #
 # library(DoOR.data)
@@ -33,7 +32,8 @@
 # top.x    	<- as.vector(modelfunction_linear(range_y[2],linear_parameters) )
 #
 # range.X <- c(max(c(0, bottom.x, range_x[1])), min(c(1, top.x, range_x[2])))
-# MD <- compute_MD(x=x, y=y, range.X = range.X, parms = linear_parameters,fun = modelfunction_linear)
+# MD <- compute_MD(x=x, y=y, range.X = range.X, parms = linear_parameters, 
+#       fun = modelfunction_linear)
 #
 #' @importFrom stats na.omit lm optimize
 compute_MD <- function(x, y, range.X, parms, fun) {

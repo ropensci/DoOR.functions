@@ -17,5 +17,10 @@
 # plot(x,y)
 #' @importFrom stats SSasymp 
 modelfunction_asymp <- function(input, parms) {
-  return(SSasymp(input, Asym = parms["Asym"], R0 = parms["R0"], lrc = parms["lrc"]))
+  return(SSasymp(
+    input,
+    Asym = parms["Asym"],
+    R0 = parms["R0"],
+    lrc = parms["lrc"]
+  ))
 }
