@@ -34,12 +34,12 @@
 #' # load some data sets
 #' data(Or22a)
 #' data(door_response_matrix)
-#' 
+#'
 #' # create example data we are going to back project
 #' template.data <- data.frame(odorants = Or22a$InChIKey,
 #'                             responses = Or22a$Hallem.2004.EN)
-#'                             
-#' # run back_project and plot the results                             
+#'
+#' # run back_project and plot the results
 #' bp <- back_project(template.data, "Or22a")
 #'
 #' plot(bp$back_projected$original.data,
@@ -50,21 +50,21 @@
 #'
 back_project <- function(template.data,
                          responding.unit,
-                         response_matrix = 
+                         response_matrix =
                            door_default_values("door_response_matrix")) {
   template.data$odorants <- as.character(template.data$odorants)
   source.data <-
     data.frame(
       odorants = rownames(response_matrix),
       cons.responses = response_matrix[, responding.unit],
-      stringsAsFactors = F
+      stringsAsFactors = FALSE
     )
-  
+
   # combine the data
   match.st <- match(source.data$odorants, template.data$odorants)
   xy       <- cbind(door_norm(source.data$cons.responses),
                     door_norm(template.data$responses[match.st]))
-  
+
   # find the best fitting model and project all points along the fitted curve
   best.model <- calculate_model(x = xy[, 1], y = xy[, 2])
   projected  <-
@@ -77,7 +77,7 @@ back_project <- function(template.data,
       xlab = paste(responding.unit, "[consensus data]"),
       ylab = "template data"
     )
-  
+
   # extract the projected and the normalized projected data
   projected.back     <-
     rbind(projected$double.observations[, c('ID', 'Y')],
@@ -85,7 +85,7 @@ back_project <- function(template.data,
   projected.back_NDR <-
     rbind(projected$double.observations[, c('ID', 'NDR')],
           projected$single.observations[, c('ID', 'NDR')])
-  
+
   # extract normalized and original values of the double observations
   # (points/odorants that appear in both data sets)
   double.observations_ID   <-
@@ -94,18 +94,18 @@ back_project <- function(template.data,
     projected$double.observations[, 'y']  # normalized values
   double.observations_orig <-
     template.data[double.observations_ID, 'responses'] # original values
-  
+
   # perform a linear fit for "translation" of the consensus scale into the
   # template scale
   translate       <-
     lm(double.observations_orig ~ double.observations_norm)
   translate.parms <- c(translate$coef[1], translate$coef[2])
-  
+
   # now rescale the whole data set according to these parameters
   match.sp <- match(1:dim(source.data)[1], projected.back[, 'ID'])
   projected.back_rescaled <-
     translate.parms[1] + translate.parms[2] * projected.back[match.sp, 'Y']
-  
+
   back.projected <- list(
     back_projected =
       data.frame(
