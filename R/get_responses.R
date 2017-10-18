@@ -23,24 +23,36 @@
 #' responses <- get_responses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #'
 get_responses <- function(odorant,
-                         responseRange = door_default_values("door_response_range"),
-                         Or.list = load2list()) {
-
-  studies  <- responseRange[,"study"]
+                          responseRange = door_default_values("
+                                           door_response_range"),
+                          Or.list = load2list()) {
+  studies  <- responseRange[, "study"]
   Or.Names <- names(Or.list)
   res 	   <- numeric()
-
+  
   for (i in 1:length(Or.Names)) {
-    match_odor <- match(odorant, Or.list[[i]][,'InChIKey'])
-    pres1 	   <- Or.list[[i]][match_odor, ]
+    match_odor <- match(odorant, Or.list[[i]][, 'InChIKey'])
+    pres1 	   <- Or.list[[i]][match_odor,]
     valueCol   <- as.numeric(which(sapply(pres1, is.numeric)))
-
+    
     if (is.na(valueCol[1])) {
-      pres <- data.frame(ORs = Or.Names[i], studies = NA, Odor = odorant, Response = NA )
+      pres <-
+        data.frame(
+          ORs = Or.Names[i],
+          studies = NA,
+          Odor = odorant,
+          Response = NA
+        )
     } else {
-      pres <- data.frame(ORs = Or.Names[i], studies = colnames(pres1)[valueCol], Odor = odorant, Response = c(as.matrix(pres1[, valueCol])))
+      pres <-
+        data.frame(
+          ORs = Or.Names[i],
+          studies = colnames(pres1)[valueCol],
+          Odor = odorant,
+          Response = c(as.matrix(pres1[, valueCol]))
+        )
     }
-    res<-rbind(res,pres)
+    res <- rbind(res, pres)
   }
   return(res)
 }

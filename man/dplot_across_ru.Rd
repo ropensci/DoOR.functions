@@ -14,15 +14,18 @@ dplot_across_ru(odorant,
 \arguments{
 \item{odorant}{character vecto, one or several InChIKeys}
 
-\item{response_matrix}{DoOR response matrix, a DoOR response matrix as data source}
+\item{response_matrix}{DoOR response matrix, a DoOR response matrix as data
+source}
 
 \item{odor_data}{data frame, contains the odorant information.}
 
 \item{zero}{character, an InChIKey of the odorant that should be set to 0}
 
-\item{tag}{character, the chemical identifier to plot as odorant name (one of colnames(odor))}
+\item{tag}{character, the chemical identifier to plot as odorant name (one of
+colnames(odor))}
 
-\item{limits}{numeric of length 2, if provided the ylim will range accordingly}
+\item{limits}{numeric of length 2, if provided the ylim will range
+accordingly}
 
 \item{base_size}{numeric, the base font size for the ggplot2 plot}
 }
@@ -30,7 +33,8 @@ dplot_across_ru(odorant,
 a ggplot object
 }
 \description{
-barplot of DoOR responses of a set of odorant across all responding units in DoOR
+barplot of DoOR responses of a set of odorant across all responding units in
+DoOR
 }
 \examples{
 # load data

@@ -15,16 +15,17 @@ get_normalized_responses(odors, zero = door_default_values("zero"),
 \item{zero}{InChIKey of background that should be set to zero. The default is
 "SFR", i.e. the spontaneous firing rate.}
 
-\item{response_matrix}{a data frame, as e.g. "door_response_matrix" that is loaded
-by \code{\link{model_response}}. It is also possible to create this frame manually
-using \code{\link{model_response}}.}
+\item{response_matrix}{a data frame, as e.g. "door_response_matrix" that is
+loaded by \code{\link{model_response}}. It is also possible to create this
+frame manually using \code{\link{model_response}}.}
 
-\item{round}{numeric, round to this amount of digits, set to NA if you do not want to round}
+\item{round}{numeric, round to this amount of digits, set to NA if you do not
+want to round}
 
 \item{na.rm}{logical, remove NAs?}
 }
 \description{
-given a chemical, get normalised receptor responses from all studies in the
+given a chemical, get normalised receptor responses from all studies in the 
 database.
 }
 \examples{
@@ -38,7 +39,8 @@ odors <- c("MLFHJEHSLIIPHL-UHFFFAOYSA-N",
            "IKHGUXGNUITLKF-UHFFFAOYSA-N")
 
 # get the normalized responses for these odorants
-result <- get_normalized_responses(odors, response_matrix = door_response_matrix)
+result <- get_normalized_responses(odors, 
+                                   response_matrix = door_response_matrix)
 
 }
 \seealso{

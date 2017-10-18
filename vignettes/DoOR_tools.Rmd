@@ -75,7 +75,7 @@ identify_sensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size 
 ### returning data instead of plots
 We can also return the correlation/distance data instead of the plot when setting `plot =FALSE`:
 ```{r}
-sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = F)
+sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = FALSE)
 head(sensillumX)
 ```
 

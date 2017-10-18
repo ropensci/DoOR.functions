@@ -14,8 +14,8 @@ calculate_model(x, y, select.MD = door_default_values("select.MD"))
 MD) will be returned.}
 }
 \description{
-\code{calculate_model} is used to return the best model function that represent the
-relationship between responses from study x and y.
+\code{calculate_model} is used to return the best model function that
+represent the relationship between responses from study x and y.
 }
 \details{
 \code{calculate_model} chooses the best model function from following: linear,
@@ -25,7 +25,7 @@ these functions please check the sources at
 https://github.com/Dahaniel/DoOR.functions)
 }
 \examples{
-# load a data set 
+# load a data set
 library(DoOR.data)
 data(Or35a)
 
@@ -33,7 +33,7 @@ data(Or35a)
 x <- door_norm(Or35a[,6])
 y <- door_norm(Or35a[,9])
 # run calculate_model
-calM_xy <- calculate_model(x, y, select.MD = door_default_values("select.MD"))
+calM_xy <- calculate_model(x,y, select.MD = door_default_values("select.MD"))
 
 }
 \author{

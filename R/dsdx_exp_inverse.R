@@ -15,10 +15,13 @@
 #
 # x <-  seq(0.1,1,length=20)
 # parms <- c(a = 0, b = 0.2, c = 0.3)
-# integrate(function(x) { dsdx_exp_inverse(input = x, parms = parms ) }, lower = 0.1, upper = 0.5)
+# integrate(function(x) { dsdx_exp_inverse(input = x, parms = parms ) }, 
+# lower = 0.1, upper = 0.5)
 #
 #' @importFrom stats integrate
 dsdx_exp_inverse <- function(input, parms) {
-  .value <- sqrt(1 + (1/parms["b"]/((input - parms["a"])/parms["b"])/parms["c"])^2)
+  .value <-
+    sqrt(1 + (1 / parms["b"] / ((input - parms["a"]) / parms["b"]) / 
+                parms["c"]) ^ 2)
   .value
 }

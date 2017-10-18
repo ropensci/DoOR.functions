@@ -13,20 +13,21 @@ map_receptor(data,
 \item{data}{data frame, containing two columns, one called "odorants" and one
 "responses" providing InChIKeys and odorant responses respectively.}
 
-\item{response_matrix}{output is a numeric vector that contains the Pearson
+\item{response_matrix}{output is a numeric vector that contains the Pearson 
 Correlation Coefficient between given data and selected consensus data in}
 
-\item{sub}{character, a subset of responding units
-returned response matrix}
+\item{sub}{character, a subset of responding units returned response matrix}
 
-\item{threshold.p}{numeric, a p-value threshold, only correlations below will be returned}
+\item{threshold.p}{numeric, a p-value threshold, only correlations below will
+be returned}
 
-\item{threshold.cor}{numeric, a correlation-coefficient threshold, only correlations above will be returned}
+\item{threshold.cor}{numeric, a correlation-coefficient threshold, only
+correlations above will be returned}
 
 \item{nshow}{numeric, if defined, only this number of results will be}
 }
 \description{
-Identifying the source of unknown response data by correlating it agains all
+Identifying the source of unknown response data by correlating it agains all 
 DoOR responding units.
 }
 \examples{

@@ -24,34 +24,45 @@
 #' remove_study('Bruyne.2001.WT')
 #'
 remove_study <- function(study,
-                        receptors = door_default_values('ORs'),
-                        responseRange = door_default_values('door_response_range'),
-                        weightGlobNorm = door_default_values('door_global_normalization_weights')) {
+   receptors = door_default_values('ORs'),
+   responseRange = door_default_values('door_response_range'),
+   weightGlobNorm = door_default_values('door_global_normalization_weights')) {
   if (length(study) > 1)
     stop('Please enter only 1 study at a time.')
-
-  for(x in receptors[,'OR']) {
+  
+  for (x in receptors[, 'OR']) {
     data <- try(get(x), silent = TRUE)
     if (any(colnames(data) == study)) {
       pos <- which(colnames(data) == study)
-      data <- data[,-pos]
+      data <- data[, -pos]
       assign(x, data, envir = .GlobalEnv)
-      message(paste('removed',study,'from',x,'.'))
+      message(paste('removed', study, 'from', x, '.'))
     }
   }
-  if(study %in% responseRange$study) {
-    responseRange <- responseRange[- which(responseRange$study == study),]
+  if (study %in% responseRange$study) {
+    responseRange <-
+      responseRange[-which(responseRange$study == study), ]
     assign('door_response_range', responseRange, envir = .GlobalEnv)
-    message(paste('removed',study,'from \'door_response_range\''))
+    message(paste('removed', study, 'from \'door_response_range\''))
   } else {
     warning(paste(study, 'not found in \'door_response_range\''))
   }
-
-  if(study %in% names(weightGlobNorm)) {
-    weightGlobNorm <- weightGlobNorm[, - which(colnames(weightGlobNorm) == study)]
-    assign('door_global_normalization_weights', weightGlobNorm, envir = .GlobalEnv)
-    message(paste('removed',study,'from \'door_global_normalization_weights\''))
+  
+  if (study %in% names(weightGlobNorm)) {
+    weightGlobNorm <-
+      weightGlobNorm[,-which(colnames(weightGlobNorm) == study)]
+    assign('door_global_normalization_weights',
+           weightGlobNorm,
+           envir = .GlobalEnv)
+    message(paste(
+      'removed',
+      study,
+      'from \'door_global_normalization_weights\''
+    ))
   } else {
-    warning(paste(study, 'not found in \'door_global_normalization_weights\''))
+    warning(paste(
+      study,
+      'not found in \'door_global_normalization_weights\''
+    ))
   }
 }

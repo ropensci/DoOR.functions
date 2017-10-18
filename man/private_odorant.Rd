@@ -11,11 +11,14 @@ private_odorant(receptor, sensillum = FALSE,
   zero = door_default_values("zero"), nshow = 5, tag)
 }
 \arguments{
-\item{receptor}{character, name of a DoOR responding unit (one of \code{ORs$Or})}
+\item{receptor}{character, name of a DoOR responding unit (one of
+\code{ORs$Or})}
 
-\item{sensillum}{logical, restrict the search to the sensillum the receptor is expressed in?}
+\item{sensillum}{logical, restrict the search to the sensillum the receptor
+is expressed in?}
 
-\item{response_matrix}{DoOR response matrix, the input data to perform the search on}
+\item{response_matrix}{DoOR response matrix, the input data to perform the
+search on}
 
 \item{door_mappings}{the data frame containing the mapping information}
 
@@ -23,10 +26,13 @@ private_odorant(receptor, sensillum = FALSE,
 
 \item{nshow}{numeric, the number of private odorants to return}
 
-\item{tag}{character, the chemical identifier to give the odorant names in (on of \code{colnames(odor)})}
+\item{tag}{character, the chemical identifier to give the odorant names in
+(on of \code{colnames(odor)})}
 }
 \value{
-a data.frame containing odorants and the response in the receptor of interest as well as the maximum response of the remaining receptors and their difference
+a data.frame containing odorants and the response in the receptor of
+  interest as well as the maximum response of the remaining receptors and
+  their difference
 }
 \description{
 return an odorant that activates the receptor of interest exclusively
@@ -36,9 +42,10 @@ return an odorant that activates the receptor of interest exclusively
 library(DoOR.data)
 
 # find a private odorant for Gr21a.Gr63a (the carbon dioxide receptor)
-private_odorant("Gr21a.Gr63a", tag = "Name")
+# private_odorant("Gr21a.Gr63a", tag = "Name")
 
-# now find an odorant that within the ab3 sensillum specifically activates Or22a
+# now find an odorant that within the ab3 sensillum specifically activates
+# Or22a
 private_odorant("Or22a", tag = "Name", sensillum = TRUE)
 
 }

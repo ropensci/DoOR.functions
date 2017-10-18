@@ -12,7 +12,8 @@
 #
 # x <-  seq(0.1,1,length=20)
 # parms <- c(Intercept = 0.2, Slope = 0.3)
-# integrate(function(x) { dsdx_linear_inverse(input = x, parms = parms ) }, lower = 0.1, upper = 0.5)
+# integrate(function(x) { dsdx_linear_inverse(input = x, parms = parms ) }, 
+# lower = 0.1, upper = 0.5)
 #
 #' @importFrom stats integrate
 dsdx_linear_inverse <- function(input, parms) {

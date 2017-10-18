@@ -74,7 +74,7 @@ dplot_al_map("MLFHJEHSLIIPHL-UHFFFAOYSA-N", tag = "Ors",
 # pass some ggplot2 theming parameters
 dplot_al_map(trans_id("123-92-2"), scalebar = FALSE) +
 ggplot2::theme(legend.position  = "bottom",
-      panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
+     panel.background = ggplot2::element_rect(fill = "grey90", color = NA)) +
 ggplot2::ggtitle("responses elicited by isopentyl acetate")
 
 # export as pdf

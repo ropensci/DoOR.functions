@@ -22,13 +22,15 @@
 # 
 interval_fun <-
   function(x, range.X, middleFun, parms) {
-    # if the values of input are small than the minimum of range.X, apply lowerFun, a linear function with a slope that equal 1.
+    # if the values of input are small than the minimum of range.X, apply
+    # lowerFun, a linear function with a slope that equal 1.
     lowerFun <- function(x, parms) {
       expr1 <- middleFun(range.X[1], parms)
       return((expr1 - range.X[1]) + x)
     }
     
-    # if the values of input are bigger than the maximum of range.X, apply upperFun, a linear function with a slope that equal 1.
+    # if the values of input are bigger than the maximum of range.X, apply
+    # upperFun, a linear function with a slope that equal 1.
     upperFun <- function(x,parms) {
       expr1 <- middleFun(range.X[2],parms) 		
       return((expr1 - range.X[2]) + x)

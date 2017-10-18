@@ -54,7 +54,7 @@ dplot_al_map(trans_id("benzaldehyde", from = "Name"), tag = "receptor", main = "
 
 If we prefer the plain activation pattern without annotations at all:
 ```{r, fig.width=7.1, fig.height=2}
-dplot_al_map(trans_id("628-63-7", from = "CAS"), tag = "", main = "", legend = F, scalebar = F)
+dplot_al_map(trans_id("628-63-7", from = "CAS"), tag = "", main = "", legend = FALSE, scalebar = FALSE)
 ```
 
 ## Visualizing tuning curves with `dplot_tuningCurve()`{#tuningCurve}
@@ -116,7 +116,7 @@ dplot_response_profile("Gr21a.Gr63a", tag = "Name", base_size = 8, zero ="")
 
 And if we prefer monochrome data:
 ```{r, fig.width=5, fig.height=6}
-dplot_response_profile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = F)
+dplot_response_profile("Gr21a.Gr63a", tag = "CAS", base_size = 8, colored = FALSE)
 ```
 
 ## Comparing response profiles `dplot_compare_profiles()`{#compareProfiles}

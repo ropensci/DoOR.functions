@@ -29,7 +29,7 @@ identify_sensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
 identify_sensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size = 8)
 
 ## ------------------------------------------------------------------------
-sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = F)
+sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = FALSE)
 head(sensillumX)
 
 ## ------------------------------------------------------------------------
