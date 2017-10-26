@@ -90,7 +90,7 @@ project_points <- function(x,
     return(message('There is no observation between the two data sets.'))
   
   x_y <- na.omit(comb.xy)
-  q   <- 1:length(x)
+  q   <- seq_along(x)
   qq  <- match(q, attr(x_y, "na.action"))
   ID  <- which(is.na(qq))
   

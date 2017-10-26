@@ -88,7 +88,7 @@ dplot_tuningCurve <- function(receptor,
       data <- na.omit(response.vector)
     }
     
-    data <- data.frame(odorants = 1:length(data), value = data)
+    data <- data.frame(odorants = seq_along(data), value = data)
     data$odorants <-
       factor(data$odorants, levels = data$odorants[orderPyramid(data$value)])
     
@@ -132,7 +132,7 @@ dplot_tuningCurve <- function(receptor,
       data <- response.vector
     }
     
-    data <- data.frame(receptors = 1:length(data), value = data)
+    data <- data.frame(receptors = seq_along(data), value = data)
     if (nrow(data) > 1)
       data$receptors <-
       factor(data$receptors, levels = data$receptors[orderPyramid(data$value)])

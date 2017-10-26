@@ -28,7 +28,7 @@ door_melt <- function(data, datasets, ident, na.rm = FALSE) {
   }
   
   result <- data.frame()
-  for (i in 1:length(datasets)) {
+  for (i in seq_along(datasets)) {
     tmp <-
       data.frame(odorant = data[, ident],
                  dataset = datasets[i],

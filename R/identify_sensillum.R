@@ -110,7 +110,7 @@ identify_sensillum <- function(recording,
       door_mappings$sensillum[match(result$receptor, door_mappings$receptor)]
     result$OSN <-
       door_mappings$OSN[match(result$receptor, door_mappings$receptor)]
-    for (i in 1:length(units)) {
+    for (i in seq_along(units)) {
       corx <-
         apply(data, 2, function(x)
           cor(x, recording[, units[i]], use = use))
@@ -149,7 +149,7 @@ identify_sensillum <- function(recording,
       door_mappings$sensillum[match(result$receptor, door_mappings$receptor)]
     result$OSN <-
       door_mappings$OSN[match(result$receptor, door_mappings$receptor)]
-    for (i in 1:length(units)) {
+    for (i in seq_along(units)) {
       corx <- c()
       px   <- c()
       for (j in colnames(data)) {
@@ -199,7 +199,7 @@ identify_sensillum <- function(recording,
     result <- rbind(t(recording[, -1, drop = FALSE]), t(data))
     result <- as.matrix(dist(result))
     result <-
-      result[(length(units) + 1):nrow(result), 1:length(units), drop = FALSE]
+      result[(length(units) + 1):nrow(result), seq_along(units), drop = FALSE]
     result <- data.frame(
       receptor  = rownames(result),
       sensillum = door_mappings$sensillum[match(rownames(result), 
@@ -224,7 +224,7 @@ identify_sensillum <- function(recording,
     
     data.melt <- door_melt(data)
     plots <- list()
-    for (i in 1:length(units)) {
+    for (i in seq_along(units)) {
       if (method %in% c("cor"))
         cor.tmp <-
           result[order(result[, units[i]], decreasing = TRUE), ][1:nshow, 
@@ -304,7 +304,7 @@ identify_sensillum <- function(recording,
     
     # plot recording
     
-    for (i in 1:length(units)) {
+    for (i in seq_along(units)) {
       rec.tmp <-
         data.frame(
           odorant = recording$odorants,
@@ -344,7 +344,7 @@ identify_sensillum <- function(recording,
     }
     
     #build grobs
-    for (i in 1:length(units)) {
+    for (i in seq_along(units)) {
       plots[[i]] <- gridExtra::arrangeGrob(
         grobs = list(
           get(paste("r", i, sep = ".")) + 

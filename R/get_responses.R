@@ -30,7 +30,7 @@ get_responses <- function(odorant,
   Or.Names <- names(Or.list)
   res 	   <- numeric()
   
-  for (i in 1:length(Or.Names)) {
+  for (i in seq_along(Or.Names)) {
     match_odor <- match(odorant, Or.list[[i]][, 'InChIKey'])
     pres1 	   <- Or.list[[i]][match_odor,]
     valueCol   <- as.numeric(which(sapply(pres1, is.numeric)))

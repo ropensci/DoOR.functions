@@ -28,7 +28,7 @@ count_studies <- function(ors = door_default_values("ORs"),
                          char.columns = door_default_values("num.charColumns"),
                          ident = door_default_values("ident")) {
   counts <- matrix(nrow = dim(odor_data)[1], dimnames = c(odor_data[ident]))
-  for (i in 1:length(ors$OR)) {
+  for (i in seq_along(ors$OR)) {
     or.name <- as.character(ors$OR[i])
     or <- get(or.name)
     or <- or[-c(1:char.columns)]
