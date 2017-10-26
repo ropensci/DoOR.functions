@@ -37,13 +37,13 @@ interval_fun <-
     }
     
     if (is.na(x[1])) { 
-      y = NA 
+      y <- NA 
     } else {
-      if (x[1] > (range.X[1]) & x[1] < (range.X[2])) { y = middleFun(x, parms) }
+      if (x[1] > (range.X[1]) & x[1] < (range.X[2])) {y <- middleFun(x, parms)}
       
-      if (x[1] <= (range.X[1])) { y = lowerFun(x,parms) }
+      if (x[1] <= (range.X[1])) { y <- lowerFun(x,parms) }
       
-      if (x[1] >= (range.X[2])) { y = upperFun(x,parms) }
+      if (x[1] >= (range.X[2])) { y <- upperFun(x,parms) }
     }
     return(as.vector(y))
   }

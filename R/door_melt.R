@@ -20,7 +20,7 @@
 # @importFrom stats na.omit
 door_melt <- function(data, datasets, ident, na.rm = FALSE) {
   if (missing(datasets))
-    datasets = colnames(data)
+    datasets <- colnames(data)
   
   if (missing(ident)) {
     data$odorant <- rownames(data)

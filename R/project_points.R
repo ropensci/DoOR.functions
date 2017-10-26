@@ -211,7 +211,7 @@ project_points <- function(x,
                                                            na.rm = TRUE))]   
   
   if (length(xmin) > 1)
-    xmin = xmin[1]
+    xmin <- xmin[1]
   
   # vector holding all distances: for each point we compute the distance to the
   # minimum value on the curve
@@ -320,10 +320,10 @@ project_points <- function(x,
     projected_all[match(projected_single_coord[, 1], projected_all$ID), ]
   
   if (plot == TRUE) {
-    range.projected_all.X = range(projected_all[, 'X'], na.rm = TRUE)
-    range.projected_all.Y = range(projected_all[, 'Y'], na.rm = TRUE)
-    range.projected_all.x = range(projected_all[, 'x'], na.rm = TRUE)
-    range.projected_all.y = range(projected_all[, 'y'], na.rm = TRUE)
+    range.projected_all.X <- range(projected_all[, 'X'], na.rm = TRUE)
+    range.projected_all.Y <- range(projected_all[, 'Y'], na.rm = TRUE)
+    range.projected_all.x <- range(projected_all[, 'x'], na.rm = TRUE)
+    range.projected_all.y <- range(projected_all[, 'y'], na.rm = TRUE)
     
     if (!missing(xylim)) {
       plot(
@@ -349,7 +349,7 @@ project_points <- function(x,
       )
     }
     
-    seg_y = which(is.na(projected_all$x))
+    seg_y <- which(is.na(projected_all$x))
     
     if (!is.na(seg_y[1])) {
       segments(

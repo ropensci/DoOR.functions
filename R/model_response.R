@@ -271,7 +271,7 @@ model_response <- function(da,
   
   resd <-
     cbind(da[, c("Class", "Name", "InChIKey", "CID", "CAS")], merged_data)
-  source.data = colnames(da)[nv][-na.omit(match(excluded, colnames(da)[nv]))]
+  source.data <- colnames(da)[nv][-na.omit(match(excluded, colnames(da)[nv]))]
   
   return(
     list(

@@ -27,7 +27,7 @@ filter_data <-
     
     # remove studies with sd = 0 e.g. containing only 0
     study.sd <-
-      apply(apply(as.data.frame(data[, studies]), 2, range, na.rm = TRUE), 2, sd)
+     apply(apply(as.data.frame(data[, studies]), 2, range, na.rm = TRUE), 2, sd)
     if (any(study.sd == 0)) {
       message(paste(receptor, ": REMOVED ", studies[which(study.sd == 0)], 
                     " as it had a SD of 0.\n", sep = ""))
