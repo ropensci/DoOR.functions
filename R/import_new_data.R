@@ -106,7 +106,7 @@ import_new_data <- function(file.name,
   }
   
   # look for columns containing numerical values (response data)
-  nv 	<- as.numeric(which(sapply(imported.data, is.numeric)))
+  nv 	<- as.numeric(which(vapply(imported.data, is.numeric, logical(1))))
   n 	<- length(nv)
   receptor_file <- colnames(imported.data)[nv]
   

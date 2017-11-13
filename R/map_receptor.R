@@ -69,8 +69,8 @@ map_receptor <- function(data,
   result <- data.frame(
     responding.unit = names(result),
     n               = apply(!is.na(response_matrix), 2, sum),
-    cor             = unlist(sapply(result, "[", "estimate")),
-    p.value         = unlist(sapply(result, "[", "p.value"))
+    cor             = unlist(lapply(result, "[", "estimate")),
+    p.value         = unlist(lapply(result, "[", "p.value"))
   )
   
   result <- result[order(result$cor, decreasing = TRUE), ]

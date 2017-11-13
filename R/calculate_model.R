@@ -48,7 +48,7 @@ calculate_model <-
     }
     
     if (select.MD == TRUE) {
-      collect.MD <- sapply(models, "[[", "MD")
+      collect.MD <- vapply(models, "[[", numeric(1), "MD")
       if (all(is.na(collect.MD))) {
         return(NA)
         message("No model could be fitted")
