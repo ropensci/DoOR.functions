@@ -20,7 +20,7 @@
 #' load_door_data(nointeraction = TRUE)
 #'
 #' # get raw responses for odorant MLFHJEHSLIIPHL-UHFFFAOYSA-N
-#' responses <- get_responses(odor = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
+#' responses <- get_responses(odorant = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #'
 get_responses <- function(odorant,
                           responseRange = door_default_values("
@@ -33,7 +33,7 @@ get_responses <- function(odorant,
   for (i in seq_along(Or.Names)) {
     match_odor <- match(odorant, Or.list[[i]][, 'InChIKey'])
     pres1 	   <- Or.list[[i]][match_odor,]
-    valueCol   <- as.numeric(which(sapply(pres1, is.numeric)))
+    valueCol   <- which(vapply(pres1, is.numeric, logical(1)))
     
     if (is.na(valueCol[1])) {
       pres <-

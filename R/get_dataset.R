@@ -22,8 +22,8 @@
 #' get_dataset("Hallem.2004.EN", na.rm = TRUE)
 get_dataset <- function(study, na.rm = FALSE) {
   tmp <- load2list()
-  selected <- sapply(tmp, "[[", study)
-  selected.length <- sapply(selected, function(x) length(x))
+  selected <- lapply(tmp, "[[", study)
+  selected.length <- vapply(selected, function(x) length(x), integer(1))
   selected.pos <- which(selected.length > 0)
 
   selected <- as.data.frame(selected[selected.pos])
