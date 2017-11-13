@@ -26,5 +26,5 @@ modelfunction_asymp_off_inverse <- function(input, parms) {
                               exp(parms["lrc"])))
     }
   }
-  return(as.vector(sapply(input, subfun)))
+  return(vapply(input, subfun, numeric(1)))
 }

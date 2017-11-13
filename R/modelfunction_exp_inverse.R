@@ -23,5 +23,5 @@ modelfunction_exp_inverse <- function(input, parms) {
       return((log((input-parms["a"])/parms["b"]))/parms["c"])
     }
   }
-  return(as.vector(sapply(input, subfun)))
+  return(vapply(input, subfun, numeric(1)))
 }

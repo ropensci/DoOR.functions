@@ -2,7 +2,7 @@ rebuild_metadata <- function() {
   # rebuild door_global_normalization_weights
   tmp <- load2list()
   datasets <-
-    unlist(sapply(tmp, function(x)
+    unlist(lapply(tmp, function(x)
       colnames(x)[-c(1:door_default_values("num.charColumns"))]))
   datasets <- sort(unique(datasets))
   wgn <- matrix(nrow = length(ORs$OR), ncol = length(datasets))

@@ -26,5 +26,5 @@ modelfunction_sigmoid_inverse <- function(input, parms) {
       return(parms["xmid"] - parms["scal"] * log((parms["Asym"] / input) - 1))
     }
   }
-  return(as.vector(sapply(input, subfun)))
+  return(vapply(input, subfun, numeric(1)))
 }

@@ -68,7 +68,7 @@ project_points <- function(x,
   #             2: available on y
   #             3: available in both datasets
   available <- function(x) {
-    y <- sum(which(sapply(x, is.na) == FALSE))
+    y <- sum(which(!is.na(x)))
     return(y)
   }
   
@@ -136,8 +136,8 @@ project_points <- function(x,
   
   #  define the range of frame for middle function. (e.g. range.X, range.Y)
   range.Y <-
-    sapply(range.X, function(x)
-      interval_fun(x, range.X, middleFun = ff, parms))
+    vapply(range.X, function(x)
+      interval_fun(x, range.X, middleFun = ff, parms), numeric(1))
   
   
   # project the double observation values onto the respective closest points on
@@ -178,11 +178,12 @@ project_points <- function(x,
   Coor_X       <- as.matrix(Coor_x)
   Coor_Y       <- as.matrix(Coor_y)
   Coor_X[, 'y'] <-
-    sapply(Coor_X[, 'x'], function(x)
-      interval_fun(x, range.X, middleFun = ff, parms))
+    vapply(Coor_X[, 'x'], function(x)
+      interval_fun(x, range.X, middleFun = ff, parms), numeric(1))
   Coor_Y[, 'x'] <-
-    sapply(Coor_Y[, 'y'], function(x)
-      interval_fun(x, range.X = range.Y, middleFun = ff_inverse, parms))
+    vapply(Coor_Y[, 'y'], function(x)
+      interval_fun(x, range.X = range.Y, middleFun = ff_inverse, parms), 
+      numeric(1))
   
   single_coord_xy <- rbind(Coor_x, Coor_y)
   single_coord_XY <- rbind(Coor_X, Coor_Y)

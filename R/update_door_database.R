@@ -110,7 +110,7 @@ plot = FALSE) {
           meanCorrel_merge.try <- NA
         } else {
           meanCorrel_merge.try <-
-            mean(unlist(sapply(da[, recordColumn], function(x)
+            mean(unlist(lapply(da[, recordColumn], function(x)
               calculate_model(merge.try, x)[[1]]["MD"])))
         }
         meanCorrel[i, ] <- meanCorrel_merge.try
