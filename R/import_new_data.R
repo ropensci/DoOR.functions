@@ -191,39 +191,39 @@ import_new_data <- function(file.name,
     
     levels(odor_data$InChIKey) <- union(levels(odor_data$InChIKey),
                                         levels(imported.data$InChIKey))
-    odor_data[(dim_odor[1] + (1:length(whichNA))), "InChIKey"] <-
+    odor_data[(dim_odor[1] + (seq_along(whichNA))), "InChIKey"] <-
       as.character(imported.data[whichNA, "InChIKey"])
     
     levels(odor_data$Name) <-
       union(levels(odor_data$Name), levels(imported.data$Name))
-    odor_data[(dim_odor[1] + (1:length(whichNA))), "Name"] <-
+    odor_data[(dim_odor[1] + (seq_along(whichNA))), "Name"] <-
       as.character(imported.data[whichNA, "Name"])
     
     if ('CAS' %in% colnames(imported.data)) {
       levels(odor_data$CAS) <-
         union(levels(odor_data$CAS), levels(imported.data$CAS))
-      odor_data[(dim_odor[1] + (1:length(whichNA))), "CAS"] <-
+      odor_data[(dim_odor[1] + (seq_along(whichNA))), "CAS"] <-
         as.character(imported.data[whichNA, "CAS"])
     }
     
     if ('CID' %in% colnames(imported.data)) {
       levels(odor_data$CID) <-
         union(levels(odor_data$CID), levels(imported.data$CID))
-      odor_data[(dim_odor[1] + (1:length(whichNA))), "CID"]    	      <-
+      odor_data[(dim_odor[1] + (seq_along(whichNA))), "CID"]    	      <-
         as.character(imported.data[whichNA, "CID"])
     }
     
     if ('Class' %in% colnames(imported.data)) {
       levels(odor_data$Class) <-
         union(levels(odor_data$Class), levels(imported.data$Class))
-      odor_data[(dim_odor[1] + (1:length(whichNA))), "Class"]    	    <-
+      odor_data[(dim_odor[1] + (seq_along(whichNA))), "Class"]    	    <-
         as.character(imported.data[whichNA, "Class"])
     }
     
     if ('InChI' %in% colnames(imported.data)) {
       levels(odor_data$InChI) <-
         union(levels(odor_data$InChI), levels(imported.data$InChI))
-      odor_data[(dim_odor[1] + (1:length(whichNA))), "InChI"]          <-
+      odor_data[(dim_odor[1] + (seq_along(whichNA))), "InChI"]          <-
         as.character(imported.data[whichNA, "InChI"])
     }
     
@@ -231,7 +231,7 @@ import_new_data <- function(file.name,
       levels(odor_data$SMILES) <-
         union(levels(odor_data$SMILES),
               levels(imported.data$SMILES))
-      odor_data[(dim_odor[1] + (1:length(whichNA))), "SMILES"]       <-
+      odor_data[(dim_odor[1] + (seq_along(whichNA))), "SMILES"]       <-
         as.character(imported.data[whichNA, "SMILES"])
     }
     
@@ -283,32 +283,32 @@ import_new_data <- function(file.name,
       levels(target$InChIKey) <-
         union(levels(target$InChIKey),
               levels(imported.data$InChIKey))
-      target[(dim_RD[1] + (1:length(whichNA))), "InChIKey"] <-
+      target[(dim_RD[1] + (seq_along(whichNA))), "InChIKey"] <-
         as.character(imported.data[whichNA, "InChIKey"])
       
       levels(target$Name) <-
         union(levels(target$Name), levels(imported.data$Name))
-      target[(dim_odor[1] + (1:length(whichNA))), "Name"] <-
+      target[(dim_odor[1] + (seq_along(whichNA))), "Name"] <-
         as.character(imported.data[whichNA, "Name"])
       
       if ('Class' %in% colnames(imported.data)) {
         levels(target$Class) <-
           union(levels(target$Class), levels(imported.data$Class))
-        target[(dim_RD[1] + (1:length(whichNA))), "Class"] <-
+        target[(dim_RD[1] + (seq_along(whichNA))), "Class"] <-
           as.character(imported.data[whichNA, "Class"])
       }
       
       if ('CAS' %in% colnames(imported.data)) {
         levels(target$CAS) <-
           union(levels(target$CAS), levels(imported.data$CAS))
-        target[(dim_RD[1] + (1:length(whichNA))), "CAS"] <-
+        target[(dim_RD[1] + (seq_along(whichNA))), "CAS"] <-
           as.character(imported.data[whichNA, "CAS"])
       }
       
       if ('CID' %in% colnames(imported.data)) {
         levels(target$CID) <-
           union(levels(target$CID), levels(imported.data$CID))
-        target[(dim_odor[1] + (1:length(whichNA))), "CID"] <-
+        target[(dim_odor[1] + (seq_along(whichNA))), "CID"] <-
           as.character(imported.data[whichNA, "CID"])
       }
       # assign the target back to his real name

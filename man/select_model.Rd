@@ -17,22 +17,22 @@ value columns.}
 
 \item{merged_data}{numeric vector, merged data}
 
-\item{overlapValues}{numeric, a criterion using to refuse a data set that
-has not enough overlap value.}
+\item{overlapValues}{numeric, a criterion using to refuse a data set that has
+not enough overlap value.}
 
 \item{merged}{logical, if merged is \code{TRUE}, calculate models between
 merged_data and candidate data. If \code{FALSE}, calculate models between
 candidates.}
 }
 \description{
-compute the data pairwise using function \code{\link{calculate_model}} and selects
-a pair with the lowest "MD" value.
+compute the data pairwise using function \code{\link{calculate_model}} and
+selects a pair with the lowest "MD" value.
 }
 \details{
-This function is used in \code{\link{model_response}} to select the first pair or
-next data set for merging. The output is a list containing "selected.x" and
-"selected.y" that specify which data plots against another, and "best.model"
-that is used in function \code{\link{project_points}}.
+This function is used in \code{\link{model_response}} to select the first
+pair or next data set for merging. The output is a list containing
+"selected.x" and "selected.y" that specify which data plots against another,
+and "best.model" that is used in function \code{\link{project_points}}.
 }
 \examples{
 # load data
@@ -47,7 +47,8 @@ data_candidate <- ac3B[,c(7:8)]
 norm_data_candidate <- apply(data_candidate, 2, door_norm)
 
 # find the best fitting model
-select_model(candidate = studies, data_candidate = norm_data_candidate, merged = FALSE)
+select_model(candidate = studies, data_candidate = norm_data_candidate,
+             merged = FALSE)
 
 }
 \seealso{

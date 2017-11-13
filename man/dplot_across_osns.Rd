@@ -55,9 +55,9 @@ DoOR response profiles will be selected and ordered according to the
 library(DoOR.data)
 library(DoOR.functions)
 
-# pick example odorants by name ans transform their ID to InChIKey
-odorants <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"),
-                    from = "Name", to = "InChIKey")
+# pick example odorants by name ans transform their ID to InChIKey 
+odorants <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), 
+from = "Name", to = "InChIKey")
  
 # plot                                      
 dplot_across_osns(odorants)

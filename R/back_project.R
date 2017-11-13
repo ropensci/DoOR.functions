@@ -15,7 +15,7 @@
 #'   responses in a column called "responses"
 #' @param responding.unit character, the name of the receptor/OSN/glomerulus
 #'   which responses should be transformed
-#' @param response_matrix DoOR response mnatrix, the source data is picked from
+#' @param response_matrix DoOR response matrix, the source data is picked from
 #'   here
 #'
 #' @return Output of back_project is a list containing a data frame with the

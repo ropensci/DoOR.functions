@@ -15,7 +15,7 @@ responses in a column called "responses"}
 \item{responding.unit}{character, the name of the receptor/OSN/glomerulus
 which responses should be transformed}
 
-\item{response_matrix}{DoOR response mnatrix, the source data is picked from
+\item{response_matrix}{DoOR response matrix, the source data is picked from
 here}
 }
 \value{
@@ -45,8 +45,8 @@ data(door_response_matrix)
 # create example data we are going to back project
 template.data <- data.frame(odorants = Or22a$InChIKey,
                             responses = Or22a$Hallem.2004.EN)
-                            
-# run back_project and plot the results                             
+
+# run back_project and plot the results
 bp <- back_project(template.data, "Or22a")
 
 plot(bp$back_projected$original.data,

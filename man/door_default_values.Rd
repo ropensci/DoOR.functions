@@ -8,14 +8,15 @@
 door_default_values(DoOR_default)
 }
 \arguments{
-\item{DoOR_default}{a character string, indicating which argument is to be
+\item{DoOR_default}{a character string, indicating which argument is to be 
 returned for DoOR functions.}
 }
 \description{
-\code{door_default_values} is used to return default values for DoOR functions.
+\code{door_default_values} is used to return default values for DoOR
+functions.
 }
 \details{
-There are six categories for default value. real number, integer, logical,
+There are six categories for default value. real number, integer, logical, 
 NULL, character string and character vector.
 }
 \examples{

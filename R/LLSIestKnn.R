@@ -124,7 +124,7 @@ LLSIestKnn <-
     ## sorting odors:
     
     if (missing(nodor)) {
-      nodor = dim(candi_A)[1]
+      nodor <- dim(candi_A)[1]
     }
     # find neighbors
     kNeighbors <-

@@ -34,22 +34,22 @@ symbols relative to the default size.}
 projects data points onto the curve defined by the model function
 }
 \details{
-For internal use in the merging process (see also \code{\link{model_response}}). The
-model function is choosen by \code{\link{calculate_model}}.
-\code{\link{project_points}} then projects the data points from the datasets
-to be merged onto the curve defined by the model function. It computes the
-closest distance from a data point to a point on the curve by numerical
-optimisation.
+For internal use in the merging process (see also
+\code{\link{model_response}}). The model function is choosen by
+\code{\link{calculate_model}}. \code{\link{project_points}} then projects the
+data points from the datasets to be merged onto the curve defined by the
+model function. It computes the closest distance from a data point to a point
+on the curve by numerical optimisation.
 
-A list with two data frames "double.observations" and "single.observations" is
-returned, which give the coordinates of double observations (defined as
+A list with two data frames "double.observations" and "single.observations"
+is returned, which give the coordinates of double observations (defined as
 (x,y)) and coordinates of single observation (defined as (x,NA) or (NA,y)).
 Both data frames contain seven columns: "ID" indicating the original position
 of data x and y, "x", "y" indicating the coordinate of observation, "X", "Y"
-indicating the coordinate of projected point on the function,
-"distance" indicating the distances between \code{(xmin, f(xmin))} and all
-points on the functional line, "NDR" indicating the normalized distances
-across all the distance values.
+indicating the coordinate of projected point on the function, "distance"
+indicating the distances between \code{(xmin, f(xmin))} and all points on the
+functional line, "NDR" indicating the normalized distances across all the
+distance values.
 }
 \examples{
 # load data

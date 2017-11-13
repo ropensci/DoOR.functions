@@ -17,12 +17,13 @@ dplot_response_matrix(data, odor_data = door_default_values("odor"),
 
 \item{tag}{the chemical identfier to plot (one of colnames(odor))}
 
-\item{colors}{the colors to use if negative values are supplied (range of 5
+\item{colors}{the colors to use if negative values are supplied (range of 5 
 colors, 2 for negative values, 1 for 0 and 3 for positive values)}
 
 \item{flip}{logical, if TRUE the x and y axes will be flipped}
 
-\item{fix}{logical, whether to fix the ratio of the tiles when plotting as a heatmap}
+\item{fix}{logical, whether to fix the ratio of the tiles when plotting as a 
+heatmap}
 
 \item{bw}{logical, whether to plot b&w or colored}
 
@@ -48,7 +49,8 @@ data(door_response_matrix)
 tmp <- reset_sfr(door_response_matrix, "SFR")
 
 # plot heatmap / coloured tiles
-dplot_response_matrix(tmp[10:50,], tag = "Name", limits = range(tmp, na.rm = TRUE))
+dplot_response_matrix(tmp[10:50,], tag = "Name", 
+ limits = range(tmp, na.rm = TRUE))
 
 # plot dotplot
 dplot_response_matrix(door_response_matrix[10:50,], tag = "Name",

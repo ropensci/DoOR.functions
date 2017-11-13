@@ -9,25 +9,36 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-DoOR consists of two R packages and both are needed for DoOR to work properly. One package, `DoOR.data` contains all the _Drosophila_ odor responses we gathered from labs around the world or recorded ourselves. The other package `DoOR.functions` contains the DoOR framework for integrating heterogeneous data sets as well as analysis tools and functions for visualization.
+DoOR consists of two R packages and both are needed for DoOR to work properly.
+One package, `DoOR.data` contains all the _Drosophila_ odor responses we
+gathered from labs around the world or recorded ourselves. The other package
+`DoOR.functions` contains the DoOR framework for integrating heterogeneous data
+sets as well as analysis tools and functions for visualization.
 
-In this vignette we describe how to build, modify and update DoOR and introduce some helper functions. There are two other vignettes explaining the [plotting functions](DoOR_visualizations.html) and the [analysis tools](DoOR_tools.html) in detail.
+In this vignette we describe how to build, modify and update DoOR and introduce
+some helper functions. There are two other vignettes explaining the [plotting
+functions](DoOR_visualizations.html) and the [analysis tools](DoOR_tools.html)
+in detail.
 ##
 
 ## Content
 * [loading DoOR](#loading)
 * [Modifying, building and updating DoOR](#building)
     * [Importing new data with `import_new_data()`](#import_new_data)
-    * [Building the complete data base with `create_door_database()`](#create_door_database)
-    * [Updating parts of the data base with `update_door_database()`](#update_door_database)
+    * [Building the complete data base with `create_door_database()`](
+    #create_door_database)
+    * [Updating parts of the data base with `update_door_database()`](
+    #update_door_database)
     * [`model_response()` and `model_response_seq()`](#model)
     * [Removing a study with `remove_study()`](#remove_study)
-    * [Updating the odor information with `update_door_odorinfo()`](#update_door_odorinfo)
+    * [Updating the odor information with `update_door_odorinfo()`](
+    #update_door_odorinfo)
 * [Helper functions](#helper)
 
 
 ## Loading DoOR{#loading}
-The first step after starting R is to attach both packages and to load the response data:
+The first step after starting R is to attach both packages and to load the
+response data:
 
 ```{r, results='hide'}
 library(DoOR.data)
@@ -39,19 +50,29 @@ load_door_data(nointeraction = TRUE)
 
 
 # Modifying, building and updating DoOR{#building}
-DoOR comes with all the original data sets as well as with a pre-computed version of the consensus matrix `door_response_matrix` where all data was integrated using the DoOR merging algorithms (see paper for details on how the algorithm works). The values in `door_response_matrix` are globally normalized with values scaled `[0,1]`. `door_response_matrix_non_normalized` is a version of the consensus data that is not globally normalized meaning that responses are scaled `[0,1]` within each _responding unit_ (receptor, sensory neuron, glomerulus...).
+DoOR comes with all the original data sets as well as with a pre-computed
+version of the consensus matrix `door_response_matrix` where all data was
+integrated using the DoOR merging algorithms (see paper for details on how the
+algorithm works). The values in `door_response_matrix` are globally normalized
+with values scaled `[0,1]`. `door_response_matrix_non_normalized` is a version
+of the consensus data that is not globally normalized meaning that responses are
+scaled `[0,1]` within each _responding unit_ (receptor, sensory neuron,
+glomerulus...).
 
 
 ## Importing new data with `import_new_data()`{#import_new_data}
-It is easy to add new response data to DoOR, we only have to take care to provide it in the right format:
+It is easy to add new response data to DoOR, we only have to take care to
+provide it in the right format:
 
-* either a .csv or a .txt file with fields separated by colons or tabs (see `?read.table` for detailed specifications).
-* the filename corresponds to the later name of the data set
-* if we add e.g. recordings obtained with different methods, these should go into two data sets and thus into two different files that we import
-* e.g. "Hallem.2004.EN" and "Hallem.2004.WT" are the "empty neuron" and the "wildtype neuron" recordings from Elissa Hallem's 2004 publication
-* the file needs at least two columns:
-1. one column named "InChIKey" holding the InChIKey of the odorant
-1. one column named after the responding unit the recording comes from (e.g. "Or22a")
+* either a .csv or a .txt file with fields separated by colons or tabs (see
+`?read.table` for detailed specifications). * the filename corresponds to the
+later name of the data set * if we add e.g. recordings obtained with different
+methods, these should go into two data sets and thus into two different files
+that we import * e.g. "Hallem.2004.EN" and "Hallem.2004.WT" are the "empty
+neuron" and the "wildtype neuron" recordings from Elissa Hallem's 2004
+publication * the file needs at least two columns: 1. one column named
+"InChIKey" holding the InChIKey of the odorant 1. one column named after the
+responding unit the recording comes from (e.g. "Or22a")
 
 A minimal example file could look like this:
 ```{r, echo=FALSE, }
@@ -77,7 +98,8 @@ Any of the following will be imported:
 : e.g. "isopentyl acetate"
 
 **`InChIKey`**
-: e.g. "MLFHJEHSLIIPHL-UHFFFAOYSA-N" ([details](https://en.wikipedia.org/wiki/International_Chemical_Identifier))
+: e.g. "MLFHJEHSLIIPHL-UHFFFAOYSA-N" 
+([details](https://en.wikipedia.org/wiki/International_Chemical_Identifier))
 
 **`InChI`**
 : e.g. "InChI=1S/C7H14O2/c1-6(2)4-5-9-7(3)8/h6H,4-5H2,1-3H3" ([details](https://en.wikipedia.org/wiki/International_Chemical_Identifier))
@@ -89,51 +111,82 @@ Any of the following will be imported:
 : e.g. "31276" ([details](https://en.wikipedia.org/wiki/PubChem))
 
 **`SMILES`**
-: e.g. "C(C(C)C)COC(=O)C" ([details](https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system))
+: e.g. "C(C(C)C)COC(=O)C" 
+([details](
+https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system))
 
 
-See `?import_new_data` for more details. We can e.g. import data also based on CAS or CID instead of InChIKey.
+See `?import_new_data` for more details. We can e.g. import data also based on
+CAS or CID instead of InChIKey.
 
-#### Looking up InChIKeys
-If you do not know the InChIKeys of the odorants in your data set, we recommend using the [`webchem`](https://cran.r-project.org/package=webchem) package for automated lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure> or any other chemical lookup service.
+#### Looking up InChIKeys If you do not know the InChIKeys of the odorants in
+your data set, we recommend using the
+[`webchem`](https://cran.r-project.org/package=webchem) package for automated
+lookup or doing it manually _via_ <http://cactus.nci.nih.gov/chemical/structure>
+or any other chemical lookup service.
 
 
-## Building the complete data base with `create_door_database()`{#create_door_database}
-Once we imported new data we can use `create_door_database()` in order to rebuild both response matrices. During the merge process some data sets might be excluded because either their overlap with other studies is too low or the fit against other studies is too bad; these studies will be recorded in `door_excluded_data`.
+## Building the complete data base with
+`create_door_database()`{#create_door_database} Once we imported new data we can
+use `create_door_database()` in order to rebuild both response matrices. During
+the merge process some data sets might be excluded because either their overlap
+with other studies is too low or the fit against other studies is too bad; these
+studies will be recorded in `door_excluded_data`.
 
 
-## Updating parts of the data base with `update_door_database()`{#update_door_database}
-If we imported new data only for a few receptors, we can update the data base with `update_door_database()`. There are two ways to update the data base:
+## Updating parts of the data base with
+`update_door_database()`{#update_door_database} If we imported new data only for
+a few receptors, we can update the data base with `update_door_database()`.
+There are two ways to update the data base:
 
-### Using the heuristic approach
-This is the faster way to perform a merge of all data sets. All possible binary combinations of data sets will be merged using 10 different fitting functions on the odorants that were measured in both data sets. The two data sets yielding the "best merge" (i.e. lowest mean deviations of points from the fitted function) will be merged. The process of pairwise merges will be repeated with the "merged_data" against the remaining data sets until all of them are included:
+### Using the heuristic approach This is the faster way to perform a merge of
+all data sets. All possible binary combinations of data sets will be merged
+using 10 different fitting functions on the odorants that were measured in both
+data sets. The two data sets yielding the "best merge" (i.e. lowest mean
+deviations of points from the fitted function) will be merged. The process of
+pairwise merges will be repeated with the "merged_data" against the remaining
+data sets until all of them are included:
 
 ```{r, fig.width = 7.1, fig.height = 5.5}
 update_door_database("Or92a", permutation = FALSE, plot = TRUE)
 ```
 
-### Trying all permutations
-The more exhaustive way to update the data base is to test all possible sequences of data set merges, calculating the mean deviations from all original data sets and selecting the merge that produces the lowest mean deviations. This approach works well for responding units that contain a low number of recorded data sets. For responding units containing 5 data sets we have to calculate merges for 120 different sequences. With 6 it is already 720 sequences and with 10 data sets we have to test > 3.6 million different sequences.
+### Trying all permutations The more exhaustive way to update the data base is
+to test all possible sequences of data set merges, calculating the mean
+deviations from all original data sets and selecting the merge that produces the
+lowest mean deviations. This approach works well for responding units that
+contain a low number of recorded data sets. For responding units containing 5
+data sets we have to calculate merges for 120 different sequences. With 6 it is
+already 720 sequences and with 10 data sets we have to test > 3.6 million
+different sequences.
 
-While this can be done _via_ parallel computing, this is nothing you should try on your home PC. For the pre-computed response matrices we performed matches using the permutation approach for all responding units that contained a maximum of 10 different data sets on a computing cluster. For DoOR 2.0 these are all responding units except Or22a.
+While this can be done _via_ parallel computing, this is nothing you should try
+on your home PC. For the pre-computed response matrices we performed matches
+using the permutation approach for all responding units that contained a maximum
+of 10 different data sets on a computing cluster. For DoOR 2.0 these are all
+responding units except Or22a.
 
 ```{r, fig.width = 7.1, fig.height = 5.5}
 update_door_database("Or67a", permutation = TRUE, plot = FALSE)
 ```
 
 
-## `model_response()` and `model_response_seq()`{#model}
-`update_door_database()` and `createDatabse()` call `model_response()` and `model_response_seq()` to perform the merges and update the different DoOR objects. If we only want to perform a merge we can call them both directly.
+## `model_response()` and `model_response_seq()`{#model} 
+`update_door_database()` and `createDatabse()` call `model_response()` and
+`model_response_seq()` to perform the merges and update the different DoOR
+objects. If we only want to perform a merge we can call them both directly.
 
-### Merging using the heuristic with `model_response()`
-`model_response()` returns a list containing the merged data, the names of the excluded data sets (if any) and the names of the included data sets (if any were excluded).
+### Merging using the heuristic with `model_response()` `model_response()`
+returns a list containing the merged data, the names of the excluded data sets
+(if any) and the names of the included data sets (if any were excluded).
 ```{r, fig.width = 7.1, fig.height = 5.5}
 merge <- model_response(Or67a, plot = FALSE)
 knitr::kable(head(merge$model.response))
 ```
 
-### Merging in a specific sequence with `model_response_seq()`
-`update_door_database()` with `permutation = TRUE` calls `model_response_seq()`. Like `model_response()` we can also call model_response_seq directly:
+### Merging in a specific sequence with `model_response_seq()` 
+`update_door_database()` with `permutation = TRUE` calls `model_response_seq()`.
+Like `model_response()` we can also call model_response_seq directly:
 ```{r, fig.width=5, fig.height=5.5}
 SEQ <- c("Hallem.2006.EN","Kreher.2008.EN","Hallem.2006.EN")
 merge <- model_response_seq(Or35a, SEQ = SEQ, plot = TRUE)
@@ -141,16 +194,22 @@ head(merge)
 ```
 
 
-## Removing a study with `remove_study()`{#remove_study}
-`remove_study()` will remove a data set from all DoOR data objects. If we import a data set that already exists with `import_new_data()`, `remove_study()` will automatically run before the data is imported.
+## Removing a study with `remove_study()`{#remove_study} `remove_study()` will
+remove a data set from all DoOR data objects. If we import a data set that
+already exists with `import_new_data()`, `remove_study()` will automatically run
+before the data is imported.
 
 ```{r}
 remove_study(study = "Hallem.2004.EN")
 ```
 
 
-## Updating the odor information with `update_door_odorinfo()`{#update_door_odorinfo}
-If we edit the general odor information in `DoOR.data::odor` we need to update all other DoOR objects with the new information. `update_door_odorinfo()` overwrites the first 5 columns of the DoOR responding units data frames (e.g. `Or22a`), it does not add or remove lines!
+## Updating the odor information with
+`update_door_odorinfo()`{#update_door_odorinfo} If we edit the general odor
+information in `DoOR.data::odor` we need to update all other DoOR objects with
+the new information. `update_door_odorinfo()` overwrites the first 5 columns of
+the DoOR responding units data frames (e.g. `Or22a`), it does not add or remove
+lines!
 
 
 
@@ -159,22 +218,32 @@ There are several small helper functions that belong to `DoOR.functions`.
 
 
 ## `trans_id()`{#trans_id}
-Maybe **the** most important little function in DoOR. With `trans_id()` we can translate odorant identifiers, e.g. from CAS numbers to InChIKeys or to names. The information is taken from `DoOR.data::odor`, any `colnames(odor)` can be used to define input or output:
+Maybe **the** most important little function in DoOR. With `trans_id()` we can
+translate odorant identifiers, e.g. from CAS numbers to InChIKeys or to names.
+The information is taken from `DoOR.data::odor`, any `colnames(odor)` can be
+used to define input or output:
 ```{r}
 trans_id("123-92-2")
 trans_id("123-92-2", to = "Name")
 trans_id("carbon dioxide", from = "Name", to = "SMILES")
 
-odorants <- c("carbon dioxide", "pentanoic acid", "water", "benzaldehyde", "isopentyl acetate")
+odorants <- c("carbon dioxide", "pentanoic acid", "water", "benzaldehyde", 
+              "isopentyl acetate")
 trans_id(odorants, from = "Name", to = "InChI")
 
 ```
 
 
-## `reset_sfr()`{#reset_sfr}
-`reset_sfr()` subtracts the values of a specified odorant from a response vector or from the whole response matrix. It is usually used to subtract the spontaneous firing rate of an odorant, thus setting it to zero and restoring inhibitory responses. We treat SFR like a normal odorant during the merging process, thus it becomes > 0 if negative values exist (as all data gets rescaled `[0,1]` before merging).
+## `reset_sfr()`{#reset_sfr} `reset_sfr()` subtracts the values of a specified
+odorant from a response vector or from the whole response matrix. It is usually
+used to subtract the spontaneous firing rate of an odorant, thus setting it to
+zero and restoring inhibitory responses. We treat SFR like a normal odorant
+during the merging process, thus it becomes > 0 if negative values exist (as all
+data gets rescaled `[0,1]` before merging).
 
-`reset_sfr()` works either on the whole `door_response_matrix`, then an odorant InChIKey has to be specified for subtraction. Or it subtracts a value from a response vector.
+`reset_sfr()` works either on the whole `door_response_matrix`, then an odorant
+InChIKey has to be specified for subtraction. Or it subtracts a value from a
+response vector.
 
 ```{r}
 rm_sfrReset <- reset_sfr(x = door_response_matrix, sfr = "SFR")
@@ -186,8 +255,9 @@ reset_sfr(x = c(1:10), sfr = 4)
 ```
 
 
-## `door_default_values()`{#door_default_values}
-`door_default_values()` returns default values for several parameters used by the DoOR functions, e.g. the default odor identifier of the colors used in plots.
+## `door_default_values()`{#door_default_values} `door_default_values()` returns
+default values for several parameters used by the DoOR functions, e.g. the
+default odor identifier of the colors used in plots.
 
 ```{r}
 door_default_values("ident")
@@ -195,8 +265,8 @@ door_default_values("colors")
 ```
 
 
-## `get_responses()`{#get_responses}
-`get_responses()` returns the response values of one or several odorants across individual data sets.
+## `get_responses()`{#get_responses} `get_responses()` returns the response
+values of one or several odorants across individual data sets.
 ```{r}
 odorants  <- trans_id(c("carbon dioxide", "isopentyl acetate"), from = "Name")
 responses <- get_responses(odorants)
@@ -205,8 +275,9 @@ knitr::kable(head(responses))
 ```
 
 
-## `get_normalized_responses()`{#get_normalized_responses}
-`get_normalized_responses()` gathers responses to the specified odorants from the door_response_matrix and resets the SFR _via_ `reset_sfr()`:
+## `get_normalized_responses()`{#get_normalized_responses} 
+`get_normalized_responses()` gathers responses to the specified odorants from
+the door_response_matrix and resets the SFR _via_ `reset_sfr()`:
 ```{r}
 odorants  <- trans_id(c("carbon dioxide", "isopentyl acetate"), from = "Name")
 responses <- get_normalized_responses(odorants)
@@ -215,17 +286,18 @@ knitr::kable(head(responses))
 ```
 
 
-## `countStudies()`{#countStudies}
-`countStudies()` counts the number of studies that measured a given odorant-responding unit combination.
+## `countStudies()`{#countStudies} `countStudies()` counts the number of studies
+that measured a given odorant-responding unit combination.
 ```{r}
 counts <- countStudies()
 knitr::kable(counts[1:10,6:15])
 ```
 
 
-## `export_door_data()`{#export_door_data}
-`export_door_data()` exports all or selected DoOR data objects in txt or csv format.
+## `export_door_data()`{#export_door_data} `export_door_data()` exports all or
+selected DoOR data objects in txt or csv format.
 ```{r}
 # export_door_data(".csv")                  	# export all data as .csv files
-# export_door_data(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
+# export_door_data(".txt", all.data = FALSE) 	# export odorant responses data 
+                                              # only as .txt files
 ```

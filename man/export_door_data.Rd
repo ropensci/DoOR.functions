@@ -14,10 +14,10 @@ export_door_data(file.format, directory,
   all.data = TRUE)
 }
 \arguments{
-\item{file.format}{character string, the format of given file, either ".txt"
+\item{file.format}{character string, the format of given file, either ".txt" 
 or ".csv"}
 
-\item{directory}{character string, naming a directory for writing. If
+\item{directory}{character string, naming a directory for writing. If 
 missing, the exported data are saved in current working directory.}
 
 \item{odorantReceptors}{data frame, receptor names and expressions}
@@ -30,15 +30,16 @@ missing, the exported data are saved in current working directory.}
 
 \item{weightGlobNorm}{data frame, weight matrix for global normalizazion}
 
-\item{all.data}{logical, if TRUE, export odorant response data and supported
-data "door_response_matrix", "door_response_range", "door_response_matrix_non_normalized",
-"door_response_matrix", "door_global_normalization_weights" and "ORs".}
+\item{all.data}{logical, if TRUE, export odorant response data and supported 
+data "door_response_matrix", "door_response_range", 
+"door_response_matrix_non_normalized", "door_response_matrix", 
+"door_global_normalization_weights" and "ORs".}
 }
 \description{
 export odor response data and supported data
 }
 \details{
-Please load ORs from data package DoOR.data by typing (\code{data(ORs)})
+Please load ORs from data package DoOR.data by typing (\code{data(ORs)}) 
 before use.
 }
 \examples{

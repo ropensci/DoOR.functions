@@ -17,16 +17,16 @@ dplot_tuningCurve(receptor, odorant, response.vector,
 
 \item{odorant}{character, an odorant name (InChIKey)}
 
-\item{response.vector}{numerical vector, a vector with responses, if empty
+\item{response.vector}{numerical vector, a vector with responses, if empty 
 this is taken from door_response_matrix}
 
-\item{response_matrix}{DoOR response matrix, response vector will be taken
+\item{response_matrix}{DoOR response matrix, response vector will be taken 
 from here, not needed if response.vector is given}
 
 \item{odor_data}{data frame, contains the odorant information.}
 
-\item{zero}{InChIKey, will be set to zero, default is SFR, ignored when data
-is provided via response.vector, set to "" if you don't want to subtract
+\item{zero}{InChIKey, will be set to zero, default is SFR, ignored when data 
+is provided via response.vector, set to "" if you don't want to subtract 
 anything}
 
 \item{fill.receptor}{color code, bar color for receptor tuning curve}
@@ -58,7 +58,8 @@ dplot_tuningCurve(receptor = "Or22a")
 
 # adjust the plotting range
 range <- range(reset_sfr(door_response_matrix, "SFR"), na.rm = TRUE)
-dplot_tuningCurve(receptor = "Or10a", limits = range, fill.receptor = "magenta")
+dplot_tuningCurve(receptor = "Or10a", limits = range, 
+                  fill.receptor = "magenta")
 
 # plot with manual input data as receptor tuning curve
 dplot_tuningCurve(receptor = "receptor X", response.vector = c(1:100))

@@ -33,8 +33,8 @@
 #' library(DoOR.data)
 #' library(DoOR.functions)
 #' 
-#' # pick example odorants by name ans transform their ID to InChIKey odorants
-#' <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), 
+#' # pick example odorants by name ans transform their ID to InChIKey 
+#' odorants <- trans_id(c("1-butanol", "isopentyl acetate", "carbon dioxide", "water"), 
 #' from = "Name", to = "InChIKey")
 #'  
 #' # plot                                      
