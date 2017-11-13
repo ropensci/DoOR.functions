@@ -1,4 +1,4 @@
-## ---- echo = TRUE, message = TRUE, results='hide'---------------------------
+## ---- echo = TRUE, message = TRUE, results='hide'------------------------
 #load data
 library(DoOR.functions)
 library(DoOR.data)
@@ -26,11 +26,16 @@ identify_sensillum(recording, sub = "ab", nshow = 5, base_size = 8)
 identify_sensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
 
 ## ---- fig.width=7.1, fig.height=4.5--------------------------------------
-identify_sensillum(recording, method = "dist", sub = "ab", nshow = 5, base_size = 8)
+identify_sensillum(recording, method = "dist", sub = "ab", nshow = 5, 
+                   base_size = 8)
 
 ## ------------------------------------------------------------------------
-sensillumX <- identify_sensillum(recording, method = "dist", sub = "ab", plot = FALSE)
-head(sensillumX)
+sensillumX <-
+  identify_sensillum(recording,
+  method = "dist",
+  sub = "ab",
+  plot = FALSE)
+  head(sensillumX)
 
 ## ------------------------------------------------------------------------
 private_odorant("Or22a")
@@ -39,7 +44,7 @@ private_odorant("Or22a")
 private_odorant("Or22a", tag = "Name")
 
 ## ------------------------------------------------------------------------
-private_odorant("Or22a", tag = "Name", sensillum = TRUE)
+private_odorant("Or22a", tag = "Name", sensillum = T)
 
 ## ------------------------------------------------------------------------
 data <- data.frame(odorants  = Or22a$InChIKey, responses = Or22a$Hallem.2006.EN)
@@ -69,3 +74,5 @@ sparse(x = rm.SFRreset[,"Or69a"], method = "lts")
 
 sparse(x = rm.SFRreset[,"Gr21a.Gr63a"], method = "ltk")
 sparse(x = abs(rm.SFRreset[,"Gr21a.Gr63a"]), method = "lts")
+
+

@@ -36,7 +36,8 @@ trans_id("123-92-2")
 trans_id("123-92-2", to = "Name")
 trans_id("carbon dioxide", from = "Name", to = "SMILES")
 
-odorants <- c("carbon dioxide", "pentanoic acid", "water", "benzaldehyde", "isopentyl acetate")
+odorants <- c("carbon dioxide", "pentanoic acid", "water", "benzaldehyde", 
+              "isopentyl acetate")
 trans_id(odorants, from = "Name", to = "InChI")
 
 
@@ -69,4 +70,6 @@ knitr::kable(counts[1:10,6:15])
 
 ## ------------------------------------------------------------------------
 # export_door_data(".csv")                  	# export all data as .csv files
-# export_door_data(".txt", all.data = FALSE) 	# export odorant responses data only as .txt files
+# export_door_data(".txt", all.data = FALSE) 	# export odorant responses data 
+                                              # only as .txt files
+
