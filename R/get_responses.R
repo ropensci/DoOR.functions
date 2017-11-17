@@ -23,8 +23,8 @@
 #' responses <- get_responses(odorant = 'MLFHJEHSLIIPHL-UHFFFAOYSA-N')
 #'
 get_responses <- function(odorant,
-                          responseRange = door_default_values("
-                                           door_response_range"),
+                          responseRange = door_default_values(
+                            "door_response_range"),
                           Or.list = load2list()) {
   studies  <- responseRange[, "study"]
   Or.Names <- names(Or.list)

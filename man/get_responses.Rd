@@ -6,7 +6,7 @@
 \title{Find receptor responses}
 \usage{
 get_responses(odorant,
-  responseRange = door_default_values("\\n                                           door_response_range"),
+  responseRange = door_default_values("door_response_range"),
   Or.list = load2list())
 }
 \arguments{
