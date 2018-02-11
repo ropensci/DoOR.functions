@@ -28,3 +28,5 @@ DoOR was first published in 2010, the OpenAccess publication is available from
 
 An OpenAccess publication regarding the comprehensive update to **DoOR version 2.0** is available from
 A preprint of manuscript related to DoOR 2.0 can be found at bioRxiv: [http://www.nature.com/articles/srep21841](http://www.nature.com/articles/srep21841)
+
+[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
