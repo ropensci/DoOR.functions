@@ -1,6 +1,7 @@
 DoOR.functions
 ==============
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.375617.svg)](http://dx.doi.org/10.5281/zenodo.375617)
+[![](https://badges.ropensci.org/34_status.svg)](https://github.com/ropensci/onboarding/issues/34)
 [![Travis-CI Build Status](https://travis-ci.org/ropensci/DoOR.functions.svg?branch=master)](https://travis-ci.org/ropensci/DoOR.functions)
 
 R package containing the functions used to build the Database of Odor Responses. The corresponding data package can be found at [https://github.com/ropensci/DoOR.data](https://github.com/ropensci/DoOR.data).
