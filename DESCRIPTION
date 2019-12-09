@@ -10,7 +10,7 @@ Authors@R: c(
     person("Martin", "Strauch", role = "aut"),
     person("Anja", "Nissler", role = "aut"),
     person("Wolf", "Huetteroth", role = "ctb"))
-URL: http://neuro.uni.kn/DoOR, http://dx.doi.org/10.1038/srep21841, http://dx.doi.org/10.1093/chemse/bjq042, https://github.com/ropensci/DoOR.functions
+URL: https://docs.ropensci.org/DoOR.functions, http://neuro.uni.kn/DoOR, http://dx.doi.org/10.1038/srep21841, http://dx.doi.org/10.1093/chemse/bjq042, https://github.com/ropensci/DoOR.functions
 BugReports: https://github.com/ropensci/DoOR.functions/issues
 Description: This is a function package providing functions to perform data
     manipulations and visualizations for DoOR.data. See the URLs for the original and the DoOR 2.0 publication.
