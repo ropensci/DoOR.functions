@@ -139,7 +139,7 @@ dplot_al_map <- function(InChIKey,
     ggplot2::scale_fill_gradientn(
       na.value = "grey65",
       colours = colors,
-      space = "rgb",
+      space = "Lab",
       values = door_norm(c(
         limits[1], limits[1] / 2, 0, limits[2] / 3, limits[2] / 1.5, limits[2]
       )),
