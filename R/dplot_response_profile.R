@@ -83,7 +83,7 @@ dplot_response_profile <- function(receptor,
       ) +
       ggplot2::scale_fill_gradientn(
         colours = colors,
-        space = "rgb",
+        space = "Lab",
         values = values,
         limits = limits
       )

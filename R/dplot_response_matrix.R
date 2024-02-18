@@ -110,7 +110,7 @@ dplot_response_matrix <- function(data,
     plot <-
     plot + ggplot2::scale_fill_gradientn(
       colours  = colors,
-      space = "rgb",
+      space = "Lab",
       values = values,
       limits  = limits
     )
@@ -118,7 +118,7 @@ dplot_response_matrix <- function(data,
     plot <-
     plot + ggplot2::scale_color_gradientn(
       colours  = colors,
-      space = "rgb",
+      space = "Lab",
       values = values,
       limits  = limits
     )
