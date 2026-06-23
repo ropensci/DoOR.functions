@@ -5,9 +5,16 @@
 \alias{projectPoints}
 \title{project_points}
 \usage{
-project_points(x, y, xylim, best.model, plot = door_default_values("plot"),
+project_points(
+  x,
+  y,
+  xylim,
+  best.model,
+  plot = door_default_values("plot"),
   points_cex = door_default_values("points.cex"),
-  title = door_default_values("title"), ...)
+  title = door_default_values("title"),
+  ...
+)
 }
 \arguments{
 \item{x, y}{numeric vectors of data values, coordinate vectors of points to

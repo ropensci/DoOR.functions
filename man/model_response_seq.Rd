@@ -5,10 +5,14 @@
 \alias{modelRPSEQ}
 \title{model_response_seq}
 \usage{
-model_response_seq(data, SEQ,
+model_response_seq(
+  data,
+  SEQ,
   overlapValues = door_default_values("overlapValues"),
-  select.MDValue = door_default_values("select.MDValue"), strict = TRUE,
-  plot = FALSE)
+  select.MDValue = door_default_values("select.MDValue"),
+  strict = TRUE,
+  plot = FALSE
+)
 }
 \arguments{
 \item{data}{data frame, odorant response data, e.g. Or22a.}

@@ -5,9 +5,12 @@
 \alias{removeStudy}
 \title{Remove a study from DoOR}
 \usage{
-remove_study(study, receptors = door_default_values("ORs"),
+remove_study(
+  study,
+  receptors = door_default_values("ORs"),
   responseRange = door_default_values("door_response_range"),
-  weightGlobNorm = door_default_values("door_global_normalization_weights"))
+  weightGlobNorm = door_default_values("door_global_normalization_weights")
+)
 }
 \arguments{
 \item{study}{a string containing the name of the study you want to remove

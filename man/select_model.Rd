@@ -5,9 +5,13 @@
 \alias{selectModel}
 \title{compute the data pairwise and and selects a pair with the lowest "MD" value.}
 \usage{
-select_model(candidate, data_candidate, merged_data,
+select_model(
+  candidate,
+  data_candidate,
+  merged_data,
   overlapValues = door_default_values("overlapValues"),
-  merged = door_default_values("merged"))
+  merged = door_default_values("merged")
+)
 }
 \arguments{
 \item{candidate}{a character vector, contains the names of studies.}

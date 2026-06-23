@@ -1,10 +1,10 @@
-## ---- echo = TRUE, message = TRUE, results='hide'------------------------
+## ----echo = TRUE, message = TRUE, results='hide'------------------------------
 #load data
 library(DoOR.functions)
 library(DoOR.data)
 load_door_data(nointeraction = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 recording <- data.frame(
   odorants = c(trans_id(c("BEDN", "ETAS"), "Code"),
                trans_id("carbon dioxide", "Name")),
@@ -12,24 +12,24 @@ recording <- data.frame(
   unit2 = c(0, .1, 1)
 )
 
-## ---- fig.width=7.1, fig.height=4.5--------------------------------------
+## ----fig.width=7.1, fig.height=4.5--------------------------------------------
 identify_sensillum(recording, base_size = 8)
 
-## ---- fig.width=7.1, fig.height=4.5, fig.show='hide'---------------------
+## ----fig.width=7.1, fig.height=4.5, fig.show='hide'---------------------------
 identify_sensillum(recording, min.cor = .99)
 
-## ---- fig.width=7.1, fig.height=4.5--------------------------------------
+## ----fig.width=7.1, fig.height=4.5--------------------------------------------
 identify_sensillum(recording, nshow = 5, base_size = 8)
 
-## ---- fig.width=7.1, fig.height=4.5--------------------------------------
+## ----fig.width=7.1, fig.height=4.5--------------------------------------------
 identify_sensillum(recording, sub = "ab", nshow = 5, base_size = 8)
 identify_sensillum(recording, sub = c("ac","at"), nshow = 5, base_size = 8)
 
-## ---- fig.width=7.1, fig.height=4.5--------------------------------------
+## ----fig.width=7.1, fig.height=4.5--------------------------------------------
 identify_sensillum(recording, method = "dist", sub = "ab", nshow = 5, 
                    base_size = 8)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sensillumX <-
   identify_sensillum(recording,
   method = "dist",
@@ -37,22 +37,22 @@ sensillumX <-
   plot = FALSE)
   head(sensillumX)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 private_odorant("Or22a")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 private_odorant("Or22a", tag = "Name")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 private_odorant("Or22a", tag = "Name", sensillum = T)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 data <- data.frame(odorants  = Or22a$InChIKey, responses = Or22a$Hallem.2006.EN)
 data <- na.omit(data)
 head(data)
 map_receptor(data = data, nshow = 5)
 
-## ---- fig.width = 4.5, fig.height = 4.5----------------------------------
+## ----fig.width = 4.5, fig.height = 4.5----------------------------------------
 template <- data.frame(odorants  = Or22a$InChIKey,
                        responses = Or22a$Hallem.2006.EN)
 
@@ -66,7 +66,7 @@ plot(bp$back_projected$original.data,
 head(bp$back_projected)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 rm.SFRreset <- reset_sfr(door_response_matrix, "SFR")
 
 sparse(x = rm.SFRreset[,"Or69a"], method = "ltk")

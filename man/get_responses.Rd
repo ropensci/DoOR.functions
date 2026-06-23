@@ -5,9 +5,11 @@
 \alias{getResponses}
 \title{Find receptor responses}
 \usage{
-get_responses(odorant,
+get_responses(
+  odorant,
   responseRange = door_default_values("door_response_range"),
-  Or.list = load2list())
+  Or.list = load2list()
+)
 }
 \arguments{
 \item{odorant}{a single odor provided as InChIKey}

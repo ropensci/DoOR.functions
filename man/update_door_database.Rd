@@ -4,15 +4,20 @@
 \alias{update_door_database}
 \title{update response matrix}
 \usage{
-update_door_database(receptor, permutation = TRUE, perm,
+update_door_database(
+  receptor,
+  permutation = TRUE,
+  perm,
   response_matrix_nn = door_default_values("door_response_matrix_non_normalized"),
   response_matrix = door_default_values("door_response_matrix"),
   responseRange = door_default_values("door_response_range"),
   weightGlobNorm = door_default_values("door_global_normalization_weights"),
-  select.MDValue = door_default_values("select.MDValue"), strict = TRUE,
+  select.MDValue = door_default_values("select.MDValue"),
+  strict = TRUE,
   overlapValues = door_default_values("overlapValues"),
   door_excluded_data = door_default_values("door_excluded_data"),
-  plot = FALSE)
+  plot = FALSE
+)
 }
 \arguments{
 \item{receptor}{character string, name of given odorant receptor.}

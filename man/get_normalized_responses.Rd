@@ -5,9 +5,13 @@
 \alias{getNormalizedResponses}
 \title{Find normalised receptor responses}
 \usage{
-get_normalized_responses(odors, zero = door_default_values("zero"),
-  response_matrix = door_default_values("door_response_matrix"), round = 3,
-  na.rm = FALSE)
+get_normalized_responses(
+  odors,
+  zero = door_default_values("zero"),
+  response_matrix = door_default_values("door_response_matrix"),
+  round = 3,
+  na.rm = FALSE
+)
 }
 \arguments{
 \item{odors}{character vector, one or more odors provided as InChIKey.}

@@ -5,12 +5,15 @@
 \alias{modelRP}
 \title{Generates a model response}
 \usage{
-model_response(da, select.MDValue = door_default_values("select.MDValue"),
+model_response(
+  da,
+  select.MDValue = door_default_values("select.MDValue"),
   overlapValues = door_default_values("overlapValues"),
   responseRange = door_default_values("door_response_range"),
   weightGlobNorm = door_default_values("door_global_normalization_weights"),
   glob.normalization = door_default_values("glob.normalization"),
-  plot = door_default_values("plot"))
+  plot = door_default_values("plot")
+)
 }
 \arguments{
 \item{da}{data frame, a selected receptor containing measured responses from

@@ -5,11 +5,15 @@
 \alias{dplot_acrossReceptors}
 \title{dplot_across_ru}
 \usage{
-dplot_across_ru(odorant,
+dplot_across_ru(
+  odorant,
   response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
-  zero = door_default_values("zero"), tag = "Name", limits,
-  base_size = 12)
+  zero = door_default_values("zero"),
+  tag = "Name",
+  limits,
+  base_size = 12
+)
 }
 \arguments{
 \item{odorant}{character vecto, one or several InChIKeys}

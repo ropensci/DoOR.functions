@@ -5,12 +5,20 @@
 \alias{identifySensillum}
 \title{identify_sensillum}
 \usage{
-identify_sensillum(recording,
+identify_sensillum(
+  recording,
   response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
-  door_mappings = door_default_values("door_mappings"), tag = "Name",
-  min.cor = 0.9, nshow = 10, method = "cor", sub, base_size = 12,
-  plot = TRUE, use = "everything")
+  door_mappings = door_default_values("door_mappings"),
+  tag = "Name",
+  min.cor = 0.9,
+  nshow = 10,
+  method = "cor",
+  sub,
+  base_size = 12,
+  plot = TRUE,
+  use = "everything"
+)
 }
 \arguments{
 \item{recording}{data frame, a data frame with the following columns 

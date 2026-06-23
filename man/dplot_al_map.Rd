@@ -5,16 +5,21 @@
 \alias{dplot_ALmap}
 \title{dplot_al_map}
 \usage{
-dplot_al_map(InChIKey,
+dplot_al_map(
+  InChIKey,
   response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
   door_mappings = door_default_values("door_mappings"),
   zero = door_default_values("zero"),
-  tag = door_default_values("tag.ALmap"), main = "Name",
+  tag = door_default_values("tag.ALmap"),
+  main = "Name",
   scalebar = door_default_values("scalebar"),
   door_AL_map = door_default_values("door_AL_map"),
-  colors = door_default_values("colors"), legend = TRUE, limits,
-  base_size = 12)
+  colors = door_default_values("colors"),
+  legend = TRUE,
+  limits,
+  base_size = 12
+)
 }
 \arguments{
 \item{InChIKey}{InChIKey specifying the odorant to plot}

@@ -4,13 +4,19 @@
 \alias{dplot_tuningCurve}
 \title{dplot_tuningCurve}
 \usage{
-dplot_tuningCurve(receptor, odorant, response.vector,
+dplot_tuningCurve(
+  receptor,
+  odorant,
+  response.vector,
   response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
   zero = door_default_values("zero"),
   fill.receptor = door_default_values("color.receptor"),
-  fill.odorant = door_default_values("color.odorant"), odor.main = "Name",
-  limits, base_size = 12)
+  fill.odorant = door_default_values("color.odorant"),
+  odor.main = "Name",
+  limits,
+  base_size = 12
+)
 }
 \arguments{
 \item{receptor}{character, a receptor name (one of ORS$OR)}

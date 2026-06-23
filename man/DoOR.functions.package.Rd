@@ -2,10 +2,10 @@
 % Please edit documentation in R/DoOR.functions-package.R
 \docType{package}
 \name{DoOR.functions.package}
+\alias{DoOR.functions-package}
 \alias{DoOR.functions.package}
 \alias{DoOR.functions}
 \alias{DoOR.function}
-\alias{DoOR.functions.package-package}
 \title{DoOR Functions}
 \description{
 Functions package providing manipulation and application of the DoOR.

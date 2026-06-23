@@ -4,8 +4,11 @@
 \alias{back_project}
 \title{back_project}
 \usage{
-back_project(template.data, responding.unit,
-  response_matrix = door_default_values("door_response_matrix"))
+back_project(
+  template.data,
+  responding.unit,
+  response_matrix = door_default_values("door_response_matrix")
+)
 }
 \arguments{
 \item{template.data}{data frame, the data that provides the scale to

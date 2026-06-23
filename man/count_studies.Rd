@@ -5,10 +5,12 @@
 \alias{countStudies}
 \title{count_studies}
 \usage{
-count_studies(ors = door_default_values("ORs"),
+count_studies(
+  ors = door_default_values("ORs"),
   odor_data = door_default_values("odor"),
   char.columns = door_default_values("num.charColumns"),
-  ident = door_default_values("ident"))
+  ident = door_default_values("ident")
+)
 }
 \arguments{
 \item{ors}{data.frame containing all receptors exidting in DoOR.}

@@ -5,8 +5,12 @@
 \alias{transID}
 \title{trans_id}
 \usage{
-trans_id(x, from = "CAS", to = "InChIKey",
-  odor_data = door_default_values("odor"))
+trans_id(
+  x,
+  from = "CAS",
+  to = "InChIKey",
+  odor_data = door_default_values("odor")
+)
 }
 \arguments{
 \item{x}{character vector, one or many chemical identifiers}

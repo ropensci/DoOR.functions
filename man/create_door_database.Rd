@@ -5,9 +5,12 @@
 \alias{CreateDatabase}
 \title{Compose a Response Matrix of All Odor Receptors}
 \usage{
-create_door_database(tag = door_default_values("tag"),
+create_door_database(
+  tag = door_default_values("tag"),
   select.MDValue = door_default_values("select.MDValue"),
-  overlapValues = door_default_values("overlapValues"), ...)
+  overlapValues = door_default_values("overlapValues"),
+  ...
+)
 }
 \arguments{
 \item{tag}{character string, format for rownames, possibilities: "InChIKey",

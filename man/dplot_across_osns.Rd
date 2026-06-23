@@ -5,12 +5,17 @@
 \alias{dplot_acrossOSNs}
 \title{dplot_across_osns}
 \usage{
-dplot_across_osns(odorants,
+dplot_across_osns(
+  odorants,
   response_matrix = door_default_values("door_response_matrix"),
   odor_data = door_default_values("odor"),
   door_mappings = door_default_values("door_mappings"),
-  zero = door_default_values("zero"), tag = "Name", sub, plot.type = 1,
-  base_size = 12)
+  zero = door_default_values("zero"),
+  tag = "Name",
+  sub,
+  plot.type = 1,
+  base_size = 12
+)
 }
 \arguments{
 \item{odorants}{character vector, one or several InChIKeys}

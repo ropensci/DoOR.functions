@@ -5,10 +5,15 @@
 \alias{privateOdorant}
 \title{private_odorant}
 \usage{
-private_odorant(receptor, sensillum = FALSE,
+private_odorant(
+  receptor,
+  sensillum = FALSE,
   response_matrix = door_default_values("door_response_matrix"),
   door_mappings = door_default_values("door_mappings"),
-  zero = door_default_values("zero"), nshow = 5, tag)
+  zero = door_default_values("zero"),
+  nshow = 5,
+  tag
+)
 }
 \arguments{
 \item{receptor}{character, name of a DoOR responding unit (one of
