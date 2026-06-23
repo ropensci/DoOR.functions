@@ -249,7 +249,7 @@ import_new_data <- function(file.name,
   match_receptor <- match(receptor_file, receptors[, "OR"])
   what_is_new <-  receptor_file[which(is.na(match_receptor))]
   if (!is.na(what_is_new[1])) {
-    ORs_new 	<- data.frame(OR = what_is_new, expression = NA)
+    ORs_new 	<- data.frame(OR = what_is_new)
     receptors 	<- rbind(receptors, ORs_new)
     message("New receptor or ORN has been added to 'ORs',
             please input the AL mapping manually.")
