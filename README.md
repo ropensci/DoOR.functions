@@ -10,17 +10,14 @@ R package containing the functions used to build the Database of Odor Responses.
 Find more information, precompiled R-packages and an interactive web-version of the DoOR-Database at: **[http://neuro.uni.kn/DoOR](http://neuro.uni.kn/DoOR)**
 
 ## Install
-Either download a packaged version or install _via_ `devtools`:
+Install latest version from master branch or specific version _via_ `pak`:
 ```{r}
-# install devtools
-install.packages("devtools")
-library(devtools)
+# install pak
+install.packages("pak")
+pak::pak('ropensci/DoOR.functions@master')
 
 # install DoOR.functions 2.0.1
-install_github("ropensci/DoOR.functions", ref="v2.0.1")
-
-# or install the latest version available on Github
-install_github("ropensci/DoOR.functions")
+pak::pak('ropensci/DoOR.functions@v2.0.1')
 ```
 
 ## Publications
