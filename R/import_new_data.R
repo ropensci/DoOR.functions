@@ -52,11 +52,11 @@ import_new_data <- function(file.name,
       ident     = door_default_values("ident"),
       round     = 3) {
   if (any(grep(".txt$", file.name))) {
-    imported.data <- read.table(file.name)
+    imported.data <- read.table(file.name, stringsAsFactors = TRUE)
     file.name <- gsub(".txt$", "", file.name)
   }
   if (any(grep(".csv$", file.name))) {
-    imported.data <- read.csv(file.name)
+    imported.data <- read.csv(file.name, stringsAsFactors = TRUE)
     file.name <- gsub(".csv$", "", file.name)
   }
   
