@@ -2,7 +2,8 @@ Package: DoOR.functions
 Type: Package
 Title: Integrating Heterogeneous Odorant Response Data into a Common Response
     Model: A DoOR to the Complete Olfactome
-Version: 2.0.3
+Version: 2.0.3.9000
+Date: 2026-07-10
 Authors@R: c(
     person("Daniel", "Münch", email = "daniel.muench@uni-konstanz.de", role = c("aut", "cre")),
     person("C. Giovanni", "Galizia", email = "giovanni.galizia@uni-konstanz.de", role = "aut"), 

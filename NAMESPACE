@@ -2,7 +2,6 @@
 
 export(back_project)
 export(calculate_model)
-export(countStudies)
 export(count_studies)
 export(create_door_database)
 export(door_default_values)
