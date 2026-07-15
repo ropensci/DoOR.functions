@@ -19,7 +19,7 @@
 #' door_response_matrix_SFRreset <- reset_sfr(door_response_matrix, "SFR")
 #'
 reset_sfr <- function(x, sfr) {
-  if (is.numeric(x)) {
+  if (is.null(dim(x))) {
     if (!is.numeric(sfr))
       stop("As x is a vector, sfr has to be a numeric value to subtract!")
     if (is.na(sfr))

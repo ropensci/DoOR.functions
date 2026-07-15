@@ -25,10 +25,10 @@ update_door_database(
 \item{permutation}{logical, if TRUE, the sequence is chosen from permutation,
 if FALSE, sequence is chosen by the routine process.}
 
-\item{perm}{a matrix with one sequence of study names per row, if empty, all 
+\item{perm}{a matrix with one sequence of study names per row, if empty, all
 possible permutations of study names will be provided.}
 
-\item{response_matrix_nn}{data frame, response data that has not been 
+\item{response_matrix_nn}{data frame, response data that has not been
 globally normalized.}
 
 \item{response_matrix}{data frame, globally normalized response data.}
@@ -37,12 +37,12 @@ globally normalized.}
 
 \item{weightGlobNorm}{data frame, weight matrix for global normalization.}
 
-\item{select.MDValue}{the minimum mean distance between studies to perfom a 
+\item{select.MDValue}{the minimum mean distance between studies to perfom a
 merge (used if permutation == FALSE or if permutation == TRUE AND strict ==
 TRUE)}
 
-\item{strict}{logical, if TRUE merging a permutation will be stopped once a 
-single merge has a mean distance above select.MDValue (only valid if 
+\item{strict}{logical, if TRUE merging a permutation will be stopped once a
+single merge has a mean distance above select.MDValue (only valid if
 permutation == TRUE)}
 
 \item{overlapValues}{minimum overlap between studies to perfom a merge}
@@ -53,12 +53,12 @@ data sets.}
 \item{plot}{logical}
 }
 \description{
-update the globally \code{response matrix} and the unglobally normalized 
+update the globally \code{response matrix} and the unglobally normalized
 response matrix \code{door_response_matrix_non_normalized} by introducing new
 consensus response data of given receptor.
 }
 \details{
-The merging sequence could be arranged by the routine process (using 
+The merging sequence could be arranged by the routine process (using
 \code{\link{model_response}} or taking the optimized sequence that is chosen
 from permutations. The mean correlation between merged responses and each
 original recording will be computed for each permutation, the optimozed
@@ -80,6 +80,6 @@ load_door_data()
 \author{
 Shouwen Ma <\email{shouwen.ma@uni-konstanz.de}>
 
-Shouwen Ma <\email{daniel.muench@uni-konstanz.de}>
+Daniel Münch <\email{daniel.muench@uni-konstanz.de}>
 }
 \keyword{data}

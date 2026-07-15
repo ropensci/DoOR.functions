@@ -23,7 +23,7 @@
 #' # load DoOR data
 #' library(DoOR.data)
 #' load_door_data()
-#' 
+#'
 #' # create a new consensus matrix
 #' create_door_database()
 #' }
@@ -82,12 +82,18 @@ create_door_database <-
     }
     frame_data_nn <- apply(frame_data, 2, door_norm)
     
-    assign("door_response_matrix", frame_data, envir = .GlobalEnv)
+    assign(
+      "door_response_matrix",
+      as.data.frame(frame_data, stringsAsFactors = FALSE),
+      envir = .GlobalEnv
+    )
     message("door_response_matrix has been created")
     
-    assign("door_response_matrix_non_normalized",
-           frame_data_nn,
-           envir = .GlobalEnv)
+    assign(
+      "door_response_matrix_non_normalized",
+      as.data.frame(frame_data_nn, stringsAsFactors = FALSE),
+      envir = .GlobalEnv
+    )
     message("door_response_matrix_non_normalized has been created")
     
     assign("door_excluded_data", door_excluded_data, envir = .GlobalEnv)
