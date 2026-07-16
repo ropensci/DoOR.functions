@@ -132,6 +132,7 @@ import_new_data <- function(file.name,
     for (n in names(all_data_meta)) {
       if (any(duplicated(all_data_meta[,n]))) {
         dup_hit <- 1
+<<<<<<< HEAD
         dupes <- all_data_meta[which(duplicated(all_data_meta[,n])),n]
         all_duplicates <- all_data_meta[which(all_data_meta[,n] %in% dupes),]
         all_duplicates <- all_duplicates[order(all_duplicates[,n]),] 
@@ -139,6 +140,11 @@ import_new_data <- function(file.name,
           paste0('Duplicates created in column >>', n, '<<. Fix before importing.')
         )
         print(all_duplicates)
+=======
+        message(
+          paste0('Duplicates created in column >>', n, '<<. Fix before importing.')
+        )
+>>>>>>> 395ea413f13820696ac21f54333245364c02e9da
       }
       if (dup_hit == 1) stop("Aborted, please fix duplicates first!")
     }
