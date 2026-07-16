@@ -22,7 +22,7 @@ Imports:
 Depends:
     DoOR.data (>= 2.0.1),
     R (>= 3.4.1)
-Remotes: Dahaniel/DoOR.data@v2.0.1
+Remotes: Dahaniel/DoOR.data@master
 Suggests:
     ggplot2,
     grid,
