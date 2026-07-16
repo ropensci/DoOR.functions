@@ -94,7 +94,7 @@ import_new_data <- function(file.name,
             call. = FALSE)
   }
   
-  # check for duplicated identifiers
+  # check for duplicated identifiers in data
   if (any(duplicated(tolower(imported.data[, ident]))))
     stop('There are duplicated identifiers in the new dataset,
          please solve this first.')
@@ -113,6 +113,39 @@ import_new_data <- function(file.name,
   if (round != FALSE) {
     imported.data[nv] <- round(imported.data[nv], round)
   }
+  
+  # check if duplicated Name, CID or CAS entries would be generated
+  imported.data_meta <- imported.data[1:(nv[1]-1)]
+  odor_meta <- odor[,2:7]
+  new_odor_pos <- which(!(imported.data_meta[,ident] %in% odor_meta[,ident]))
+
+  if (length(new_odor_pos) > 0) {
+    imported.data_meta_new <- imported.data_meta[new_odor_pos,]
+    
+    all_cols <- union(names(imported.data_meta_new), names(odor_meta))
+    
+    imported.data_meta_new[setdiff(all_cols, names(imported.data_meta_new))] <- NA
+    odor_meta[setdiff(all_cols, names(odor_meta))] <- NA
+    all_data_meta <- rbind(odor_meta, imported.data_meta_new)
+    
+    dup_hit <- 0
+    for (n in names(all_data_meta)) {
+      if (any(duplicated(all_data_meta[,n]))) {
+        dup_hit <- 1
+        dupes <- all_data_meta[which(duplicated(all_data_meta[,n])),n]
+        all_duplicates <- all_data_meta[which(all_data_meta[,n] %in% dupes),]
+        all_duplicates <- all_duplicates[order(all_duplicates[,n]),] 
+        message(
+          paste0('Duplicates created in column >>', n, '<<. Fix before importing.')
+        )
+        print(all_duplicates)
+      }
+      if (dup_hit == 1) stop("Aborted, please fix duplicates first!")
+    }
+  }
+ 
+
+  
   
   # update data matrix "door_global_normalization_weights"
   dim_weightGlobNorm <- dim(weightGlobNorm)
