@@ -12,7 +12,9 @@
 #' study) will be integrated into data \code{door_response_range}, \code{odor}, 
 #' \code{ORs} and \code{door_global_normalization_weights}. If an existing study
 #' is imported, \code{\link{remove_study}} will be run first in order to perform
-#' an update.
+#' an update. 
+#' 
+#' Stops if it finds any duplicates in the identifier columns, omits NAs on check.
 #' 
 #' @param file.name character string, the name of given file that contains 
 #'   response values of one or more odorant receptors, either a .csv or .txt 
@@ -130,7 +132,7 @@ import_new_data <- function(file.name,
     
     dup_hit <- 0
     for (n in names(all_data_meta)) {
-      if (any(duplicated(all_data_meta[,n]))) {
+      if (any(duplicated(na.omit(all_data_meta[,n])))) {
         dup_hit <- 1
         dupes <- all_data_meta[which(duplicated(all_data_meta[,n])),n]
         all_duplicates <- all_data_meta[which(all_data_meta[,n] %in% dupes),]
