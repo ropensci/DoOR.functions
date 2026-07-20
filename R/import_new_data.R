@@ -12,7 +12,9 @@
 #' study) will be integrated into data \code{door_response_range}, \code{odor}, 
 #' \code{ORs} and \code{door_global_normalization_weights}. If an existing study
 #' is imported, \code{\link{remove_study}} will be run first in order to perform
-#' an update.
+#' an update. 
+#' 
+#' Stops if it finds any duplicates in the identifier columns, omits NAs on check.
 #' 
 #' @param file.name character string, the name of given file that contains 
 #'   response values of one or more odorant receptors, either a .csv or .txt 
@@ -129,14 +131,15 @@ import_new_data <- function(file.name,
     all_data_meta <- rbind(odor_meta, imported.data_meta_new)
     
     dup_hit <- 0
-    for (n in names(all_data_meta)) {
-      if (any(duplicated(all_data_meta[,n]))) {
+    for (nident in names(all_data_meta)) {
+      if (any(duplicated(na.omit(all_data_meta[,nident])))) {
         dup_hit <- 1
-        dupes <- all_data_meta[which(duplicated(all_data_meta[,n])),n]
-        all_duplicates <- all_data_meta[which(all_data_meta[,n] %in% dupes),]
-        all_duplicates <- all_duplicates[order(all_duplicates[,n]),] 
+        all_data_meta_n <- all_data_meta[which(!is.na(all_data_meta[,nident])),]
+        dupes <- all_data_meta_n[which(duplicated(all_data_meta_n[,nident])),nident]
+        all_duplicates <- all_data_meta[which(all_data_meta[,nident] %in% dupes),]
+        all_duplicates <- all_duplicates[order(all_duplicates[,nident]),] 
         message(
-          paste0('Duplicates created in column >>', n, '<<. Fix before importing.')
+          paste0('Duplicates created in column >>', nident, '<<. Fix before importing.')
         )
         print(all_duplicates)
       }

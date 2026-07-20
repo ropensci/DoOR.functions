@@ -53,7 +53,9 @@ database, then merge the imported data into old data frame. The information
 study) will be integrated into data \code{door_response_range}, \code{odor}, 
 \code{ORs} and \code{door_global_normalization_weights}. If an existing study
 is imported, \code{\link{remove_study}} will be run first in order to perform
-an update.
+an update. 
+
+Stops if it finds any duplicates in the identifier columns, omits NAs on check.
 }
 \examples{
 \dontrun{
