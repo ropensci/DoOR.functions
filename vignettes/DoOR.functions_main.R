@@ -65,7 +65,7 @@ responses <- na.omit(responses)
 knitr::kable(head(responses))
 
 ## -----------------------------------------------------------------------------
-counts <- countStudies()
+counts <- count_studies()
 knitr::kable(counts[1:10,6:15])
 
 ## -----------------------------------------------------------------------------
